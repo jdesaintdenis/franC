@@ -1,0 +1,144 @@
+{
+  "title": "Paiements récurrents",
+  "empty": {
+    "title": "Aucun paiement récurrent pour le moment",
+    "body": "Ils apparaissent après trois paiements similaires d'affilée.",
+    "detect": "Les chercher maintenant",
+    "import": "Importer votre export bancaire"
+  },
+  "detected": "Détecté",
+  "intervals": {
+    "weekly": "Chaque semaine",
+    "monthly": "Chaque mois",
+    "quarterly": "Tous les 3 mois",
+    "yearly": "Chaque année"
+  },
+  "detect": {
+    "button": "Détecter maintenant",
+    "pending": "Détection en cours…",
+    "found": "{count, plural, one {# nouveau paiement récurrent trouvé} other {# nouveaux paiements récurrents trouvés}}",
+    "none": "Aucun nouveau paiement récurrent",
+    "failed": "Impossible de rechercher les paiements récurrents. Réessayez."
+  },
+  "headline": {
+    "label": "Coût mensuel des factures et abonnements",
+    "none": "Aucune facture ni aucun abonnement trouvé pour le moment",
+    "confirmedPerMonth": "<big>{amount}</big> par mois confirmés",
+    "confirmedDetail": "{yearly} par an · {count, plural, one {# paiement} other {# paiements}}",
+    "income": " · revenus +{amount} par mois",
+    "noneConfirmed": "Aucun paiement confirmé pour le moment"
+  },
+  "band": {
+    "confirmAll": "Tout confirmer"
+  },
+  "filters": {
+    "label": "Trier et filtrer",
+    "all": "Toutes",
+    "category": "Catégorie",
+    "sortNext": "Prochaine date",
+    "sortYearly": "Coût par an",
+    "noMatch": "Aucun paiement récurrent dans cette catégorie.",
+    "sort": "Trier",
+    "sortActive": "Trier · {name}",
+    "sortBy": "Trier par"
+  },
+  "swipe": {
+    "confirm": "Confirmer",
+    "dismiss": "Ignorer",
+    "hint": "Glissez un paiement vers la droite pour le confirmer, vers la gauche pour l'ignorer",
+    "dismissHint": "Masquer l'astuce"
+  },
+  "caption": {
+    "next": "{interval} · prochain le {date}",
+    "last": "{interval} · dernier prélèvement le {date}",
+    "cancelled": "Résilié ?",
+    "priceChange": "<was>{old}</was> <now>{new}</now>"
+  },
+  "pills": {
+    "toConfirm": "À confirmer",
+    "priceUp": "Hausse de prix",
+    "cancelled": "Résilié ?"
+  },
+  "sections": {
+    "bills": "Factures et abonnements",
+    "income": "Revenus",
+    "incomePerMonth": "+{amount} par mois",
+    "showMore": "{count, plural, one {Voir l’autre} other {Voir les # autres}}",
+    "showLess": "Voir moins"
+  },
+  "ended": {
+    "summary": "Terminés ({count})",
+    "label": "Paiements récurrents terminés",
+    "lastCharge": "Dernier prélèvement : {last} · Terminé le {ended}",
+    "lastChargeOnly": "Dernier prélèvement : {last}",
+    "saving": "Vous ne payez plus {amount} par an."
+  },
+  "dismissed": {
+    "summary": "Ignorés ({count})",
+    "label": "Paiements récurrents ignorés"
+  },
+  "actions": {
+    "confirm": "Confirmer",
+    "dismiss": "Ignorer",
+    "end": "Marquer comme terminé",
+    "resume": "Reprendre",
+    "restore": "Restaurer",
+    "stillActive": "Toujours actif",
+    "stopTracking": "Ne plus suivre"
+  },
+  "sheet": {
+    "perYear": "{amount} par an",
+    "priceAlert": "Hausse de prix",
+    "priceChange": "Était de {old}, maintenant {new} ({diff}, {percent})",
+    "acceptPrice": "Accepter le nouveau prix",
+    "keepPrice": "Garder {amount}",
+    "cancelledHint": "{count, plural, one {# paiement attendu manqué} other {# paiements attendus manqués}} depuis le {last}. Si vous l'avez résilié, marquez-le comme terminé pour le retirer de vos prévisions.",
+    "history": "Derniers prélèvements",
+    "newPrice": "nouveau prix",
+    "seeAll": "Voir toutes les opérations",
+    "createBudget": "Créer un budget {category}",
+    "openBudget": "Voir le budget {category}",
+    "actions": "Actions",
+    "range": "{count, plural, one {# dernier paiement} other {# derniers paiements}} : de {min} à {max}"
+  },
+  "toast": {
+    "confirmed": "{name} confirmé",
+    "dismissed": "{name} ignoré",
+    "ended": "{name} marqué comme terminé",
+    "resumed": "{name} repris",
+    "restored": "{name} restauré",
+    "stillActive": "{name} gardé comme actif",
+    "confirmedMany": "{count, plural, one {# confirmé} other {# confirmés}}",
+    "priceAccepted": "Nouveau prix accepté pour {name}",
+    "priceKept": "Prix habituel conservé pour {name}",
+    "stopped": "{name} n'est plus suivi"
+  },
+  "errors": {
+    "notFound": "Ce paiement récurrent n'existe plus. Rechargez la page.",
+    "offline": "Vous êtes hors ligne. Reconnectez-vous et réessayez.",
+    "confirmFailed": "Impossible de confirmer {name}. Réessayez.",
+    "dismissFailed": "Impossible d'ignorer {name}. Réessayez.",
+    "endFailed": "Impossible de marquer {name} comme terminé. Réessayez.",
+    "resumeFailed": "Impossible de reprendre {name}. Réessayez.",
+    "restoreFailed": "Impossible de restaurer {name}. Réessayez.",
+    "stillActiveFailed": "Impossible d'enregistrer votre réponse pour {name}. Réessayez.",
+    "acceptFailed": "Impossible d'accepter le nouveau prix pour {name}. Réessayez.",
+    "dismissAlertFailed": "Impossible d'ignorer l'alerte pour {name}. Réessayez.",
+    "confirmAllFailed": "Impossible de tout confirmer. Réessayez.",
+    "undoFailed": "Impossible d'annuler. Réessayez.",
+    "stopTrackingFailed": "Impossible d'arrêter le suivi de {name}. Réessayez.",
+    "trackFailed": "Impossible de suivre ce paiement. Réessayez."
+  },
+  "toConfirm": {
+    "counter": "{index} sur {count} · {amount} par mois au total",
+    "showList": "Voir la liste",
+    "oneByOne": "Un par un",
+    "found": "{count, plural, one {# paiement trouvé} other {# paiements trouvés}}",
+    "question": "Ils reviennent chaque mois. Les garder dans vos prévisions ?",
+    "listLabel": "Paiements à confirmer",
+    "showMore": "Voir les {count} autres",
+    "perYear": "par mois · {amount} par an",
+    "history": "Derniers prélèvements",
+    "perYearOther": "{interval} · {amount} par an"
+  }
+}

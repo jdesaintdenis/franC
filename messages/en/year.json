@@ -1,0 +1,57 @@
+{
+  "title": "Year",
+  "selector": {
+    "previous": "Previous year",
+    "next": "Next year",
+    "current": "in progress"
+  },
+  "empty": {
+    "title": "Nothing in {year}",
+    "body": "Import your bank export to see this year.",
+    "import": "Import your bank export",
+    "goToYear": "Go to {year}"
+  },
+  "headline": {
+    "label": "Year totals",
+    "savedRate": "{rate} of your income",
+    "overspentNote": "Your balance covered the difference",
+    "noIncomeNote": "No income recorded in {year}",
+    "savedLabel": "Saved in {year}",
+    "savedSoFarLabel": "Saved since January",
+    "overspentLabel": "Spent more than earned in {year}",
+    "evenLabel": "Spent what you earned in {year}",
+    "noIncomeLabel": "Spent in {year}",
+    "perMonth": "Spent per month"
+  },
+  "highlights": {
+    "best": "Best month: <link>{month}</link>, {amount} saved",
+    "toughest": "Toughest month: <link>{month}</link>, {amount} more spent than earned",
+    "lowest": "Lowest month: <link>{month}</link>, {amount} saved"
+  },
+  "monthly": {
+    "heading": "Month by month",
+    "legend": "Net of each month · green: best month · hatched: in progress",
+    "legendNoBest": "Net of each month · hatched: in progress",
+    "barLabel": "{month}: {amount}",
+    "listHeading": "The months",
+    "row": "{income} in · {spent} spent",
+    "rowSaved": "{income} in · {spent} spent · {saved} set aside",
+    "inProgress": "in progress"
+  },
+  "flow": {
+    "heading": "Where the money went",
+    "period": "Period",
+    "wholeYear": "Whole year",
+    "empty": "No income or spending in this period.",
+    "sourcesHeading": "Where it came from",
+    "periodDescription": "Pick the whole year or one month."
+  },
+  "categories": {
+    "heading": "By category",
+    "perMonth": "≈ {amount} / month",
+    "biggest": "Most spent in {month}",
+    "total": "Total",
+    "averageNote": "Monthly averages divide by {count, plural, one {# month} other {# months}}, counted from the first month with data.",
+    "empty": "No spending in {year}."
+  }
+}

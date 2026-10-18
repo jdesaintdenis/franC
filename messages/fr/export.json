@@ -1,0 +1,55 @@
+{
+  "columns": {
+    "transactions": {
+      "date": "Date",
+      "account": "Compte",
+      "label": "Libellé",
+      "amount": "Montant",
+      "category": "Catégorie",
+      "subcategory": "Sous-catégorie",
+      "split": "Part",
+      "transactionAmount": "Montant de l'opération",
+      "transfer": "Virement interne",
+      "categorySource": "Source de la catégorie",
+      "bankCategory": "Catégorie de la banque",
+      "bankSubcategory": "Sous-catégorie de la banque",
+      "bankLabel": "Libellé de la banque",
+      "tags": "Étiquettes",
+      "note": "Note"
+    },
+    "categories": {
+      "category": "Catégorie",
+      "subcategory": "Sous-catégorie",
+      "color": "Couleur",
+      "icon": "Icône"
+    },
+    "rules": {
+      "priority": "Priorité",
+      "matchType": "Type de correspondance",
+      "pattern": "Motif",
+      "category": "Catégorie",
+      "subcategory": "Sous-catégorie"
+    },
+    "budgets": {
+      "category": "Catégorie",
+      "subcategory": "Sous-catégorie",
+      "monthlyBudget": "Budget mensuel",
+      "rollover": "Report"
+    }
+  },
+  "categorySource": {
+    "manual": "Manuelle",
+    "rule": "Règle",
+    "bank": "Banque",
+    "guess": "Proposée"
+  },
+  "matchType": {
+    "contains": "contient",
+    "equals": "est exactement",
+    "regex": "correspond à l'expression régulière"
+  },
+  "yesNo": {
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

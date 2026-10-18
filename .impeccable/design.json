@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T17:41:12Z",
+  "title": "Design System: franC",
+  "extensions": {
+    "colorMeta": {
+      "night": {
+        "role": "neutral",
+        "displayName": "Night",
+        "canonical": "#04051a",
+        "tonalRamp": [
+          "#0a0d42",
+          "#11156e",
+          "#181e9b",
+          "#1f26c7",
+          "#3840e0",
+          "#7a7feb",
+          "#afb2f3",
+          "#e9eafc"
+        ]
+      },
+      "note-blue": {
+        "role": "neutral",
+        "displayName": "Note Blue",
+        "canonical": "#121638",
+        "tonalRamp": [
+          "#13173a",
+          "#1f2660",
+          "#2b3587",
+          "#3844ae",
+          "#515ec7",
+          "#8b93da",
+          "#babee9",
+          "#ecedf9"
+        ]
+      },
+      "popover-blue": {
+        "role": "neutral",
+        "displayName": "Popover Blue",
+        "canonical": "#161b42",
+        "tonalRamp": [
+          "#131739",
+          "#202760",
+          "#2d3786",
+          "#3946ac",
+          "#5360c6",
+          "#8c95d9",
+          "#babfe8",
+          "#ecedf9"
+        ]
+      },
+      "ink-wash": {
+        "role": "neutral",
+        "displayName": "Ink Wash",
+        "canonical": "#1b2150",
+        "tonalRamp": [
+          "#131839",
+          "#20275f",
+          "#2d3785",
+          "#3a47ac",
+          "#5360c5",
+          "#8d95d8",
+          "#bac0e8",
+          "#ecedf9"
+        ]
+      },
+      "gauge-off": {
+        "role": "neutral",
+        "displayName": "Gauge Off",
+        "canonical": "#1d2350",
+        "tonalRamp": [
+          "#141938",
+          "#22295e",
+          "#2f3983",
+          "#3d4aa8",
+          "#5763c2",
+          "#8f97d6",
+          "#bcc1e7",
+          "#eceef8"
+        ]
+      },
+      "engraved-edge": {
+        "role": "neutral",
+        "displayName": "Engraved Edge",
+        "canonical": "#232a5c",
+        "tonalRamp": [
+          "#151937",
+          "#232a5c",
+          "#313b81",
+          "#3f4ca6",
+          "#5965c0",
+          "#9099d5",
+          "#bcc2e6",
+          "#edeef8"
+        ]
+      },
+      "input-edge": {
+        "role": "neutral",
+        "displayName": "Input Edge",
+        "canonical": "#2b3368",
+        "tonalRamp": [
+          "#161b36",
+          "#252c5a",
+          "#343e7e",
+          "#4350a2",
+          "#5d69bc",
+          "#939bd2",
+          "#bec3e4",
+          "#edeef8"
+        ]
+      },
+      "moon-paper": {
+        "role": "neutral",
+        "displayName": "Moon Paper",
+        "canonical": "#eeeaff",
+        "tonalRamp": [
+          "#0f004c",
+          "#180080",
+          "#2200b2",
+          "#2c00e6",
+          "#451aff",
+          "#8366ff",
+          "#b5a3ff",
+          "#eae5ff"
+        ]
+      },
+      "faded-ink": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#9a9fc6",
+        "tonalRamp": [
+          "#1c1e31",
+          "#2e3252",
+          "#404672",
+          "#535a93",
+          "#6c74ac",
+          "#9da2c8",
+          "#c4c7de",
+          "#eff0f6"
+        ]
+      },
+      "periwinkle": {
+        "role": "primary",
+        "displayName": "Periwinkle",
+        "canonical": "#8ea2ff",
+        "tonalRamp": [
+          "#000e4c",
+          "#001780",
+          "#0020b2",
+          "#0029e6",
+          "#1a42ff",
+          "#6681ff",
+          "#a3b3ff",
+          "#e5eaff"
+        ]
+      },
+      "desert-sand": {
+        "role": "secondary",
+        "displayName": "Desert Sand",
+        "canonical": "#f3e3a6",
+        "tonalRamp": [
+          "#433709",
+          "#705c0f",
+          "#9d8115",
+          "#caa61b",
+          "#e4bf35",
+          "#edd578",
+          "#f4e6ae",
+          "#fcf8e9"
+        ]
+      },
+      "lamp-amber": {
+        "role": "tertiary",
+        "displayName": "Lamp Amber",
+        "canonical": "#ffb05a",
+        "tonalRamp": [
+          "#4c2800",
+          "#804200",
+          "#b25d00",
+          "#e67800",
+          "#ff911a",
+          "#ffb666",
+          "#ffd3a3",
+          "#fff3e5"
+        ]
+      },
+      "mint": {
+        "role": "tertiary",
+        "displayName": "Mint",
+        "canonical": "#7fe0b0",
+        "tonalRamp": [
+          "#0f3e26",
+          "#196740",
+          "#23905a",
+          "#2db973",
+          "#46d28d",
+          "#84e1b3",
+          "#b5edd1",
+          "#eafaf2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "hero-amount": {
+        "displayName": "Hero amount",
+        "purpose": "The Reste à vivre figure only; one per screen."
+      },
+      "section-title": {
+        "displayName": "Section title",
+        "purpose": "Cinzel capitals for every section and page title."
+      },
+      "figure-large": {
+        "displayName": "Large figure",
+        "purpose": "Percentage beside a gauge."
+      },
+      "balance": {
+        "displayName": "Balance",
+        "purpose": "Account balances."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Row names and sentences."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Captions, detail lines, the francs line."
+      }
+    },
+    "shadows": [
+      {
+        "name": "value-panel-rule",
+        "value": "inset 0 0 0 4px var(--card), inset 0 0 0 5px rgb(142 162 255 / 0.27)",
+        "purpose": "The hero's inner engraved rule; structural, not a lift."
+      }
+    ],
+    "motion": [
+      {
+        "name": "press",
+        "value": "150ms ease-out, scale(0.98)",
+        "purpose": "Button press feedback."
+      },
+      {
+        "name": "toast-pop",
+        "value": "260ms ease-out",
+        "purpose": "Toast icon pop."
+      },
+      {
+        "name": "bar-grow",
+        "value": "450ms ease-out",
+        "purpose": "Progress fills grow from the left on first paint."
+      },
+      {
+        "name": "list-row",
+        "value": "220ms ease-out",
+        "purpose": "View-transition for list rows; all motion cut by prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action; rare on 50 F screens.",
+      "html": "<button class=\"ds-btn-primary\">Enregistrer</button>",
+      "css": ".ds-btn-primary{background:#8ea2ff;color:#04051a;font:500 14px 'Manrope Variable',system-ui,sans-serif;height:36px;padding:8px 16px;border:0;border-radius:8px;transition:background .15s ease-out,transform .15s ease-out,box-shadow .15s ease-out;cursor:pointer}.ds-btn-primary:hover{background:rgb(142 162 255/.9)}.ds-btn-primary:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255/.5)}.ds-btn-primary:active{transform:scale(.98)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary action on Ink Wash.",
+      "html": "<button class=\"ds-btn-secondary\">Annuler</button>",
+      "css": ".ds-btn-secondary{background:#1b2150;color:#eeeaff;font:500 14px 'Manrope Variable',system-ui,sans-serif;height:36px;padding:8px 16px;border:0;border-radius:8px;transition:background .15s ease-out,transform .15s ease-out;cursor:pointer}.ds-btn-secondary:hover{background:rgb(27 33 80/.8)}.ds-btn-secondary:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255/.5)}.ds-btn-secondary:active{transform:scale(.98)}"
+    },
+    {
+      "name": "Section card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Cinzel title with its link, over a solid Note Blue card.",
+      "html": "<section class=\"ds-section\"><div class=\"ds-section-head\"><h2>Comptes</h2><a href=\"#\">Tout voir</a></div><div class=\"ds-card\"><div class=\"ds-row\"><span><b>Compte courant</b><small>Banque, à 07:02</small></span><strong>1 234,56 €</strong></div></div></section>",
+      "css": ".ds-section{display:flex;flex-direction:column;gap:8px;background:#04051a;padding:8px;font-family:'Manrope Variable',system-ui,sans-serif;color:#eeeaff}.ds-section-head{display:flex;justify-content:space-between;align-items:baseline;padding:8px 4px 0}.ds-section-head h2{margin:0;font:600 12px 'Cinzel Variable',Georgia,serif;letter-spacing:.14em;text-transform:uppercase;color:#8ea2ff}.ds-section-head a{font:600 13px 'Cinzel Variable',Georgia,serif;color:#8ea2ff;text-decoration:none}.ds-section-head a:hover{text-decoration:underline}.ds-section-head a:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255/.5);border-radius:6px}.ds-card{background:#121638;border:1px solid #232a5c;border-radius:10px;padding:14px}.ds-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.ds-row span{display:flex;flex-direction:column}.ds-row small{color:#9a9fc6;font-size:12px}.ds-row strong{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Reste à vivre value panel",
+      "kind": "custom",
+      "refersTo": "hero-panel",
+      "description": "Banknote-framed hero: engraved Sand amount, francs line, per-day pace.",
+      "html": "<section class=\"ds-hero\"><div class=\"ds-hero-top\"><span>Jusqu'au 31 oct.</span><span class=\"ds-chip\">Jour 5 / 31</span></div><div class=\"ds-amount\"><p class=\"ds-euro\">1 523 €</p><p class=\"ds-francs\">soit 9 990 francs</p></div><p class=\"ds-perday\">Environ <b>58 €</b> par jour pendant 26 jours</p></section>",
+      "css": ".ds-hero{position:relative;overflow:hidden;font-family:'Manrope Variable',system-ui,sans-serif;color:#eeeaff;padding:16px;border-radius:10px;border:1px solid rgb(142 162 255/.4);box-shadow:inset 0 0 0 4px #121638,inset 0 0 0 5px rgb(142 162 255/.27);background:radial-gradient(1.2px 1.2px at 30px 40px,rgb(243 227 166/.67) 50%,transparent),radial-gradient(1px 1px at 140px 160px,rgb(255 255 255/.53) 50%,transparent),repeating-radial-gradient(circle at 85% 12%,rgb(142 162 255/.09) 0 1px,transparent 1px 7px),repeating-linear-gradient(45deg,rgb(142 162 255/.05) 0 1px,transparent 1px 6px),#121638}.ds-hero::after{content:'50';position:absolute;right:-4px;bottom:-14px;font:700 130px/1 'Cormorant Garamond',Georgia,serif;color:#8ea2ff;opacity:.07;pointer-events:none}.ds-hero-top{display:flex;justify-content:space-between;align-items:center;color:#9a9fc6;font-size:13px;font-weight:600}.ds-chip{background:#1b2150;color:#eeeaff;border-radius:9999px;padding:2px 10px;font-size:12px;font-weight:700}.ds-amount{display:inline-flex;flex-direction:column;align-items:flex-end;margin-top:8px}.ds-euro{margin:0;font:700 54px/1 'Cormorant Garamond',Georgia,serif;letter-spacing:-.025em;color:#f3e3a6;font-variant-numeric:lining-nums tabular-nums}.ds-francs{margin:0;color:#9a9fc6;font-size:12px}.ds-perday{color:#9a9fc6;font-size:15px}.ds-perday b{color:#eeeaff}"
+    },
+    {
+      "name": "Budget row with block gauge",
+      "kind": "custom",
+      "refersTo": "gauge-block-on",
+      "description": "Ten-block gauge, pace tick, big percentage; amber when ahead of pace.",
+      "html": "<div class=\"ds-budget\"><span class=\"ds-tile\">🛒</span><span class=\"ds-name\"><b>Courses</b><small>312 € sur 450 € <em>· rythme rapide</em></small></span><span class=\"ds-pct\">69 %</span><span class=\"ds-gauge\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"half\"></i><i></i><i></i><i></i><span class=\"ds-tick\" style=\"left:16%\"></span></span></div>",
+      "css": ".ds-budget{display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;column-gap:10px;row-gap:6px;padding:12px 14px;background:#121638;color:#eeeaff;font-family:'Manrope Variable',system-ui,sans-serif;border-radius:10px}.ds-tile{grid-row:span 2;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgb(127 224 176/.18)}.ds-name{display:flex;flex-direction:column;min-width:0}.ds-name b{font-size:14px;font-weight:600}.ds-name small{color:#9a9fc6;font-size:12px}.ds-name em{color:#ffb05a;font-style:normal}.ds-pct{grid-row:span 2;font-size:22px;font-weight:800;color:#ffb05a;font-variant-numeric:tabular-nums}.ds-gauge{position:relative;display:grid;grid-template-columns:repeat(10,1fr);gap:3px;height:12px}.ds-gauge i{border-radius:2px;background:#1d2350}.ds-gauge i.on{background:#ffb05a}.ds-gauge i.half{background:linear-gradient(90deg,#ffb05a 50%,#1d2350 50%)}.ds-tick{position:absolute;top:-4px;bottom:-4px;width:2px;border-radius:9999px;background:#eeeaff}"
+    },
+    {
+      "name": "Attention row (price rise)",
+      "kind": "custom",
+      "refersTo": "attention-icon-warning",
+      "description": "Link row to the page where the action happens; old price struck, new in amber.",
+      "html": "<a class=\"ds-attn\" href=\"#\"><span class=\"ds-attn-icon\">↗</span><span class=\"ds-attn-text\"><b>Netflix</b><small><s>13,49</s> <strong>15,99 €</strong></small></span><span class=\"ds-chev\">›</span></a>",
+      "css": ".ds-attn{display:flex;align-items:center;gap:12px;min-height:56px;padding:12px 16px;background:#121638;color:#eeeaff;text-decoration:none;font-family:'Manrope Variable',system-ui,sans-serif;transition:background .15s ease-out}.ds-attn:hover{background:rgb(27 33 80/.6)}.ds-attn:focus-visible{outline:none;box-shadow:inset 0 0 0 3px rgb(142 162 255/.5)}.ds-attn-icon{width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgb(255 176 90/.16);color:#ffb05a;font-weight:700}.ds-attn-text{flex:1;display:flex;flex-direction:column}.ds-attn-text small{font-size:14px}.ds-attn-text s{color:#9a9fc6;font-weight:500}.ds-attn-text strong{color:#ffb05a}.ds-chev{color:#9a9fc6;font-size:20px}"
+    },
+    {
+      "name": "Bottom tab bar",
+      "kind": "nav",
+      "refersTo": "section-link",
+      "description": "Four equal tabs; active tab periwinkle with a top bar.",
+      "html": "<nav class=\"ds-nav\"><a class=\"active\" href=\"#\">Accueil</a><a href=\"#\">Opérations</a><a href=\"#\">Budget</a><a href=\"#\">Plus</a></nav>",
+      "css": ".ds-nav{display:grid;grid-template-columns:repeat(4,1fr);height:64px;background:#04051a;border-top:1px solid #232a5c;font:400 12px 'Manrope Variable',system-ui,sans-serif}.ds-nav a{position:relative;display:flex;align-items:center;justify-content:center;color:#9a9fc6;text-decoration:none}.ds-nav a:hover{background:rgb(27 33 80/.6)}.ds-nav a:focus-visible{outline:none;box-shadow:inset 0 0 0 3px rgb(142 162 255/.5)}.ds-nav a.active{color:#8ea2ff;font-weight:600}.ds-nav a.active::before{content:'';position:absolute;top:0;left:16px;right:16px;height:2px;border-radius:9999px;background:#8ea2ff}"
+    },
+    {
+      "name": "Day card with transaction row",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Opérations: dated header with day total, then a row with to-review dot and ✓ validate button.",
+      "html": "<div class=\"ds-day\"><div class=\"ds-day-h\"><h2>Aujourd'hui</h2><span>-42,10 €</span></div><div class=\"ds-row\"><span class=\"ds-tile\">🛒</span><div class=\"ds-main\"><b>Carrefour <i></i></b><small class=\"warn\">Non catégorisée</small></div><span class=\"ds-amt\">-42,10 €</span><button aria-label=\"Valider\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg></button></div></div>",
+      "css": ".ds-day{background:#121638;border-radius:14px;overflow:hidden;color:#eeeaff;font:400 14px 'Manrope Variable',system-ui,sans-serif;width:340px}.ds-day-h{display:flex;justify-content:space-between;align-items:baseline;padding:10px 16px;border-bottom:1px solid rgb(35 42 92/.6)}.ds-day-h h2{margin:0;font:600 13px 'Cinzel Variable',Georgia,serif;letter-spacing:.08em;color:#8ea2ff}.ds-day-h span{color:#9a9fc6;font-variant-numeric:tabular-nums}.ds-row{display:flex;align-items:center;gap:12px;min-height:64px;padding:8px 4px 8px 12px}.ds-tile{width:32px;height:32px;border-radius:10px;background:rgb(142 162 255/.18);display:grid;place-items:center}.ds-main{flex:1;display:flex;flex-direction:column;gap:2px}.ds-main b{font-weight:600}.ds-main i{display:inline-block;width:8px;height:8px;border-radius:9999px;background:#ffb05a;margin-left:6px}.ds-main small{font-size:12px;color:#9a9fc6}.ds-main small.warn{color:#ffb05a}.ds-amt{font-weight:500;font-variant-numeric:tabular-nums}.ds-row button{width:44px;height:44px;border:0;border-radius:9999px;background:none;color:#8ea2ff;display:grid;place-items:center}.ds-row button:hover{background:#1b2150}.ds-row button:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255/.5)}"
+    },
+    {
+      "name": "Category suggestion pills",
+      "kind": "chip",
+      "refersTo": "button-secondary",
+      "description": "Sheet: suggested categories, dashed new-category pill, validate button.",
+      "html": "<div class=\"ds-pills\"><button>Courses</button><button>Restaurants</button><button class=\"new\">+ Nouvelle</button></div><button class=\"ds-validate\">Valider en Courses</button>",
+      "css": ".ds-pills{display:flex;flex-wrap:wrap;gap:8px;font:400 14px 'Manrope Variable',system-ui,sans-serif}.ds-pills button{min-height:44px;padding:0 16px;border:0;border-radius:9999px;background:#1b2150;color:#eeeaff}.ds-pills button:hover{background:#232a5c}.ds-pills button:focus-visible,.ds-validate:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255/.5)}.ds-pills button.new{background:none;border:1px dashed #2b3368;color:#8ea2ff}.ds-validate{margin-top:8px;height:48px;width:100%;border:0;border-radius:8px;background:#8ea2ff;color:#04051a;font:600 14px 'Manrope Variable',system-ui,sans-serif}"
+    },
+    {
+      "name": "Month bars",
+      "kind": "custom",
+      "description": "Six month bars with a dashed planned line; the selected month is Periwinkle, next month dashed.",
+      "html": "<div class=\"ds-mb\"><div class=\"ds-mb-plan\"><span>prévu 960 €</span></div><ul class=\"ds-mb-bars\"><li><span style=\"height:62%\"></span><b>juin</b></li><li><span style=\"height:64%\"></span><b>juil.</b></li><li><span style=\"height:72%\"></span><b>août</b></li><li><span style=\"height:58%\"></span><b>sept.</b></li><li class=\"on\"><span style=\"height:38%\"></span><b>oct.</b></li><li class=\"next\"><span style=\"height:100%\"></span><b>nov.</b></li></ul></div>",
+      "css": ".ds-mb{position:relative;width:300px;height:120px;font-family:var(--font-sans,Manrope,sans-serif)}.ds-mb-plan{position:absolute;left:0;right:0;top:6px;border-top:1.5px dashed rgb(238 234 255 / .45)}.ds-mb-plan span{position:absolute;top:-2px;left:0;padding-right:4px;background:#121638;color:#9a9fc6;font-size:10px}.ds-mb-bars{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;height:100%;margin:0;padding:0;list-style:none}.ds-mb-bars li{display:flex;flex-direction:column;justify-content:flex-end;height:100%}.ds-mb-bars span{display:block;border-radius:3px 3px 0 0;background:#1b2150}.ds-mb-bars .on span{background:#8ea2ff}.ds-mb-bars .next span{background:transparent;border:1.5px dashed #9a9fc6;border-bottom:0}.ds-mb-bars b{height:16px;line-height:16px;text-align:center;font-size:10px;font-weight:400;color:#9a9fc6}.ds-mb-bars .on b{color:#eeeaff;font-weight:700}"
+    },
+    {
+      "name": "Month title",
+      "kind": "nav",
+      "description": "Previous arrow, month button opening the month grid, next arrow.",
+      "html": "<div class=\"ds-mt\"><a class=\"ds-mt-arrow\" href=\"#\" aria-label=\"Mois précédent\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M15 18l-6-6 6-6\"/></svg></a><button class=\"ds-mt-btn\">Octobre 2026</button><a class=\"ds-mt-arrow\" href=\"#\" aria-label=\"Mois suivant\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M9 18l6-6-6-6\"/></svg></a></div>",
+      "css": ".ds-mt{display:flex;align-items:center;gap:4px;font-family:var(--font-sans,Manrope,sans-serif)}.ds-mt-arrow{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:8px;background:#1b2150;color:#8ea2ff;text-decoration:none}.ds-mt-arrow:focus-visible,.ds-mt-btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255 / .5)}.ds-mt-btn{min-height:44px;padding:0 12px;border:0;background:transparent;color:#eeeaff;font-size:14px;font-weight:700}"
+    },
+    {
+      "name": "Bottom add button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one add action of a list page, stuck above the tab bar.",
+      "html": "<a class=\"ds-add\">＋ Ajouter</a>",
+      "css": ".ds-add{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:14px;background:#8ea2ff;color:#04051a;font:700 14px 'Manrope Variable',system-ui,sans-serif;box-shadow:0 -10px 24px rgb(4 5 26/.85)}.ds-add:hover{background:rgb(142 162 255/.9)}.ds-add:focus-visible{outline:none;box-shadow:0 0 0 3px rgb(142 162 255/.5)}"
+    },
+    {
+      "name": "To confirm block",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "One detected payment at a time with Ignore and Confirm.",
+      "html": "<div class=\"ds-tc\"><p class=\"ds-tc-n\">Netflix</p><p class=\"ds-tc-a\">15,99 €</p><div class=\"ds-tc-b\"><button class=\"ds-tc-x\">✕ Ignorer</button><button class=\"ds-tc-ok\">✓ Confirmer</button></div></div>",
+      "css": ".ds-tc{background:#121638;color:#eeeaff;border:1px solid rgb(255 176 90/.45);border-radius:10px;padding:14px;font-family:'Manrope Variable',system-ui,sans-serif}.ds-tc-n{margin:0;font-weight:600;font-size:14px}.ds-tc-a{margin:4px 0 12px;font-weight:800;font-size:28px;font-variant-numeric:tabular-nums}.ds-tc-b{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ds-tc-b button{min-height:52px;border:0;border-radius:14px;font:700 14px inherit;cursor:pointer}.ds-tc-x{background:#1b2150;color:#eeeaff}.ds-tc-ok{background:#8ea2ff;color:#04051a}"
+    },
+    {
+      "name": "Flow totals",
+      "kind": "custom",
+      "refersTo": "colors.mint",
+      "description": "Money in, out and net of an import, three hairline-separated columns; only 'in' is mint.",
+      "html": "<dl class=\"ds-flows\"><div><dt>Entrées</dt><dd class=\"in\">+1 240,00 €</dd></div><div><dt>Sorties</dt><dd>−860,40 €</dd></div><div><dt>Solde</dt><dd>+379,60 €</dd></div></dl>",
+      "css": ".ds-flows{display:grid;grid-template-columns:repeat(3,1fr);margin:0;font-family:'Manrope Variable',system-ui,sans-serif;color:#eeeaff}.ds-flows>div{padding:0 8px;border-left:1px solid #232a5c}.ds-flows>div:first-child{padding-left:0;border-left:0}.ds-flows dt{font-size:12px;color:#9a9fc6}.ds-flows dd{margin:2px 0 0;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.ds-flows dd.in{color:#7fe0b0}"
+    },
+    {
+      "name": "Account pill",
+      "kind": "chip",
+      "refersTo": "button-primary",
+      "description": "Radio pills to pick the account a file goes to; selected is periwinkle.",
+      "html": "<div class=\"ds-pills\" role=\"radiogroup\"><button class=\"ds-pill on\" role=\"radio\" aria-checked=\"true\">Compte courant ••4821</button><button class=\"ds-pill\" role=\"radio\" aria-checked=\"false\">Livret A</button></div>",
+      "css": ".ds-pills{display:flex;flex-wrap:wrap;gap:8px}.ds-pill{font-family:'Manrope Variable',system-ui,sans-serif;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:#1b2150;color:#eeeaff;font-weight:600;font-size:14px;cursor:pointer}.ds-pill.on{background:#8ea2ff;color:#04051a}.ds-pill:focus-visible{outline:3px solid rgb(142 162 255/.5)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Last 50 F Note",
+    "overview": "franC looks like the 1993 Saint-Exupéry 50 franc banknote held up under a lamp at night: deep night blue, a periwinkle engraving colour, a sand-coloured value, faint guilloché rosettes and a few stars. The name already says *franc* and *français*; the look says it again, quietly. It is a household tool, not a bank and not an AI product, so it avoids the cool grey \"fintech\" look, gradients on numbers, and glow.\n\nIt is an **Operate** surface used on a phone, one hand, a few seconds at a time. The banknote world lives in a few precise places (the hero value panel, the engraved section titles, the francs line, the page's faint rosettes). Everything else is calm, solid, dark cards with clear numbers in Manrope. One answer leads each screen; on Home it is Reste à vivre, set in an engraved serif like a note's face value.\n\n**Status (2026-10-08):** this is the target system for the whole app and the only theme it will have (dark only). It ships on Home (Slice 57, SPEC §72), Opérations and the À valider queue (Slice 58, SPEC §73) and the Budget page at `/budget` (Slice 59, SPEC §74) and the lists you manage (Categories, Budgets and Goals settings, Paiements récurrents; Slice 60, SPEC §75) through the `.theme-50f` class. The other pages still render the older Tricolore light/dark tokens in `:root` until a roll-out slice migrates them; Tricolore is legacy, not a rule. Variants in the other last-series note colours (100 F Cézanne, 200 F Eiffel, 500 F Curie) may come later as alternative palettes on the same structure.",
+    "keyCharacteristics": [
+      "Dark only: night page `#04051a`, solid note-blue cards `#121638` one step lighter, so cards stand out from the patterned page.",
+      "One accent, periwinkle `#8ea2ff`, for links, the active tab, section titles, charts and gauges.",
+      "Sand `#f3e3a6` is reserved for the hero amount, goal gauges and regular payments in budget gauges (paid solid, due hatched).",
+      "Amber `#ffb05a` is the only alarm colour. Red is never used, on amounts or anywhere else.",
+      "Three fonts with fixed jobs: Manrope for all text and numbers, Cormorant Garamond for the hero amount only, Cinzel capitals for titles.",
+      "Ten-block gauges instead of smooth progress bars.",
+      "Each section is its own titled card. No horizontal scroll at any width."
+    ],
+    "rules": [
+      {
+        "name": "The No Red Rule",
+        "body": "Red never appears inside the 50 F system. Money that needs attention is amber; nothing is ever \"an error\" in red. `--destructive` is amber.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sand Is Money Rule",
+        "body": "Sand marks money you have or have already set aside: the hero amount, savings goals and regular payments. Nothing else takes it.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Ink Rule",
+        "body": "Periwinkle is the only accent. A new state gets a meaning from amber or mint, not a new hue. Category colours appear only as category markers (tinted icon tiles at 18 % alpha), never as UI chrome.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Serif Number Rule",
+        "body": "Cormorant Garamond sets exactly one number per screen: the hero amount. Every other number is Manrope with tabular figures (`font-variant-numeric: tabular-nums` is the body default).",
+        "section": "typography"
+      },
+      {
+        "name": "The Francs Whisper Rule",
+        "body": "The amount in old francs (× 6,55957, legal rate, no inflation adjustment) appears in the Home Reste à vivre card only, nowhere else, and sits under the euro figure, right-aligned with it, 12px Faded Ink, and never extends past the euro amount's right edge. It is a wink; it never competes.",
+        "section": "typography"
+      },
+      {
+        "name": "The Pattern Below, Solid Above Rule",
+        "body": "Guilloché rosettes and stars live on the page background (`.bg-50f`) and inside the hero value panel only. Ordinary cards are solid Note Blue so their content reads cleanly.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Glow Rule",
+        "body": "No glow, no gradient on numbers, no neon. The only gradient fills are the background pattern and the pace chart's area under the line.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep the 50 F system dark only; new screens add the `theme-50f` class (and `bg-50f` on the page wrapper) until the roll-out makes it the `:root` default.",
+      "**Do** lead every screen with one answer, and give each section its own Cinzel-titled card.",
+      "**Do** use Amber `#ffb05a` for every warning, over-budget and negative amount.",
+      "**Do** set every number in Manrope with tabular figures, except the one hero amount.",
+      "**Do** show the old price and the new price for a price rise, not \"+2,50 €\".",
+      "**Do** keep touch targets at least 44px and mark the active state with shape as well as colour.",
+      "**Do** format money and dates only through `lib/money.ts` and `lib/format-date.ts`.",
+      "Do make one tap do one job: choosing a category validates, and ✓ shows only when a row can be validated.",
+      "Do flag a transaction waiting for review with a small amber dot, never a coloured row.",
+      "Do write French month names in lower case inside a sentence (`inSentence`); the month title and sentence starts keep the capital.",
+      "**Do** keep a list and its summary on the same row component (`BudgetGaugeRowContent`, `GoalGaugeRowContent`) so the two never drift apart.",
+      "Do end a one-decision flow with the sticky action bar and one quiet text button below it; show the money a file will add (in, out, net) before the Import button.",
+      "Do keep a mint (`text-positive`) figure to gains and progress only; failure and warnings stay Amber."
+    ],
+    "donts": [
+      "**Don't** use red anywhere, including for errors and destructive actions.",
+      "**Don't** add light-theme values or a theme picker to 50 F screens; Tricolore is legacy, not a reference (no page uses it any more since Slice 63).",
+      "**Don't** put gradients, glow or neon on numbers; no \"banking/AI\" sheen.",
+      "**Don't** use Bodoni Moda (its € reads as a C) or any second serif for numbers.",
+      "**Don't** put the rosette pattern on ordinary cards, or let decoration compete with a figure.",
+      "**Don't** allow horizontal scroll at any width.",
+      "**Don't** show actions on Home; it links to the pages where actions happen.",
+      "Don't show the francs line outside the Home card, or set any amount in a serif other than the Home hero.",
+      "Don't give a portal (sheet, toast, bulk bar) a hand-picked colour: add theme-50f to it.",
+      "**Don't** put a page's main \"add\" in the header on a list page: use the sticky bottom button.",
+      "**Don't** show \"0 €\" for an empty month on a category, or fold dormant categories away.",
+      "Don't hide a destructive step (Undo, Disconnect) as a loud button: it sits in a ⋯ menu or a quiet text button and confirms in a dialog."
+    ]
+  }
+}

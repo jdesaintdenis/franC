@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-franc}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-franc}
+      POSTGRES_DB: ${POSTGRES_DB:-franc_dev}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - franc-db-data:/var/lib/postgresql/data
+      - ./docker/init-db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-franc} -d ${POSTGRES_DB:-franc_dev}"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      target: dev
+    profiles: ["app"]
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-franc}:${POSTGRES_PASSWORD:-franc}@db:5432/${POSTGRES_DB:-franc_dev}
+      DATABASE_URL_TEST: postgres://${POSTGRES_USER:-franc}:${POSTGRES_PASSWORD:-franc}@db:5432/franc_test
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  franc-db-data:

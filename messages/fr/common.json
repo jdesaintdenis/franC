@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "label": "Navigation principale",
+    "home": "Accueil",
+    "transactions": "Opérations",
+    "recurring": "Récurrents",
+    "import": "Import",
+    "settings": "Paramètres",
+    "transactionsWithReview": "Opérations, {count, plural, one {# à valider} other {# à valider}}",
+    "accounts": "Comptes",
+    "plan": "Budget",
+    "more": "Plus",
+    "backToPlan": "Retour au budget",
+    "backToAccounts": "Retour à Comptes",
+    "backToMore": "Retour au menu Plus",
+    "backToTransactions": "Retour aux opérations"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "loading": "Chargement…"
+  },
+  "toast": {
+    "undo": "Annuler",
+    "undoLabel": "Annuler : {message}",
+    "dismiss": "Fermer",
+    "retry": "Réessayer"
+  },
+  "accounts": {
+    "all": "Tous les comptes",
+    "filterLabel": "Filtrer par compte"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Réessayez."
+  },
+  "glossary": {
+    "transaction": "Opération",
+    "transactions": "Opérations",
+    "category": "Catégorie",
+    "subcategory": "Sous-catégorie",
+    "subcategories": "Sous-catégories",
+    "rule": "Règle",
+    "recurringPayment": "Paiement récurrent",
+    "forecast": "Prévision",
+    "income": "Revenus",
+    "spent": "Dépenses",
+    "net": "Bilan",
+    "account": "Compte",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "signUp": "Créer un compte",
+    "undo": "Annuler",
+    "duplicate": "Doublon",
+    "uncategorized": "Non catégorisée",
+    "saved": "Épargné"
+  },
+  "metadata": {
+    "description": "Gestionnaire de budget personnel"
+  },
+  "manifest": {
+    "name": "franC — Gestionnaire de budget",
+    "description": "Gestionnaire de budget personnel : importez vos opérations, suivez vos dépenses, prévoyez le mois prochain."
+  },
+  "noCategories": "Vous n'avez pas encore de catégories. <import>Importez un fichier</import> pour les créer à partir des catégories de votre banque, ou <settings>créez-en une dans les Paramètres</settings>.",
+  "importReminderPush": {
+    "title": "C'est l'heure d'importer",
+    "body": "Vos données bancaires datent de {days, plural, one {# jour} other {# jours}}. Importez votre dernier export."
+  },
+  "bankHealthPush": {
+    "reconnectTitle": "Reconnectez votre banque",
+    "reconnectBody": "franC n'arrive plus à joindre votre banque. Ouvrez franC pour la reconnecter.",
+    "failingTitle": "La synchronisation bancaire échoue",
+    "failingBody": "franC n'a pas pu synchroniser votre banque depuis le {date}. Ouvrez franC pour vérifier."
+  },
+  "emptyState": {
+    "import": "Importer votre export bancaire"
+  },
+  "charts": {
+    "saved": "Épargné",
+    "openMonth": "Ouvrir {month} ›",
+    "shareOfIncome": "{percent} des revenus"
+  },
+  "about": "environ {amount}"
+}

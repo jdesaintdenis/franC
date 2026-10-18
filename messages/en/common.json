@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "label": "Main",
+    "home": "Home",
+    "transactions": "Transactions",
+    "recurring": "Recurring",
+    "import": "Import",
+    "settings": "Settings",
+    "transactionsWithReview": "Transactions, {count, plural, one {# to review} other {# to review}}",
+    "accounts": "Accounts",
+    "plan": "Plan",
+    "more": "More",
+    "backToPlan": "Back to Plan",
+    "backToAccounts": "Back to Accounts",
+    "backToMore": "Back to More",
+    "backToTransactions": "Back to Transactions"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "retry": "Try again",
+    "close": "Close",
+    "loading": "Loading…"
+  },
+  "toast": {
+    "undo": "Undo",
+    "undoLabel": "Undo: {message}",
+    "dismiss": "Dismiss",
+    "retry": "Try again"
+  },
+  "accounts": {
+    "all": "All accounts",
+    "filterLabel": "Filter by account"
+  },
+  "errors": {
+    "generic": "Something went wrong. Try again."
+  },
+  "glossary": {
+    "transaction": "Transaction",
+    "transactions": "Transactions",
+    "category": "Category",
+    "subcategory": "Subcategory",
+    "subcategories": "Subcategories",
+    "rule": "Rule",
+    "recurringPayment": "Recurring payment",
+    "forecast": "Forecast",
+    "income": "Income",
+    "spent": "Spent",
+    "net": "Net",
+    "account": "Account",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signUp": "Create account",
+    "undo": "Undo",
+    "duplicate": "Duplicate",
+    "uncategorized": "Uncategorized",
+    "saved": "Saved"
+  },
+  "metadata": {
+    "description": "Personal budget manager"
+  },
+  "manifest": {
+    "name": "franC — Budget Manager",
+    "description": "Personal budget manager: import transactions, track spending, forecast next month."
+  },
+  "noCategories": "You don't have any categories yet. <import>Import a file</import> to create them from your bank's categories, or <settings>create one in Settings</settings>.",
+  "importReminderPush": {
+    "title": "Time to import",
+    "body": "Your bank data is {days, plural, one {# day} other {# days}} old. Import your latest export."
+  },
+  "bankHealthPush": {
+    "reconnectTitle": "Reconnect your bank",
+    "reconnectBody": "franC can't reach your bank any more. Open franC to reconnect.",
+    "failingTitle": "Bank sync is failing",
+    "failingBody": "franC couldn't sync your bank since {date}. Open franC to check."
+  },
+  "emptyState": {
+    "import": "Import your bank export"
+  },
+  "charts": {
+    "saved": "Saved",
+    "openMonth": "Open {month} ›",
+    "shareOfIncome": "{percent} of income"
+  },
+  "about": "about {amount}"
+}

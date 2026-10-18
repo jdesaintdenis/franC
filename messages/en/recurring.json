@@ -1,0 +1,144 @@
+{
+  "title": "Regular payments",
+  "empty": {
+    "title": "No regular payments yet",
+    "body": "They show up after three similar payments in a row.",
+    "detect": "Look for them now",
+    "import": "Import your bank export"
+  },
+  "detected": "Detected",
+  "intervals": {
+    "weekly": "Every week",
+    "monthly": "Every month",
+    "quarterly": "Every 3 months",
+    "yearly": "Every year"
+  },
+  "detect": {
+    "button": "Detect now",
+    "pending": "Detecting…",
+    "found": "Found {count, plural, one {# new recurring payment} other {# new recurring payments}}",
+    "none": "No new recurring payments",
+    "failed": "Could not scan for recurring payments. Try again."
+  },
+  "headline": {
+    "label": "Monthly cost of bills and subscriptions",
+    "none": "No bills or subscriptions found yet",
+    "confirmedPerMonth": "<big>{amount}</big> a month confirmed",
+    "confirmedDetail": "{yearly} a year · {count, plural, one {# payment} other {# payments}}",
+    "income": " · income +{amount} a month",
+    "noneConfirmed": "No payment confirmed yet"
+  },
+  "band": {
+    "confirmAll": "Confirm all"
+  },
+  "filters": {
+    "label": "Sort and filter",
+    "all": "All",
+    "category": "Category",
+    "sortNext": "Next date",
+    "sortYearly": "Cost per year",
+    "noMatch": "No regular payments in this category.",
+    "sort": "Sort",
+    "sortActive": "Sort · {name}",
+    "sortBy": "Sort by"
+  },
+  "swipe": {
+    "confirm": "Confirm",
+    "dismiss": "Dismiss",
+    "hint": "Swipe a payment right to confirm it, left to dismiss it",
+    "dismissHint": "Dismiss tip"
+  },
+  "caption": {
+    "next": "{interval} · next {date}",
+    "last": "{interval} · last charge {date}",
+    "cancelled": "Cancelled?",
+    "priceChange": "<was>{old}</was> <now>{new}</now>"
+  },
+  "pills": {
+    "toConfirm": "To confirm",
+    "priceUp": "Price up",
+    "cancelled": "Cancelled?"
+  },
+  "sections": {
+    "bills": "Bills and subscriptions",
+    "income": "Income",
+    "incomePerMonth": "+{amount} a month",
+    "showMore": "{count, plural, one {Show 1 more} other {Show # more}}",
+    "showLess": "Show less"
+  },
+  "ended": {
+    "summary": "Ended ({count})",
+    "label": "Ended regular payments",
+    "lastCharge": "Last charge: {last} · Ended on {ended}",
+    "lastChargeOnly": "Last charge: {last}",
+    "saving": "You no longer pay {amount} a year."
+  },
+  "dismissed": {
+    "summary": "Dismissed ({count})",
+    "label": "Dismissed regular payments"
+  },
+  "actions": {
+    "confirm": "Confirm",
+    "dismiss": "Dismiss",
+    "end": "Mark ended",
+    "resume": "Resume",
+    "restore": "Restore",
+    "stillActive": "Still active",
+    "stopTracking": "Stop tracking"
+  },
+  "sheet": {
+    "perYear": "{amount} a year",
+    "priceAlert": "Price increase",
+    "priceChange": "Was {old}, now {new} ({diff}, {percent})",
+    "acceptPrice": "Accept new price",
+    "keepPrice": "Keep {amount}",
+    "cancelledHint": "{count, plural, one {# expected payment} other {# expected payments}} missed since {last}. If you cancelled it, mark it ended so it leaves your forecast.",
+    "history": "Last charges",
+    "newPrice": "new price",
+    "seeAll": "See all transactions",
+    "createBudget": "Create a {category} budget",
+    "openBudget": "Open the {category} budget",
+    "actions": "Actions",
+    "range": "Last {count, plural, one {# payment} other {# payments}}: {min} to {max}"
+  },
+  "toast": {
+    "confirmed": "{name} confirmed",
+    "dismissed": "{name} dismissed",
+    "ended": "{name} marked as ended",
+    "resumed": "{name} resumed",
+    "restored": "{name} restored",
+    "stillActive": "{name} kept as active",
+    "confirmedMany": "{count} confirmed",
+    "priceAccepted": "New price accepted for {name}",
+    "priceKept": "Kept the usual price for {name}",
+    "stopped": "{name} no longer tracked"
+  },
+  "errors": {
+    "notFound": "This recurring payment no longer exists. Reload the page.",
+    "offline": "You're offline. Reconnect and try again.",
+    "confirmFailed": "Could not confirm {name}. Try again.",
+    "dismissFailed": "Could not dismiss {name}. Try again.",
+    "endFailed": "Could not mark {name} as ended. Try again.",
+    "resumeFailed": "Could not resume {name}. Try again.",
+    "restoreFailed": "Could not restore {name}. Try again.",
+    "stillActiveFailed": "Could not save your answer for {name}. Try again.",
+    "acceptFailed": "Could not accept the new price for {name}. Try again.",
+    "dismissAlertFailed": "Could not dismiss the alert for {name}. Try again.",
+    "confirmAllFailed": "Could not confirm them all. Try again.",
+    "undoFailed": "Could not undo. Try again.",
+    "stopTrackingFailed": "Could not stop tracking {name}. Try again.",
+    "trackFailed": "Could not track this payment. Try again."
+  },
+  "toConfirm": {
+    "counter": "{index} of {count} · {amount} a month in all",
+    "showList": "See the list",
+    "oneByOne": "One by one",
+    "found": "{count, plural, one {# payment found} other {# payments found}}",
+    "question": "They come back every month. Keep them in your forecasts?",
+    "listLabel": "Payments to confirm",
+    "showMore": "See the {count} others",
+    "perYear": "a month · {amount} a year",
+    "history": "Latest charges",
+    "perYearOther": "{interval} · {amount} a year"
+  }
+}

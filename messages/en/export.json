@@ -1,0 +1,55 @@
+{
+  "columns": {
+    "transactions": {
+      "date": "Date",
+      "account": "Account",
+      "label": "Label",
+      "amount": "Amount",
+      "category": "Category",
+      "subcategory": "Subcategory",
+      "split": "Split",
+      "transactionAmount": "Transaction amount",
+      "transfer": "Internal transfer",
+      "categorySource": "Category source",
+      "bankCategory": "Bank category",
+      "bankSubcategory": "Bank subcategory",
+      "bankLabel": "Bank label",
+      "tags": "Tags",
+      "note": "Note"
+    },
+    "categories": {
+      "category": "Category",
+      "subcategory": "Subcategory",
+      "color": "Color",
+      "icon": "Icon"
+    },
+    "rules": {
+      "priority": "Priority",
+      "matchType": "Match type",
+      "pattern": "Pattern",
+      "category": "Category",
+      "subcategory": "Subcategory"
+    },
+    "budgets": {
+      "category": "Category",
+      "subcategory": "Subcategory",
+      "monthlyBudget": "Monthly budget",
+      "rollover": "Rollover"
+    }
+  },
+  "categorySource": {
+    "manual": "Manual",
+    "rule": "Rule",
+    "bank": "Bank",
+    "guess": "Guess"
+  },
+  "matchType": {
+    "contains": "contains",
+    "equals": "equals",
+    "regex": "matches regex"
+  },
+  "yesNo": {
+    "yes": "Yes",
+    "no": "No"
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "accounts" ADD COLUMN "in_safe_to_spend" boolean DEFAULT true NOT NULL;

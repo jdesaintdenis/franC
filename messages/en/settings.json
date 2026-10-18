@@ -1,0 +1,1041 @@
+{
+  "title": "More",
+  "offline": "You're offline. Reconnect and try again.",
+  "sections": {
+    "accounts": {
+      "title": "Accounts"
+    },
+    "bankConnection": {
+      "title": "Bank connection"
+    },
+    "label": "Settings sections",
+    "categories": {
+      "title": "Categories"
+    },
+    "budgets": {
+      "title": "Budgets"
+    },
+    "rules": {
+      "title": "Rules"
+    },
+    "bankCategories": {
+      "title": "Bank categories"
+    },
+    "export": {
+      "title": "Export"
+    },
+    "merchants": {
+      "title": "Merchant names"
+    },
+    "goals": {
+      "title": "Goals"
+    },
+    "tags": {
+      "title": "Tags"
+    },
+    "preferences": "Preferences",
+    "account": "franC account",
+    "importCsv": {
+      "title": "Import a CSV"
+    },
+    "classement": "Sorting",
+    "data": "Your data",
+    "values": {
+      "categories": "{top} · {sub} sub",
+      "categoriesTop": "{top}",
+      "bankMappings": "{count, plural, one {# linked} other {# linked}}",
+      "csv": "CSV"
+    }
+  },
+  "signOut": {
+    "button": "Sign out",
+    "pending": "Signing out…",
+    "error": "Could not sign out. Try again."
+  },
+  "language": {
+    "legend": "Language",
+    "auto": "Automatic (browser language)",
+    "fr": "Français",
+    "en": "English",
+    "error": "Could not save the language."
+  },
+  "validation": {
+    "invalidCategory": "Invalid category.",
+    "invalidRule": "Invalid rule.",
+    "nameRequired": "Name is required",
+    "nameTooLong": "Name is too long",
+    "colorInvalid": "Color must be #RRGGBB",
+    "categoryInvalid": "Choose a category",
+    "matchTypeInvalid": "Choose a match type",
+    "patternRequired": "Pattern is required",
+    "patternTooLong": "Pattern is too long",
+    "regexInvalid": "Invalid regular expression",
+    "parentInvalid": "Choose a valid parent category",
+    "iconInvalid": "Choose a single emoji"
+  },
+  "categories": {
+    "title": "Categories",
+    "empty": {
+      "title": "No categories yet",
+      "body": "Categories group your spending, like Groceries or Rent.",
+      "action": "Add a category"
+    },
+    "listLabel": "Categories",
+    "form": {
+      "name": "Name",
+      "color": "Color",
+      "colorPicker": "Pick a colour",
+      "colorHexHint": "Type a hex code like #1e3a8a.",
+      "colorUsedBy": "Used by {names}",
+      "add": "Add category",
+      "adding": "Adding…",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "addError": "Could not add the category. Try again.",
+      "saveError": "Could not save the category. Try again.",
+      "parent": "Parent category",
+      "parentNone": "None (top-level)",
+      "parentLockedHint": "This category has subcategories, so it cannot be moved under another one.",
+      "icon": {
+        "label": "Icon",
+        "choose": "Choose an icon",
+        "change": "Change icon, currently {icon}",
+        "title": "Choose an icon",
+        "description": "Search for an emoji to show next to this category.",
+        "search": "Search emojis",
+        "loading": "Loading emojis…",
+        "noResults": "No emoji found.",
+        "remove": "Remove icon"
+      },
+      "exactColor": "Or an exact colour",
+      "picker": "Colour picker",
+      "swatchLabel": "Colour {index}",
+      "swatchTakenLabel": "Colour {index}, already used by {names}"
+    },
+    "row": {
+      "addSubcategory": "Add a subcategory to {name}",
+      "edit": "Edit {name}"
+    },
+    "delete": {
+      "usage": "Deleting <strong>{name}</strong> makes {transactions, plural, one {# transaction} other {# transactions}} uncategorized and deletes {rules, plural, one {# rule} other {# rules}}.",
+      "cancel": "Cancel",
+      "pending": "Deleting…",
+      "confirm": "Delete category",
+      "error": "Could not delete the category. Try again.",
+      "usageSubcategory": "<strong>{name}</strong> is a subcategory of <strong>{parent}</strong>. It has {transactions, plural, one {# transaction} other {# transactions}} and {rules, plural, one {# rule} other {# rules}}.",
+      "usageParent": "<strong>{name}</strong> has {subcategories, plural, one {# subcategory} other {# subcategories}}. Its own {transactions, plural, one {# transaction becomes uncategorized} other {# transactions become uncategorized}} and {rules, plural, one {# rule is deleted} other {# rules are deleted}}.",
+      "optionsLabel": "What to do with this category's content",
+      "options": {
+        "moveToParent": "Move its {transactions, plural, one {# transaction} other {# transactions}} and {rules, plural, one {# rule} other {# rules}} to {parent}",
+        "uncategorize": "Uncategorize its {transactions, plural, one {# transaction} other {# transactions}} and delete its {rules, plural, one {# rule} other {# rules}}",
+        "keepSubcategories": "Keep the {subcategories, plural, one {# subcategory} other {# subcategories}} as top-level categories",
+        "deleteSubcategories": "Delete them too: {transactions, plural, one {# transaction} other {# transactions}} in them become uncategorized and {rules, plural, one {# rule is} other {# rules are}} deleted"
+      },
+      "sheetTitle": "Delete {name}?",
+      "attached": "Its budget and bank category mappings, if any, are deleted too.",
+      "irreversible": "This can't be undone."
+    },
+    "errors": {
+      "nameTaken": "A category with this name already exists.",
+      "notFound": "Category not found.",
+      "parentNotFound": "Parent category not found.",
+      "parentIsSelf": "A category cannot be its own parent.",
+      "parentIsSubcategory": "The parent must be a top-level category.",
+      "hasSubcategories": "A category with subcategories cannot become a subcategory.",
+      "subcategoryNameTaken": "A top-level category already uses the name of one of its subcategories.",
+      "cannotRestore": "Could not restore the category: something it belonged to has changed."
+    },
+    "subcategoriesLabel": "Subcategories of {name}",
+    "addLabel": "New category",
+    "menu": {
+      "edit": "Rename, icon, colour",
+      "addSubcategory": "Add a subcategory",
+      "setBudget": "Set a budget"
+    },
+    "sheet": {
+      "addTitle": "Add a category",
+      "addSubcategoryTitle": "Add a subcategory to {name}",
+      "editTitle": "Edit {name}"
+    },
+    "toast": {
+      "added": "Category added",
+      "saved": "Category saved",
+      "deleted": "{name} deleted",
+      "restored": "{name} restored"
+    },
+    "lead": "{count, plural, one {# category} other {# categories}} · this month's spending",
+    "addSubcategoryShort": "Subcategory",
+    "budgetBadge": "budget"
+  },
+  "rules": {
+    "title": "Rules",
+    "intro": "A rule matches the bank label or the displayed label of a transaction, ignoring case and accents. The first matching rule wins, so order matters. Categories you set by hand are never changed.",
+    "empty": {
+      "title": "No rules yet",
+      "body": "A rule categorizes matching transactions for you, now and on future imports.",
+      "action": "Add a rule"
+    },
+    "applyNow": "Apply rules now",
+    "applying": "Applying…",
+    "applyError": "Could not apply the rules. Try again.",
+    "categorized": "{count, plural, one {# transaction} other {# transactions}} categorized",
+    "matchType": {
+      "contains": "contains",
+      "equals": "is exactly",
+      "regex": "matches regex"
+    },
+    "form": {
+      "category": "Category",
+      "matchType": "Match type",
+      "pattern": "Pattern",
+      "apply": "Apply to uncategorized transactions",
+      "add": "Add rule",
+      "adding": "Adding…",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "addError": "Could not add the rule. Try again.",
+      "saveError": "Could not save the rule. Try again."
+    },
+    "list": {
+      "label": "Rules in evaluation order",
+      "edit": "Edit rule {pattern}",
+      "reorderError": "Could not reorder the rules. Try again.",
+      "priority": "Priority {position}"
+    },
+    "errors": {
+      "notFound": "Rule or category not found.",
+      "reorderFailed": "Could not reorder rules.",
+      "listChanged": "The rule list changed. Reload the page and try again.",
+      "cannotRestore": "Could not restore the rule: its category no longer exists."
+    },
+    "suggestions": {
+      "heading": "Suggested rules",
+      "intro": "Based on the categories you chose by hand.",
+      "list": "Suggested rules",
+      "wouldCategorize": "{count, plural, =0 {Nothing to categorize now} one {Would categorize # transaction now} other {Would categorize # transactions now}}",
+      "create": "Create rule",
+      "creating": "Creating…",
+      "notNow": "Not now",
+      "created": "{count, plural, =0 {Rule created} one {Rule created · # transaction categorized} other {Rule created · # transactions categorized}}",
+      "error": "Could not update the suggestion. Try again."
+    },
+    "addLabel": "Add",
+    "sheet": {
+      "addTitle": "Add a rule",
+      "editTitle": "Edit rule"
+    },
+    "toast": {
+      "added": "{count, plural, =0 {Rule added} one {Rule added · # transaction categorized} other {Rule added · # transactions categorized}}",
+      "saved": "{count, plural, =0 {Rule saved} one {Rule saved · # transaction categorized} other {Rule saved · # transactions categorized}}",
+      "deleted": "Rule deleted"
+    },
+    "menu": {
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "seeMatching": "See matching transactions"
+    }
+  },
+  "bankCategories": {
+    "title": "Bank categories",
+    "intro": "Each category your bank uses is mapped to one of your categories, or ignored. Changing a mapping updates the transactions that were categorized from it or are uncategorized. Rules and manual choices are kept.",
+    "empty": {
+      "title": "No bank categories yet",
+      "body": "They appear after your first import.",
+      "action": "Import your bank export"
+    },
+    "listLabel": "Bank categories",
+    "subLabel": "Subcategories of {name}",
+    "selectLabel": "Category for {name}",
+    "ignore": "Ignore",
+    "saved": "{count, plural, one {Saved · # transaction updated} other {Saved · # transactions updated}}",
+    "saving": "Saving…",
+    "saveError": "Could not save the mapping. Try again.",
+    "forget": {
+      "trigger": "Forget<sr> {name}</sr>",
+      "title": "Forget this bank category?",
+      "description": "You will be asked again about <strong>{name}</strong> at your next import. Transactions keep their category.",
+      "cancel": "Cancel",
+      "pending": "Forgetting…",
+      "confirm": "Forget",
+      "error": "Could not forget the mapping. Try again."
+    },
+    "errors": {
+      "notFound": "This bank category is no longer mapped.",
+      "categoryNotFound": "That category no longer exists."
+    },
+    "savedNone": "Saved"
+  },
+  "accounts": {
+    "title": "Accounts",
+    "addHeading": "Add an account",
+    "new": "New account",
+    "listLabel": "Your accounts",
+    "form": {
+      "name": "Account name",
+      "add": "Add account",
+      "adding": "Adding…",
+      "save": "Save",
+      "saving": "Saving…"
+    },
+    "delete": {
+      "title": "Delete this account?",
+      "description": "This deletes <strong>{name}</strong>, its {imports, plural, one {# import} other {# imports}} and {transactions, plural, one {# transaction} other {# transactions}}. This can't be undone.",
+      "lastHint": "You can't delete your only account. Add another one first.",
+      "cancel": "Cancel",
+      "pending": "Deleting…",
+      "confirm": "Delete account",
+      "goalNote": "<strong>{goals}</strong> will keep their money as goals you track yourself."
+    },
+    "errors": {
+      "required": "Name is required",
+      "tooLong": "Name is too long (50 characters maximum)",
+      "nameTaken": "An account with this name already exists",
+      "notFound": "Account not found",
+      "lastAccount": "You can't delete your only account",
+      "createFailed": "Could not add the account. Try again.",
+      "renameFailed": "Could not rename the account. Try again.",
+      "deleteFailed": "Could not delete the account. Try again.",
+      "amountRequired": "Enter the balance",
+      "amountInvalid": "Enter a valid amount, like 1234.56 or -120.50",
+      "amountTooLarge": "The amount is too large",
+      "thresholdInvalid": "Enter a valid amount for the warning threshold",
+      "thresholdTooLarge": "The warning threshold is too large",
+      "dateInvalid": "Enter a valid date",
+      "dateFuture": "The date can't be in the future",
+      "balanceFailed": "Could not save the balance. Try again.",
+      "balanceRemoveFailed": "Could not remove the balance. Try again.",
+      "safeToSpendFailed": "Could not update the account. Try again.",
+      "bankBalance": "This balance comes from your bank. Disconnect the bank to edit it.",
+      "homeAccountFailed": "Couldn't change the default account. Try again."
+    },
+    "balance": {
+      "none": "No starting balance",
+      "summary": "Starting balance {amount} on {date}",
+      "formLabel": "Starting balance for {name}",
+      "amount": "Balance",
+      "amountPlaceholder": "1234.56",
+      "date": "Date",
+      "dateHelp": "The balance before that day's transactions.",
+      "threshold": "Warn me below",
+      "thresholdHelp": "You get a warning when the projected balance goes below this amount. 0 warns on overdraft.",
+      "save": "Save balance",
+      "saving": "Saving…",
+      "remove": "Remove starting balance",
+      "removing": "Removing…",
+      "fromBank": "From {bank}, {when}",
+      "fromBankUnnamed": "From your bank, {when}",
+      "pendingBank": "The bank's balance replaces it at the next sync",
+      "saveThreshold": "Save"
+    },
+    "safeToSpend": {
+      "label": "Count in safe to spend"
+    },
+    "importReminder": {
+      "label": "Remind me to import"
+    },
+    "row": {
+      "caption": "Last import {date} · {transactions, plural, one {# transaction} other {# transactions}}",
+      "captionNever": "No import yet · {transactions, plural, one {# transaction} other {# transactions}}",
+      "linked": "Linked to {bank}",
+      "default": "Default · Home opens on this account",
+      "savingsLine": "Savings · {count, plural, =0 {no moves yet} one {# move} other {# moves}}",
+      "bank": "{bank} · synced {when}",
+      "bankNever": "{bank} · not synced yet",
+      "csv": "CSV · imported {date}",
+      "csvNever": "CSV · never imported",
+      "assigned": "{amount} assigned"
+    },
+    "menu": {
+      "startingBalance": "Starting balance",
+      "deleteLast": "Delete (your only account)",
+      "setDefault": "Set as default",
+      "removeDefault": "Remove as default"
+    },
+    "toast": {
+      "added": "Account added",
+      "saved": "Saved",
+      "defaultSet": "{name} is now the default account",
+      "defaultCleared": "No default account: Home shows all accounts"
+    },
+    "sheet": {
+      "balanceHeading": "Starting balance",
+      "optionsHeading": "Options",
+      "balanceHeadingBank": "Balance",
+      "goalsHeading": "Goals",
+      "goalLine": "{name} · {amount}",
+      "notAssigned": "Not assigned · {amount}",
+      "overAssigned": "Assigned {amount} more than the balance",
+      "manageGoals": "Manage goals"
+    },
+    "type": {
+      "legend": "Account type",
+      "current": "Current account",
+      "savings": "Savings account",
+      "savingsHint": "No imports or bank sync. You add money to it with Move to savings.",
+      "nowSavings": "Now a savings account",
+      "nowCurrent": "Now a current account",
+      "errors": {
+        "failed": "Could not change the account type. Try again.",
+        "notFound": "Account not found",
+        "hasImports": "This account gets imports or bank sync, so it stays a current account.",
+        "hasMoves": "Undo its moves first, or delete the account.",
+        "lastCurrent": "You need at least one current account.",
+        "hasManual": "This account has transactions you added. Delete them first."
+      }
+    },
+    "savingsRules": {
+      "heading": "Automatic moves",
+      "rule": "Label contains “{pattern}”",
+      "remove": "Remove",
+      "removeLabel": "Remove the rule for {pattern}",
+      "empty": "None yet. In a transaction, Move to savings offers to do it for past and future payments.",
+      "removed": "Rule removed",
+      "ruleWithGoal": "Label contains “{pattern}” · for {goal}"
+    },
+    "total": {
+      "label": "On your accounts",
+      "split": "Current {current} · Savings {savings}",
+      "current": "Current {current}",
+      "savings": "Savings {savings}"
+    },
+    "sections": {
+      "accounts": "Your accounts",
+      "sync": "Bank sync",
+      "imports": "Imports"
+    },
+    "sync": {
+      "manage": "Manage",
+      "connect": "Connect your bank",
+      "validUntil": "connection valid until {date}",
+      "reconnect": "Reconnect"
+    },
+    "imports": {
+      "csv": "Import a CSV",
+      "csvHintSync": "For accounts without sync",
+      "csvHint": "Your bank's export",
+      "stale": "{name}: nothing new for {days, plural, one {# day} other {# days}}",
+      "import": "Import"
+    },
+    "addBalance": "Add a balance"
+  },
+  "budgets": {
+    "title": "Budgets",
+    "intro": "A monthly limit per category, the same every month, counting spending from all accounts. A category's budget covers its subcategories too.",
+    "addLabel": "Add a budget",
+    "listLabel": "Budgets by category",
+    "subcategoriesLabel": "Subcategory budgets of {name}",
+    "subcategoriesExceed": "Subcategory budgets add up to {sum}, more than {category}'s {budget}.",
+    "row": {
+      "edit": "Edit budget for {name}",
+      "rollsOver": "Rolls over",
+      "rollsOverCarried": "Rolls over · {amount} carried",
+      "rollsOverOverspent": "Rolls over · {amount} overspent",
+      "remove": "Remove budget"
+    },
+    "empty": {
+      "title": "No budgets yet",
+      "text": "Set a monthly limit on what you spend most.",
+      "suggestions": "Start with your biggest expenses",
+      "average": "{amount} a month on average",
+      "add": "Add",
+      "addLabel": "Add a budget for {name}"
+    },
+    "add": {
+      "title": "Add a budget",
+      "hint": "Pick a category.",
+      "search": "Search categories",
+      "noMatch": "No category matches “{query}”",
+      "none": "Every category already has a budget.",
+      "average": "{amount} a month on average",
+      "noSpending": "No spending yet",
+      "back": "Back to the list",
+      "listLabel": "Categories without a budget"
+    },
+    "form": {
+      "amount": "Monthly budget",
+      "placeholder": "0",
+      "useAverage": "Use average · {amount}",
+      "lastMonth": "Last month · {amount}",
+      "presets": "Quick amounts",
+      "rollover": "Roll over",
+      "rolloverHelp": "Carry what's left, or what was overspent, into next month.",
+      "carried": "{amount} carried into this month",
+      "carriedOverspent": "{amount} overspent, carried into this month",
+      "save": "Save",
+      "saving": "Saving…",
+      "remove": "Remove budget",
+      "charges": "Payments · {amount}",
+      "chargesNote": "Includes {amount} of payments this month: {names}",
+      "chargesNoteItem": "{name} (on the {day})"
+    },
+    "toast": {
+      "saved": "Budget saved",
+      "carryReset": "Budget saved. The carried amount was reset.",
+      "removed": "Budget removed",
+      "restored": "Budget restored"
+    },
+    "errors": {
+      "invalid": "Enter an amount in euros, like 400 or 400.50.",
+      "notPositive": "The budget must be more than 0.",
+      "tooLarge": "The budget is too large.",
+      "notFound": "Category not found.",
+      "saveFailed": "Could not save the budget. Try again.",
+      "removeFailed": "Could not remove the budget. Try again.",
+      "restoreFailed": "Could not restore the budget. Try again."
+    },
+    "summary": "<big>{amount}</big> planned per month · {count, plural, one {# budget} other {# budgets}}",
+    "monthTitle": "This month",
+    "footnote": "A category's budget also covers its subcategories. Tap a budget to change it."
+  },
+  "export": {
+    "title": "Export",
+    "intro": "Download your data as CSV files that open in a spreadsheet. Files follow your language: comma-separated with a decimal point in English, semicolon-separated with a decimal comma in French.",
+    "listLabel": "Downloads",
+    "transactions": {
+      "title": "All transactions",
+      "hint": "Every transaction from every account, split transactions on one line per part"
+    },
+    "categories": {
+      "title": "Categories",
+      "hint": "Names, subcategories and colors"
+    },
+    "rules": {
+      "title": "Rules",
+      "hint": "Categorization rules in evaluation order"
+    },
+    "budgets": {
+      "title": "Budgets",
+      "hint": "Monthly budget per category"
+    },
+    "filtered": "To export only some transactions, filter them on the <link>Transactions</link> page and use its Export CSV link."
+  },
+  "merchants": {
+    "title": "Merchant names",
+    "intro": "Give a merchant one clean name. Every transaction whose bank label matches shows that name, past and future. The bank label is never changed and stays visible in the transaction details.",
+    "addHeading": "Add a merchant",
+    "listLabel": "Merchant names",
+    "empty": {
+      "title": "No merchant names yet",
+      "body": "Give a merchant one clean name, like Orange instead of the bank's label.",
+      "action": "Add a merchant name"
+    },
+    "patternsLabel": "Labels matched by {name}",
+    "addPattern": "Add a pattern",
+    "removePattern": "Remove<sr> pattern {pattern}</sr>",
+    "form": {
+      "name": "Merchant name",
+      "matchType": "Match labels that",
+      "pattern": "Pattern",
+      "add": "Add merchant",
+      "adding": "Adding…",
+      "addPattern": "Add pattern",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "added": "{count, plural, =0 {Merchant added} one {Merchant added · # transaction renamed} other {Merchant added · # transactions renamed}}",
+      "matchTypes": {
+        "equals": "is exactly",
+        "starts_with": "starts with",
+        "contains": "contains"
+      }
+    },
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameTooLong": "Name is too long",
+      "patternRequired": "Pattern is required",
+      "patternTooLong": "Pattern is too long",
+      "matchTypeInvalid": "Choose how labels are matched",
+      "nameTaken": "You already have a merchant with this name",
+      "patternExists": "This merchant already has this pattern",
+      "notFound": "Merchant not found",
+      "invalidInput": "Invalid input",
+      "saveFailed": "Could not save. Try again.",
+      "offline": "You're offline. Reconnect and try again."
+    },
+    "add": "Add",
+    "caption": "{transactions, plural, one {# transaction} other {# transactions}} · {patterns, plural, one {# pattern} other {# patterns}}",
+    "patternsHeading": "Patterns",
+    "toast": {
+      "saved": "Saved",
+      "deleted": "{name} deleted",
+      "patternRemoved": "Pattern removed"
+    }
+  },
+  "goals": {
+    "title": "Goals",
+    "intro": "Money set aside for a plan, with a date if you like.",
+    "addHeading": "New goal",
+    "listLabel": "Your goals",
+    "empty": {
+      "title": "No savings goals yet",
+      "body": "A goal is an amount to save, with an optional date.",
+      "action": "Add a goal"
+    },
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Car",
+      "target": "Target",
+      "targetPlaceholder": "3000",
+      "date": "Target date (optional)",
+      "dateHelp": "Leave empty for a goal without a deadline.",
+      "source": "Where the money is",
+      "sourceManual": "Money added by hand",
+      "accountOption": "{name}",
+      "add": "Add goal",
+      "adding": "Adding…",
+      "save": "Save",
+      "saving": "Saving…",
+      "sourceHelpAccount": "Assign money to it from the account, or pick it when you move money to savings.",
+      "sourceAccount": "On an account",
+      "sourceHelpManual": "You add the money yourself with ＋.",
+      "delete": "Delete goal"
+    },
+    "row": {
+      "progressManual": "Money added by hand",
+      "progressIn": "In {account}",
+      "open": "Edit {name}",
+      "manualShort": "by hand",
+      "noDate": "no date",
+      "behind": "behind by {amount}",
+      "pastDue": "date passed, {amount} to go",
+      "reached": "reached"
+    },
+    "contribution": {
+      "heading": "Money for {name}",
+      "amount": "Amount",
+      "date": "Date",
+      "add": "Add money",
+      "take": "Take out",
+      "pending": "Saving…",
+      "historyLabel": "Recent entries for {name}",
+      "noEntries": "No entries yet.",
+      "remove": "Remove<sr> the entry of {amount} on {date}</sr>",
+      "titleAdd": "Add money to {name}",
+      "titleTake": "Take money out of {name}",
+      "assign": "Assign",
+      "unassign": "Unassign",
+      "titleAssign": "Assign money to {name}",
+      "titleUnassign": "Unassign money from {name}",
+      "notAssignedHint": "{amount} not assigned in {account}",
+      "holdsHint": "{name} holds {amount}",
+      "presets": "Quick amounts",
+      "presetMonthly": "{amount} · to stay on time",
+      "presetRemaining": "{amount} · to finish",
+      "presetAll": "All · {amount}"
+    },
+    "errors": {
+      "nameRequired": "Enter a name.",
+      "nameTooLong": "The name is too long (60 characters at most).",
+      "targetRequired": "Enter a target amount.",
+      "targetInvalid": "Enter an amount in euros, like 3000 or 3000.50.",
+      "targetNotPositive": "The target must be more than 0.",
+      "targetTooLarge": "The target is too large.",
+      "dateInvalid": "Enter a valid date.",
+      "datePast": "The target date can't be in the past.",
+      "iconInvalid": "Choose a single emoji.",
+      "sourceInvalid": "Choose where the progress comes from.",
+      "nameTaken": "You already have a goal with this name.",
+      "accountNotFound": "Account not found.",
+      "notFound": "Goal not found.",
+      "amountRequired": "Enter an amount.",
+      "amountInvalid": "Enter an amount in euros, like 200 or 200.50.",
+      "amountNotPositive": "The amount must be more than 0.",
+      "amountTooLarge": "The amount is too large.",
+      "dateFuture": "The date can't be in the future.",
+      "directionInvalid": "Choose add or take out.",
+      "notManual": "This goal follows an account, so you can't add money by hand.",
+      "exceedsSaved": "You can't take out more than what is saved.",
+      "saveFailed": "Could not save the goal. Try again.",
+      "deleteFailed": "Could not delete the goal. Try again.",
+      "contributionFailed": "Could not save the entry. Try again.",
+      "removeFailed": "Could not remove the entry. Try again.",
+      "restoreFailed": "Could not restore the goal. Try again.",
+      "notEmpty": "Take the money out of this goal first.",
+      "notAccount": "This goal isn't kept in an account.",
+      "noBalance": "Set the account's starting balance first.",
+      "exceedsNotAssigned": "That's more than what's not assigned.",
+      "notSameAccount": "Both goals must use the same account."
+    },
+    "add": "New goal",
+    "menu": {
+      "addMoney": "Add money",
+      "takeOut": "Take money out",
+      "assign": "Assign money",
+      "unassign": "Unassign money",
+      "moveToGoal": "Move to another goal"
+    },
+    "toast": {
+      "added": "Goal added",
+      "saved": "Saved",
+      "deleted": "{name} deleted",
+      "moneyAdded": "Money added",
+      "moneyTaken": "Money taken out"
+    },
+    "moveForm": {
+      "title": "Move money from {name}",
+      "to": "To",
+      "amount": "Amount",
+      "date": "Date",
+      "holds": "{name} holds {amount}",
+      "submit": "Move",
+      "pending": "Moving…",
+      "done": "Moved {amount} from {from} to {to}"
+    },
+    "summary": {
+      "saved": "<big>{saved}</big> saved of {target}",
+      "monthly": "{amount} a month to set aside to meet the dates"
+    },
+    "accounts": {
+      "label": "Accounts behind your goals",
+      "assigned": "{amount} assigned",
+      "toAssign": "{amount} to assign",
+      "allAssigned": "all assigned",
+      "overAssigned": "{amount} more than the balance",
+      "noBalance": "{account}: set a starting balance"
+    }
+  },
+  "tags": {
+    "title": "Tags",
+    "intro": "Tags group transactions across categories, like a trip or a project. Add them from a transaction, or to several at once when you select rows. Deleting a tag only removes it from your transactions; nothing else is deleted.",
+    "listLabel": "Tags",
+    "empty": {
+      "title": "No tags yet",
+      "body": "Add tags from a transaction, like a trip or a project.",
+      "action": "Go to transactions"
+    },
+    "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
+    "nameLabel": "Tag name",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "errors": {
+      "empty": "Enter a tag name",
+      "tooLong": "A tag name can have at most {length} characters",
+      "comma": "A tag name cannot contain a comma",
+      "conflict": "A tag with this name already exists",
+      "notFound": "Tag not found",
+      "invalidInput": "Invalid input",
+      "saveFailed": "Could not save. Try again.",
+      "offline": "You're offline. Reconnect and try again."
+    },
+    "row": {
+      "rename": "Rename {name}"
+    },
+    "menu": {
+      "rename": "Rename"
+    },
+    "sheet": {
+      "renameTitle": "Rename tag"
+    },
+    "toast": {
+      "saved": "Tag renamed",
+      "deleted": "{name} deleted",
+      "restored": "{name} restored"
+    }
+  },
+  "importReminder": {
+    "toggle": "Remind me to import",
+    "daysBefore": "After",
+    "daysAfter": "{count, plural, one {day without new data} other {days without new data}}",
+    "error": "Could not save the import reminder. Try again.",
+    "invalid": "Enter a number of days between {min} and {max}.",
+    "push": {
+      "unsupported": "Notifications are available in the installed app.",
+      "iosInstall": "Add franC to your Home Screen to get notifications.",
+      "denied": "Notifications are blocked for this site. Allow them in your browser settings, then come back.",
+      "enabled": "Notifications on for this device.",
+      "enable": "Also send a notification",
+      "enabling": "Turning on…",
+      "disable": "Turn off on this device",
+      "disabling": "Turning off…",
+      "hint": "At most one notification a week while your data is out of date.",
+      "error": "Could not change notifications. Try again."
+    }
+  },
+  "manage": {
+    "options": "Options for {name}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "seeTransactions": "See transactions",
+    "undoFailed": "Could not undo. Try again.",
+    "deleteFailed": "Could not delete. Try again."
+  },
+  "bankConnection": {
+    "title": "Bank",
+    "offline": "You're offline. Reconnect and try again.",
+    "connect": "Connect",
+    "connectAnother": "Connect another bank",
+    "connectedUntil": "Connected until {date}",
+    "justConnected": "Connected. Now choose which franC account each bank account feeds.",
+    "linksLabel": "Bank accounts and the franC accounts they feed",
+    "feeds": "feeds",
+    "notImported": "Not imported",
+    "change": "Change links",
+    "cancel": "Cancel",
+    "empty": {
+      "title": "Link your bank",
+      "factDaily": "Your transactions arrive on their own every morning, and when you open franC.",
+      "factPassword": "You sign in on your bank's own page: franC never sees your password.",
+      "factReadOnly": "Read-only, 180 days at most, through Enable Banking (a licensed provider).",
+      "withoutSync": "Without sync"
+    },
+    "picker": {
+      "title": "Your bank",
+      "description": "You'll log in on your bank's page, then come back here.",
+      "search": "Search banks",
+      "listLabel": "Banks",
+      "loading": "Loading banks…",
+      "failed": "Couldn't load the list of banks.",
+      "retry": "Try again",
+      "none": "No bank matches “{query}”."
+    },
+    "link": {
+      "body": "Last step: choose the franC account each bank account feeds.",
+      "new": "New account “{name}”",
+      "skip": "Don't import",
+      "save": "Save",
+      "saving": "Saving…",
+      "duplicate": "Each franC account can be fed by only one bank account.",
+      "syncFrom": "Bring transactions from",
+      "syncFromHint": "For every account. 90 days back at most; for older history, import a CSV.",
+      "accounts": "Accounts",
+      "sheetTitle": "franC account",
+      "sheetDescription": "{name} feeds:",
+      "saveAndSync": "Save and sync"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "title": "Disconnect {bank}?",
+      "description": "Your transactions and accounts stay in franC. You can connect again at any time.",
+      "confirm": "Disconnect",
+      "pending": "Disconnecting…",
+      "balanceNote": "Each account keeps its last bank balance, which you can edit again.",
+      "menu": "Disconnect bank"
+    },
+    "toast": {
+      "connected": "Bank connected",
+      "saved": "Links saved",
+      "reconnected": "Bank reconnected",
+      "disconnected": "Bank disconnected"
+    },
+    "callbackErrors": {
+      "denied": "The bank didn't confirm the connection. Try again.",
+      "invalid_state": "This connection attempt has expired. Start again.",
+      "unknown_bank": "This bank isn't available. Choose another one.",
+      "unauthorized": "Enable Banking refused franC's credentials. Check the application id and key.",
+      "bank_unavailable": "The bank isn't answering right now. Try again later.",
+      "rate_limited": "Your bank's limit for today is reached. franC will try again tomorrow morning.",
+      "network": "Couldn't reach Enable Banking. Try again.",
+      "invalid_response": "Enable Banking sent an unexpected answer. Try again.",
+      "not_found": "Enable Banking couldn't find this connection. Start again.",
+      "not_configured": "Bank connection isn't set up on this server.",
+      "unexpected": "Something went wrong. Try again."
+    },
+    "errors": {
+      "banksFailed": "Couldn't load the list of banks.",
+      "notConfigured": "Bank connection isn't set up on this server.",
+      "saveFailed": "Couldn't save the links.",
+      "disconnectFailed": "Couldn't disconnect.",
+      "notFound": "This connection no longer exists.",
+      "accountTaken": "That account is already fed by another bank account.",
+      "invalidName": "Account names must be 1 to 50 characters."
+    },
+    "sync": {
+      "button": "Sync now",
+      "pending": "Syncing…",
+      "result": "{count, plural, =0 {Nothing new} one {# new transaction} other {# new transactions}}",
+      "rowErrors": "{count, plural, one {# transaction from the bank couldn't be read} other {# transactions from the bank couldn't be read}}",
+      "review": "Review now",
+      "synced": "Synced {time}",
+      "syncedWithCount": "Synced {time} · {count, plural, =0 {nothing new} one {# new} other {# new}}",
+      "notYet": "Not synced yet · from {date}",
+      "errors": {
+        "failed": "Couldn't sync. Try again.",
+        "not_configured": "Bank connection isn't set up on this server.",
+        "linkNotFound": "This account is no longer linked.",
+        "unauthorized": "The bank refused access. The connection may have ended: disconnect and connect again.",
+        "bank_unavailable": "The bank isn't answering right now. Try again later.",
+        "rate_limited": "Your bank's limit for today is reached. franC will try again tomorrow morning.",
+        "network": "Couldn't reach Enable Banking. Try again.",
+        "invalid_response": "The bank sent an unexpected answer. Try again later.",
+        "not_found": "The bank no longer knows this account. Disconnect and connect again."
+      }
+    },
+    "status": {
+      "synced": "Synced {when}",
+      "never": "Not synced yet",
+      "reconnectExpiring": "Reconnect needed · ends {date}",
+      "reconnectExpired": "Reconnect needed · ended {date}",
+      "reconnectRefused": "Reconnect needed",
+      "failing": "Sync failed · since {date}"
+    },
+    "reconnect": "Reconnect",
+    "importCsvHint": "Older history or a missing period",
+    "importCsvTitle": "Import a CSV",
+    "connectChoose": "Choose my bank",
+    "connectionOptions": "Options for {bank}",
+    "connectedUntilLong": "Connection valid until {date}."
+  },
+  "loans": {
+    "section": "Loans",
+    "add": "Add",
+    "track": "Track a loan",
+    "total": "Left to repay",
+    "listLabel": "Your loans",
+    "offline": "You're offline. Try again when you're back online.",
+    "row": {
+      "done": "Repaid",
+      "phase": "{rate} · lower payments until {until}",
+      "until": "{rate} · until {end}",
+      "repaid": "{percent} repaid"
+    },
+    "form": {
+      "newHeading": "Track a loan",
+      "editHeading": "Edit loan",
+      "newLabel": "New loan",
+      "editLabel": "Edit {name}",
+      "name": "Name",
+      "namePlaceholder": "Mortgage",
+      "borrowed": "Amount borrowed",
+      "borrowedHelp": "The original amount.",
+      "startedOn": "Subscription date",
+      "startedOnHelp": "The day the loan was paid out. Optional.",
+      "amortizationFrom": "Capital repayment starts",
+      "amortizationFromHelp": "The first payment that repays capital (“first amortization payment” on your table). Leave empty if there was no deferral.",
+      "owed": "Capital still owed",
+      "owedHelp": "The figure on your bank's table or statement.",
+      "owedOn": "As of",
+      "rate": "Interest rate (per year)",
+      "insurance": "Insurance",
+      "insuranceMode": "Insurance type",
+      "insuranceAmount": "€ per month",
+      "insuranceRate": "% a year of capital owed",
+      "lastPaymentOn": "Last payment of the contract",
+      "lastPaymentOnHelp": "The very last instalment on your table, when the loan is repaid. Not the latest debit.",
+      "currentUntil": "Current payment until",
+      "currentUntilHelp": "Only if the payment changes later, such as an interest-only period. Leave empty otherwise.",
+      "paidBy": "Paid by",
+      "paidByHelp": "The regular payment that carries this loan's monthly debit.",
+      "paidByNone": "No confirmed regular payment yet. Confirm it first, or link it later.",
+      "paidByLater": "Link later",
+      "save": "Save",
+      "saving": "Saving…"
+    },
+    "correct": {
+      "heading": "Correct the capital owed",
+      "label": "Correct the capital owed",
+      "owed": "Capital owed",
+      "owedHelp": "The figure your bank gives for that day.",
+      "on": "As of",
+      "save": "Save",
+      "saving": "Saving…"
+    },
+    "split": {
+      "heading": "Payment of {date}",
+      "label": "Split of this payment",
+      "paid": "Taken by the bank",
+      "interest": "Interest",
+      "insurance": "Insurance",
+      "capital": "Capital repaid",
+      "save": "Save",
+      "saving": "Saving…",
+      "reset": "Reset to franC's calculation"
+    },
+    "simulate": {
+      "heading": "Repay early",
+      "amount": "Amount repaid today",
+      "help": "Nothing is saved. The monthly payment stays the same, so the loan ends sooner.",
+      "invalid": "Enter an amount such as 5000.",
+      "newEnd": "New end",
+      "monthsSaved": "Time saved",
+      "months": "{count, plural, one {# month} other {# months}}",
+      "interestSaved": "Interest saved"
+    },
+    "page": {
+      "back": "Back to Accounts",
+      "owed": "Left to repay",
+      "repaid": "{percent} repaid of {borrowed}",
+      "next": "Next payment {date} · {amount}",
+      "done": "Fully repaid",
+      "phase": "Lower payments until {until}",
+      "ends": "{rate} · ends {end}",
+      "payments": "Payments",
+      "noPayment": "No regular payment is linked, so no payment is counted yet.",
+      "choosePayment": "Choose one",
+      "empty": "No payment yet.",
+      "split": "Capital {capital} · interest {interest} · insurance {insurance}",
+      "less": "{amount} less than the month before",
+      "more": "{amount} more than the month before",
+      "corrected": "Split corrected",
+      "correction": "Correction of the capital",
+      "removeCorrection": "Remove",
+      "seeAll": "See all {count}",
+      "curve": "Capital owed",
+      "cost": "What the loan costs",
+      "paidSoFar": "Interest and insurance paid",
+      "interestLeft": "Interest to come",
+      "insuranceLeft": "Insurance to come",
+      "totalCost": "Total cost",
+      "correct": "Correct the capital owed",
+      "simulate": "Simulate an early repayment",
+      "edit": "Edit loan",
+      "delete": "Delete loan",
+      "splitNoInsurance": "Capital {capital} · interest {interest}",
+      "length": "{total} months in all · {paid} paid · {left} left",
+      "lengthLeft": "{left} months left",
+      "contractEnd": "Last payment {date}",
+      "deferralTitle": "Deferral",
+      "deferralSpan": "{from} → {to} · {count, plural, one {# payment} other {# payments}}",
+      "deferralSplit": "Capital unchanged · interest {interest} · insurance {insurance}",
+      "deferralSplitNoInsurance": "Capital unchanged · interest {interest}",
+      "estimatedTitle": "Estimated period",
+      "estimatedBadge": "estimated",
+      "estimatedSpan": "{from} → {to} · {count, plural, one {# payment} other {# payments}}",
+      "estimatedSplit": "Capital {capital} · interest ≈ {interest} · insurance ≈ {insurance}",
+      "estimatedSplitNoInsurance": "Capital {capital} · interest ≈ {interest}",
+      "costDeferral": "{amount} during the deferral",
+      "costEstimated": "≈ {amount} of it estimated",
+      "approx": "≈ {amount}",
+      "endPassed": "The contract's last payment is past while capital is still owed.",
+      "fixEnd": "Fix it"
+    },
+    "delete": {
+      "title": "Delete this loan?",
+      "description": "{name} stops being tracked. Your bank transactions and budgets stay as they are.",
+      "cancel": "Cancel",
+      "confirm": "Delete",
+      "pending": "Deleting…"
+    },
+    "toast": {
+      "deleted": "{name} deleted"
+    },
+    "errors": {
+      "nameRequired": "Enter a name.",
+      "nameTooLong": "That name is too long.",
+      "amountInvalid": "Enter a valid amount.",
+      "rateInvalid": "Enter a valid rate, such as 1.5.",
+      "dateInvalid": "Enter a valid date.",
+      "dateTooLate": "That date is too far ahead.",
+      "lastPaymentTooEarly": "The last payment must come after the date of the capital owed.",
+      "currentPaymentOutOfRange": "That date must fall before the last payment.",
+      "nameTaken": "You already have a loan with that name.",
+      "notFound": "This loan no longer exists.",
+      "paymentNotFound": "That regular payment is not available.",
+      "startConflict": "A correction already exists before that date. Remove it first.",
+      "beforeStart": "A correction must come after the loan's starting date.",
+      "isStart": "The starting capital can't be removed. Edit the loan instead.",
+      "notAPayment": "That row is not a payment of this loan.",
+      "tooHigh": "Interest and insurance can't exceed what the bank took.",
+      "invalid": "Check the form and try again.",
+      "saveFailed": "Couldn't save the loan. Try again.",
+      "deleteFailed": "Couldn't delete the loan. Try again.",
+      "lastPaymentTooEarlyStart": "The last payment must come after the subscription date.",
+      "startedAfterAnchor": "The subscription date must come before the capital owed date.",
+      "amortizationNeedsStart": "Enter the subscription date first.",
+      "amortizationOutOfRange": "This date must fall between the subscription and the last payment.",
+      "lastPaymentStillOwed": "Capital is still owed on that date, so the contract's last payment must come after “As of”."
+    }
+  }
+}
