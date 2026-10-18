@@ -1,0 +1,1 @@
+ALTER TABLE "transactions" ADD COLUMN "label_display" text;

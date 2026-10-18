@@ -1,0 +1,78 @@
+{
+  "title": "Plan",
+  "budgetsLeft": "{left} left of {budgeted} · {days, plural, =0 {last day} one {# day to go} other {# days to go}}",
+  "noGoals": "Add a savings goal",
+  "noGoalsHint": "Put money aside for something",
+  "recurring": {
+    "title": "Regular payments",
+    "hint": "{amount} a month",
+    "hintWithDetected": "{amount} a month · {count, plural, one {# to confirm} other {# to confirm}}",
+    "none": "None detected yet"
+  },
+  "nextMonth": {
+    "title": "Next month",
+    "hint": "{month}: about {amount} left",
+    "empty": "{month}: nothing expected yet"
+  },
+  "year": {
+    "title": "Year in review",
+    "hint": "{year} so far"
+  },
+  "nextMonthPage": {
+    "eyebrow": "Next month",
+    "leftTitle": "What's left",
+    "leftLabel": "After regular payments and budgets",
+    "leftSentence": "You should have about <b>{amount}</b> left to save or spend outside your budgets.",
+    "shortSentence": "Payments and budgets come to <b>{amount}</b> more than what comes in.",
+    "in": "Coming in",
+    "payments": "Payments",
+    "budgets": "Budgets",
+    "paymentsNote": "A payment in a category with a budget counts in that budget.",
+    "basedOn": "Based on data up to {date}",
+    "noBudgets": "No budgets yet: everyday spending isn't counted.",
+    "addBudget": "Add a budget",
+    "toConfirm": "{count, plural, one {# regular payment to confirm} other {# regular payments to confirm}}",
+    "toConfirmHint": "Counted in this forecast. Marked with a dot below.",
+    "toConfirmDot": "to confirm",
+    "paymentsTitle": "Expected payments",
+    "incomeTitle": "Expected income",
+    "budgetsTitle": "Budgets",
+    "edit": "Edit",
+    "perMonth": "per month",
+    "empty": {
+      "title": "Nothing expected next month",
+      "body": "Regular payments you confirm show up here.",
+      "action": "See regular payments"
+    }
+  },
+  "month": {
+    "titleMonth": "The month",
+    "spent": "<b>{amount}</b> spent",
+    "plannedOf": "of {amount} planned",
+    "outsideBudget": "incl. {amount} outside budgets",
+    "remaining": "{amount} left",
+    "margin": "{amount} to spare",
+    "overPlanned": "{amount} over",
+    "day": "day {day} / {total}",
+    "vsPrevious": "{pct} vs {month}",
+    "income": "Income {amount}",
+    "net": "net <b>{amount}</b>",
+    "noSpending": "No spending in {month}",
+    "barLabel": "{month}: {amount}",
+    "plannedLine": "planned {amount}",
+    "chartLegend": "Tap a month to open it · dashed: planned",
+    "chartLegendNext": " · outline: next month (recurring)",
+    "verdictCurrent": "<b>{left}</b> left of {budgeted} in budgets, for {days, plural, =0 {# days} one {# day} other {# days}}",
+    "verdictPast": "<b>{kept} of {total} budgets kept</b> · {over} over in total",
+    "verdictAllKept": "<b>All budgets kept</b>",
+    "savedIn": "Saved in {month}: {amount}",
+    "further": "More",
+    "upcoming": "Coming up",
+    "balance": "Balance",
+    "goals": "Goals",
+    "budgets": "Budgets",
+    "edit": "Edit",
+    "manage": "Manage",
+    "recurringLink": "Recurring"
+  }
+}

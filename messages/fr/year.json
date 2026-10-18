@@ -1,0 +1,57 @@
+{
+  "title": "Année",
+  "selector": {
+    "previous": "Année précédente",
+    "next": "Année suivante",
+    "current": "en cours"
+  },
+  "empty": {
+    "title": "Rien en {year}",
+    "body": "Importez votre export bancaire pour voir cette année.",
+    "import": "Importer votre export bancaire",
+    "goToYear": "Aller à {year}"
+  },
+  "headline": {
+    "label": "Totaux de l'année",
+    "savedRate": "{rate} de vos revenus",
+    "overspentNote": "Votre solde a couvert la différence",
+    "noIncomeNote": "Aucun revenu enregistré en {year}",
+    "savedLabel": "Épargné en {year}",
+    "savedSoFarLabel": "Épargné depuis janvier",
+    "overspentLabel": "Dépensé de plus que gagné en {year}",
+    "evenLabel": "Dépensé ce que vous avez gagné en {year}",
+    "noIncomeLabel": "Dépensé en {year}",
+    "perMonth": "Dépensé par mois"
+  },
+  "highlights": {
+    "best": "Meilleur mois : <link>{month}</link>, {amount} épargnés",
+    "toughest": "Mois le plus difficile : <link>{month}</link>, {amount} dépensés de plus que vos revenus",
+    "lowest": "Mois le plus faible : <link>{month}</link>, {amount} épargnés"
+  },
+  "monthly": {
+    "heading": "Mois par mois",
+    "legend": "Bilan de chaque mois · vert : le meilleur · hachuré : en cours",
+    "legendNoBest": "Bilan de chaque mois · hachuré : en cours",
+    "barLabel": "{month} : {amount}",
+    "listHeading": "Les mois",
+    "row": "{income} reçus · {spent} dépensés",
+    "rowSaved": "{income} reçus · {spent} dépensés · {saved} mis de côté",
+    "inProgress": "en cours"
+  },
+  "flow": {
+    "heading": "Où est passé l'argent",
+    "period": "Période",
+    "wholeYear": "Toute l'année",
+    "empty": "Aucun revenu ni aucune dépense sur cette période.",
+    "sourcesHeading": "D'où vient l'argent",
+    "periodDescription": "Choisissez toute l'année ou un mois."
+  },
+  "categories": {
+    "heading": "Par catégorie",
+    "perMonth": "≈ {amount} / mois",
+    "biggest": "Le plus dépensé en {month}",
+    "total": "Total",
+    "averageNote": "Les moyennes mensuelles divisent par {count, plural, one {# mois} other {# mois}}, à partir du premier mois avec des opérations.",
+    "empty": "Aucune dépense en {year}."
+  }
+}

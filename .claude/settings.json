@@ -1,0 +1,48 @@
+{
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/pbakaus/impeccable.git"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/DietrichGebert/ponytail.git"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/JuliusBrussee/caveman.git"
+      }
+    },
+    "caveman-browse": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/JuliusBrussee/caveman-browse.git"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "impeccable@impeccable": true,
+    "ponytail@ponytail": true,
+    "caveman@caveman": true,
+    "caveman-browse@caveman-browse": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$CLAUDE_CODE_REMOTE\" = \"true\" ]; then bash scripts/setup.sh > /tmp/franc-setup.log 2>&1; fi; exit 0",
+            "timeout": 300,
+            "statusMessage": "Running cloud setup (scripts/setup.sh)..."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,302 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Explicit .dark on <html>, or the OS is dark and the user did not pick Light. */
+@custom-variant dark {
+  &:where(.dark, .dark *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not(.light), :root:not(.light) *) {
+      @slot;
+    }
+  }
+}
+
+:root {
+  /* Follows the OS until a theme is picked; the layout then puts .light or
+     .dark on <html>. Every colour token picks its value with light-dark(), so
+     the first paint is already right and no script is needed. */
+  color-scheme: light dark;
+  --radius: 0.625rem;
+  /* Tricolore (SPEC §49): French blue for actions and selection, navy for the
+     hero card, and the flag red only as decoration (logo "C", flag stripe).
+     Money status has its own tokens: positive, warning, destructive. */
+  --background: light-dark(#f7f8fa, #0d1016);
+  --foreground: light-dark(#101828, #eef1f5);
+  --card: light-dark(#ffffff, #161a22);
+  --card-foreground: light-dark(#101828, #eef1f5);
+  --popover: light-dark(#ffffff, #1b2029);
+  --popover-foreground: light-dark(#101828, #eef1f5);
+  --primary: light-dark(#0055a4, #7fb2f0);
+  --primary-foreground: light-dark(#ffffff, #04162e);
+  --secondary: light-dark(#edf0f4, #222833);
+  --secondary-foreground: light-dark(#101828, #eef1f5);
+  --muted: light-dark(#edf0f4, #222833);
+  /* Readable (4.5:1) on the page, on cards and on a hovered bg-accent row. */
+  --muted-foreground: light-dark(#556070, #a3acb9);
+  --accent: light-dark(#e6eff9, #1f2a3a);
+  --accent-foreground: light-dark(#101828, #eef1f5);
+  --destructive: light-dark(#c0262d, #f87171);
+  --border: light-dark(#e4e7ec, #262c36);
+  --input: light-dark(#d0d5dd, #343b47);
+  --ring: light-dark(#0055a4, #7fb2f0);
+  --brand: var(--primary);
+  --brand-foreground: var(--primary-foreground);
+  --brand-soft: light-dark(#e6eff9, rgb(127 178 240 / 0.14));
+  --hero: light-dark(#0a2a5e, #0f2c5c);
+  --hero-foreground: #ffffff;
+  /* Warnings on the navy hero: --warning is too dark there. */
+  --hero-warning: #fcd34d;
+  --flag-blue: #4f8be8;
+  --sand: #f3e3a6;
+  --flag-red: light-dark(#d62839, #ff5a5f);
+  --positive: light-dark(#047857, #34d399);
+  --positive-soft: light-dark(#e3f4ec, rgb(52 211 153 / 0.14));
+  --warning: light-dark(#b45309, #fbbf24);
+  --warning-soft: light-dark(#fef3e2, rgb(251 191 36 / 0.14));
+  --destructive-soft: light-dark(#fdecec, rgb(248 113 113 / 0.14));
+  /* Spent (1) is the brand blue, income (2) the positive green, so charts
+     never borrow a category colour. 3 is the neutral "income" node of the
+     flow chart. */
+  --chart-1: light-dark(#0055a4, #7fb2f0);
+  --chart-2: light-dark(#0f9d6e, #34d399);
+  --chart-3: light-dark(#0a2a5e, #c9d6ec);
+  --chart-4: light-dark(#b45309, #fbbf24);
+  --chart-5: light-dark(#556070, #a3acb9);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+}
+
+/* 50 F Saint-Exupéry (SPEC §72): Home's look, dark whatever the theme setting. The shadcn
+   tokens are redefined inside the class, so every existing component follows. Red is never
+   used: destructive maps to the amber warning. Derived tokens (sidebar-*) are redefined here
+   too, because a var() in :root is resolved there and would not see the new values. */
+.theme-50f {
+  color-scheme: dark;
+  --background: #04051a;
+  --foreground: #eeeaff;
+  --card: #121638;
+  --card-foreground: #eeeaff;
+  --popover: #161b42;
+  --popover-foreground: #eeeaff;
+  --primary: #8ea2ff;
+  --primary-foreground: #04051a;
+  --secondary: #1b2150;
+  --secondary-foreground: #eeeaff;
+  --muted: #1b2150;
+  --muted-foreground: #9a9fc6;
+  --accent: #1b2150;
+  --accent-foreground: #eeeaff;
+  --destructive: #ffb05a;
+  --border: #232a5c;
+  --input: #2b3368;
+  --ring: #8ea2ff;
+  --brand: #8ea2ff;
+  --brand-foreground: #04051a;
+  --brand-soft: rgb(142 162 255 / 0.16);
+  --positive: #7fe0b0;
+  --positive-soft: rgb(127 224 176 / 0.14);
+  --warning: #ffb05a;
+  --warning-soft: rgb(255 176 90 / 0.16);
+  --destructive-soft: rgb(255 176 90 / 0.16);
+  --sand: #f3e3a6;
+  --gauge-off: #1d2350;
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  font-family: "Manrope Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  color: var(--foreground);
+}
+/* Rosettes and a few stars on the page background only (cards are solid). The night ground is set
+   here, not on .theme-50f: an unlayered background there would beat the bg-card of sheets and toasts. */
+.theme-50f.bg-50f {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(1.2px 1.2px at 30px 40px, rgb(243 227 166 / 0.67) 50%, transparent),
+    radial-gradient(1px 1px at 140px 160px, rgb(255 255 255 / 0.53) 50%, transparent),
+    repeating-radial-gradient(circle at 85% 12%, rgb(142 162 255 / 0.07) 0 1px, transparent 1px 7px),
+    repeating-radial-gradient(circle at 10% 70%, rgb(142 162 255 / 0.05) 0 1px, transparent 1px 9px);
+}
+/* The value panel: thin border, inner rule, its own rosettes, hatching and stars, a faint "50". */
+.hero-50f {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(142 162 255 / 0.4);
+  box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px rgb(142 162 255 / 0.27);
+  background:
+    radial-gradient(1.2px 1.2px at 30px 40px, rgb(243 227 166 / 0.67) 50%, transparent),
+    radial-gradient(1px 1px at 140px 160px, rgb(255 255 255 / 0.53) 50%, transparent),
+    repeating-radial-gradient(circle at 85% 12%, rgb(142 162 255 / 0.09) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, rgb(142 162 255 / 0.05) 0 1px, transparent 1px 6px),
+    var(--card);
+}
+.hero-50f::after {
+  content: "50";
+  position: absolute;
+  right: -4px;
+  bottom: -14px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: 130px;
+  line-height: 1;
+  color: #8ea2ff;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+@theme inline {
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-warning: var(--hero-warning);
+  --color-flag-blue: var(--flag-blue);
+  --color-flag-red: var(--flag-red);
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --font-title: "Cinzel Variable", Georgia, serif;
+  --font-engraved: "Cormorant Garamond", Georgia, serif;
+  --color-sand: var(--sand);
+  --color-gauge-off: var(--gauge-off);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Motion (Slice 43): short and quiet, all cut by the reduce-motion guard below. */
+  --animate-toast-pop: toast-pop 260ms ease-out;
+  --animate-bar-grow: bar-grow 450ms ease-out both;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes toast-pop {
+    0% { transform: scale(0.6); }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  /* Progress fills grow from the left when they first appear (used with origin-left). */
+  @keyframes bar-grow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes shimmer {
+    from { background-position: 150% 0; }
+    to { background-position: -50% 0; }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  body {
+    /* Digits line up in lists and totals. */
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* List rows animated with React's <ViewTransition> (Slice 43): leaving rows fade, the others
+   slide into place, rows put back by Undo fade in. */
+::view-transition-group(.list-row) {
+  animation-duration: 220ms;
+  animation-timing-function: ease-out;
+}
+::view-transition-old(.list-row):only-child {
+  animation: 180ms ease-in both list-row-out;
+}
+::view-transition-new(.list-row):only-child {
+  animation: 220ms ease-out both list-row-in;
+}
+@keyframes list-row-out {
+  to { opacity: 0; transform: translateX(-12px); }
+}
+@keyframes list-row-in {
+  from { opacity: 0; transform: translateY(-6px); }
+}
+/* Only rows move: the page itself does not cross-fade on every list change. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* One guard for every animation and transition, so no screen can forget "reduce motion". */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Charts are decorative (aria-hidden): a tap focuses Recharts' internal layers (tabindex="-1"),
+   whose browser outline drew a box around the plot. Nothing in a chart is keyboard-reachable. */
+.recharts-wrapper:focus,
+.recharts-wrapper :focus {
+  outline: none;
+}

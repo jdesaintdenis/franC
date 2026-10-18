@@ -1,0 +1,78 @@
+{
+  "title": "Budget",
+  "budgetsLeft": "{left} restants sur {budgeted} · {days, plural, =0 {dernier jour} one {# jour restant} other {# jours restants}}",
+  "noGoals": "Ajouter un objectif d'épargne",
+  "noGoalsHint": "Mettre de l'argent de côté pour un projet",
+  "recurring": {
+    "title": "Paiements récurrents",
+    "hint": "{amount} par mois",
+    "hintWithDetected": "{amount} par mois · {count, plural, one {# à confirmer} other {# à confirmer}}",
+    "none": "Aucun détecté pour l'instant"
+  },
+  "nextMonth": {
+    "title": "Mois prochain",
+    "hint": "{month} : environ {amount} restants",
+    "empty": "{month} : rien de prévu pour l'instant"
+  },
+  "year": {
+    "title": "Rétrospective de l'année",
+    "hint": "{year} jusqu'ici"
+  },
+  "nextMonthPage": {
+    "eyebrow": "Mois prochain",
+    "leftTitle": "Ce qu'il restera",
+    "leftLabel": "Après les paiements récurrents et les budgets",
+    "leftSentence": "Il devrait vous rester environ <b>{amount}</b> à mettre de côté ou à dépenser hors budget.",
+    "shortSentence": "Paiements et budgets dépassent de <b>{amount}</b> ce qui rentre.",
+    "in": "Entrées",
+    "payments": "Paiements",
+    "budgets": "Budgets",
+    "paymentsNote": "Un paiement d'une catégorie qui a un budget est compté dans ce budget.",
+    "basedOn": "Basé sur les données jusqu'au {date}",
+    "noBudgets": "Pas encore de budget : les dépenses courantes ne sont pas comptées.",
+    "addBudget": "Créer un budget",
+    "toConfirm": "{count, plural, one {# paiement à confirmer} other {# paiements à confirmer}}",
+    "toConfirmHint": "Comptés dans la prévision. Marqués d'un point ci-dessous.",
+    "toConfirmDot": "à confirmer",
+    "paymentsTitle": "Paiements prévus",
+    "incomeTitle": "Entrées prévues",
+    "budgetsTitle": "Budgets",
+    "edit": "Modifier",
+    "perMonth": "par mois",
+    "empty": {
+      "title": "Rien d'attendu le mois prochain",
+      "body": "Les paiements récurrents que vous confirmez apparaissent ici.",
+      "action": "Voir les paiements récurrents"
+    }
+  },
+  "month": {
+    "titleMonth": "Le mois",
+    "spent": "<b>{amount}</b> dépensés",
+    "plannedOf": "sur {amount} prévus",
+    "outsideBudget": "dont {amount} hors budget",
+    "remaining": "{amount} restants",
+    "margin": "{amount} de marge",
+    "overPlanned": "dépassé de {amount}",
+    "day": "jour {day} / {total}",
+    "vsPrevious": "{pct} vs {month}",
+    "income": "Revenus {amount}",
+    "net": "bilan <b>{amount}</b>",
+    "noSpending": "Aucune dépense en {month}",
+    "barLabel": "{month} : {amount}",
+    "plannedLine": "prévu {amount}",
+    "chartLegend": "Touchez un mois pour l'ouvrir · pointillés : prévu",
+    "chartLegendNext": " · contour : mois prochain (récurrents)",
+    "verdictCurrent": "Il reste <b>{left}</b> sur {budgeted} de budgets, pour {days, plural, =0 {# jour} one {# jour} other {# jours}}",
+    "verdictPast": "<b>{kept} budgets tenus sur {total}</b> · {over} de dépassement au total",
+    "verdictAllKept": "<b>Tous les budgets tenus</b>",
+    "savedIn": "Mis de côté en {month} : {amount}",
+    "further": "Aller plus loin",
+    "upcoming": "À venir",
+    "balance": "Solde",
+    "goals": "Objectifs",
+    "budgets": "Budgets",
+    "edit": "Modifier",
+    "manage": "Gérer",
+    "recurringLink": "Récurrents"
+  }
+}

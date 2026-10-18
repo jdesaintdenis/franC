@@ -1,0 +1,2 @@
+ALTER TABLE "users" ADD COLUMN "home_account_id" uuid;--> statement-breakpoint
+ALTER TABLE "users" ADD CONSTRAINT "users_home_account_id_accounts_id_fk" FOREIGN KEY ("home_account_id") REFERENCES "public"."accounts"("id") ON DELETE set null ON UPDATE no action;

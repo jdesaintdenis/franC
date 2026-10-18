@@ -1,0 +1,1041 @@
+{
+  "title": "Plus",
+  "offline": "Vous êtes hors ligne. Reconnectez-vous et réessayez.",
+  "sections": {
+    "accounts": {
+      "title": "Comptes"
+    },
+    "bankConnection": {
+      "title": "Connexion bancaire"
+    },
+    "label": "Sections des paramètres",
+    "categories": {
+      "title": "Catégories"
+    },
+    "budgets": {
+      "title": "Budgets"
+    },
+    "rules": {
+      "title": "Règles"
+    },
+    "bankCategories": {
+      "title": "Catégories de la banque"
+    },
+    "export": {
+      "title": "Export"
+    },
+    "merchants": {
+      "title": "Noms des commerçants"
+    },
+    "goals": {
+      "title": "Objectifs"
+    },
+    "tags": {
+      "title": "Étiquettes"
+    },
+    "preferences": "Préférences",
+    "account": "Compte franC",
+    "importCsv": {
+      "title": "Importer un CSV"
+    },
+    "classement": "Classement",
+    "data": "Vos données",
+    "values": {
+      "categories": "{top} · {sub} sous-cat.",
+      "categoriesTop": "{top}",
+      "bankMappings": "{count, plural, one {# associée} other {# associées}}",
+      "csv": "CSV"
+    }
+  },
+  "signOut": {
+    "button": "Se déconnecter",
+    "pending": "Déconnexion…",
+    "error": "Impossible de vous déconnecter. Réessayez."
+  },
+  "language": {
+    "legend": "Langue",
+    "auto": "Automatique (langue du navigateur)",
+    "fr": "Français",
+    "en": "English",
+    "error": "Impossible d'enregistrer la langue."
+  },
+  "validation": {
+    "invalidCategory": "Catégorie invalide.",
+    "invalidRule": "Règle invalide.",
+    "nameRequired": "Le nom est obligatoire",
+    "nameTooLong": "Le nom est trop long",
+    "colorInvalid": "La couleur doit être au format #RRGGBB",
+    "categoryInvalid": "Choisissez une catégorie",
+    "matchTypeInvalid": "Choisissez un type de correspondance",
+    "patternRequired": "Le motif est obligatoire",
+    "patternTooLong": "Le motif est trop long",
+    "regexInvalid": "Expression régulière invalide",
+    "parentInvalid": "Choisissez une catégorie parente valide",
+    "iconInvalid": "Choisissez un seul emoji"
+  },
+  "categories": {
+    "title": "Catégories",
+    "empty": {
+      "title": "Aucune catégorie pour le moment",
+      "body": "Les catégories regroupent vos dépenses, comme Courses ou Loyer.",
+      "action": "Ajouter une catégorie"
+    },
+    "listLabel": "Catégories",
+    "form": {
+      "name": "Nom",
+      "color": "Couleur",
+      "colorPicker": "Choisir une couleur",
+      "colorHexHint": "Saisissez un code hexadécimal, par ex. #1e3a8a.",
+      "colorUsedBy": "Déjà utilisée par {names}",
+      "add": "Ajouter la catégorie",
+      "adding": "Ajout…",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "cancel": "Annuler",
+      "addError": "Impossible d'ajouter la catégorie. Réessayez.",
+      "saveError": "Impossible d'enregistrer la catégorie. Réessayez.",
+      "parent": "Catégorie parente",
+      "parentNone": "Aucune (premier niveau)",
+      "parentLockedHint": "Cette catégorie a des sous-catégories, elle ne peut donc pas être placée sous une autre.",
+      "icon": {
+        "label": "Icône",
+        "choose": "Choisir une icône",
+        "change": "Changer l'icône, actuellement {icon}",
+        "title": "Choisir une icône",
+        "description": "Recherchez un emoji à afficher à côté de cette catégorie.",
+        "search": "Rechercher un emoji",
+        "loading": "Chargement des emojis…",
+        "noResults": "Aucun emoji trouvé.",
+        "remove": "Retirer l'icône"
+      },
+      "exactColor": "Ou une couleur exacte",
+      "picker": "Nuancier",
+      "swatchLabel": "Couleur {index}",
+      "swatchTakenLabel": "Couleur {index}, déjà utilisée par {names}"
+    },
+    "row": {
+      "addSubcategory": "Ajouter une sous-catégorie à {name}",
+      "edit": "Modifier {name}"
+    },
+    "delete": {
+      "usage": "La suppression de <strong>{name}</strong> rend {transactions, plural, one {# opération non catégorisée} other {# opérations non catégorisées}} et supprime {rules, plural, one {# règle} other {# règles}}.",
+      "cancel": "Annuler",
+      "pending": "Suppression…",
+      "confirm": "Supprimer la catégorie",
+      "error": "Impossible de supprimer la catégorie. Réessayez.",
+      "usageSubcategory": "<strong>{name}</strong> est une sous-catégorie de <strong>{parent}</strong>. Elle contient {transactions, plural, one {# opération} other {# opérations}} et {rules, plural, one {# règle} other {# règles}}.",
+      "usageParent": "<strong>{name}</strong> a {subcategories, plural, one {# sous-catégorie} other {# sous-catégories}}. Ses propres opérations deviennent non catégorisées ({transactions}) et ses règles sont supprimées ({rules}).",
+      "optionsLabel": "Que faire du contenu de cette catégorie",
+      "options": {
+        "moveToParent": "Déplacer ses {transactions, plural, one {# opération} other {# opérations}} et {rules, plural, one {# règle} other {# règles}} vers {parent}",
+        "uncategorize": "Retirer la catégorie de ses {transactions, plural, one {# opération} other {# opérations}} et supprimer ses {rules, plural, one {# règle} other {# règles}}",
+        "keepSubcategories": "Conserver {subcategories, plural, one {la # sous-catégorie} other {les # sous-catégories}} comme catégories de premier niveau",
+        "deleteSubcategories": "Les supprimer aussi : {transactions, plural, one {# opération devient non catégorisée} other {# opérations deviennent non catégorisées}} et {rules, plural, one {# règle est supprimée} other {# règles sont supprimées}}"
+      },
+      "sheetTitle": "Supprimer {name} ?",
+      "attached": "Son budget et ses correspondances de catégories bancaires, s'il y en a, sont supprimés aussi.",
+      "irreversible": "Cette action est irréversible."
+    },
+    "errors": {
+      "nameTaken": "Une catégorie porte déjà ce nom.",
+      "notFound": "Catégorie introuvable.",
+      "parentNotFound": "Catégorie parente introuvable.",
+      "parentIsSelf": "Une catégorie ne peut pas être son propre parent.",
+      "parentIsSubcategory": "Le parent doit être une catégorie de premier niveau.",
+      "hasSubcategories": "Une catégorie qui a des sous-catégories ne peut pas devenir une sous-catégorie.",
+      "subcategoryNameTaken": "Une catégorie de premier niveau porte déjà le nom de l'une de ses sous-catégories.",
+      "cannotRestore": "Impossible de rétablir la catégorie : ce à quoi elle appartenait a changé."
+    },
+    "subcategoriesLabel": "Sous-catégories de {name}",
+    "addLabel": "Nouvelle catégorie",
+    "menu": {
+      "edit": "Renommer, icône, couleur",
+      "addSubcategory": "Ajouter une sous-catégorie",
+      "setBudget": "Définir un budget"
+    },
+    "sheet": {
+      "addTitle": "Ajouter une catégorie",
+      "addSubcategoryTitle": "Ajouter une sous-catégorie à {name}",
+      "editTitle": "Modifier {name}"
+    },
+    "toast": {
+      "added": "Catégorie ajoutée",
+      "saved": "Catégorie enregistrée",
+      "deleted": "{name} supprimée",
+      "restored": "{name} rétablie"
+    },
+    "lead": "{count, plural, one {# catégorie} other {# catégories}} · dépenses du mois",
+    "addSubcategoryShort": "Sous-catégorie",
+    "budgetBadge": "budget"
+  },
+  "rules": {
+    "title": "Règles",
+    "intro": "Une règle s'applique au libellé bancaire ou au libellé affiché d'une opération, sans tenir compte des majuscules ni des accents. La première règle qui correspond l'emporte, donc l'ordre compte. Les catégories que vous définissez à la main ne sont jamais modifiées.",
+    "empty": {
+      "title": "Aucune règle pour le moment",
+      "body": "Une règle catégorise pour vous les opérations qui correspondent, maintenant et lors des prochains imports.",
+      "action": "Ajouter une règle"
+    },
+    "applyNow": "Appliquer les règles maintenant",
+    "applying": "Application…",
+    "applyError": "Impossible d'appliquer les règles. Réessayez.",
+    "categorized": "{count, plural, one {# opération catégorisée} other {# opérations catégorisées}}",
+    "matchType": {
+      "contains": "contient",
+      "equals": "est exactement",
+      "regex": "correspond à l'expression régulière"
+    },
+    "form": {
+      "category": "Catégorie",
+      "matchType": "Type de correspondance",
+      "pattern": "Motif",
+      "apply": "Appliquer aux opérations non catégorisées",
+      "add": "Ajouter la règle",
+      "adding": "Ajout…",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "cancel": "Annuler",
+      "addError": "Impossible d'ajouter la règle. Réessayez.",
+      "saveError": "Impossible d'enregistrer la règle. Réessayez."
+    },
+    "list": {
+      "label": "Règles par ordre d'évaluation",
+      "edit": "Modifier la règle {pattern}",
+      "reorderError": "Impossible de réordonner les règles. Réessayez.",
+      "priority": "Priorité {position}"
+    },
+    "errors": {
+      "notFound": "Règle ou catégorie introuvable.",
+      "reorderFailed": "Impossible de réordonner les règles.",
+      "listChanged": "La liste des règles a changé. Rechargez la page et réessayez.",
+      "cannotRestore": "Impossible de rétablir la règle : sa catégorie n'existe plus."
+    },
+    "suggestions": {
+      "heading": "Règles suggérées",
+      "intro": "D'après les catégories que vous avez choisies vous-même.",
+      "list": "Règles suggérées",
+      "wouldCategorize": "{count, plural, =0 {Rien à catégoriser maintenant} one {Catégoriserait # opération maintenant} other {Catégoriserait # opérations maintenant}}",
+      "create": "Créer la règle",
+      "creating": "Création…",
+      "notNow": "Pas maintenant",
+      "created": "{count, plural, =0 {Règle créée} one {Règle créée · # opération catégorisée} other {Règle créée · # opérations catégorisées}}",
+      "error": "Impossible de mettre à jour la suggestion. Réessayez."
+    },
+    "addLabel": "Ajouter",
+    "sheet": {
+      "addTitle": "Ajouter une règle",
+      "editTitle": "Modifier la règle"
+    },
+    "toast": {
+      "added": "{count, plural, =0 {Règle ajoutée} one {Règle ajoutée · # opération catégorisée} other {Règle ajoutée · # opérations catégorisées}}",
+      "saved": "{count, plural, =0 {Règle enregistrée} one {Règle enregistrée · # opération catégorisée} other {Règle enregistrée · # opérations catégorisées}}",
+      "deleted": "Règle supprimée"
+    },
+    "menu": {
+      "moveUp": "Monter",
+      "moveDown": "Descendre",
+      "seeMatching": "Voir les opérations correspondantes"
+    }
+  },
+  "bankCategories": {
+    "title": "Catégories de la banque",
+    "intro": "Chaque catégorie utilisée par votre banque est associée à l'une de vos catégories, ou ignorée. Modifier une association met à jour les opérations catégorisées grâce à elle ou non catégorisées. Les règles et les choix manuels sont conservés.",
+    "empty": {
+      "title": "Aucune catégorie de la banque pour le moment",
+      "body": "Elles apparaissent après votre premier import.",
+      "action": "Importer votre export bancaire"
+    },
+    "listLabel": "Catégories de la banque",
+    "subLabel": "Sous-catégories de {name}",
+    "selectLabel": "Catégorie pour {name}",
+    "ignore": "Ignorer",
+    "saved": "{count, plural, one {Enregistré · # opération mise à jour} other {Enregistré · # opérations mises à jour}}",
+    "saving": "Enregistrement…",
+    "saveError": "Impossible d'enregistrer l'association. Réessayez.",
+    "forget": {
+      "trigger": "Oublier<sr> {name}</sr>",
+      "title": "Oublier cette catégorie de la banque ?",
+      "description": "La question vous sera posée de nouveau pour <strong>{name}</strong> à votre prochain import. Les opérations gardent leur catégorie.",
+      "cancel": "Annuler",
+      "pending": "En cours…",
+      "confirm": "Oublier",
+      "error": "Impossible d'oublier l'association. Réessayez."
+    },
+    "errors": {
+      "notFound": "Cette catégorie de la banque n'est plus associée.",
+      "categoryNotFound": "Cette catégorie n'existe plus."
+    },
+    "savedNone": "Enregistré"
+  },
+  "accounts": {
+    "title": "Comptes",
+    "addHeading": "Ajouter un compte",
+    "new": "Nouveau compte",
+    "listLabel": "Vos comptes",
+    "form": {
+      "name": "Nom du compte",
+      "add": "Ajouter le compte",
+      "adding": "Ajout…",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…"
+    },
+    "delete": {
+      "title": "Supprimer ce compte ?",
+      "description": "Cette action supprime <strong>{name}</strong>, {imports, plural, one {son # import} other {ses # imports}} et {transactions, plural, one {son # opération} other {ses # opérations}}. Elle est irréversible.",
+      "lastHint": "Vous ne pouvez pas supprimer votre seul compte. Ajoutez-en d'abord un autre.",
+      "cancel": "Annuler",
+      "pending": "Suppression…",
+      "confirm": "Supprimer le compte",
+      "goalNote": "<strong>{goals}</strong> garderont leur argent, suivi par vous-même."
+    },
+    "errors": {
+      "required": "Le nom est obligatoire",
+      "tooLong": "Le nom est trop long (50 caractères maximum)",
+      "nameTaken": "Un compte portant ce nom existe déjà",
+      "notFound": "Compte introuvable",
+      "lastAccount": "Vous ne pouvez pas supprimer votre seul compte",
+      "createFailed": "Impossible d'ajouter le compte. Réessayez.",
+      "renameFailed": "Impossible de renommer le compte. Réessayez.",
+      "deleteFailed": "Impossible de supprimer le compte. Réessayez.",
+      "amountRequired": "Saisissez le solde",
+      "amountInvalid": "Saisissez un montant valide, comme 1234,56 ou -120,50",
+      "amountTooLarge": "Le montant est trop élevé",
+      "thresholdInvalid": "Saisissez un montant valide pour le seuil d'alerte",
+      "thresholdTooLarge": "Le seuil d'alerte est trop élevé",
+      "dateInvalid": "Saisissez une date valide",
+      "dateFuture": "La date ne peut pas être dans le futur",
+      "balanceFailed": "Impossible d'enregistrer le solde. Réessayez.",
+      "balanceRemoveFailed": "Impossible de retirer le solde. Réessayez.",
+      "safeToSpendFailed": "Impossible de mettre à jour le compte. Réessayez.",
+      "bankBalance": "Ce solde vient de votre banque. Déconnectez la banque pour le modifier.",
+      "homeAccountFailed": "Impossible de changer le compte par défaut. Réessayez."
+    },
+    "balance": {
+      "none": "Pas de solde de départ",
+      "summary": "Solde de départ de {amount} le {date}",
+      "formLabel": "Solde de départ de {name}",
+      "amount": "Solde",
+      "amountPlaceholder": "1234,56",
+      "date": "Date",
+      "dateHelp": "Le solde avant les opérations de ce jour.",
+      "threshold": "M'alerter sous",
+      "thresholdHelp": "Vous êtes alerté quand le solde prévu passe sous ce montant. 0 alerte en cas de découvert.",
+      "save": "Enregistrer le solde",
+      "saving": "Enregistrement…",
+      "remove": "Retirer le solde de départ",
+      "removing": "Retrait…",
+      "fromBank": "Solde de {bank}, {when}",
+      "fromBankUnnamed": "Solde de votre banque, {when}",
+      "pendingBank": "Le solde de la banque le remplacera à la prochaine synchronisation",
+      "saveThreshold": "Enregistrer"
+    },
+    "safeToSpend": {
+      "label": "Compter dans le reste à vivre"
+    },
+    "importReminder": {
+      "label": "Me rappeler d'importer"
+    },
+    "row": {
+      "caption": "Dernier import {date} · {transactions, plural, one {# opération} other {# opérations}}",
+      "captionNever": "Aucun import · {transactions, plural, one {# opération} other {# opérations}}",
+      "linked": "Lié à {bank}",
+      "default": "Par défaut · l'Accueil s'ouvre sur ce compte",
+      "savingsLine": "Épargne · {count, plural, =0 {aucun mouvement} one {# mouvement} other {# mouvements}}",
+      "bank": "{bank} · synchro {when}",
+      "bankNever": "{bank} · pas encore synchronisé",
+      "csv": "CSV · importé {date}",
+      "csvNever": "CSV · jamais importé",
+      "assigned": "{amount} affectés"
+    },
+    "menu": {
+      "startingBalance": "Solde de départ",
+      "deleteLast": "Supprimer (votre seul compte)",
+      "setDefault": "Définir par défaut",
+      "removeDefault": "Retirer par défaut"
+    },
+    "toast": {
+      "added": "Compte ajouté",
+      "saved": "Enregistré",
+      "defaultSet": "{name} est maintenant le compte par défaut",
+      "defaultCleared": "Aucun compte par défaut : l'Accueil affiche tous les comptes"
+    },
+    "sheet": {
+      "balanceHeading": "Solde de départ",
+      "optionsHeading": "Options",
+      "balanceHeadingBank": "Solde",
+      "goalsHeading": "Objectifs",
+      "goalLine": "{name} · {amount}",
+      "notAssigned": "Non affecté · {amount}",
+      "overAssigned": "{amount} affecté en trop par rapport au solde",
+      "manageGoals": "Gérer les objectifs"
+    },
+    "type": {
+      "legend": "Type de compte",
+      "current": "Compte courant",
+      "savings": "Compte épargne",
+      "savingsHint": "Ni import ni synchronisation. Vous l'alimentez avec Mettre en épargne.",
+      "nowSavings": "C'est maintenant un compte épargne",
+      "nowCurrent": "C'est maintenant un compte courant",
+      "errors": {
+        "failed": "Impossible de changer le type du compte. Réessayez.",
+        "notFound": "Compte introuvable",
+        "hasImports": "Ce compte reçoit des imports ou la synchronisation bancaire : il reste un compte courant.",
+        "hasMoves": "Annulez d'abord ses mises en épargne, ou supprimez le compte.",
+        "lastCurrent": "Il vous faut au moins un compte courant.",
+        "hasManual": "Ce compte contient des opérations ajoutées par vous. Supprimez-les d'abord."
+      }
+    },
+    "savingsRules": {
+      "heading": "Mises en épargne automatiques",
+      "rule": "Libellé contient « {pattern} »",
+      "remove": "Supprimer",
+      "removeLabel": "Supprimer la règle pour {pattern}",
+      "empty": "Aucune pour l'instant. Dans une opération, Mettre en épargne propose de le faire pour les paiements passés et à venir.",
+      "removed": "Règle supprimée",
+      "ruleWithGoal": "Libellé contient « {pattern} » · pour {goal}"
+    },
+    "total": {
+      "label": "Sur vos comptes",
+      "split": "Courant {current} · Épargne {savings}",
+      "current": "Courant {current}",
+      "savings": "Épargne {savings}"
+    },
+    "sections": {
+      "accounts": "Vos comptes",
+      "sync": "Synchro bancaire",
+      "imports": "Imports"
+    },
+    "sync": {
+      "manage": "Gérer",
+      "connect": "Connecter votre banque",
+      "validUntil": "connexion valable jusqu'au {date}",
+      "reconnect": "Reconnecter"
+    },
+    "imports": {
+      "csv": "Importer un CSV",
+      "csvHintSync": "Pour les comptes sans synchro",
+      "csvHint": "L'export de votre banque",
+      "stale": "{name} : rien de neuf depuis {days, plural, one {# jour} other {# jours}}",
+      "import": "Importer"
+    },
+    "addBalance": "Ajouter un solde"
+  },
+  "budgets": {
+    "title": "Budgets",
+    "intro": "Une limite mensuelle par catégorie, la même chaque mois, qui compte les dépenses de tous les comptes. Le budget d'une catégorie couvre aussi ses sous-catégories.",
+    "addLabel": "Ajouter un budget",
+    "listLabel": "Budgets par catégorie",
+    "subcategoriesLabel": "Budgets des sous-catégories de {name}",
+    "subcategoriesExceed": "Les budgets des sous-catégories totalisent {sum}, plus que les {budget} de {category}.",
+    "row": {
+      "edit": "Modifier le budget de {name}",
+      "rollsOver": "Reste reporté",
+      "rollsOverCarried": "Reste reporté · {amount} reportés",
+      "rollsOverOverspent": "Reste reporté · {amount} de dépassement",
+      "remove": "Supprimer le budget"
+    },
+    "empty": {
+      "title": "Aucun budget pour l'instant",
+      "text": "Fixez une limite mensuelle sur vos plus grosses dépenses.",
+      "suggestions": "Commencez par vos plus grosses dépenses",
+      "average": "{amount} par mois en moyenne",
+      "add": "Ajouter",
+      "addLabel": "Ajouter un budget pour {name}"
+    },
+    "add": {
+      "title": "Ajouter un budget",
+      "hint": "Choisissez une catégorie.",
+      "search": "Rechercher une catégorie",
+      "noMatch": "Aucune catégorie ne correspond à « {query} »",
+      "none": "Toutes les catégories ont déjà un budget.",
+      "average": "{amount} par mois en moyenne",
+      "noSpending": "Aucune dépense pour l'instant",
+      "back": "Retour à la liste",
+      "listLabel": "Catégories sans budget"
+    },
+    "form": {
+      "amount": "Budget mensuel",
+      "placeholder": "0",
+      "useAverage": "Utiliser la moyenne · {amount}",
+      "lastMonth": "Mois dernier · {amount}",
+      "presets": "Montants rapides",
+      "rollover": "Reporter le reste",
+      "rolloverHelp": "Reporte ce qu'il reste, ou le dépassement, sur le mois suivant.",
+      "carried": "{amount} reportés sur ce mois",
+      "carriedOverspent": "{amount} de dépassement reporté sur ce mois",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "remove": "Supprimer le budget",
+      "charges": "Prélèvements · {amount}",
+      "chargesNote": "Dont {amount} de prélèvements ce mois-ci : {names}",
+      "chargesNoteItem": "{name} (le {day})"
+    },
+    "toast": {
+      "saved": "Budget enregistré",
+      "carryReset": "Budget enregistré. Le report a été remis à zéro.",
+      "removed": "Budget supprimé",
+      "restored": "Budget rétabli"
+    },
+    "errors": {
+      "invalid": "Saisissez un montant en euros, par exemple 400 ou 400,50.",
+      "notPositive": "Le budget doit être supérieur à 0.",
+      "tooLarge": "Le budget est trop élevé.",
+      "notFound": "Catégorie introuvable.",
+      "saveFailed": "Impossible d'enregistrer le budget. Réessayez.",
+      "removeFailed": "Impossible de supprimer le budget. Réessayez.",
+      "restoreFailed": "Impossible de rétablir le budget. Réessayez."
+    },
+    "summary": "<big>{amount}</big> prévus par mois · {count, plural, one {# budget} other {# budgets}}",
+    "monthTitle": "Ce mois-ci",
+    "footnote": "Le budget d'une catégorie couvre aussi ses sous-catégories. Touchez un budget pour le modifier."
+  },
+  "export": {
+    "title": "Export",
+    "intro": "Téléchargez vos données en fichiers CSV lisibles dans un tableur. Les fichiers suivent votre langue : séparés par des virgules avec un point décimal en anglais, séparés par des points-virgules avec une virgule décimale en français.",
+    "listLabel": "Téléchargements",
+    "transactions": {
+      "title": "Toutes les opérations",
+      "hint": "Toutes les opérations de tous les comptes, les opérations réparties sur une ligne par part"
+    },
+    "categories": {
+      "title": "Catégories",
+      "hint": "Noms, sous-catégories et couleurs"
+    },
+    "rules": {
+      "title": "Règles",
+      "hint": "Règles de catégorisation dans l'ordre d'évaluation"
+    },
+    "budgets": {
+      "title": "Budgets",
+      "hint": "Budget mensuel par catégorie"
+    },
+    "filtered": "Pour n'exporter que certaines opérations, filtrez-les sur la page <link>Opérations</link> et utilisez son lien Exporter en CSV."
+  },
+  "merchants": {
+    "title": "Noms des commerçants",
+    "intro": "Donnez un nom clair à un commerçant. Toutes les opérations dont le libellé de la banque correspond affichent ce nom, passées et futures. Le libellé de la banque n'est jamais modifié et reste visible dans le détail de l'opération.",
+    "addHeading": "Ajouter un commerçant",
+    "listLabel": "Noms des commerçants",
+    "empty": {
+      "title": "Aucun nom de commerçant pour le moment",
+      "body": "Donnez un nom simple à un commerçant, comme Orange au lieu du libellé de la banque.",
+      "action": "Ajouter un nom de commerçant"
+    },
+    "patternsLabel": "Libellés reconnus pour {name}",
+    "addPattern": "Ajouter un motif",
+    "removePattern": "Retirer<sr> le motif {pattern}</sr>",
+    "form": {
+      "name": "Nom du commerçant",
+      "matchType": "Reconnaître les libellés qui",
+      "pattern": "Motif",
+      "add": "Ajouter le commerçant",
+      "adding": "Ajout…",
+      "addPattern": "Ajouter le motif",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "cancel": "Annuler",
+      "added": "{count, plural, =0 {Commerçant ajouté} one {Commerçant ajouté · # opération renommée} other {Commerçant ajouté · # opérations renommées}}",
+      "matchTypes": {
+        "equals": "est exactement",
+        "starts_with": "commence par",
+        "contains": "contient"
+      }
+    },
+    "errors": {
+      "nameRequired": "Le nom est obligatoire",
+      "nameTooLong": "Le nom est trop long",
+      "patternRequired": "Le motif est obligatoire",
+      "patternTooLong": "Le motif est trop long",
+      "matchTypeInvalid": "Choisissez comment les libellés sont reconnus",
+      "nameTaken": "Vous avez déjà un commerçant portant ce nom",
+      "patternExists": "Ce commerçant a déjà ce motif",
+      "notFound": "Commerçant introuvable",
+      "invalidInput": "Saisie invalide",
+      "saveFailed": "Impossible d'enregistrer. Réessayez.",
+      "offline": "Vous êtes hors ligne. Reconnectez-vous et réessayez."
+    },
+    "add": "Ajouter",
+    "caption": "{transactions, plural, one {# opération} other {# opérations}} · {patterns, plural, one {# motif} other {# motifs}}",
+    "patternsHeading": "Motifs",
+    "toast": {
+      "saved": "Enregistré",
+      "deleted": "{name} supprimé",
+      "patternRemoved": "Motif retiré"
+    }
+  },
+  "goals": {
+    "title": "Objectifs",
+    "intro": "De l'argent mis de côté pour un projet, avec une date si vous voulez.",
+    "addHeading": "Nouvel objectif",
+    "listLabel": "Vos objectifs",
+    "empty": {
+      "title": "Aucun objectif d'épargne pour le moment",
+      "body": "Un objectif est un montant à épargner, avec une date facultative.",
+      "action": "Ajouter un objectif"
+    },
+    "form": {
+      "name": "Nom",
+      "namePlaceholder": "Voiture",
+      "target": "Montant à atteindre",
+      "targetPlaceholder": "3000",
+      "date": "Date cible (facultative)",
+      "dateHelp": "Laissez vide pour un objectif sans échéance.",
+      "source": "D'où vient l'argent",
+      "sourceManual": "Argent ajouté à la main",
+      "accountOption": "{name}",
+      "add": "Ajouter l'objectif",
+      "adding": "Ajout…",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "sourceHelpAccount": "Affectez-lui de l'argent du compte, ou choisissez-le quand vous mettez en épargne.",
+      "sourceAccount": "Sur un compte",
+      "sourceHelpManual": "Vous ajoutez l'argent vous-même avec ＋.",
+      "delete": "Supprimer l'objectif"
+    },
+    "row": {
+      "progressManual": "Argent ajouté à la main",
+      "progressIn": "Sur {account}",
+      "open": "Modifier {name}",
+      "manualShort": "à la main",
+      "noDate": "sans date",
+      "behind": "en retard de {amount}",
+      "pastDue": "date dépassée, reste {amount}",
+      "reached": "atteint"
+    },
+    "contribution": {
+      "heading": "Argent pour {name}",
+      "amount": "Montant",
+      "date": "Date",
+      "add": "Ajouter de l'argent",
+      "take": "Retirer",
+      "pending": "Enregistrement…",
+      "historyLabel": "Dernières entrées pour {name}",
+      "noEntries": "Aucune entrée pour l'instant.",
+      "remove": "Supprimer<sr> l'entrée de {amount} du {date}</sr>",
+      "titleAdd": "Ajouter de l'argent à {name}",
+      "titleTake": "Retirer de l'argent de {name}",
+      "assign": "Affecter",
+      "unassign": "Désaffecter",
+      "titleAssign": "Affecter de l'argent à {name}",
+      "titleUnassign": "Désaffecter de l'argent de {name}",
+      "notAssignedHint": "{amount} non affecté sur {account}",
+      "holdsHint": "{name} contient {amount}",
+      "presets": "Montants rapides",
+      "presetMonthly": "{amount} · pour tenir la date",
+      "presetRemaining": "{amount} · pour finir",
+      "presetAll": "Tout · {amount}"
+    },
+    "errors": {
+      "nameRequired": "Saisissez un nom.",
+      "nameTooLong": "Le nom est trop long (60 caractères maximum).",
+      "targetRequired": "Saisissez un montant à atteindre.",
+      "targetInvalid": "Saisissez un montant en euros, par exemple 3000 ou 3000,50.",
+      "targetNotPositive": "Le montant à atteindre doit être supérieur à 0.",
+      "targetTooLarge": "Le montant à atteindre est trop élevé.",
+      "dateInvalid": "Saisissez une date valide.",
+      "datePast": "La date cible ne peut pas être dans le passé.",
+      "iconInvalid": "Choisissez un seul emoji.",
+      "sourceInvalid": "Choisissez d'où vient la progression.",
+      "nameTaken": "Vous avez déjà un objectif portant ce nom.",
+      "accountNotFound": "Compte introuvable.",
+      "notFound": "Objectif introuvable.",
+      "amountRequired": "Saisissez un montant.",
+      "amountInvalid": "Saisissez un montant en euros, par exemple 200 ou 200,50.",
+      "amountNotPositive": "Le montant doit être supérieur à 0.",
+      "amountTooLarge": "Le montant est trop élevé.",
+      "dateFuture": "La date ne peut pas être dans le futur.",
+      "directionInvalid": "Choisissez d'ajouter ou de retirer.",
+      "notManual": "Cet objectif suit un compte : vous ne pouvez pas y ajouter d'argent à la main.",
+      "exceedsSaved": "Vous ne pouvez pas retirer plus que ce qui est épargné.",
+      "saveFailed": "Impossible d'enregistrer l'objectif. Réessayez.",
+      "deleteFailed": "Impossible de supprimer l'objectif. Réessayez.",
+      "contributionFailed": "Impossible d'enregistrer l'entrée. Réessayez.",
+      "removeFailed": "Impossible de supprimer l'entrée. Réessayez.",
+      "restoreFailed": "Impossible de restaurer l'objectif. Réessayez.",
+      "notEmpty": "Retirez d'abord l'argent de cet objectif.",
+      "notAccount": "Cet objectif n'est pas lié à un compte.",
+      "noBalance": "Indiquez d'abord le solde de départ du compte.",
+      "exceedsNotAssigned": "C'est plus que l'argent non affecté.",
+      "notSameAccount": "Les deux objectifs doivent utiliser le même compte."
+    },
+    "add": "Nouvel objectif",
+    "menu": {
+      "addMoney": "Ajouter de l'argent",
+      "takeOut": "Retirer de l'argent",
+      "assign": "Affecter de l'argent",
+      "unassign": "Désaffecter de l'argent",
+      "moveToGoal": "Déplacer vers un autre objectif"
+    },
+    "toast": {
+      "added": "Objectif ajouté",
+      "saved": "Enregistré",
+      "deleted": "{name} supprimé",
+      "moneyAdded": "Argent ajouté",
+      "moneyTaken": "Argent retiré"
+    },
+    "moveForm": {
+      "title": "Déplacer de l'argent de {name}",
+      "to": "Vers",
+      "amount": "Montant",
+      "date": "Date",
+      "holds": "{name} contient {amount}",
+      "submit": "Déplacer",
+      "pending": "Déplacement…",
+      "done": "{amount} déplacé de {from} vers {to}"
+    },
+    "summary": {
+      "saved": "<big>{saved}</big> mis de côté sur {target}",
+      "monthly": "{amount} par mois à mettre de côté pour tenir les dates"
+    },
+    "accounts": {
+      "label": "Comptes de vos objectifs",
+      "assigned": "{amount} affectés",
+      "toAssign": "{amount} à affecter",
+      "allAssigned": "tout est affecté",
+      "overAssigned": "{amount} de plus que le solde",
+      "noBalance": "{account} : indiquez un solde de départ"
+    }
+  },
+  "tags": {
+    "title": "Étiquettes",
+    "intro": "Les étiquettes regroupent des opérations de catégories différentes, comme un voyage ou un projet. Ajoutez-les depuis une opération, ou à plusieurs à la fois en sélectionnant des lignes. Supprimer une étiquette la retire seulement de vos opérations ; rien d'autre n'est supprimé.",
+    "listLabel": "Étiquettes",
+    "empty": {
+      "title": "Aucune étiquette pour le moment",
+      "body": "Ajoutez des étiquettes depuis une opération, comme un voyage ou un projet.",
+      "action": "Aller aux opérations"
+    },
+    "transactionCount": "{count, plural, one {# opération} other {# opérations}}",
+    "nameLabel": "Nom de l'étiquette",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "cancel": "Annuler",
+    "errors": {
+      "empty": "Saisissez un nom d'étiquette",
+      "tooLong": "Un nom d'étiquette peut avoir {length} caractères au maximum",
+      "comma": "Un nom d'étiquette ne peut pas contenir de virgule",
+      "conflict": "Une étiquette portant ce nom existe déjà",
+      "notFound": "Étiquette introuvable",
+      "invalidInput": "Saisie invalide",
+      "saveFailed": "Enregistrement impossible. Réessayez.",
+      "offline": "Vous êtes hors ligne. Reconnectez-vous et réessayez."
+    },
+    "row": {
+      "rename": "Renommer {name}"
+    },
+    "menu": {
+      "rename": "Renommer"
+    },
+    "sheet": {
+      "renameTitle": "Renommer l'étiquette"
+    },
+    "toast": {
+      "saved": "Étiquette renommée",
+      "deleted": "{name} supprimée",
+      "restored": "{name} rétablie"
+    }
+  },
+  "importReminder": {
+    "toggle": "Me rappeler d'importer",
+    "daysBefore": "Après",
+    "daysAfter": "{count, plural, one {jour sans nouvelles données} other {jours sans nouvelles données}}",
+    "error": "Impossible d'enregistrer le rappel d'import. Réessayez.",
+    "invalid": "Saisissez un nombre de jours entre {min} et {max}.",
+    "push": {
+      "unsupported": "Les notifications sont disponibles dans l'application installée.",
+      "iosInstall": "Ajoutez franC à votre écran d'accueil pour recevoir des notifications.",
+      "denied": "Les notifications sont bloquées pour ce site. Autorisez-les dans les réglages de votre navigateur, puis revenez.",
+      "enabled": "Notifications activées sur cet appareil.",
+      "enable": "Envoyer aussi une notification",
+      "enabling": "Activation…",
+      "disable": "Désactiver sur cet appareil",
+      "disabling": "Désactivation…",
+      "hint": "Au plus une notification par semaine tant que vos données ne sont pas à jour.",
+      "error": "Impossible de modifier les notifications. Réessayez."
+    }
+  },
+  "manage": {
+    "options": "Options pour {name}",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "seeTransactions": "Voir les opérations",
+    "undoFailed": "Impossible d’annuler. Réessayez.",
+    "deleteFailed": "Impossible de supprimer. Réessayez."
+  },
+  "bankConnection": {
+    "title": "Banque",
+    "offline": "Vous êtes hors ligne. Reconnectez-vous et réessayez.",
+    "connect": "Connecter",
+    "connectAnother": "Connecter une autre banque",
+    "connectedUntil": "Connectée jusqu'au {date}",
+    "justConnected": "Connexion réussie. Choisissez maintenant le compte franC alimenté par chaque compte bancaire.",
+    "linksLabel": "Comptes bancaires et comptes franC qu'ils alimentent",
+    "feeds": "alimente",
+    "notImported": "Non importé",
+    "change": "Modifier les liens",
+    "cancel": "Annuler",
+    "empty": {
+      "title": "Reliez votre banque",
+      "factDaily": "Vos opérations arrivent seules chaque matin, et quand vous ouvrez franC.",
+      "factPassword": "Vous vous connectez sur la page de votre banque : franC ne voit jamais votre mot de passe.",
+      "factReadOnly": "Lecture seule, 180 jours au plus, via Enable Banking (prestataire agréé).",
+      "withoutSync": "Sans synchro"
+    },
+    "picker": {
+      "title": "Votre banque",
+      "description": "Vous vous connecterez sur la page de votre banque, puis reviendrez ici.",
+      "search": "Rechercher une banque",
+      "listLabel": "Banques",
+      "loading": "Chargement des banques…",
+      "failed": "Impossible de charger la liste des banques.",
+      "retry": "Réessayer",
+      "none": "Aucune banque ne correspond à « {query} »."
+    },
+    "link": {
+      "body": "Dernière étape : choisissez le compte franC que chaque compte bancaire alimente.",
+      "new": "Nouveau compte « {name} »",
+      "skip": "Ne pas importer",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "duplicate": "Un compte franC ne peut être alimenté que par un seul compte bancaire.",
+      "syncFrom": "Récupérer les opérations à partir du",
+      "syncFromHint": "Pour tous les comptes. 90 jours en arrière au plus ; plus ancien, importez un CSV.",
+      "accounts": "Comptes",
+      "sheetTitle": "Compte franC",
+      "sheetDescription": "{name} alimente :",
+      "saveAndSync": "Enregistrer et synchroniser"
+    },
+    "disconnect": {
+      "button": "Déconnecter",
+      "title": "Déconnecter {bank} ?",
+      "description": "Vos opérations et vos comptes restent dans franC. Vous pourrez vous reconnecter à tout moment.",
+      "confirm": "Déconnecter",
+      "pending": "Déconnexion…",
+      "balanceNote": "Chaque compte garde le dernier solde de la banque, que vous pourrez de nouveau modifier.",
+      "menu": "Déconnecter la banque"
+    },
+    "toast": {
+      "connected": "Banque connectée",
+      "saved": "Liens enregistrés",
+      "reconnected": "Banque reconnectée",
+      "disconnected": "Banque déconnectée"
+    },
+    "callbackErrors": {
+      "denied": "La banque n'a pas confirmé la connexion. Réessayez.",
+      "invalid_state": "Cette tentative de connexion a expiré. Recommencez.",
+      "unknown_bank": "Cette banque n'est pas disponible. Choisissez-en une autre.",
+      "unauthorized": "Enable Banking a refusé les identifiants de franC. Vérifiez l'identifiant de l'application et la clé.",
+      "bank_unavailable": "La banque ne répond pas pour le moment. Réessayez plus tard.",
+      "rate_limited": "La limite de votre banque pour aujourd'hui est atteinte. franC réessaiera demain matin.",
+      "network": "Impossible de joindre Enable Banking. Réessayez.",
+      "invalid_response": "Enable Banking a envoyé une réponse inattendue. Réessayez.",
+      "not_found": "Enable Banking ne trouve pas cette connexion. Recommencez.",
+      "not_configured": "La connexion bancaire n'est pas configurée sur ce serveur.",
+      "unexpected": "Une erreur s'est produite. Réessayez."
+    },
+    "errors": {
+      "banksFailed": "Impossible de charger la liste des banques.",
+      "notConfigured": "La connexion bancaire n'est pas configurée sur ce serveur.",
+      "saveFailed": "Impossible d'enregistrer les liens.",
+      "disconnectFailed": "Impossible de déconnecter.",
+      "notFound": "Cette connexion n'existe plus.",
+      "accountTaken": "Ce compte est déjà alimenté par un autre compte bancaire.",
+      "invalidName": "Le nom d'un compte doit faire de 1 à 50 caractères."
+    },
+    "sync": {
+      "button": "Synchroniser",
+      "pending": "Synchronisation…",
+      "result": "{count, plural, =0 {Rien de nouveau} one {# nouvelle opération} other {# nouvelles opérations}}",
+      "rowErrors": "{count, plural, one {# opération de la banque n'a pas pu être lue} other {# opérations de la banque n'ont pas pu être lues}}",
+      "review": "Valider maintenant",
+      "synced": "Synchronisé {time}",
+      "syncedWithCount": "Synchronisé {time} · {count, plural, =0 {rien de nouveau} one {# nouvelle} other {# nouvelles}}",
+      "notYet": "Pas encore synchronisé · à partir du {date}",
+      "errors": {
+        "failed": "Impossible de synchroniser. Réessayez.",
+        "not_configured": "La connexion bancaire n'est pas configurée sur ce serveur.",
+        "linkNotFound": "Ce compte n'est plus lié.",
+        "unauthorized": "La banque a refusé l'accès. La connexion a peut-être pris fin : déconnectez puis reconnectez la banque.",
+        "bank_unavailable": "La banque ne répond pas pour le moment. Réessayez plus tard.",
+        "rate_limited": "La limite de votre banque pour aujourd'hui est atteinte. franC réessaiera demain matin.",
+        "network": "Impossible de joindre Enable Banking. Réessayez.",
+        "invalid_response": "La banque a envoyé une réponse inattendue. Réessayez plus tard.",
+        "not_found": "La banque ne connaît plus ce compte. Déconnectez puis reconnectez la banque."
+      }
+    },
+    "status": {
+      "synced": "Synchronisé {when}",
+      "never": "Pas encore synchronisé",
+      "reconnectExpiring": "Reconnexion nécessaire · se termine le {date}",
+      "reconnectExpired": "Reconnexion nécessaire · terminée le {date}",
+      "reconnectRefused": "Reconnexion nécessaire",
+      "failing": "Synchronisation en échec · depuis le {date}"
+    },
+    "reconnect": "Reconnecter",
+    "importCsvHint": "Historique plus ancien ou période manquante",
+    "importCsvTitle": "Importer un CSV",
+    "connectChoose": "Choisir ma banque",
+    "connectionOptions": "Options pour {bank}",
+    "connectedUntilLong": "Connexion valable jusqu'au {date}."
+  },
+  "loans": {
+    "section": "Crédits",
+    "add": "Ajouter",
+    "track": "Suivre un crédit",
+    "total": "Reste à rembourser",
+    "listLabel": "Vos crédits",
+    "offline": "Vous êtes hors ligne. Réessayez une fois reconnecté.",
+    "row": {
+      "done": "Remboursé",
+      "phase": "{rate} · mensualités réduites jusqu’en {until}",
+      "until": "{rate} · jusqu’en {end}",
+      "repaid": "{percent} remboursé"
+    },
+    "form": {
+      "newHeading": "Suivre un crédit",
+      "editHeading": "Modifier le crédit",
+      "newLabel": "Nouveau crédit",
+      "editLabel": "Modifier {name}",
+      "name": "Nom",
+      "namePlaceholder": "Prêt immobilier",
+      "borrowed": "Montant emprunté",
+      "borrowedHelp": "Le montant d’origine.",
+      "startedOn": "Date de souscription",
+      "startedOnHelp": "Le jour où le crédit a été débloqué. Facultatif.",
+      "amortizationFrom": "Début du remboursement du capital",
+      "amortizationFromHelp": "La première échéance qui rembourse du capital (« première échéance d’amortissement » sur votre tableau). Vide s’il n’y a pas eu de différé.",
+      "owed": "Capital restant dû",
+      "owedHelp": "Le chiffre de votre tableau d’amortissement ou relevé.",
+      "owedOn": "Au",
+      "rate": "Taux d’intérêt (par an)",
+      "insurance": "Assurance",
+      "insuranceMode": "Type d’assurance",
+      "insuranceAmount": "€ par mois",
+      "insuranceRate": "% par an du capital restant dû",
+      "lastPaymentOn": "Dernière échéance du contrat",
+      "lastPaymentOnHelp": "La toute dernière mensualité prévue sur votre tableau, quand le crédit sera remboursé. Pas le dernier prélèvement.",
+      "currentUntil": "Échéance actuelle jusqu’au",
+      "currentUntilHelp": "Seulement si la mensualité change plus tard, par exemple après une période d’intérêts seuls. Sinon, laissez vide.",
+      "paidBy": "Payé par",
+      "paidByHelp": "Le paiement régulier qui porte le prélèvement mensuel de ce crédit.",
+      "paidByNone": "Aucun paiement régulier confirmé pour l’instant. Confirmez-le d’abord, ou liez-le plus tard.",
+      "paidByLater": "Lier plus tard",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…"
+    },
+    "correct": {
+      "heading": "Corriger le capital restant dû",
+      "label": "Corriger le capital restant dû",
+      "owed": "Capital restant dû",
+      "owedHelp": "Le chiffre donné par votre banque pour ce jour.",
+      "on": "Au",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…"
+    },
+    "split": {
+      "heading": "Échéance du {date}",
+      "label": "Répartition de cette échéance",
+      "paid": "Prélevé par la banque",
+      "interest": "Intérêts",
+      "insurance": "Assurance",
+      "capital": "Capital remboursé",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "reset": "Remettre le calcul de franC"
+    },
+    "simulate": {
+      "heading": "Rembourser par anticipation",
+      "amount": "Montant remboursé aujourd’hui",
+      "help": "Rien n’est enregistré. La mensualité reste la même, le crédit se termine donc plus tôt.",
+      "invalid": "Saisissez un montant, par exemple 5000.",
+      "newEnd": "Nouvelle fin",
+      "monthsSaved": "Durée gagnée",
+      "months": "{count, plural, one {# mois} other {# mois}}",
+      "interestSaved": "Intérêts économisés"
+    },
+    "page": {
+      "back": "Retour aux comptes",
+      "owed": "Reste à rembourser",
+      "repaid": "{percent} remboursé sur {borrowed}",
+      "next": "Prochaine échéance {date} · {amount}",
+      "done": "Entièrement remboursé",
+      "phase": "Mensualités réduites jusqu’en {until}",
+      "ends": "{rate} · fin {end}",
+      "payments": "Échéances",
+      "noPayment": "Aucun paiement régulier n’est lié : aucune échéance n’est comptée pour l’instant.",
+      "choosePayment": "En choisir un",
+      "empty": "Aucune échéance pour l’instant.",
+      "split": "Capital {capital} · intérêts {interest} · assurance {insurance}",
+      "less": "{amount} de moins que le mois d’avant",
+      "more": "{amount} de plus que le mois d’avant",
+      "corrected": "Répartition corrigée",
+      "correction": "Correction du capital",
+      "removeCorrection": "Retirer",
+      "seeAll": "Voir les {count}",
+      "curve": "Capital restant dû",
+      "cost": "Ce que coûte le crédit",
+      "paidSoFar": "Intérêts et assurance payés",
+      "interestLeft": "Intérêts à venir",
+      "insuranceLeft": "Assurance à venir",
+      "totalCost": "Coût total",
+      "correct": "Corriger le capital restant dû",
+      "simulate": "Simuler un remboursement anticipé",
+      "edit": "Modifier le crédit",
+      "delete": "Supprimer le crédit",
+      "splitNoInsurance": "Capital {capital} · intérêts {interest}",
+      "length": "{total} mois au total · {paid} payés · {left} restants",
+      "lengthLeft": "{left} mois restants",
+      "contractEnd": "Dernière échéance le {date}",
+      "deferralTitle": "Différé",
+      "deferralSpan": "{from} → {to} · {count, plural, one {# échéance} other {# échéances}}",
+      "deferralSplit": "Capital inchangé · intérêts {interest} · assurance {insurance}",
+      "deferralSplitNoInsurance": "Capital inchangé · intérêts {interest}",
+      "estimatedTitle": "Période estimée",
+      "estimatedBadge": "estimée",
+      "estimatedSpan": "{from} → {to} · {count, plural, one {# échéance} other {# échéances}}",
+      "estimatedSplit": "Capital {capital} · intérêts ≈ {interest} · assurance ≈ {insurance}",
+      "estimatedSplitNoInsurance": "Capital {capital} · intérêts ≈ {interest}",
+      "costDeferral": "dont différé {amount}",
+      "costEstimated": "dont estimés ≈ {amount}",
+      "approx": "≈ {amount}",
+      "endPassed": "La dernière échéance du contrat est passée alors qu’il reste du capital.",
+      "fixEnd": "La corriger"
+    },
+    "delete": {
+      "title": "Supprimer ce crédit ?",
+      "description": "{name} n’est plus suivi. Vos opérations bancaires et vos budgets ne changent pas.",
+      "cancel": "Annuler",
+      "confirm": "Supprimer",
+      "pending": "Suppression…"
+    },
+    "toast": {
+      "deleted": "{name} supprimé"
+    },
+    "errors": {
+      "nameRequired": "Saisissez un nom.",
+      "nameTooLong": "Ce nom est trop long.",
+      "amountInvalid": "Saisissez un montant valide.",
+      "rateInvalid": "Saisissez un taux valide, par exemple 1,5.",
+      "dateInvalid": "Saisissez une date valide.",
+      "dateTooLate": "Cette date est trop lointaine.",
+      "lastPaymentTooEarly": "La dernière échéance doit suivre la date du capital restant dû.",
+      "currentPaymentOutOfRange": "Cette date doit tomber avant la dernière échéance.",
+      "nameTaken": "Vous avez déjà un crédit portant ce nom.",
+      "notFound": "Ce crédit n’existe plus.",
+      "paymentNotFound": "Ce paiement régulier n’est pas disponible.",
+      "startConflict": "Une correction existe déjà avant cette date. Retirez-la d’abord.",
+      "beforeStart": "Une correction doit suivre la date de départ du crédit.",
+      "isStart": "Le capital de départ ne peut pas être retiré. Modifiez plutôt le crédit.",
+      "notAPayment": "Cette opération n’est pas une échéance de ce crédit.",
+      "tooHigh": "Les intérêts et l’assurance ne peuvent pas dépasser ce que la banque a prélevé.",
+      "invalid": "Vérifiez le formulaire et réessayez.",
+      "saveFailed": "Impossible d’enregistrer le crédit. Réessayez.",
+      "deleteFailed": "Impossible de supprimer le crédit. Réessayez.",
+      "lastPaymentTooEarlyStart": "La dernière échéance doit suivre la date de souscription.",
+      "startedAfterAnchor": "La date de souscription doit précéder la date du capital restant dû.",
+      "amortizationNeedsStart": "Indiquez d’abord la date de souscription.",
+      "amortizationOutOfRange": "Cette date doit tomber entre la souscription et la dernière échéance.",
+      "lastPaymentStillOwed": "Il reste du capital à cette date : la dernière échéance du contrat doit venir après « Au »."
+    }
+  }
+}

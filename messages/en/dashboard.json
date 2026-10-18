@@ -1,0 +1,271 @@
+{
+  "empty": {
+    "title": "Nothing in {month}",
+    "body": "Import your bank export to see this month.",
+    "goToMonth": "Go to {month}"
+  },
+  "monthSelector": {
+    "previous": "Previous month",
+    "next": "Next month"
+  },
+  "monthPicker": {
+    "title": "Choose a month",
+    "description": "Pick a month to see its totals, budgets and spending.",
+    "goToYear": "Go to {year}",
+    "cellLabel": "{month}, {amount} spent",
+    "footnote": "Amounts are what you spent. Months without data are greyed out.",
+    "backToThisMonth": "Back to this month"
+  },
+  "totals": {
+    "label": "Month totals",
+    "transfersNotCounted": "{count, plural, one {# internal transfer not counted} other {# internal transfers not counted}}",
+    "incomeDue": "{amount} due {date}"
+  },
+  "categorySpending": {
+    "heading": "Where it went",
+    "empty": "No spending this month",
+    "back": "Back to all categories",
+    "breakdownHeading": "{category} — {month}",
+    "noSubcategory": "{category} (no subcategory)",
+    "seeAll": "See all transactions",
+    "shareOfMonth": "{percent} of this month's spending",
+    "shareOfCategory": "{percent} of {category}",
+    "underOnePercent": "<{percent}",
+    "subcategories": "Subcategories",
+    "subcategorySummary": "Subcategories: {list}",
+    "open": "Open",
+    "close": "Close details",
+    "seeAllCategories": "See all categories",
+    "showFewer": "Show fewer",
+    "seeAllCount": "{count, plural, other {All categories (#)}}"
+  },
+  "trend": {
+    "label": "Spending trend",
+    "heading": "Last 6 months",
+    "empty": "No spending or income yet",
+    "caption": "Spent and income for the last 6 months. Choose a month to show it on this page.",
+    "month": "Month",
+    "selectedMonth": "{label} (selected)"
+  },
+  "comingUp": {
+    "heading": "Coming up",
+    "empty": "Nothing due in the next 30 days",
+    "seeAll": "See all regular payments"
+  },
+  "budgets": {
+    "heading": "Budgets",
+    "setUp": "Set monthly budgets",
+    "allAccountsNote": "Budgets count all accounts.",
+    "spentOf": "{spent} of {budget}",
+    "over": "Over by {amount}",
+    "left": "{amount} left",
+    "carried": "Budget {budget} + {amount} carried over",
+    "carriedOverspent": "Budget {budget} − {amount} overspent in earlier months",
+    "onPace": "On pace to go over",
+    "edit": "Edit budgets",
+    "seeAll": "{count, plural, other {See all # budgets}}",
+    "fastPace": "fast pace",
+    "overShort": "{amount} over",
+    "legend": "White line: an even pace to date · one block = 10 %",
+    "all": "Budget",
+    "allCount": "{count, plural, other {All # budgets}}",
+    "behind": "{spent} spent · {carry} carried over behind",
+    "ofBehind": "{spent} of {budget} · {carry} carried over behind",
+    "legendPast": "Month ended · one block = 10 %",
+    "dueShort": "{amount} due",
+    "leftToSpend": "<b>{amount}</b> left to spend",
+    "nothingLeft": "All planned: nothing left to spend",
+    "tooMuch": "{amount} too much with the payments due",
+    "chargePaid": "paid {date}",
+    "chargeDue": "due {date}",
+    "chargesOnlyShow": "{count, plural, one {Show the payments-only budget} other {Show the # payments-only budgets}}",
+    "chargesOnlyHide": "Hide payments-only budgets",
+    "chargesOnlyHeading": "Payments-only budgets",
+    "chargesOnlySummary": "{total} this month · {due} still due",
+    "chargesOnlyAllPaid": "{total} this month · all paid",
+    "legendCharges": "Sand: payments (hatched = due) · white line: even pace on the rest · one block = 10 %",
+    "legendPastCharges": "Month ended · sand: payments · one block = 10 %"
+  },
+  "balance": {
+    "heading": "Balance",
+    "accountsLabel": "Account balances",
+    "asOf": "Balance on {date}",
+    "asOfToday": "Balance today",
+    "lowest": "Lowest point in the next 30 days: {amount} on {date}",
+    "noDip": "No dip expected in the next 30 days",
+    "chartSummary": "Projected balance over the next 30 days. Lowest point: {amount} on {date}.",
+    "sinceImport": "{count, plural, one {Includes # payment expected since your last import} other {Includes # payments expected since your last import}}",
+    "missing": "{count, plural, one {No starting balance for {names}.} other {No starting balance for {names}.}} <link>Set it in Settings</link>",
+    "prompt": "Add a starting balance to see your balance and a 30-day projection. <link>Set it in Settings</link>",
+    "scope": "{scope} · next 30 days",
+    "alertBelow": "Alert below {threshold}",
+    "today": "Today",
+    "lowestCaption": "Lowest {amount} · {date}",
+    "fromBank": "From your bank, {when}",
+    "monthEnd": "End of month",
+    "monthEndProjected": "Expected end",
+    "monthLine": "Start {start} · Lowest {low} on {date}",
+    "noMonthData": "No known balance for this month",
+    "chartSummaryMonth": "Balance from {start} at the start of the month to {end} at the end, lowest {low} on {date}.",
+    "legendCurrent": "Solid: actual up to {date} · dashed: expected (recurring + rest of the budgets spread per day)",
+    "legendPast": "Actual balance day by day · switch months to compare curves"
+  },
+  "safeToSpend": {
+    "short": "{amount} short until {date}",
+    "nothing": "Nothing left to spend until {date}",
+    "asOf": "Based on your balance on {date}",
+    "missing": "{count, plural, one {{names} not counted: no starting balance.} other {{names} not counted: no starting balance.}} <link>Set it in Settings</link>",
+    "prompt": "Set a starting balance on an account counted in safe to spend to see what's left to spend this month. <link>Open Settings</link>",
+    "balance": "Balance",
+    "income": "Income expected",
+    "noIncome": "No income expected",
+    "bills": "Bills still due ({count})",
+    "noBills": "No bills still due",
+    "budgets": "Budgets left",
+    "noBudgets": "No budgets set. <link>Set budgets</link>",
+    "includesBills": "incl. bills {amount}",
+    "ignoredIncome": "{count, plural, one {# detected income not counted} other {# detected incomes not counted}}. <link>Review in Recurring</link>",
+    "result": "Safe to spend",
+    "perDay": "About <strong>{amount} a day</strong> for the next {days, plural, one {# day} other {# days}}",
+    "perDayLast": "About <strong>{amount}</strong> for today",
+    "howWorked": "How is this worked out?",
+    "breakdownTitle": "How it's worked out",
+    "breakdownDescription": "Until {date}, to the cent.",
+    "nextMonth": "{month}: <amount>{value}</amount> expected",
+    "until": "Until {date}",
+    "dayChip": "Day {day} / {total}",
+    "francs": "{amount} francs",
+    "chartToday": "today",
+    "chartPlanned": "planned pace"
+  },
+  "review": {
+    "text": "{count, plural, one {# transaction to review} other {# transactions to review}}"
+  },
+  "goals": {
+    "heading": "Goals",
+    "listLabel": "Your savings goals",
+    "of": "{saved} of {target}",
+    "ofPercent": "{saved} of {target}, {fraction, number, percent}",
+    "monthly": "Put aside {amount} a month until {month}",
+    "onTrack": "On track",
+    "behind": "Behind by {amount}",
+    "pastDue": "Past target date, {amount} left",
+    "reached": "Reached",
+    "manage": "Manage goals",
+    "all": "All goals"
+  },
+  "importReminder": {
+    "single": "No new data since {date} ({days, plural, one {# day} other {# days}}).",
+    "account": "No new data for {name} since {date} ({days, plural, one {# day} other {# days}}).",
+    "several": "{count, plural, one {# account has} other {# accounts have}} no new data for over {days, plural, one {# day} other {# days}}",
+    "listItem": "{name}: {date}"
+  },
+  "attention": {
+    "heading": "Needs attention",
+    "belowNow": "{name} is already below {threshold}",
+    "belowNowHint": "Check your upcoming payments",
+    "importHint": "Import your latest bank export",
+    "reviewHint": "Check their categories",
+    "priceUp": "{name} went up by {amount}",
+    "priceUpHint": "From {old} to {new}",
+    "pricesUp": "{count, plural, one {# price went up} other {# prices went up}}",
+    "pricesUpHint": "Check your regular payments",
+    "lowAhead": "{name} goes below {threshold} on {date}",
+    "lowAheadCause": "Balance {balance} after {cause} ({amount})",
+    "lowAheadHint": "Balance {balance}",
+    "bankReconnect": "Reconnect your bank (expires {date})",
+    "bankReconnectExpired": "Reconnect your bank (expired {date})",
+    "bankReconnectRefused": "Reconnect your bank",
+    "bankFailing": "Sync failing since {date}",
+    "bankConnectionHint": "Open Bank connection",
+    "backupFailing": "Backup failing since {date}",
+    "backupFailingHint": "See the daily job's logs on Vercel",
+    "balanceGapHint": "Import a CSV or accept the bank's balance",
+    "notFound": "{count, plural, one {# transaction you added isn't in your bank} other {# transactions you added aren't in your bank}}",
+    "notFoundHint": "Keep it, delete it or link it to a bank row",
+    "seeAll": "{count, plural, other {See all (#)}}",
+    "priceUpRow": "{name} <was>{old}</was> <now>{new}</now>"
+  },
+  "syncLine": {
+    "syncedToday": "Synced at {time}",
+    "syncedOn": "Synced {time}",
+    "never": "Not synced yet",
+    "failing": "Sync failing since {date}",
+    "rateLimited": "Your bank's limit for today is reached. franC will try again tomorrow morning.",
+    "reconnect": "Reconnect your bank",
+    "syncNow": "Sync now",
+    "syncing": "Syncing…",
+    "openConnection": "Open Bank connection"
+  },
+  "dataUpTo": {
+    "text": "Data up to {date}",
+    "today": "today",
+    "withLagging": "Data up to {date} ({lagging})",
+    "lagging": "{name}: {date}"
+  },
+  "welcome": {
+    "title": "Get started",
+    "intro": "Welcome to franC. Four steps and you'll know what you have left to spend this month.",
+    "progress": "{done} of {total}",
+    "hide": "Hide this guide",
+    "steps": {
+      "import": {
+        "title": "Import your bank export",
+        "hint": "Your bank's CSV transaction file."
+      },
+      "review": {
+        "title": "Validate your transactions",
+        "hint": "A category for each, in one gesture."
+      },
+      "balance": {
+        "title": "Enter your balance",
+        "hint": "So franC can tell you what's safe to spend.",
+        "hintBank": "The bank gives it once connected."
+      },
+      "budget": {
+        "title": "Set a first budget",
+        "hint": "One category, one amount a month."
+      },
+      "bank": {
+        "title": "Connect your bank",
+        "hint": "Your transactions arrive on their own, every morning.",
+        "alt": "or import a CSV statement"
+      }
+    }
+  },
+  "balanceGap": {
+    "title": "Gap with your bank",
+    "less": "Your bank shows {amount} less than franC between {from} and {to}",
+    "more": "Your bank shows {amount} more than franC between {from} and {to}",
+    "lessNamed": "{name}: your bank shows {amount} less than franC between {from} and {to}",
+    "moreNamed": "{name}: your bank shows {amount} more than franC between {from} and {to}",
+    "explainLess": "Some of your spending between those dates is probably missing from franC.",
+    "explainMore": "Some income between those dates may be missing from franC, or a payment may be counted twice.",
+    "importCsv": "Import a CSV for those dates",
+    "accept": "Accept the bank's balance",
+    "accepting": "Accepting…",
+    "acceptHint": "Your transactions stay as they are and nothing is added to your spending.",
+    "accepted": "Bank's balance accepted",
+    "restored": "Gap restored",
+    "acceptFailed": "Could not accept the bank's balance. Try again.",
+    "undoFailed": "Could not undo. Try again.",
+    "notFound": "Account not found"
+  },
+  "month": {
+    "title": "This month"
+  },
+  "upcoming": {
+    "heading": "Coming up this month",
+    "all": "See all",
+    "left": "{count, plural, one {still to pay · # bill} other {still to pay · # bills}}",
+    "bigKey": "{count, plural, one {# of {limit} or more} other {# of {limit} or more}}",
+    "smallKey": "under {limit}",
+    "onlySmall": "Only small bills, under {limit} each",
+    "biggest": "Biggest bills still due",
+    "today": "today",
+    "dotOne": "{name}, {amount}, {date}",
+    "dotMany": "{count} bills, {amount}, {date}",
+    "more": "{count, plural, one {+ # more} other {+ # more}}",
+    "empty": "Nothing left to pay this month"
+  }
+}

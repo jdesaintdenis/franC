@@ -1,0 +1,271 @@
+{
+  "empty": {
+    "title": "Rien en {month}",
+    "body": "Importez votre export bancaire pour voir ce mois.",
+    "goToMonth": "Aller à {month}"
+  },
+  "monthSelector": {
+    "previous": "Mois précédent",
+    "next": "Mois suivant"
+  },
+  "monthPicker": {
+    "title": "Choisir un mois",
+    "description": "Choisissez un mois pour voir ses totaux, ses budgets et ses dépenses.",
+    "goToYear": "Aller à {year}",
+    "cellLabel": "{month}, {amount} dépensés",
+    "footnote": "Les montants sont les dépenses du mois. Les mois sans données sont grisés.",
+    "backToThisMonth": "Revenir à ce mois-ci"
+  },
+  "totals": {
+    "label": "Totaux du mois",
+    "transfersNotCounted": "{count, plural, one {# virement interne non compté} other {# virements internes non comptés}}",
+    "incomeDue": "{amount} attendus le {date}"
+  },
+  "categorySpending": {
+    "heading": "Où est passé l'argent",
+    "empty": "Aucune dépense ce mois-ci",
+    "back": "Retour à toutes les catégories",
+    "breakdownHeading": "{category} — {month}",
+    "noSubcategory": "{category} (sans sous-catégorie)",
+    "seeAll": "Voir toutes les opérations",
+    "shareOfMonth": "{percent} des dépenses du mois",
+    "shareOfCategory": "{percent} de {category}",
+    "underOnePercent": "<{percent}",
+    "subcategories": "Sous-catégories",
+    "subcategorySummary": "Sous-catégories : {list}",
+    "open": "Ouvrir",
+    "close": "Fermer le détail",
+    "seeAllCategories": "Voir toutes les catégories",
+    "showFewer": "Voir moins",
+    "seeAllCount": "{count, plural, other {Toutes les catégories (#)}}"
+  },
+  "trend": {
+    "label": "Évolution des dépenses",
+    "heading": "6 derniers mois",
+    "empty": "Aucune dépense ni revenu pour le moment",
+    "caption": "Dépenses et revenus des 6 derniers mois. Choisissez un mois pour l'afficher sur cette page.",
+    "month": "Mois",
+    "selectedMonth": "{label} (sélectionné)"
+  },
+  "comingUp": {
+    "heading": "À venir",
+    "empty": "Rien à payer dans les 30 prochains jours",
+    "seeAll": "Voir tous les paiements récurrents"
+  },
+  "budgets": {
+    "heading": "Budgets",
+    "setUp": "Définir des budgets mensuels",
+    "allAccountsNote": "Les budgets comptent tous les comptes.",
+    "spentOf": "{spent} sur {budget}",
+    "over": "Budget dépassé de {amount}",
+    "left": "{amount} restant",
+    "carried": "Budget {budget} + {amount} reporté",
+    "carriedOverspent": "Budget {budget} − {amount} de dépassement reporté",
+    "onPace": "Dépassement prévu à ce rythme",
+    "edit": "Modifier les budgets",
+    "seeAll": "{count, plural, other {Voir les # budgets}}",
+    "fastPace": "rythme rapide",
+    "overShort": "dépassé de {amount}",
+    "legend": "Trait blanc : rythme normal à ce jour · un carré = 10 %",
+    "all": "Budget",
+    "allCount": "{count, plural, one {Le budget} other {Les # budgets}}",
+    "behind": "{spent} dépensés · {carry} de retard reporté",
+    "ofBehind": "{spent} sur {budget} · {carry} de retard reporté",
+    "legendPast": "Mois terminé · un carré = 10 %",
+    "dueShort": "{amount} à venir",
+    "leftToSpend": "Reste <b>{amount}</b> à dépenser",
+    "nothingLeft": "Tout est prévu : plus rien à dépenser",
+    "tooMuch": "{amount} de trop avec les prélèvements à venir",
+    "chargePaid": "payé le {date}",
+    "chargeDue": "attendu le {date}",
+    "chargesOnlyShow": "{count, plural, one {Voir le budget de prélèvements} other {Voir les # budgets de prélèvements}}",
+    "chargesOnlyHide": "Masquer les budgets de prélèvements",
+    "chargesOnlyHeading": "Budgets de prélèvements",
+    "chargesOnlySummary": "{total} ce mois-ci · {due} encore attendus",
+    "chargesOnlyAllPaid": "{total} ce mois-ci · tout est payé",
+    "legendCharges": "Sable : prélèvements (hachuré = attendu) · trait blanc : rythme normal sur le reste · un carré = 10 %",
+    "legendPastCharges": "Mois terminé · sable : prélèvements · un carré = 10 %"
+  },
+  "balance": {
+    "heading": "Solde",
+    "accountsLabel": "Soldes des comptes",
+    "asOf": "Solde au {date}",
+    "asOfToday": "Solde d'aujourd'hui",
+    "lowest": "Point bas des 30 prochains jours : {amount} le {date}",
+    "noDip": "Aucune baisse prévue dans les 30 prochains jours",
+    "chartSummary": "Solde prévu sur les 30 prochains jours. Point bas : {amount} le {date}.",
+    "sinceImport": "{count, plural, one {Inclut # paiement attendu depuis votre dernier import} other {Inclut # paiements attendus depuis votre dernier import}}",
+    "missing": "{count, plural, one {Pas de solde de départ pour {names}.} other {Pas de solde de départ pour {names}.}} <link>Renseignez-le dans les paramètres</link>",
+    "prompt": "Ajoutez un solde de départ pour voir votre solde et une prévision sur 30 jours. <link>Renseignez-le dans les paramètres</link>",
+    "scope": "{scope} · 30 prochains jours",
+    "alertBelow": "Alerte sous {threshold}",
+    "today": "Aujourd'hui",
+    "lowestCaption": "Point bas {amount} · {date}",
+    "fromBank": "Solde de votre banque, {when}",
+    "monthEnd": "Fin du mois",
+    "monthEndProjected": "Fin prévue",
+    "monthLine": "Début {start} · Point bas {low} le {date}",
+    "noMonthData": "Pas de solde connu pour ce mois",
+    "chartSummaryMonth": "Solde de {start} au début du mois à {end} à la fin, point bas {low} le {date}.",
+    "legendCurrent": "Trait plein : réel jusqu'au {date} · pointillés : prévu (récurrents + reste des budgets réparti par jour)",
+    "legendPast": "Solde réel jour par jour · changez de mois pour comparer les courbes"
+  },
+  "safeToSpend": {
+    "short": "Il manque {amount} d'ici le {date}",
+    "nothing": "Plus rien à dépenser jusqu'au {date}",
+    "asOf": "Selon votre solde au {date}",
+    "missing": "{count, plural, one {{names} non compté : pas de solde de départ.} other {{names} non comptés : pas de solde de départ.}} <link>Renseignez-le dans les paramètres</link>",
+    "prompt": "Renseignez un solde de départ sur un compte compté dans le reste à vivre pour voir ce qu'il reste à dépenser ce mois-ci. <link>Ouvrir les paramètres</link>",
+    "balance": "Solde",
+    "income": "Revenus attendus",
+    "noIncome": "Aucun revenu attendu",
+    "bills": "Factures à venir ({count})",
+    "noBills": "Aucune facture à venir",
+    "budgets": "Reste des budgets",
+    "noBudgets": "Aucun budget défini. <link>Définir des budgets</link>",
+    "includesBills": "dont factures {amount}",
+    "ignoredIncome": "{count, plural, one {# revenu détecté non compté} other {# revenus détectés non comptés}}. <link>À valider dans Récurrents</link>",
+    "result": "Reste à vivre",
+    "perDay": "Environ <strong>{amount} par jour</strong> pour les {days, plural, one {# prochain jour} other {# prochains jours}}",
+    "perDayLast": "Environ <strong>{amount}</strong> pour aujourd'hui",
+    "howWorked": "Comment est-ce calculé ?",
+    "breakdownTitle": "Comment c'est calculé",
+    "breakdownDescription": "Jusqu'au {date}, au centime près.",
+    "nextMonth": "{month} : <amount>{value}</amount> attendus",
+    "until": "Jusqu'au {date}",
+    "dayChip": "Jour {day} / {total}",
+    "francs": "{amount} francs",
+    "chartToday": "auj.",
+    "chartPlanned": "rythme prévu"
+  },
+  "review": {
+    "text": "{count, plural, one {# opération à valider} other {# opérations à valider}}"
+  },
+  "goals": {
+    "heading": "Objectifs",
+    "listLabel": "Vos objectifs d'épargne",
+    "of": "{saved} sur {target}",
+    "ofPercent": "{saved} sur {target}, {fraction, number, percent}",
+    "monthly": "À mettre de côté : {amount} par mois jusqu'en {month}",
+    "onTrack": "En bonne voie",
+    "behind": "En retard de {amount}",
+    "pastDue": "Date dépassée, il reste {amount}",
+    "reached": "Objectif atteint",
+    "manage": "Gérer les objectifs",
+    "all": "Tous les objectifs"
+  },
+  "importReminder": {
+    "single": "Aucune nouvelle donnée depuis le {date} ({days, plural, one {# jour} other {# jours}}).",
+    "account": "Aucune nouvelle donnée pour {name} depuis le {date} ({days, plural, one {# jour} other {# jours}}).",
+    "several": "{count, plural, one {# compte n'a} other {# comptes n'ont}} aucune nouvelle donnée depuis plus de {days, plural, one {# jour} other {# jours}}",
+    "listItem": "{name} : {date}"
+  },
+  "attention": {
+    "heading": "À traiter",
+    "belowNow": "{name} est déjà sous {threshold}",
+    "belowNowHint": "Vérifiez vos paiements à venir",
+    "importHint": "Importez votre dernier export bancaire",
+    "reviewHint": "Vérifiez leurs catégories",
+    "priceUp": "{name} a augmenté de {amount}",
+    "priceUpHint": "De {old} à {new}",
+    "pricesUp": "{count, plural, one {# prix a augmenté} other {# prix ont augmenté}}",
+    "pricesUpHint": "Voir vos paiements récurrents",
+    "lowAhead": "{name} passe sous {threshold} le {date}",
+    "lowAheadCause": "Solde {balance} après {cause} ({amount})",
+    "lowAheadHint": "Solde {balance}",
+    "bankReconnect": "Reconnectez votre banque (expire le {date})",
+    "bankReconnectExpired": "Reconnectez votre banque (a expiré le {date})",
+    "bankReconnectRefused": "Reconnectez votre banque",
+    "bankFailing": "Synchronisation en échec depuis le {date}",
+    "bankConnectionHint": "Ouvrir la connexion bancaire",
+    "backupFailing": "Sauvegarde en échec depuis le {date}",
+    "backupFailingHint": "Voir les journaux de la tâche quotidienne sur Vercel",
+    "balanceGapHint": "Importez un CSV ou acceptez le solde de la banque",
+    "notFound": "{count, plural, one {# opération ajoutée par vous est introuvable dans votre banque} other {# opérations ajoutées par vous sont introuvables dans votre banque}}",
+    "notFoundHint": "Gardez-la, supprimez-la ou liez-la à une opération de la banque",
+    "seeAll": "{count, plural, other {Tout voir (#)}}",
+    "priceUpRow": "{name} <was>{old}</was> <now>{new}</now>"
+  },
+  "syncLine": {
+    "syncedToday": "Synchronisé à {time}",
+    "syncedOn": "Synchronisé {time}",
+    "never": "Pas encore synchronisé",
+    "failing": "Synchronisation en échec depuis le {date}",
+    "rateLimited": "La limite de votre banque pour aujourd'hui est atteinte. franC réessaiera demain matin.",
+    "reconnect": "Reconnectez votre banque",
+    "syncNow": "Synchroniser",
+    "syncing": "Synchronisation…",
+    "openConnection": "Ouvrir la connexion bancaire"
+  },
+  "dataUpTo": {
+    "text": "Données jusqu'au {date}",
+    "today": "aujourd'hui",
+    "withLagging": "Données jusqu'au {date} ({lagging})",
+    "lagging": "{name} : {date}"
+  },
+  "welcome": {
+    "title": "Bien démarrer",
+    "intro": "Bienvenue dans franC. Quatre étapes et vous saurez ce qu'il vous reste à dépenser ce mois-ci.",
+    "progress": "{done} sur {total}",
+    "hide": "Masquer ce guide",
+    "steps": {
+      "import": {
+        "title": "Importez votre relevé",
+        "hint": "Le fichier CSV des opérations de votre banque."
+      },
+      "review": {
+        "title": "Validez vos opérations",
+        "hint": "Une catégorie pour chacune, d'un geste."
+      },
+      "balance": {
+        "title": "Indiquez votre solde",
+        "hint": "Pour que franC vous dise ce que vous pouvez dépenser sans risque.",
+        "hintBank": "La banque le donne si elle est connectée."
+      },
+      "budget": {
+        "title": "Créez un premier budget",
+        "hint": "Une catégorie, un montant par mois."
+      },
+      "bank": {
+        "title": "Connectez votre banque",
+        "hint": "Vos opérations arrivent seules, chaque matin.",
+        "alt": "ou importez un relevé CSV"
+      }
+    }
+  },
+  "balanceGap": {
+    "title": "Écart avec la banque",
+    "less": "Votre banque indique {amount} de moins que franC entre le {from} et le {to}",
+    "more": "Votre banque indique {amount} de plus que franC entre le {from} et le {to}",
+    "lessNamed": "{name} : votre banque indique {amount} de moins que franC entre le {from} et le {to}",
+    "moreNamed": "{name} : votre banque indique {amount} de plus que franC entre le {from} et le {to}",
+    "explainLess": "Une partie de vos dépenses de cette période manque probablement dans franC.",
+    "explainMore": "Il manque peut-être des revenus de cette période dans franC, ou un paiement est compté deux fois.",
+    "importCsv": "Importer un CSV pour ces dates",
+    "accept": "Accepter le solde de la banque",
+    "accepting": "Validation…",
+    "acceptHint": "Vos opérations restent telles quelles et rien n'est ajouté à vos dépenses.",
+    "accepted": "Solde de la banque accepté",
+    "restored": "Écart rétabli",
+    "acceptFailed": "Impossible d'accepter le solde de la banque. Réessayez.",
+    "undoFailed": "Impossible d'annuler. Réessayez.",
+    "notFound": "Compte introuvable"
+  },
+  "month": {
+    "title": "Ce mois-ci"
+  },
+  "upcoming": {
+    "heading": "À venir ce mois-ci",
+    "all": "Tout voir",
+    "left": "{count, plural, one {encore à payer · # facture} other {encore à payer · # factures}}",
+    "bigKey": "{count, plural, one {# de {limit} ou plus} other {# de {limit} ou plus}}",
+    "smallKey": "moins de {limit}",
+    "onlySmall": "Que des petites factures, moins de {limit} chacune",
+    "biggest": "Plus grosses factures à venir",
+    "today": "aujourd’hui",
+    "dotOne": "{name}, {amount}, {date}",
+    "dotMany": "{count} factures, {amount}, {date}",
+    "more": "{count, plural, one {+ # autre} other {+ # autres}}",
+    "empty": "Plus rien à payer ce mois-ci"
+  }
+}
