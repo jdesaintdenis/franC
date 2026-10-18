@@ -867,8 +867,8 @@ A README I can show to employers: what franC does, how it looks, how it is built
 
 Publish franC as a new public repo, without the private history (SPEC §85).
 
-- [ ] Clean copy of `main`: the old sample CSV, the backup workflow and the real labels removed from every commit; re-scanned before any push
-- [ ] Pushed to a new `jdesaintdenis/franC` only after my "push"; the current repo renamed `franC-private` and archived, never rewritten or made public
+- [x] Clean copy of `main`: one fresh commit of the cleaned tree, re-scanned (old sample rows, labels, secrets, emails) before any push
+- [x] Pushed to a new `jdesaintdenis/franC` only after my "push"; the current repo renamed `franC-private` (archived at the end), never rewritten or made public
 - [ ] Vercel switched to the new repo; repo settings for a public project (fork protection, security alerts, private vulnerability reporting)
 
 **Done when:** the public repo shows franC with no real data in any commit, production deploys from it, and the old repo is archived.
