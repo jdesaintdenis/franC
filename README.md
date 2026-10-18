@@ -38,7 +38,7 @@ franC is a budget app made for a phone. You bring in your bank transactions, sor
 - **Regular payments, found for you.** Subscriptions and bills are spotted automatically, and you are told when a price goes up.
 - **Savings goals and loans.** Follow a goal on its way to the target, or see how much of a loan is left to repay.
 - **Look back on the year.** What came in, what went out, and where the money went, month by month.
-- **Bring your data in your way.** Upload your bank's CSV file (checked before anything is saved, never duplicated), or connect your bank to sync it.
+- **Bring your data in your way.** Upload your bank's CSV file (checked before anything is saved, never duplicated), or connect your bank to sync it ([how to set up bank sync](docs/deployment.md#bank-sync-with-enable-banking-optional)).
 - **Your data stays yours.** You run franC yourself, on your own database. Nothing is shared with anyone.
 - **Works like an app.** Install it on your phone's home screen. It speaks English and French.
 
@@ -59,7 +59,7 @@ pnpm dev
 
 Open http://localhost:3000, create your account, and import [`docs/samples/sample-export.csv`](docs/samples/sample-export.csv) to see franC with made-up data.
 
-More help: [run it on your computer or server](docs/self-hosting.md) · [put it online for free with Vercel and Neon](docs/deployment.md).
+More help: [run it on your computer or server](docs/self-hosting.md) · [put it online for free with Vercel and Neon](docs/deployment.md) · [every setting (environment variables)](docs/deployment.md#3-environment-variables).
 
 franC reads one bank's CSV format today (the sample file shows it). Other banks can be added, or connected through bank sync.
 

@@ -40,7 +40,7 @@ Never paste a secret anywhere except Vercel's environment variable form.
 | `ENABLE_BANKING_APP_ID`, `ENABLE_BANKING_PRIVATE_KEY`, `BANK_SYNC_EMAILS` | Optional | See [bank sync](#bank-sync-with-enable-banking-optional) |
 | `BACKUP_AGE_RECIPIENT`, `BLOB_READ_WRITE_TOKEN` | Production only (optional) | See [backups](#backups-optional) |
 
-Do not set `DATABASE_URL_TEST` or `E2E_USER_*` on Vercel: tests do not run there.
+Do not set `DATABASE_URL_TEST` or `E2E_USER_*` on Vercel: tests do not run there. Vercel sets `VERCEL_ENV`, `VERCEL_PROJECT_PRODUCTION_URL` and `VERCEL_GIT_COMMIT_SHA` itself, and `ENABLE_BANKING_API_ORIGIN` only exists so tests can use a fake bank. Every variable, with a comment, is in [`.env.example`](../.env.example).
 
 ## 4. First deploy and sign-up
 
@@ -102,6 +102,8 @@ accounts you link yourself. The steps follow Enable Banking's official samples
 6. In **Link your accounts**, set **Bring transactions from** for each account: by default the day
    after its newest transaction, so the first **Sync now** continues where your last CSV stopped
    (90 days back at most). Then use **Sync now** on the card or on the Import page.
+
+Enable Banking's free mode only reads accounts you link yourself, so this is for your own accounts, and your bank must be one Enable Banking supports (the Connect screen lists them). Without the three variables the feature stays hidden and CSV import still works.
 
 The consent lasts up to 180 days; you log in at the bank again after that. Sync now passes your IP
 address and browser to the bank (Enable Banking's `Psu-Ip-Address` / `Psu-User-Agent`), which marks
