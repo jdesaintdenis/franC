@@ -74,6 +74,8 @@ test("production SW: a CSV shared to the app opens its import preview, and the f
   expect(redirected).toBe("/import?shared=1");
 
   await page.goto("/import?shared=1");
+  await page.getByRole("region", { name: "Match the columns" }).waitFor();
+  await page.getByRole("button", { name: "Continue" }).click();
   const preview = page.getByRole("region", { name: "Import preview" });
   await expect(preview.getByText("shared.csv")).toBeVisible();
   await expect(preview.getByTestId("import-new-count")).toHaveText("1");

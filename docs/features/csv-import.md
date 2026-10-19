@@ -13,7 +13,7 @@ Transactions come in by uploading a CSV export from any bank: you tell franC onc
 
 **Where to start an import**: **Accounts > Imports > Import a CSV**, or the Import links of the overdue-import warnings (Home and Accounts), which preselect the account. The bar has no Import button (Slice 61).
 
-**Sharing a file to franC** (Android, installed app): franC appears in the share sheet for CSV files, so an export can go straight from the bank app or Files to the import preview. See [PWA and offline](pwa-offline.md#share-target).
+**Sharing a file to franC** (Android, installed app): franC appears in the share sheet for CSV files, so an export can go straight from the bank app or Files to the Columns step of the import. See [PWA and offline](pwa-offline.md#share-target).
 
 **Import history** (same page, "Import history" section) lists the latest 50 imports, newest first: file name, date (like the rest of the app, "12 Oct 11:50"), the account (with several accounts) and "99 transactions" or "nothing new" (+ "· 2 unreadable"). The **⋯** menu of an import has **Undo import** (with confirmation, one destructive item), which removes that import's transactions. Bank sync runs are listed too, as **Synced from <bank>**, without a menu (see [Bank sync](bank-sync.md)); when the chosen account is linked to a bank, a **Connected to <bank>** card with **Sync now** sits above the file card. It adds "This account syncs automatically. Import a CSV for older history or a gap." so you know a CSV is only needed for dates the sync did not cover.
 
