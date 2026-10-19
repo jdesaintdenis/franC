@@ -41,7 +41,7 @@ franC is built for this family's needs and nobody else's. It does what they need
 - EUR only, amounts in integer cents; fr-FR format `1 234,56 €`, English as en-GB.
 - French wording follows `messages/GLOSSARY.md` ("opération", "Paramètres", "Solde" = account balance, "Bilan" = month net, "Reste à vivre").
 - Bank sync is restricted to Jérémy's email (`BANK_SYNC_EMAILS`); any other account on the deployment must never connect or import his bank data.
-- Out of scope unless asked: envelope budgeting, multi-currency, other banks' formats, investments or net worth.
+- Out of scope unless asked: envelope budgeting, multi-currency, OFX and other file types, investments or net worth.
 
 ## Brand Commitments
 

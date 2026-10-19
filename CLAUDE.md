@@ -62,7 +62,7 @@ Business logic (import, dedupe, categorization, recurring) = **pure functions** 
 - Multi-row writes (e.g. import) run in a **single transaction**.
 
 ### CSV import
-- One bank format only; `docs/samples/` is the source of truth. No generic multi-bank or encoding detection unless asked.
+- Any bank's CSV through the column mapping (`src/lib/import/mapping.ts`), remembered per account. UTF-8, else Windows-1252; no other encoding detection. `docs/samples/` is an example and the golden test fixture.
 - Parser isolated in `src/lib/import/` behind a small interface.
 - Validate every row with Zod. Report invalid rows; never drop silently.
 - Flow: upload → preview → confirm. Re-import of same file is idempotent.
@@ -119,7 +119,7 @@ Business logic (import, dedupe, categorization, recurring) = **pure functions** 
 
 ## Out of scope (unless asked)
 
-Envelope budgeting; bank API connections other than the Enable Banking sync (Slices 45–49); multi-user/sharing; multi-currency; multi-bank import formats.
+Envelope budgeting; bank API connections other than the Enable Banking sync (Slices 45–49); multi-user/sharing; multi-currency; OFX/QIF/other import file types.
 
 # This is NOT the Next.js you know
 

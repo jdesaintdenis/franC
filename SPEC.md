@@ -22,7 +22,7 @@ This spec records goals and **decisions with their reasons**. How each feature b
 - Direct bank connection (Open Banking, aggregators). Superseded on 2026-10-02: automatic sync through Enable Banking is planned (§60).
 - Multi-user, sharing, or household features.
 - Multi-currency support (EUR only).
-- Handling multiple banks' formats. v1 supports **one bank's CSV format**, used as the template (see §6).
+- Handling multiple banks' formats. v1 supported **one bank's CSV format**; superseded by the column mapping (§86).
 - Investment, debt, or net-worth tracking.
 
 ## 4. Users
@@ -207,12 +207,12 @@ TypeScript, Next.js (App Router), Tailwind + shadcn/ui, Recharts, PostgreSQL, Dr
 - **Amount**: exactly one of `Debit`/`Credit` must be set, with a coherent sign; parsed to integer cents with string arithmetic.
 - **Dedupe hash**: SHA-256 hex of `JSON.stringify([accountId, date, amountCents, labelNormalized])`. `occurrence_index` numbers identical hashes within a file (0, 1, 2…); a row is a duplicate iff its `(hash, index)` already exists for the account.
 - **Label normalization** (NFKD, strip accents, uppercase, collapse whitespace) is frozen once data exists: re-imports recompute hashes with it, so changing it would require a re-hash migration.
-- **Errors**: a wrong header rejects the file; invalid rows are returned with their file line number and messages, alongside the valid rows.
+- **Errors**: (superseded by §86: no fixed header) a wrong header rejected the file; invalid rows are returned with their file line number and messages, alongside the valid rows.
 
 ## 16. Resolved decisions (Slice 4)
 
 - **Stateless preview → confirm**: nothing is staged server-side. The client keeps the `File`; the `previewImport` and `confirmImport` server actions (`src/app/(app)/import/actions.ts`) each re-validate (Zod: account uuid, non-empty `.csv`, ≤ 2 MB), check account ownership, decode and re-parse. Confirm is authoritative and reports its own counts.
-- **Encoding**: the bank export is **Windows-1252** (the synthetic sample is ASCII, but real labels contain Latin-1 accents such as `é` as single bytes), so uploads are decoded as Windows-1252. It maps every byte, so decoding never fails. No encoding detection: a UTF-8 file would show garbled accents. Label normalization strips accents, so dedupe hashes are unaffected by this choice.
+- **Encoding** (superseded by §86: UTF-8 first, Windows-1252 fallback): the bank export is **Windows-1252** (the synthetic sample is ASCII, but real labels contain Latin-1 accents such as `é` as single bytes), so uploads are decoded as Windows-1252. It maps every byte, so decoding never fails. No encoding detection: a UTF-8 file would show garbled accents. Label normalization strips accents, so dedupe hashes are unaffected by this choice.
 - **Insert**: `commitImport` (`src/db/queries/imports.ts`) runs in one DB transaction: insert the `imports` row, insert all valid rows in chunks of 1000 with `ON CONFLICT (account_id, dedupe_hash, occurrence_index) DO NOTHING`, then store the counts. Duplicates = valid rows − inserted, so the unique constraint is the final judge (race-safe).
 - **Empty imports are recorded**: a confirmed import that inserts 0 rows still gets an `imports` row, so history shows every confirmed upload.
 - **Display label**: `transactions.label_display` holds `Libelle simplifie` (falling back to `Libelle operation`); never part of the hash.
@@ -1025,3 +1025,18 @@ Jérémy's brief (2026-10-14): follow loans easily, YNAB-style (a loan with a ne
 
 - **A. No budget rows in Needs attention.** "Over budget" and "ahead of pace" (current month) rows are gone from Home's "À traiter": the Budgets section below already shows both (amber gauge, "rythme rapide", "dépassé de X"), so the rows only repeated it. The gauges keep their over and fast-pace states. This supersedes the budget rows listed in §52.
 - **B. On /budget, "Où est passé l'argent" comes before Budgets.** Phone order: Le mois, Où est passé l'argent, Budgets, À venir, Objectifs, Solde. From 1024 px the ring sits under the month card on the left; Budgets opens the right column.
+
+## 86. Resolved decisions (Slice 74, CSV column mapping)
+
+Every CSV import goes through a Columns step; the Caisse d'Épargne parser is gone. Bank sync (`convert.ts`) is untouched.
+
+- **D1**: One mapping form for every file (variant A of the mockups), never skipped, even when the mapping is remembered: a prefill to confirm with one tap.
+- **D2**: Columns are stored by **name**, not position, in `accounts.csv_mapping` (jsonb) with `csv_mapping_saved_at`. Reason: banks reorder columns; names survive.
+- **D3**: Prefill order: this account's saved mapping; else the latest saved on any of the user's accounts (adopted as a whole when its date, label and amount columns exist in the file); else a header-name guess (French and English names). Deviation from the plan: `prefillMapping` returns `{draft, remembered}` so the UI can say which one it used.
+- **D4**: A mapping is saved only when the preview reads at least one valid row.
+- **D5**: Date formats offered: `DD/MM/YYYY`, `DD/MM/YY`, `DD-MM-YYYY`, `DD.MM.YYYY`, `YYYY-MM-DD`, `MM/DD/YYYY`; decimal mark comma or dot. Both are guessed from values and re-guessed when the column changes.
+- **D6**: Amount is one signed column or a debit and credit column (sign from the column).
+- **D7**: Header = first row with the file's usual cell count (at least 2 non-empty), so preambles are skipped. Fewer than 2 columns or no data row: "no table".
+- **D8**: Encoding: UTF-8 if valid, else Windows-1252. No other detection.
+- **D9**: Dedupe hash and label normalization stay frozen; a golden test (`golden.test.ts`) proves the sample export yields identical rows and hashes, so production data keeps deduplicating. No data migration beyond two new columns.
+- **D10**: Still out of scope: OFX/QIF and other file types, a per-bank dropdown, multi-currency.
