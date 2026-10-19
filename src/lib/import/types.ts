@@ -22,8 +22,6 @@ export type RowIssue =
   | { code: "emptyLabel" }
   | { code: "debitCreditExclusive" }
   | { code: "malformedAmount" }
-  | { code: "debitPositive" }
-  | { code: "creditNegative" }
   | { code: "columnCount"; expected: number; found: number }
   | { code: "invalidRow" };
 
@@ -33,17 +31,11 @@ export interface RowError {
 }
 
 /** Why the whole file was rejected. */
-export type FileErrorCode = "unrecognizedHeader";
+export type FileErrorCode = "noTable" | "columnMissing";
 
 export type ParseResult =
   | { ok: true; transactions: ParsedTransaction[]; errors: RowError[] }
   | { ok: false; fileError: FileErrorCode };
-
-/** Small interface so another bank format can be added later. */
-export interface CsvFormat {
-  id: string;
-  parse(text: string): ParseResult;
-}
 
 export type KeyedTransaction = ParsedTransaction & {
   dedupeHash: string;

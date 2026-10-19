@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import type { EnableBankingClient } from "../../lib/bank-sync/client";
 import type { BankBalance, BankTransaction } from "../../lib/bank-sync/schemas";
 import { syncAccount } from "../../lib/bank-sync/sync";
-import { prepareImport } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { bankAccountLinks, duplicateCandidates, imports, transactionMatches, transactions } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
@@ -61,7 +61,7 @@ async function linked() {
 }
 
 async function importCsv(userId: string, accountId: string, lines: string[]) {
-  const prepared = prepareImport([HEADER, ...lines].join("\n"), accountId);
+  const prepared = prepareImportGuessed([HEADER, ...lines].join("\n"), accountId);
   if (!prepared.ok) throw new Error(prepared.fileError);
   return commitImport(db, { userId, accountId, filename: "x.csv", rowsTotal: prepared.rowsTotal, rowsError: 0, transactions: prepared.transactions });
 }
@@ -198,7 +198,7 @@ describe("bank sync store", () => {
     it("a synced row, then the CSV of the same purchase: one row, in the preview and in the import", async () => {
       const { user, main, linkId } = await linked();
       await sync(user.id, linkId, [bakery()]);
-      const prepared = prepareImport([HEADER, csvLine("30/09/2026", "PAIN AU LEVAIN")].join("\n"), main.id);
+      const prepared = prepareImportGuessed([HEADER, csvLine("30/09/2026", "PAIN AU LEVAIN")].join("\n"), main.id);
       if (!prepared.ok) throw new Error(prepared.fileError);
 
       const preview = await planMatches(db, user.id, main.id, "csv", prepared.transactions);

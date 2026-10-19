@@ -8,6 +8,7 @@ import {
   foreignKey,
   index,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   primaryKey,
@@ -18,6 +19,8 @@ import {
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
+
+import type { CsvMapping } from "../lib/import/mapping";
 
 /**
  * Better Auth tables (email + password, wired up in a later slice).
@@ -214,6 +217,9 @@ export const accounts = pgTable(
     importReminder: boolean("import_reminder").notNull().default(true),
     // A Savings account (Slice 52): no import or sync; franC creates its rows when money is moved to savings.
     savings: boolean("savings").notNull().default(false),
+    // The last CSV column mapping used for this account (Slice 74); prefills the next import. Re-validated on read.
+    csvMapping: jsonb("csv_mapping").$type<CsvMapping>(),
+    csvMappingSavedAt: timestamp("csv_mapping_saved_at", { withTimezone: true }),
   },
   (t) => [
     check(

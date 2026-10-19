@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { bankExportFormat } from "./formats/bank-export";
+import { prepareImportGuessed } from "./prepare-guessed";
 import { buildSampleExport } from "./sample-export";
 
 describe("synthetic sample export", () => {
@@ -13,7 +13,7 @@ describe("synthetic sample export", () => {
   });
 
   it("parses with no error and starts with the telecom, salary, cash and savings rows", () => {
-    const result = bankExportFormat.parse(buildSampleExport());
+    const result = prepareImportGuessed(buildSampleExport(), "acc-1");
     if (!result.ok) throw new Error(result.fileError);
     expect(result.transactions).toHaveLength(140);
     expect(result.errors).toEqual([]);

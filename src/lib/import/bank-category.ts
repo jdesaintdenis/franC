@@ -13,9 +13,9 @@ function clean(value: string | null): string | null {
 }
 
 /**
- * Turns the bank's raw category columns into what we keep. The bank writes
- * "A categoriser - ..." (category) and "... - a categoriser" (subcategory) when it
- * has not categorized a row: those are "no category", not real ones.
+ * Turns the bank's raw category columns into what we keep. Some banks write
+ * "A categoriser - ..." (category) and "... - a categoriser" (subcategory) when they
+ * have not categorized a row: those are "no category", not real ones (harmless for banks that never do).
  * Comparison is accent- and case-insensitive (via normalizeLabel).
  */
 export function cleanBankCategory(raw: BankCategoryPair): BankCategoryPair {

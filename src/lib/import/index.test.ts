@@ -3,14 +3,15 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { dedupeKey, partitionByExisting, prepareImport } from "./index";
+import { dedupeKey, partitionByExisting } from "./index";
+import { prepareImportGuessed } from "./prepare-guessed";
 import type { KeyedTransaction } from "./index";
 
 const sample = readFileSync(join(process.cwd(), "docs/samples/sample-export.csv"), "utf8");
 const ACCOUNT = "acc-1";
 
 function prepare(text: string, account = ACCOUNT): KeyedTransaction[] {
-  const r = prepareImport(text, account);
+  const r = prepareImportGuessed(text, account);
   if (!r.ok) throw new Error(r.fileError);
   return r.transactions;
 }
@@ -21,7 +22,7 @@ describe("prepareImport on the sample export", () => {
   const txs = prepare(sample);
 
   it("reports totals", () => {
-    const r = prepareImport(sample, ACCOUNT);
+    const r = prepareImportGuessed(sample, ACCOUNT);
     expect(r).toMatchObject({ ok: true, rowsTotal: 140, errors: [] });
   });
 
@@ -86,6 +87,6 @@ describe("prepareImport on the sample export", () => {
   });
 
   it("propagates file errors", () => {
-    expect(prepareImport("nope", ACCOUNT)).toEqual({ ok: false, fileError: "unrecognizedHeader" });
+    expect(prepareImportGuessed("nope", ACCOUNT)).toEqual({ ok: false, fileError: "noTable" });
   });
 });

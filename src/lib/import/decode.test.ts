@@ -25,4 +25,8 @@ describe("decodeUpload", () => {
   it("decodes plain ASCII unchanged", () => {
     expect(decodeUpload(new TextEncoder().encode("Date;Debit\r\n"))).toBe("Date;Debit\r\n");
   });
+
+  it("reads valid UTF-8 as UTF-8", () => {
+    expect(decodeUpload(new TextEncoder().encode("Libellé;Débit €\r\n"))).toBe("Libellé;Débit €\r\n");
+  });
 });

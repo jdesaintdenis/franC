@@ -7,7 +7,7 @@ import type { EnableBankingClient } from "../../lib/bank-sync/client";
 import { BankSyncError } from "../../lib/bank-sync/errors";
 import type { BankBalance, BankTransaction } from "../../lib/bank-sync/schemas";
 import { syncAccount } from "../../lib/bank-sync/sync";
-import { prepareImport } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { accounts, balanceCheckpoints, bankAccountLinks, imports, transactions } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
@@ -273,9 +273,9 @@ describe("booked_on", () => {
 
   it("a CSV import stores the booking date without changing the dedupe hash", async () => {
     const { user, main } = await setup();
-    const prepared = prepareImport([HEADER, csvLine("30/09/2026", "29/09/2026")].join("\n"), main.id);
+    const prepared = prepareImportGuessed([HEADER, csvLine("30/09/2026", "29/09/2026")].join("\n"), main.id);
     if (!prepared.ok) throw new Error("parse");
-    const sameOperation = prepareImport([HEADER, csvLine("02/10/2026", "29/09/2026")].join("\n"), main.id);
+    const sameOperation = prepareImportGuessed([HEADER, csvLine("02/10/2026", "29/09/2026")].join("\n"), main.id);
     if (!sameOperation.ok) throw new Error("parse");
     expect(prepared.transactions[0].dedupeHash).toBe(sameOperation.transactions[0].dedupeHash);
     await commitImport(db, { userId: user.id, accountId: main.id, filename: "x.csv", rowsTotal: 1, rowsError: 0, transactions: prepared.transactions });
@@ -285,7 +285,7 @@ describe("booked_on", () => {
 
   it("a synced row merged into a CSV row without a booking date gives it one, and never overwrites", async () => {
     const { user, main, linkId } = await linked();
-    const prepared = prepareImport([HEADER, csvLine("30/09/2026", "30/09/2026")].join("\n"), main.id);
+    const prepared = prepareImportGuessed([HEADER, csvLine("30/09/2026", "30/09/2026")].join("\n"), main.id);
     if (!prepared.ok) throw new Error("parse");
     await commitImport(db, { userId: user.id, accountId: main.id, filename: "x.csv", rowsTotal: 1, rowsError: 0, transactions: prepared.transactions });
     await db.update(transactions).set({ bookedOn: null }).where(eq(transactions.accountId, main.id));
