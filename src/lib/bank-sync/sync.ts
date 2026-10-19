@@ -76,7 +76,9 @@ export async function syncAccount(
 
   let transactions;
   try {
-    transactions = await client.getTransactions(link.bankAccountUid, { dateFrom, status: "BOOK", psu: deps.psu });
+    // shortcut: temporary, every status is fetched (convert still keeps BOOK only) so the log below shows
+    // whether the bank sends pending card payments. Restore `status: "BOOK"` once that is known.
+    transactions = await client.getTransactions(link.bankAccountUid, { dateFrom, psu: deps.psu });
   } catch (error) {
     if (error instanceof BankSyncError) return { ok: false, error: error.code };
     throw error;
@@ -84,12 +86,17 @@ export async function syncAccount(
 
   // A failed balance call only skips the checkpoint: the transactions are still worth importing.
   let balance: SyncCommitInput["balance"] = null;
+  let balanceTypes: string[] = [];
   try {
-    const picked = pickBookedBalance(await client.getBalances(link.bankAccountUid, { psu: deps.psu }), now);
+    const balances = await client.getBalances(link.bankAccountUid, { psu: deps.psu });
+    balanceTypes = balances.map((b) => b.balance_type);
+    const picked = pickBookedBalance(balances, now);
     balance = picked && { ...picked, bankName: link.bankName, fetchedAt: now };
   } catch (error) {
     if (!(error instanceof BankSyncError)) throw error;
   }
+
+  console.info(`bank-sync statuses: ${statusCounts(transactions)} balanceTypes=${balanceTypes.join(",") || "none"}`);
 
   const learned = learnShortLabels(await store.csvLabels(userId, link.accountId));
   const converted = convertBankTransactions(transactions, learned);
@@ -114,4 +121,11 @@ export async function syncAccount(
     possible: committed.possible,
     errors: converted.errors.length,
   };
+}
+
+/** Counts only (e.g. `BOOK=41 OTHR=3`): never amounts or labels. */
+function statusCounts(transactions: ReadonlyArray<{ status?: string | null }>): string {
+  const counts = new Map<string, number>();
+  for (const tx of transactions) counts.set(tx.status ?? "none", (counts.get(tx.status ?? "none") ?? 0) + 1);
+  return [...counts].map(([status, n]) => `${status}=${n}`).join(" ") || "none";
 }
