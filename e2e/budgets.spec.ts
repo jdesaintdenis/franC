@@ -182,6 +182,8 @@ test("budgets: empty state suggests a category, edit in the sheet, remove then U
     // Now it is a row with its bar, nothing spent this month yet.
     const row = page.getByRole("button", { name: `Edit budget for ${name}`, exact: true });
     await expect(row).toContainText("€0.00 of €1,234.00");
+    // No regular payment in this category: what is left still shows.
+    await expect(row).toContainText("€1,234.00 left to spend");
     await expect(page.getByText("planned per month")).toContainText("€1,234");
 
     // Edit the amount and turn roll over on, in the sheet.

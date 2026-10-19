@@ -65,7 +65,7 @@ A budget counts the regular payments of its category and its subcategories (`cha
 
 - **Gauge**, in order: paid payments (solid sand), other spending (periwinkle; amber when over or ahead of pace), payments still due (hatched sand), capped at 100 % (`gaugeSegments`). The big percentage is still the real spending.
 - **Pace tick on the rest**: it starts after the paid payments and leaves room for the due ones (`restPaceTickPercent`); without payments it is the plain even pace.
-- **Detail line** adds " · X à venir" when payments are due. **Left to spend** under the gauge (current month, budgets with payments, not over): `available − spent − due`; "Tout est prévu : plus rien à dépenser" at zero, amber "X de trop avec les prélèvements à venir" below zero.
+- **Detail line** adds " · X à venir" when payments are due. **Left to spend** under the gauge (current month, every budget not over, with or without payments): `available − spent − due`; "Tout est prévu : plus rien à dépenser" at zero, amber "X de trop avec les prélèvements à venir" below zero.
 - **Payments-only budget** (`isChargesOnly`): payments cover at least 95 % of the amount (`CHARGES_ONLY_PERCENT`) and the budget is not over. Home leaves it out; the Budget page folds it under "Voir les N budgets de prélèvements"; this settings list shows every budget.
 - **Budget sheet**: a "Prélèvements X €" pill first (this month's payments of the category, rounded up to the euro, `chargesPresetCents`) and a note naming up to three of them.
 - A past month shows paid payments only, with no tick and no left-to-spend line.
