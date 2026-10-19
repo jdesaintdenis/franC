@@ -824,5 +824,4 @@ A loan can start in the past: subscription date and capital start date, history 
 
 ## Later / ideas (not v1)
 - [ ] Support for additional bank CSV formats
-- [ ] Pending card payments shown under the balance (display only)
 - [ ] Daily "N new transactions to review" notification

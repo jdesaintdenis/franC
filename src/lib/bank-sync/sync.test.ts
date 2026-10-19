@@ -70,7 +70,7 @@ describe("syncAccount", () => {
     const result = await run();
     expect(result).toEqual({ ok: true, importId: "imp", inserted: 1, duplicate: 0, possible: 0, errors: 0 });
     // The day after the newest transaction, minus the 4-day overlap.
-    expect(calls.fetch[0]).toMatchObject({ dateFrom: "2026-09-22" });
+    expect(calls.fetch[0]).toMatchObject({ dateFrom: "2026-09-22", status: "BOOK" });
     const [commit] = calls.commits;
     expect(commit).toMatchObject({ accountId: "acc", filename: "Caisse d'Epargne", rowsTotal: 1, rowsError: 0 });
     expect(commit.rows[0]).toMatchObject({
