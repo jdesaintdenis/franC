@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 
 import { db } from "@/db/client";
-import { getDailySpending, getMonthlyHistory } from "@/db/queries/dashboard";
+import { getDailySpending, getMonthlyHistory, getReceivedIncome } from "@/db/queries/dashboard";
 import { listAccounts } from "@/db/queries/accounts";
 import { getAccountBalances } from "@/db/queries/balance";
 import { getBalanceGaps } from "@/db/queries/balance-gaps";
@@ -17,6 +17,7 @@ import { listCategories } from "@/db/queries/categories";
 import { listOpenPriceAlerts } from "@/db/queries/price-alerts";
 import { countToReview } from "@/db/queries/review";
 import { listRecurring } from "@/db/queries/recurring";
+import { getIncomeMonth } from "@/db/queries/users";
 import { requireUser } from "@/lib/auth/session";
 import { buildBalanceOverview } from "@/lib/balance/projection";
 import { attachCharges, buildBudgetOverview } from "@/lib/budgets/progress";
@@ -65,7 +66,7 @@ export default async function Home() {
   const now = currentMonth(today);
   const todayDate = currentDate(today);
 
-  const [accounts, toReview, history, allRecurring, budgetRows, categories, priceAlerts, balances, goals, freshness, reminderSettings, welcomeFacts, balanceGaps, bankConnections, notFoundCount, paidCharges, backup] = await Promise.all([
+  const [accounts, toReview, history, allRecurring, budgetRows, categories, priceAlerts, balances, goals, freshness, reminderSettings, welcomeFacts, balanceGaps, bankConnections, notFoundCount, paidCharges, backup, incomeMonth] = await Promise.all([
     listAccounts(user.id),
     countToReview(db, user.id),
     // Only to know whether the user has any data at all ("latest month with data").
@@ -89,14 +90,14 @@ export default async function Home() {
     getRecurringCharges(db, user.id, monthRange(now)),
     // The nightly backup belongs to the deployment, so only its owner (who has bank sync) hears about it.
     isBankSyncAllowed(user.email) ? getBackupStatus(db) : null,
+    getIncomeMonth(user.id),
   ]);
-  // The hero's chart counts the accounts the number itself counts.
-  const daily = await getDailySpending(
-    db,
-    user.id,
-    monthRange(now),
-    balances.filter((b) => b.inSafeToSpend).map((b) => b.id),
-  );
+  // The hero's chart and the income held for next month use the accounts the number itself counts.
+  const countedIds = balances.filter((b) => b.inSafeToSpend).map((b) => b.id);
+  const [daily, received] = await Promise.all([
+    getDailySpending(db, user.id, monthRange(now), countedIds),
+    incomeMonth === "next" ? getReceivedIncome(db, user.id, monthRange(now), countedIds) : [],
+  ]);
   const latest = latestMonthWithData(history);
   const forecastItems = allRecurring.map(toForecastItem);
   const staleAccounts = findStaleAccounts({ accounts: freshness, days: reminderSettings.days, today: todayDate });
@@ -123,6 +124,8 @@ export default async function Home() {
     items: forecastItems,
     budgetRows,
     parentOf: new Map(categories.map((c) => [c.id, c.parentId])),
+    received,
+    incomeMonth,
     today: todayDate,
   });
   // A due bill counts in the budget that covers it, as in safe to spend.

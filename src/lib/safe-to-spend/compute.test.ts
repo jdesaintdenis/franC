@@ -2,7 +2,13 @@ import { describe, expect, it } from "vitest";
 
 import type { BudgetRow } from "../budgets/progress";
 import type { ForecastItem } from "../recurring/forecast";
-import { buildSafeToSpend, type SafeToSpendAccount } from "./compute";
+import {
+  buildSafeToSpend,
+  inLeeway,
+  type IncomeMonth,
+  type SafeToSpendAccount,
+  type SafeToSpendReceived,
+} from "./compute";
 
 const HOUSING = "cat-housing";
 const INTERNET = "cat-internet";
@@ -51,6 +57,9 @@ function run(over: {
   accounts?: SafeToSpendAccount[];
   items?: ForecastItem[];
   budgetRows?: BudgetRow[];
+  received?: SafeToSpendReceived[];
+  // "this" keeps the pre-Slice 75 behaviour, which the older cases below rely on.
+  incomeMonth?: IncomeMonth;
   today?: string;
 }) {
   return buildSafeToSpend({
@@ -58,6 +67,8 @@ function run(over: {
     items: over.items ?? [],
     budgetRows: over.budgetRows ?? [],
     parentOf: PARENTS,
+    received: over.received ?? [],
+    incomeMonth: over.incomeMonth ?? "this",
     today: over.today ?? "2026-09-14",
   });
 }
@@ -260,5 +271,79 @@ describe("buildSafeToSpend", () => {
   it("ignores dismissed items", () => {
     const r = run({ items: [item({ ...orange, status: "dismissed" })] });
     expect(r.bills).toEqual([]);
+  });
+
+  describe("live on last month's income (Slice 75)", () => {
+    const got = (over: Partial<SafeToSpendReceived> & { id: string }): SafeToSpendReceived => ({
+      date: "2026-09-10",
+      amountCents: 100000,
+      label: "VIR",
+      recurringId: null,
+      ...over,
+    });
+
+    it("holds back a salary received on the 28th", () => {
+      const r = run({
+        incomeMonth: "next",
+        today: "2026-09-29",
+        received: [got({ id: "pay", date: "2026-09-28", amountCents: 241200, recurringId: "salary" })],
+      });
+      expect(r.heldCents).toBe(241200);
+      expect(r.heldForNextMonth.map((h) => h.id)).toEqual(["pay"]);
+      expect(r.safeCents).toBe(200000 - 241200);
+    });
+
+    it("does not hold a regular income received on the 3rd", () => {
+      const r = run({ incomeMonth: "next", received: [got({ id: "pay", date: "2026-09-03", recurringId: "salary" })] });
+      expect(r.heldCents).toBe(0);
+      expect(r.safeCents).toBe(200000);
+    });
+
+    it("holds a one-off income on the 3rd", () => {
+      const r = run({ incomeMonth: "next", received: [got({ id: "refund", date: "2026-09-03", amountCents: 4500 })] });
+      expect(r.heldCents).toBe(4500);
+    });
+
+    it("lists a salary due on the 28th without counting it, and counts one due on the 5th", () => {
+      const early = item({ ...salary, id: "early", lastSeenDate: "2026-08-05" }); // due 09-05
+      const late = run({ incomeMonth: "next", today: "2026-09-02", items: [salary] });
+      expect(late.income.map((i) => [i.id, i.countsNow])).toEqual([["salary", false]]);
+      expect(late.incomeCents).toBe(0);
+      const soon = run({ incomeMonth: "next", today: "2026-09-02", items: [early] });
+      expect(soon.income.map((i) => [i.id, i.countsNow])).toEqual([["early", true]]);
+      expect(soon.incomeCents).toBe(250000);
+    });
+
+    it("counts detected income in the ignored note only when it would count now", () => {
+      const detectedLate = item({ ...salary, id: "late", status: "detected" }); // due 09-28
+      const detectedEarly = item({ ...salary, id: "early", status: "detected", lastSeenDate: "2026-08-05" }); // 09-05
+      const r = run({ incomeMonth: "next", today: "2026-09-02", items: [detectedLate, detectedEarly] });
+      expect(r.ignoredDetectedIncomeCount).toBe(1);
+    });
+
+    it('"this" ignores what was received and counts every confirmed income due', () => {
+      const r = run({
+        incomeMonth: "this",
+        items: [salary],
+        received: [got({ id: "pay", date: "2026-09-10" })],
+      });
+      expect(r.heldCents).toBe(0);
+      expect(r.heldForNextMonth).toEqual([]);
+      expect(r.incomeCents).toBe(250000);
+      expect(r.income[0].countsNow).toBe(true);
+      expect(r.safeCents).toBe(450000);
+    });
+
+    it("keeps the next month for the held income", () => {
+      expect(run({ today: "2026-12-15" }).nextMonth).toBe("2027-01");
+    });
+  });
+});
+
+describe("inLeeway", () => {
+  it("covers the 1st to the 7th", () => {
+    expect(inLeeway("2026-11-01")).toBe(true);
+    expect(inLeeway("2026-11-07")).toBe(true);
+    expect(inLeeway("2026-11-08")).toBe(false);
   });
 });

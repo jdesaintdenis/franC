@@ -1,9 +1,10 @@
-import { and, eq, gte, inArray, isNull, lte, or, sql } from "drizzle-orm";
+import { and, eq, gt, gte, inArray, isNull, lte, or, sql } from "drizzle-orm";
 import { alias, type AnyPgColumn } from "drizzle-orm/pg-core";
 
 import { UNCATEGORIZED_COLOR } from "../../lib/category-color";
 import { monthRange } from "../../lib/dashboard/month";
 import type { MonthHistoryRow } from "../../lib/dashboard/month-picker";
+import type { SafeToSpendReceived } from "../../lib/safe-to-spend/compute";
 import type { db as dbClient } from "../client";
 import { categories, transactions, transfers } from "../schema";
 import { categoryLines } from "./split-sql";
@@ -122,6 +123,31 @@ export async function getDailySpending(
     .groupBy(transactions.date)
     .orderBy(transactions.date);
   return rows.map((r) => ({ date: r.date, spentCents: toCents(r.spent) })).filter((r) => r.spentCents > 0);
+}
+
+/**
+ * Incoming rows of a range on the given accounts (transfers and ignored rows excluded, like every total),
+ * oldest first. Feeds Reste à vivre's "kept for next month".
+ */
+export async function getReceivedIncome(
+  database: typeof dbClient,
+  userId: string,
+  range: { from: string; to: string },
+  accountIds: string[],
+): Promise<SafeToSpendReceived[]> {
+  if (accountIds.length === 0) return [];
+  const rows = await database
+    .select({
+      id: transactions.id,
+      date: transactions.date,
+      amountCents: transactions.amountCents,
+      label: sql<string>`coalesce(${transactions.labelDisplay}, ${transactions.labelRaw}, '')`,
+      recurringId: transactions.recurringId,
+    })
+    .from(transactions)
+    .where(and(inRange(userId, range), inArray(transactions.accountId, accountIds), gt(transactions.amountCents, 0)))
+    .orderBy(transactions.date, transactions.id);
+  return rows;
 }
 
 /**

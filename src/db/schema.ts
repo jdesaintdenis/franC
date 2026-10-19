@@ -56,6 +56,8 @@ export const users = pgTable(
     // When the Home welcome checklist was finished or hidden; set once, so it never comes back.
     welcomeCompletedAt: timestamp("welcome_completed_at"),
     // Account Home opens on when the URL names none (Slice 50); null = all accounts. Cleared if the account is deleted.
+    // Reste à vivre: "next" keeps income received this month for next month, "this" counts it now (Slice 75).
+    incomeMonth: text("income_month").notNull().default("next"),
     homeAccountId: uuid("home_account_id").references((): AnyPgColumn => accounts.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")

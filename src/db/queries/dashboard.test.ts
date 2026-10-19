@@ -14,6 +14,7 @@ import {
   getMonthlyHistory,
   getMonthlyTrend,
   getMonthTotals,
+  getReceivedIncome,
   getSpendingByCategory,
   getSubcategoryBreakdown,
   getSubcategorySpending,
@@ -577,6 +578,52 @@ describe("dashboard queries", () => {
       await seed(ctx, [{ date: "2025-09-02", amountCents: -1000 }]);
       expect(await getDailySpending(db, ctx.user.id, monthRange("2025-09"), [])).toEqual([]);
       expect(await getDailySpending(db, ctx.user.id, monthRange("2025-09"), ["00000000-0000-4000-8000-000000000000"])).toEqual([]);
+    });
+  });
+
+  describe("getReceivedIncome", () => {
+    it("lists inflows of the range on the given accounts, oldest first, without transfers, ignored rows or other users", async () => {
+      const ctx = await setup();
+      const other = await setup();
+      await seed(ctx, [
+        { date: "2025-09-20", amountCents: 5000 },
+        { date: "2025-09-05", amountCents: 241200 },
+        { date: "2025-09-06", amountCents: -999 },
+        { date: "2025-09-07", amountCents: 700 },
+        { date: "2025-09-08", amountCents: 700 },
+        { date: "2025-09-09", amountCents: 3300 },
+        { date: "2025-10-01", amountCents: 12345 },
+      ]);
+      await seed(other, [{ date: "2025-09-05", amountCents: 8888 }]);
+      // A transfer pair (+700 in, -700 out) and an ignored inflow are not income.
+      await seed(ctx, [{ date: "2025-09-07", amountCents: -700 }]);
+      const rows = await db.select().from(transactions).where(eq(transactions.userId, ctx.user.id));
+      const at = (date: string, cents: number) => rows.find((r) => r.date === date && r.amountCents === cents)!;
+      const out = at("2025-09-07", -700);
+      await db.insert(transfers).values({ userId: ctx.user.id, outTransactionId: out.id, inTransactionId: at("2025-09-07", 700).id, status: "confirmed" });
+      await db.update(transactions).set({ ignoredAt: new Date() }).where(eq(transactions.id, at("2025-09-09", 3300).id));
+
+      const got = await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id]);
+      expect(got.map((r) => [r.date, r.amountCents])).toEqual([
+        ["2025-09-05", 241200],
+        ["2025-09-08", 700],
+        ["2025-09-20", 5000],
+      ]);
+    });
+
+    it("returns the label and the recurring link", async () => {
+      const ctx = await setup();
+      await seed(ctx, [{ date: "2025-09-05", amountCents: 1000 }]);
+      const [row] = await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id]);
+      expect(row.label).toMatch(/^ROW \d+$/);
+      expect(row.recurringId).toBeNull();
+    });
+
+    it("is empty for no accounts or accounts that are not the user's", async () => {
+      const ctx = await setup();
+      await seed(ctx, [{ date: "2025-09-05", amountCents: 1000 }]);
+      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [])).toEqual([]);
+      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), ["00000000-0000-4000-8000-000000000000"])).toEqual([]);
     });
   });
 });

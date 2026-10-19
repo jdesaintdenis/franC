@@ -281,6 +281,13 @@
       "when": 1792401169797,
       "tag": "0039_csv_mapping",
       "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1792442038474,
+      "tag": "0040_income_month",
+      "breakpoints": true
     }
   ]
 }
