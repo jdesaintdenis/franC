@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { applyStatusChange, applyStatusChanges, resolvePriceAlert } from "./optimistic";
+import { applyStatusChange, applyStatusChanges, resolvePriceAlert, setKeepsForNextMonth } from "./optimistic";
 
 const items = [
   { id: "a", status: "detected" as const },
@@ -101,5 +101,21 @@ describe("resolvePriceAlert", () => {
       typicalAmountCents: -3999,
       alert: null,
     });
+  });
+});
+
+describe("setKeepsForNextMonth", () => {
+  const list = [
+    { id: "a", keepsForNextMonth: false },
+    { id: "b", keepsForNextMonth: false },
+  ];
+
+  it("flips that item only", () => {
+    const next = setKeepsForNextMonth(list, "a", true);
+    expect(next).toEqual([
+      { id: "a", keepsForNextMonth: true },
+      { id: "b", keepsForNextMonth: false },
+    ]);
+    expect(next[1]).toBe(list[1]);
   });
 });

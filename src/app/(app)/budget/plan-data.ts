@@ -130,7 +130,7 @@ export async function loadBudgetMonth(userId: string, now: Date, month: string, 
     parentOf,
     // Only bills, budgets and income due are read here, never safeCents; "this" keeps every income due in the list.
     received: [],
-    incomeMonth: "this",
+    keptIds: new Set(),
     today,
   });
   const progress = monthProgress(today);
@@ -316,7 +316,7 @@ export async function loadPlan(userId: string, now: Date) {
     budgetRows,
     parentOf,
     received: [],
-    incomeMonth: "this",
+    keptIds: new Set(),
     today,
   });
   const budgets = withCharges(

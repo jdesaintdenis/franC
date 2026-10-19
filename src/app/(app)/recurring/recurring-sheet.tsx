@@ -35,6 +35,7 @@ export interface SheetActions {
   restore: (item: RecurringViewItem) => void;
   stillActive: (item: RecurringViewItem) => void;
   stopTracking: (item: RecurringViewItem) => void;
+  setKeeps: (item: RecurringViewItem, value: boolean) => void;
   acceptPrice: (item: RecurringViewItem) => void;
   keepPrice: (item: RecurringViewItem) => void;
 }
@@ -266,6 +267,36 @@ function SheetBody({
         {t("sheet.seeAll")}
         <ChevronRight className="size-4 shrink-0" aria-hidden="true" />
       </Link>
+
+      {item.status === "confirmed" && item.typicalAmountCents > 0 && (
+        <label className="bg-card flex cursor-pointer flex-col gap-1 rounded-xl border p-3.5">
+          <span className="flex min-h-12 items-center justify-between gap-3 font-semibold">
+            <span className="flex items-center gap-2.5">
+              {/* The hatched marker of "Kept for" in the Reste à vivre receipt. */}
+              <span
+                aria-hidden="true"
+                className="size-3 shrink-0 rounded-[3px]"
+                style={{
+                  background: "repeating-linear-gradient(135deg, var(--primary) 0 2px, transparent 2px 6px)",
+                  boxShadow: "inset 0 0 0 1px color-mix(in srgb, var(--primary) 60%, transparent)",
+                }}
+              />
+              {t("sheet.keepsTitle")}
+            </span>
+            {/* A native checkbox drawn as a switch: keeps keyboard and test semantics. */}
+            <input
+              type="checkbox"
+              role="switch"
+              className="bg-gauge-off checked:bg-primary after:bg-foreground relative h-6 w-10 shrink-0 cursor-pointer appearance-none rounded-full transition-colors after:absolute after:top-0.5 after:left-0.5 after:size-5 after:rounded-full after:transition-transform checked:after:translate-x-4"
+              checked={item.keepsForNextMonth}
+              onChange={(e) => actions.setKeeps(item, e.target.checked)}
+            />
+          </span>
+          <span className="text-muted-foreground text-[13px] leading-snug">
+            {t(item.keepsForNextMonth ? "sheet.keepsOn" : "sheet.keepsOff")}
+          </span>
+        </label>
+      )}
 
       {running && item.budget && (
         <Link

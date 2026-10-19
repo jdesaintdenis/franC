@@ -836,7 +836,7 @@ Any bank's CSV imports through a Columns step; the fixed Caisse d'Épargne parse
 
 ## Slice 75 — Live on last month's income
 
-Reste à vivre keeps income received this month for next month; a regular income on the 1st–7th counts at once; a Plus setting turns it off (SPEC §87).
+Reste à vivre keeps income received this month for next month; a regular income on the 1st–7th counts at once; a Plus setting turns it off (SPEC §87). Replaced by a per-payment switch in Slice 76.
 
 - [x] `getReceivedIncome` query + tests
 - [x] Held income, leeway and the new formula in `buildSafeToSpend` + tests
@@ -845,6 +845,17 @@ Reste à vivre keeps income received this month for next month; a regular income
 - [x] Feature docs, SPEC §87, E2E
 
 **Done when:** with the salary paid on the 28th, Reste à vivre on any day of the month no longer includes it, and a salary paid on the 2nd counts for its month.
+
+## Slice 76 — Keep one regular payment for next month
+
+The "kept for next month" rule of Slice 75 applies to the regular incomes the user switches on, instead of to all income; the Plus setting goes (SPEC §87 D7).
+
+- [x] `recurring.keeps_for_next_month` (migration 0041), `setKeepsForNextMonth` query + action + tests
+- [x] `buildSafeToSpend` takes the switched payments; `getReceivedIncome` filters on them
+- [x] "Keep for next month" switch in the regular payment sheet (en + fr); Plus "Income" row removed
+- [x] Feature docs, SPEC §87 D7, E2E
+
+**Done when:** with only the salary switched on, a salary paid on the 28th is left out of Reste à vivre, and every other income counts at once.
 
 ## Later / ideas (not v1)
 - [ ] Daily "N new transactions to review" notification

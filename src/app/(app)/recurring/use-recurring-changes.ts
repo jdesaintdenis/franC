@@ -5,7 +5,7 @@ import { useOptimistic, useRef, useTransition } from "react";
 
 import { useToast } from "@/components/toast";
 import { createSerialQueue } from "@/lib/optimistic/queue";
-import { applyStatusChanges, resolvePriceAlert, type StatusChange } from "@/lib/recurring/optimistic";
+import { applyStatusChanges, resolvePriceAlert, setKeepsForNextMonth, type StatusChange } from "@/lib/recurring/optimistic";
 
 import {
   acceptPriceAlertAction,
@@ -14,6 +14,7 @@ import {
   dismissRecurringAction,
   endRecurringAction,
   restoreRecurringAction,
+  setKeepsForNextMonthAction,
   setRecurringStatusesAction,
   stillActiveRecurringAction,
   trackRecurringAction,
@@ -24,12 +25,13 @@ import type { RecurringViewItem } from "./view-item";
 
 type Optimistic =
   | { kind: "status"; changes: StatusChange[] }
-  | { kind: "alert"; id: string; accept: boolean };
+  | { kind: "alert"; id: string; accept: boolean }
+  | { kind: "keeps"; id: string; value: boolean };
 
 function reduce(items: RecurringViewItem[], action: Optimistic): RecurringViewItem[] {
-  return action.kind === "status"
-    ? applyStatusChanges(items, action.changes)
-    : resolvePriceAlert(items, action.id, action.accept);
+  if (action.kind === "status") return applyStatusChanges(items, action.changes);
+  if (action.kind === "keeps") return setKeepsForNextMonth(items, action.id, action.value);
+  return resolvePriceAlert(items, action.id, action.accept);
 }
 
 interface Change {
@@ -186,6 +188,22 @@ export function useRecurringChanges(items: RecurringViewItem[]) {
         call: () => stillActiveRecurringAction(item.id),
         failed: t("errors.stillActiveFailed", { name: item.name }),
         done: { message: t("toast.stillActive", { name: item.name }) },
+      });
+    },
+
+    /** "Keep for next month" on a regular income; Undo flips it back. */
+    setKeeps(item: RecurringViewItem, value: boolean) {
+      const flip = (to: boolean) => () =>
+        run({
+          optimistic: { kind: "keeps", id: item.id, value: to },
+          call: () => setKeepsForNextMonthAction(item.id, to),
+          failed: t("errors.undoFailed"),
+        });
+      run({
+        optimistic: { kind: "keeps", id: item.id, value },
+        call: () => setKeepsForNextMonthAction(item.id, value),
+        failed: t("errors.keepsFailed", { name: item.name }),
+        done: { message: t(value ? "toast.keepsOn" : "toast.keepsOff", { name: item.name }), undo: flip(!value) },
       });
     },
 

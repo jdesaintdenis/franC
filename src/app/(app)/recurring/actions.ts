@@ -9,6 +9,7 @@ import { acceptPriceAlert, dismissPriceAlert } from "@/db/queries/price-alerts";
 import {
   type TrackResult,
   markRecurringStillActive,
+  setKeepsForNextMonth,
   refreshRecurring,
   restoreRecurring,
   setRecurringStatus,
@@ -133,6 +134,19 @@ export async function restoreRecurringAction(
 /** Confirms a detected item, or resumes an ended one. */
 export async function confirmRecurringAction(id: string): Promise<RecurringActionState> {
   return setStatus(id, "confirmed");
+}
+
+/** Switches "Keep for next month" on a regular income: its charges then wait for next month in Reste à vivre. */
+export async function setKeepsForNextMonthAction(rawId: string, value: boolean): Promise<RecurringActionState> {
+  const user = await requireUser();
+  const NOT_FOUND = (await getTranslations("recurring.errors"))("notFound");
+  const parsed = z.object({ id: z.uuid(), value: z.boolean() }).safeParse({ id: rawId, value });
+  if (!parsed.success) return { status: "error", error: NOT_FOUND };
+  if (!(await setKeepsForNextMonth(db, user.id, parsed.data.id, parsed.data.value))) {
+    return { status: "error", error: NOT_FOUND };
+  }
+  revalidateAll();
+  return { status: "done" };
 }
 
 /** Cancelled: the item leaves every forecast until resumed or charged again. */

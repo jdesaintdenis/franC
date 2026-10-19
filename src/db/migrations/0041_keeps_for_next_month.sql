@@ -1,0 +1,1 @@
+ALTER TABLE "recurring" ADD COLUMN "keeps_for_next_month" boolean DEFAULT false NOT NULL;

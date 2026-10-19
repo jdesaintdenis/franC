@@ -649,6 +649,28 @@ export async function markRecurringStillActive(
   return row ?? null;
 }
 
+/** Switches "Keep for next month" on a confirmed income (Slice 76). False when the item is not one of the user's. */
+export async function setKeepsForNextMonth(
+  database: typeof dbClient,
+  userId: string,
+  id: string,
+  value: boolean,
+): Promise<boolean> {
+  const rows = await database
+    .update(recurring)
+    .set({ keepsForNextMonth: value })
+    .where(
+      and(
+        eq(recurring.id, id),
+        eq(recurring.userId, userId),
+        eq(recurring.status, "confirmed"),
+        sql`${recurring.typicalAmountCents} > 0`,
+      ),
+    )
+    .returning({ id: recurring.id });
+  return rows.length > 0;
+}
+
 export interface TrackResult {
   id: string;
   /** The item's state before tracking, for Undo; null when tracking created it. */

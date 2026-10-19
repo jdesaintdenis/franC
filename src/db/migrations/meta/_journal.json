@@ -288,6 +288,13 @@
       "when": 1792442038474,
       "tag": "0040_income_month",
       "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1792444988052,
+      "tag": "0041_keeps_for_next_month",
+      "breakpoints": true
     }
   ]
 }
