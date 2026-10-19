@@ -4,6 +4,7 @@ import { expect, test } from "./fixtures";
 import { addCategory, deleteCategoriesWithPrefix } from "./helpers/manage";
 import { clearQueue } from "./helpers/queue";
 import { closeSheet, pickCategory, reviewCategory, setCategoryInSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 const PREFIX = "E2E Guess";
 
@@ -21,7 +22,7 @@ async function importMerchant(page: Page, fileName: string, label: string, first
     return `${date};${label};PRLV ${label};GS${firstDay + i};GS${firstDay + i}-;Prelevement;;;-${10 + firstDay + i},00;;${date};${date};0`;
   });
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: fileName,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),

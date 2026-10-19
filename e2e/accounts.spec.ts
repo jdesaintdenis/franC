@@ -2,6 +2,7 @@ import { type Page } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
 import { addAccount, deleteAccount, deleteAccountsWithPrefix, manageSheet, openRowMenu, rowMenuAction } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -48,7 +49,7 @@ test("accounts: create, rename, import into a second account, filter, delete", a
   // Import into the new account.
   await page.goto("/import");
   await page.getByRole("radiogroup", { name: "Which account" }).getByRole("radio", { name: renamed }).click();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `accounts-${stamp}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from(

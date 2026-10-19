@@ -5,6 +5,7 @@ import { addCategory } from "./helpers/manage";
 import { categorizeWaiting, clearQueue } from "./helpers/queue";
 import { settled } from "./helpers/recurring";
 import { toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 // Phone viewport, like transactions.spec.ts.
 test.use({ ...devices["Pixel 7"] });
@@ -18,7 +19,7 @@ async function importRows(page: Page, label: string, count: number) {
     return `${date};${label}${i};PRLV ${label}${i};RV${i};RV${i}-;Prelevement;;;-${10 + i},00;;${date};${date};0`;
   });
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `feedback-${label}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),

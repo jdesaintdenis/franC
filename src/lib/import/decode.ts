@@ -1,8 +1,12 @@
 /**
- * The supported bank export is Windows-1252 (Latin-1 accents in labels), not UTF-8.
- * No encoding detection: this is the format's encoding, like its delimiter.
- * Windows-1252 maps every byte to a character, so decoding cannot fail.
+ * UTF-8 first, Windows-1252 when the bytes are not valid UTF-8. Banks that export CSV for a French
+ * Excel often write Windows-1252 (Latin-1 accents), others write UTF-8; invalid UTF-8 is a reliable
+ * tell, and Windows-1252 maps every byte, so the fallback cannot fail.
  */
 export function decodeUpload(bytes: ArrayBuffer | Uint8Array): string {
-  return new TextDecoder("windows-1252").decode(bytes);
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    return new TextDecoder("windows-1252").decode(bytes);
+  }
 }

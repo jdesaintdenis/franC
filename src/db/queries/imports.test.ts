@@ -5,7 +5,8 @@ import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import type { BankCategoryWrites } from "../../lib/categorize/bank";
-import { dedupeKey, prepareImport } from "../../lib/import";
+import { dedupeKey } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { categories, imports, transactions } from "../schema";
 import { createTestUser, resetDb, seedCategories } from "../test-utils";
@@ -28,7 +29,7 @@ async function setup() {
 }
 
 function prepare(text: string, accountId: string) {
-  const result = prepareImport(text, accountId);
+  const result = prepareImportGuessed(text, accountId);
   if (!result.ok) throw new Error(result.fileError);
   return result;
 }

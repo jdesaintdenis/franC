@@ -1,6 +1,7 @@
 import { devices } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 test.use({ ...devices["Pixel 7"] });
 
@@ -31,7 +32,7 @@ test("import offers Create / Map / Ignore for new bank categories, and remembers
   const file = { name: `bank-${ts}.csv`, mimeType: "text/csv", buffer: Buffer.from(lines.join("\n") + "\n", "utf-8") };
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
 
   const section = page.getByRole("region", { name: /bank categor/ });
   await expect(section).toBeVisible();
@@ -66,7 +67,7 @@ test("import offers Create / Map / Ignore for new bank categories, and remembers
 
   // Re-importing asks nothing: both bank categories were answered.
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await expect(page.getByRole("region", { name: "Import preview" }).getByText("All 4 transactions in this file are already in franC.")).toBeVisible();
   await expect(page.getByRole("region", { name: /bank categor/ })).toHaveCount(0);
 

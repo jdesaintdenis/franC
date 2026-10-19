@@ -1,6 +1,7 @@
 import { formatCents, formatSignedWholeCents, formatWholeCents } from "../src/lib/money";
 
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -37,7 +38,7 @@ test("dashboard: totals, month navigation and category drill-down", async ({ pag
     .filter({ hasText: file.name });
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await page.getByRole("button", { name: "Import 3 transactions" }).click();
   await expect(result.getByText("3 imported")).toBeVisible();
 

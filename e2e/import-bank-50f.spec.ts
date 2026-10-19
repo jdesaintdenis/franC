@@ -4,7 +4,7 @@ import { hashPassword } from "better-auth/crypto";
 
 import { expect, signIn, test, waitForStreamedContent, workerEmail } from "./fixtures";
 import { chooseLink, disconnectAllBanks, holdFirstSync, openConnectionMenu } from "./helpers/bank";
-import { undoImport } from "./helpers/imports";
+import { undoImport, chooseCsv } from "./helpers/imports";
 import { deleteAccountsWithPrefix } from "./helpers/manage";
 
 // Slice 62: the import preview shows money, the result keeps its button on screen, the bank page asks one date.
@@ -27,7 +27,7 @@ test("import: the preview shows money in, out and net; a file with nothing new o
   const preview = page.getByRole("region", { name: "Import preview" });
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await expect(preview.getByTestId("import-new-count")).toHaveText("3");
   const flows = preview.getByTestId("import-flows");
   await expect(flows).toContainText("100.00");
@@ -41,7 +41,7 @@ test("import: the preview shows money in, out and net; a file with nothing new o
 
   // The same file again: nothing to record.
   await page.getByRole("button", { name: "Import another file" }).click();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await expect(preview.getByText("Nothing new")).toBeVisible();
   await expect(page.getByRole("button", { name: /^Import \d+/ })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Choose another file" })).toBeVisible();
@@ -64,7 +64,7 @@ test.describe("phone", () => {
     const name = `big-${stamp}.csv`;
     const rows = Array.from({ length: 50 }, (_, i) => debitRow("15/09/2025", `E2E-BIG-${stamp}-${i}`, "-1,00"));
     await page.goto("/import");
-    await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({ name, ...csv(rows) });
+    await chooseCsv(page, { name, ...csv(rows) });
     await page.getByRole("button", { name: "Import 50 transactions" }).click();
     const button = page.getByRole("region", { name: "Import result" }).getByRole("button", { name: /Validate all/ });
     await expect(button).toBeVisible();

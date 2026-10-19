@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from "@playwright/test";
+import { chooseCsv } from "./imports";
 
 export const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -65,7 +66,7 @@ export async function undoImport(page: Page, fileName: string): Promise<void> {
 
 export async function importFile(page: Page, file: ReturnType<typeof csvFile>, count: number): Promise<void> {
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await page.getByRole("button", { name: count === 1 ? "Import 1 transaction" : `Import ${count} transactions` }).click();
   await expect(page.getByRole("region", { name: "Import result" }).getByText(`${count} imported`)).toBeVisible();
 }

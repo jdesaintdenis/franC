@@ -3,6 +3,7 @@ import { devices } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { manageSheet, openMenu, rowMenuAction } from "./helpers/manage";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 // Phone viewport.
 test.use({ ...devices["Pixel 7"] });
@@ -33,7 +34,7 @@ test("merchants: rename from a row, see it in the list, search and Settings, the
   });
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `merchants-${ts}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),
@@ -100,7 +101,7 @@ test("merchants: delete with Undo gives the name back to its transactions", asyn
   const date = "07/04/2025";
   const row = `${date};${shortLabel};PRLV ${shortLabel} SA;REF0;REF0-;Prelevement;;;-12,00;;${date};${date};0`;
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `merchant-undo-${ts}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, row].join("\n") + "\n", "utf-8"),

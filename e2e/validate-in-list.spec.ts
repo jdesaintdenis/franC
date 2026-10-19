@@ -5,6 +5,7 @@ import { addCategory, deleteCategoriesWithPrefix } from "./helpers/manage";
 import { clearQueue } from "./helpers/queue";
 import { settled } from "./helpers/recurring";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 // Validating from the list (SPEC §73): ✓ on rows that have a category, no ✓ without one.
 test.use({ ...devices["Pixel 7"] });
@@ -20,7 +21,7 @@ async function importRows(page: Page, file: string, label: string, count: number
     return `${date};${label}${i};PRLV ${label}${i};VL${i};VL${i}-;Prelevement;;;-${10 + i},00;;${date};${date};0`;
   });
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),

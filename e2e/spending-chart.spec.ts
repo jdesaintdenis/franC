@@ -2,6 +2,7 @@ import { devices, type Page } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
 import { deleteCategory, manageSheet, pickCategoryIcon, rowMenuAction } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -34,7 +35,7 @@ async function seedMonth(page: Page): Promise<Fixture> {
   const fileName = `chart-${ts}.csv`;
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: fileName,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, row(0, big, "-75,00"), row(1, small, "-25,00")].join("\n") + "\n", "utf-8"),

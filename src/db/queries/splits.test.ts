@@ -4,7 +4,8 @@ import { join } from "node:path";
 import { and, eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { dedupeKey, prepareImport } from "../../lib/import";
+import { dedupeKey } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { categories, imports, transactions, transactionSplits, transfers } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
@@ -281,7 +282,7 @@ describe("splits and imports", () => {
   beforeEach(resetDb);
 
   async function importSample(userId: string, accountId: string) {
-    const prepared = prepareImport(sampleText, accountId);
+    const prepared = prepareImportGuessed(sampleText, accountId);
     if (!prepared.ok) throw new Error(prepared.fileError);
     const existing = await loadExistingDedupeKeys(db, userId, accountId, prepared.transactions.map((t) => t.dedupeHash));
     const fresh = prepared.transactions.filter((t) => !existing.has(dedupeKey(t)));

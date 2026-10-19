@@ -2,6 +2,7 @@ import { expect, test, waitForStreamedContent } from "./fixtures";
 import { deleteAccount, deleteAccountsWithPrefix } from "./helpers/manage";
 import { undoImport } from "./helpers/recurring";
 import { chooseLink, holdFirstSync, disconnectAllBanks, openConnectionMenu } from "./helpers/bank";
+import { chooseCsv } from "./helpers/imports";
 
 // Runs against the fake Enable Banking server that playwright.config.ts starts (e2e/helpers/fake-enable-banking.ts).
 
@@ -43,7 +44,7 @@ test("bank connection: connect, link accounts, disconnect keeps the data", async
   // Some history first, to check that disconnecting keeps it. Undone at the end: other specs on
   // this worker's user count months of history (budget presets).
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from(`${HEADER}\n01/09/2025;${label};CB ${label};R1;R1-;Carte;;;-9,99;;01/09/2025;01/09/2025;0\n`, "utf-8"),

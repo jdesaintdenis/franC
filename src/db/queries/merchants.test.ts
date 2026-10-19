@@ -5,7 +5,8 @@ import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import { TRANSACTION_COLUMNS, transactionLines } from "../../lib/export/transactions";
-import { dedupeKey, prepareImport } from "../../lib/import";
+import { dedupeKey } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { normalizeLabel } from "../../lib/import/normalize-label";
 import { parseTransactionFilters } from "../../lib/transactions/filters";
 import { db } from "../client";
@@ -289,7 +290,7 @@ describe("import and search with merchants", () => {
   });
 
   async function importSample(userId: string, accountId: string) {
-    const prepared = prepareImport(sampleText, accountId);
+    const prepared = prepareImportGuessed(sampleText, accountId);
     if (!prepared.ok) throw new Error(prepared.fileError);
     const existing = await loadExistingDedupeKeys(db, userId, accountId, prepared.transactions.map((t) => t.dedupeHash));
     return commitImport(db, {

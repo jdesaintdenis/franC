@@ -6,10 +6,13 @@ import { useActionState, useEffect, useRef, useState, useTransition } from "reac
 import { Button } from "@/components/ui/button";
 import type { BankDecision } from "@/lib/categorize/bank";
 import { effectiveDecisions, planItems, withCreateDefaults } from "@/lib/categorize/bank-decisions";
+import { toDraft, type CsvMapping } from "@/lib/import/mapping";
 
 import { HomeSection } from "../home/home-section";
 import { AccountPills } from "./account-pills";
+import { ActionBar } from "./action-bar";
 import { BankCategoriesStep } from "./bank-categories-step";
+import { ColumnMapping } from "./column-mapping";
 import { DropZone } from "./drop-zone";
 import { ImportResult } from "./import-result";
 import { ImportSummary } from "./import-summary";
@@ -61,6 +64,12 @@ export function ImportFlow({
   );
 }
 
+/** The columns a mapping reads, on one line: "Date operation · Libelle operation · Debit / Credit". */
+function mappingSummary(m: CsvMapping): string {
+  const amount = m.amount.kind === "single" ? m.amount.column : `${m.amount.debit} / ${m.amount.credit}`;
+  return [m.date, m.label, amount].join(" · ");
+}
+
 function ImportSteps({
   initialFile,
   accounts,
@@ -92,13 +101,17 @@ function ImportSteps({
   const fileInputRef = useRef<HTMLInputElement>(null);
   // Explicit choices over the plan's suggestions; null = deliberately undecided.
   const [overrides, setOverrides] = useState<Record<string, BankDecision | null>>({});
+  // The preview being sent back to the Columns step ("Change"). Tied to that very state object, so
+  // the next preview, which is a new object, ends the edit by itself.
+  const [editingFor, setEditingFor] = useState<PreviewState>(undefined);
 
-  /** Keeps the file (the confirm step re-sends it) and starts the preview at once. */
-  function startPreviewFor(chosen: File) {
+  /** Keeps the file (the confirm step re-sends it) and starts reading it: the Columns step first, the preview once a mapping comes with it. */
+  function startPreviewFor(chosen: File, mapping?: CsvMapping, forAccountId = accountId) {
     setFile(chosen);
     const formData = new FormData();
     formData.set("file", chosen);
-    formData.set("accountId", accountId);
+    formData.set("accountId", forAccountId);
+    if (mapping) formData.set("mapping", JSON.stringify(mapping));
     startPreview(() => previewAction(formData));
   }
 
@@ -120,6 +133,24 @@ function ImportSteps({
     return <ImportResult done={confirmed} filename={file?.name ?? ""} reset={reset} />;
   }
 
+  const editing = preview?.status === "preview" && editingFor === preview;
+  if (preview?.status === "mapping" || (preview?.status === "preview" && editing)) {
+    const first = preview.status === "mapping";
+    return (
+      <ColumnMapping
+        key={first ? "first" : "edit"}
+        filename={preview.filename}
+        accountName={preview.accountName}
+        columns={preview.columns}
+        initial={first ? preview.draft : toDraft(preview.mapping)}
+        remembered={first && preview.remembered}
+        pending={previewPending}
+        onContinue={(mapping) => file && startPreviewFor(file, mapping, preview.accountId)}
+        onCancel={first ? reset : () => setEditingFor(undefined)}
+      />
+    );
+  }
+
   if (preview?.status === "preview") {
     const { counts } = preview;
     const decisions = effectiveDecisions(preview.bankPlan, { ...withCreateDefaults(preview.bankPlan), ...overrides });
@@ -128,6 +159,7 @@ function ImportSteps({
       const formData = new FormData();
       formData.set("file", file);
       formData.set("accountId", preview.accountId);
+      formData.set("mapping", JSON.stringify(preview.mapping));
       formData.set("bankDecisions", JSON.stringify(decisions));
       startConfirm(() => confirmAction(formData));
     };
@@ -141,6 +173,8 @@ function ImportSteps({
           flows={preview.flows}
           errors={preview.errors}
           errorsOmitted={preview.errorsOmitted}
+          onChangeColumns={() => setEditingFor(preview)}
+          columnsSummary={mappingSummary(preview.mapping)}
         />
 
         {preview.bankPlan.groups.length > 0 && (
@@ -170,8 +204,7 @@ function ImportSteps({
           </p>
         )}
 
-        {/* Sticky above the bottom bar on phones so Import is reachable past a long list. */}
-        <div className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 -mx-4 flex flex-col gap-1 bg-gradient-to-b from-transparent to-[#04051a]/95 to-25% px-4 pt-3 pb-2 md:-mx-8 md:px-8 lg:static lg:mx-0 lg:bg-none lg:p-0">
+        <ActionBar>
           {counts.new > 0 ? (
             <Button
               type="button"
@@ -209,7 +242,7 @@ function ImportSteps({
               </button>
             )
           )}
-        </div>
+        </ActionBar>
       </section>
     );
   }

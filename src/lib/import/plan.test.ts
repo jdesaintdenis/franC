@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Decision } from "../bank-sync/match";
 import { dedupeKey } from "./dedupe";
-import { prepareImport } from "./index";
+import { prepareImportGuessed } from "./prepare-guessed";
 import { offersBulkReview } from "./bulk-review";
 import { buildImportPlan, cashFlows, dateRangeOf, sampleRows } from "./plan";
 
@@ -13,7 +13,7 @@ const sample = readFileSync(join(process.cwd(), "docs/samples/sample-export.csv"
 const ACCOUNT_ID = "00000000-0000-4000-8000-000000000001";
 
 function prepared() {
-  const result = prepareImport(sample, ACCOUNT_ID);
+  const result = prepareImportGuessed(sample, ACCOUNT_ID);
   if (!result.ok) throw new Error(result.fileError);
   return result;
 }

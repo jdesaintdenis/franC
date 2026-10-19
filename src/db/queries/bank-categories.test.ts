@@ -11,7 +11,7 @@ import {
   type BankCategoryWrites,
   type BankDecisions,
 } from "../../lib/categorize/bank";
-import { prepareImport } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { bankCategoryMappings, categories, transactions } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
@@ -48,7 +48,7 @@ async function category(userId: string, name: string, parentId: string | null = 
 }
 
 function prepare(accountId: string, text = sampleText) {
-  const result = prepareImport(text, accountId);
+  const result = prepareImportGuessed(text, accountId);
   if (!result.ok) throw new Error(result.fileError);
   return result;
 }

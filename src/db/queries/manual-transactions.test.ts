@@ -2,7 +2,7 @@
 import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { prepareImport } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { imports, transactions } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
@@ -31,7 +31,7 @@ const csvLine = (date: string, label: string, amount = "-12,50", ref = "R1") =>
   `${date};${label};${label} OPERATION;${ref};;Carte;;;${amount};;${date};${date};0`;
 
 async function importCsv(userId: string, accountId: string, lines: string[]) {
-  const prepared = prepareImport([HEADER, ...lines].join("\n"), accountId);
+  const prepared = prepareImportGuessed([HEADER, ...lines].join("\n"), accountId);
   if (!prepared.ok) throw new Error(prepared.fileError);
   return commitImport(db, { userId, accountId, filename: "x.csv", rowsTotal: prepared.rowsTotal, rowsError: 0, transactions: prepared.transactions });
 }

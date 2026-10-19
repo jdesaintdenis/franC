@@ -3,13 +3,13 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { decodeUpload } from "../import/decode";
-import { bankExportFormat } from "../import/formats/bank-export";
+import { prepareImportGuessed } from "../import/prepare-guessed";
 import { normalizeLabel } from "../import/normalize-label";
 import { learnShortLabels, shortLabelFor, stripBankLabel } from "./short-label";
 
 const sample = (() => {
   const bytes = readFileSync(path.join(process.cwd(), "docs/samples/sample-export.csv"));
-  const parsed = bankExportFormat.parse(decodeUpload(bytes));
+  const parsed = prepareImportGuessed(decodeUpload(bytes), "acc-1");
   if (!parsed.ok) throw new Error("sample did not parse");
   return parsed.transactions;
 })();

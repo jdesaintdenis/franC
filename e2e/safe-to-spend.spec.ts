@@ -2,6 +2,7 @@ import { type Page } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
 import { clearStartingBalances, manageSheet, setStartingBalance } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -42,7 +43,7 @@ test("safe to spend: card with breakdown, prompt when the account is not counted
   // A transaction is needed for the card to show; a past year keeps it out of this month's budgets.
   const line = `10/01/2015;ZQSAFE${stamp};PRLV ZQSAFE${stamp};REF1;REF1-;Prelevement;;;-5,00;;10/01/2015;10/01/2015;0`;
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, line].join("\n") + "\n", "utf-8"),

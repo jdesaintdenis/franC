@@ -7,6 +7,7 @@ import type { Page } from "@playwright/test";
 import { shiftSampleToMonth } from "../../src/lib/import/shift-sample-dates";
 import { expect, test, waitForStreamedContent } from "../fixtures";
 import { parisToday } from "../helpers/dates";
+import { chooseCsv } from "../helpers/imports";
 
 // Makes docs/screenshots/*: phone screens and a short GIF for the README, from the synthetic sample
 // export only. Run with `pnpm media:generate`; it is not part of `pnpm test:e2e`.
@@ -80,10 +81,7 @@ test("README screenshots and GIF", async ({ page, browser, baseURL, sql, workerU
 
   // 1. Import the sample, dates moved to the current month. Left unvalidated on purpose.
   await page.goto("/import");
-  await page
-    .getByLabel("Choose your bank export")
-    .filter({ visible: true })
-    .setInputFiles({ name: "export.csv", mimeType: "text/csv", buffer: Buffer.from(shiftSampleToMonth(SAMPLE, today), "latin1") });
+  await chooseCsv(page, { name: "export.csv", mimeType: "text/csv", buffer: Buffer.from(shiftSampleToMonth(SAMPLE, today), "latin1") });
   const preview = page.getByRole("region", { name: "Import preview" });
   await expect(preview.getByTestId("import-flows")).toBeVisible();
   await shoot(page, "import");

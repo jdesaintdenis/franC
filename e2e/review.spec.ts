@@ -4,6 +4,7 @@ import { expect, test } from "./fixtures";
 import { addCategory, deleteCategoriesWithPrefix } from "./helpers/manage";
 import { clearQueue } from "./helpers/queue";
 import { pickCategory, reviewCategory, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 const PREFIX = "E2E Review";
 
@@ -16,7 +17,7 @@ async function importRows(page: Page, fileName: string, count: number, label: st
     return `${date};${label}${i};PRLV ${label}${i};RV${i};RV${i}-;Prelevement;;;-${10 + i},00;;${date};${date};0`;
   });
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: fileName,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),

@@ -1,18 +1,16 @@
 import { assignDedupeKeys } from "./dedupe";
-import { bankExportFormat } from "./formats/bank-export";
-import type { CsvFormat, FileErrorCode, KeyedTransaction, RowError } from "./types";
+import type { CsvMapping } from "./mapping";
+import { parseWithMapping } from "./parse";
+import type { CsvTable } from "./table";
+import type { FileErrorCode, KeyedTransaction, RowError } from "./types";
 
 export type PrepareResult =
   | { ok: true; transactions: KeyedTransaction[]; errors: RowError[]; rowsTotal: number }
   | { ok: false; fileError: FileErrorCode };
 
-/** Parses a decoded CSV string and assigns dedupe keys. No DB access. */
-export function prepareImport(
-  text: string,
-  accountId: string,
-  format: CsvFormat = bankExportFormat,
-): PrepareResult {
-  const parsed = format.parse(text);
+/** Reads a table with the user's column mapping and assigns dedupe keys. No DB access. */
+export function prepareImport(table: CsvTable, accountId: string, mapping: CsvMapping): PrepareResult {
+  const parsed = parseWithMapping(table, mapping);
   if (!parsed.ok) return parsed;
   return {
     ok: true,
@@ -24,7 +22,11 @@ export function prepareImport(
 
 export * from "./dedupe";
 export * from "./types";
-export { bankExportFormat } from "./formats/bank-export";
+export { readCsvTable } from "./table";
+export type { CsvTable } from "./table";
+export { csvMappingSchema, completeMapping, prefillMapping, guessMapping } from "./mapping";
+export type { CsvMapping, MappingDraft } from "./mapping";
+export { parseWithMapping } from "./parse";
 export { normalizeLabel } from "./normalize-label";
 export { decodeUpload } from "./decode";
 export { buildImportPlan, cashFlows, dateRangeOf, sampleRows } from "./plan";

@@ -6,6 +6,7 @@ import { deleteConnections, seedConnection } from "./helpers/bank-seed";
 import { addCategory, deleteCategory, manageSheet } from "./helpers/manage";
 import { clearQueue } from "./helpers/queue";
 import { pickCategory, reviewCategory, sheetOf } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -84,7 +85,7 @@ for (const colorScheme of ["light", "dark"] as const) {
 
     test(`a11y (${colorScheme}): transactions list and detail sheet (main view, category step) have no serious violations`, async ({ page }) => {
       await page.goto("/import");
-      await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+      await chooseCsv(page, {
         name: "a11y.csv",
         mimeType: "text/csv",
         buffer: Buffer.from([HEADER, ...ROWS].join("\n"), "utf-8"),
@@ -143,7 +144,7 @@ for (const colorScheme of ["light", "dark"] as const) {
       const file = `a11y-review-${colorScheme}-${Date.now()}.csv`;
       const label = `A11YRVW${Date.now()}`;
       await page.goto("/import");
-      await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+      await chooseCsv(page, {
         name: file,
         mimeType: "text/csv",
         buffer: Buffer.from(
@@ -192,7 +193,7 @@ for (const colorScheme of ["light", "dark"] as const) {
           (d) => `${String(d).padStart(2, "0")}/01/2025;${label};PRLV ${label};AG${d};AG${d}-;Prelevement;;;-${d},50;;${String(d).padStart(2, "0")}/01/2025;${String(d).padStart(2, "0")}/01/2025;0`,
         );
         await page.goto("/import");
-        await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({ name: file, mimeType: "text/csv", buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8") });
+        await chooseCsv(page, { name: file, mimeType: "text/csv", buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8") });
         await page.getByRole("button", { name: /^Import/ }).click();
         await expect(page.getByRole("status").filter({ hasText: "imported" })).toBeVisible();
       };
@@ -246,7 +247,7 @@ test("a11y: split editor has no serious violations", async ({ page }) => {
 
   try {
     await page.goto("/import");
-    await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+    await chooseCsv(page, {
       name: "a11y.csv",
       mimeType: "text/csv",
       buffer: Buffer.from([HEADER, ...ROWS].join("\n"), "utf-8"),

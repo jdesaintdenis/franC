@@ -822,6 +822,17 @@ A loan can start in the past: subscription date and capital start date, history 
 
 **Done when:** a loan taken years ago shows its true capital history, what is exact and what is estimated, and when it ends.
 
+## Slice 74 — CSV column mapping
+
+Any bank's CSV imports through a Columns step; the fixed Caisse d'Épargne parser is removed (SPEC §86).
+
+- [x] Golden test of the old parser's output, kept as the regression guard
+- [x] Table reader, mapping schema and guesses, mapped parser, date and amount formats, UTF-8 / Windows-1252 decoding
+- [x] `accounts.csv_mapping` + `csv_mapping_saved_at` (migration 0039), remembered per account, latest on any account as fallback
+- [x] Columns step in `/import` (en + fr), "Change" from the preview
+- [x] Unit tests, `csv-mapping.spec.ts`, existing specs through the new step, feature docs
+
+**Done when:** a CSV from a bank franC has never seen imports after matching columns once, the next file from that bank needs one tap, and the sample export still imports to the same rows.
+
 ## Later / ideas (not v1)
-- [ ] Support for additional bank CSV formats
 - [ ] Daily "N new transactions to review" notification

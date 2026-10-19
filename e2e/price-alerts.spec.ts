@@ -1,5 +1,6 @@
 import { anyRow, showToConfirmList } from "./helpers/recurring";
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -46,13 +47,13 @@ test("price alerts: raised by a higher charge, shown on recurring and dashboard,
   const result = page.getByRole("region", { name: "Import result" });
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(first);
+  await chooseCsv(page, first);
   await page.getByRole("button", { name: "Import 3 transactions" }).click();
   await expect(result.getByText("3 imported")).toBeVisible();
   await expect(result.getByText(/went up in price/)).toHaveCount(0);
 
   await page.getByRole("button", { name: "Import another file" }).click();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(second);
+  await chooseCsv(page, second);
   await page.getByRole("button", { name: "Import 1 transaction" }).click();
   await expect(result.getByText("1 imported")).toBeVisible();
   await expect(result.getByText("1 recurring payment went up in price")).toBeVisible();

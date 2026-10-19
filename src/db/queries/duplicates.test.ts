@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import type { EnableBankingClient } from "../../lib/bank-sync/client";
 import type { BankTransaction } from "../../lib/bank-sync/schemas";
 import { syncAccount } from "../../lib/bank-sync/sync";
-import { prepareImport } from "../../lib/import";
+import { prepareImportGuessed } from "../../lib/import/prepare-guessed";
 import { db } from "../client";
 import { duplicateCandidates, transactionMatches, transactions } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
@@ -61,7 +61,7 @@ async function linked() {
 /** Two CSV rows around the bank's bakery row: the synced row becomes a possible duplicate of both. */
 async function possible() {
   const ctx = await linked();
-  const prepared = prepareImport([HEADER, csvLine("28/09/2026", "PAIN UN", "R1"), csvLine("02/10/2026", "PAIN DEUX", "R2")].join("\n"), ctx.main.id);
+  const prepared = prepareImportGuessed([HEADER, csvLine("28/09/2026", "PAIN UN", "R1"), csvLine("02/10/2026", "PAIN DEUX", "R2")].join("\n"), ctx.main.id);
   if (!prepared.ok) throw new Error(prepared.fileError);
   await commitImport(db, { userId: ctx.user.id, accountId: ctx.main.id, filename: "x.csv", rowsTotal: 2, rowsError: 0, transactions: prepared.transactions });
   await sync(ctx.user.id, ctx.linkId);

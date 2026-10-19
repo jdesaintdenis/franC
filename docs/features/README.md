@@ -15,7 +15,7 @@ The bottom bar (a left sidebar on a computer) has **Home**, **Transactions** (an
 | [Authentication](authentication.md) | Sign up allowlist, sign in/out, route protection, new-user defaults |
 | [Bank accounts and balance](accounts-and-balance.md) | Accounts, starting balance, current balance, 30-day projection, low-balance warnings |
 | [Loans](loans.md) | Tracking a loan: left to repay, payment split into capital/interest/insurance, corrections, projection, early-repayment simulation |
-| [CSV import](csv-import.md) | Bank format, upload → preview → confirm, dedupe, what runs after an import, history and undo |
+| [CSV import](csv-import.md) | Any bank's CSV, column mapping remembered per account, upload → columns → preview → confirm, dedupe, what runs after an import, history and undo |
 | [Bank sync](bank-sync.md) | Connecting your bank through Enable Banking, linking bank accounts to franC accounts, disconnecting |
 | [Import reminder](import-reminder.md) | Stale-data banner, "Data up to" lines, optional push notification |
 

@@ -10,18 +10,25 @@ import { commitImport, importDateRange, planMatches, undoImport } from "@/db/que
 import { getWelcomeFacts } from "@/db/queries/welcome";
 import { loadBankPlanContext } from "@/db/queries/bank-categories";
 import { listCategoryOptions } from "@/db/queries/categories";
+import { loadMappingPrefill, saveMapping } from "@/db/queries/csv-mapping";
 import { loadMerchantLookup, type MerchantLookup } from "@/db/queries/merchants";
 import { resolveMerchant } from "@/lib/merchants/match";
 import {
   buildImportPlan,
   cashFlows,
+  csvMappingSchema,
   dateRangeOf,
-  decodeUpload,
+  prefillMapping,
   prepareImport,
+  readCsvTable,
   sampleRows,
+  type CsvMapping,
+  type CsvTable,
   type KeyedTransaction,
+  type MappingDraft,
   type RowError,
 } from "@/lib/import";
+import { decodeUpload } from "@/lib/import/decode";
 import { buildBankCategoryWrites, planBankCategories, type BankPlan } from "@/lib/categorize/bank";
 import { parseBankDecisions } from "@/lib/categorize/bank-decisions";
 import { requireUser } from "@/lib/auth/session";
@@ -31,6 +38,9 @@ import { withActionErrorState } from "@/lib/actions/safe-action";
 const MAX_FILE_BYTES = 2 * 1024 * 1024;
 const MAX_ERRORS_RETURNED = 50;
 const PREVIEW_SAMPLE_SIZE = 50;
+/** Rows of the file the Columns step shows examples from and checks the first row against. */
+const COLUMNS_SAMPLE_ROWS = 20;
+const MAX_MAPPING_JSON_LENGTH = 4000;
 const MAX_FILENAME_LENGTH = 255;
 
 /**
@@ -45,7 +55,9 @@ const IMPORT_ERROR_CODES = [
   "fileTooLarge",
   "invalidUpload",
   "accountNotFound",
-  "unrecognizedHeader",
+  "noTable",
+  "columnMissing",
+  "invalidMapping",
   "previewFailed",
   "importFailed",
   "importNotFound",
@@ -64,7 +76,25 @@ export interface PreviewRow {
   label: string;
 }
 
+/** What the Columns step needs from the file: its header, a few rows to show examples from, its size. */
+export interface ColumnsInfo {
+  headers: string[];
+  sampleRows: { line: number; cells: string[] }[];
+  rowsTotal: number;
+}
+
 export type PreviewState =
+  | {
+      status: "mapping";
+      filename: string;
+      accountId: string;
+      /** Target account's name (user data, shown as is). */
+      accountName: string;
+      columns: ColumnsInfo;
+      draft: MappingDraft;
+      /** The draft comes from a mapping used before, not from a guess. */
+      remembered: boolean;
+    }
   | {
       status: "preview";
       filename: string;
@@ -84,6 +114,9 @@ export type PreviewState =
       bankPlan: BankPlan;
       /** The user's categories in tree order, for the "Map to" picker. */
       categoryOptions: { id: string; label: string }[];
+      /** The mapping this preview was read with, and the file's columns, to go back and change it. */
+      mapping: CsvMapping;
+      columns: ColumnsInfo;
     }
   | { status: "error"; error: ImportErrorCode }
   | undefined;
@@ -124,20 +157,20 @@ const uploadSchema = z.object({
     .refine((f) => f.size <= MAX_FILE_BYTES, "fileTooLarge"),
 });
 
-type Prepared =
+type Upload =
   | {
       ok: true;
       userId: string;
       accountId: string;
       accountName: string;
       filename: string;
-      prepared: Extract<ReturnType<typeof prepareImport>, { ok: true }>;
+      table: CsvTable;
     }
   | { ok: false; error: ImportErrorCode };
 
-// Both actions re-validate and re-parse the upload: the client keeps the File
+// Both actions re-validate and re-read the upload: the client keeps the File
 // and nothing is staged server-side, so confirm never trusts the preview.
-async function loadUpload(formData: FormData): Promise<Prepared> {
+async function loadUpload(formData: FormData): Promise<Upload> {
   const user = await requireUser();
 
   const parsed = uploadSchema.safeParse({
@@ -154,8 +187,8 @@ async function loadUpload(formData: FormData): Promise<Prepared> {
   // A Savings account takes no imports: it is filled by "Move to savings".
   if (!account || account.savings) return { ok: false, error: "accountNotFound" };
 
-  const prepared = prepareImport(decodeUpload(await file.arrayBuffer()), account.id);
-  if (!prepared.ok) return { ok: false, error: prepared.fileError };
+  const table = readCsvTable(decodeUpload(await file.arrayBuffer()));
+  if (!table) return { ok: false, error: "noTable" };
 
   return {
     ok: true,
@@ -163,8 +196,23 @@ async function loadUpload(formData: FormData): Promise<Prepared> {
     accountId: account.id,
     accountName: account.name,
     filename: file.name.trim().slice(0, MAX_FILENAME_LENGTH),
-    prepared,
+    table,
   };
+}
+
+function columnsInfo(table: CsvTable): ColumnsInfo {
+  return { headers: table.headers, sampleRows: table.rows.slice(0, COLUMNS_SAMPLE_ROWS), rowsTotal: table.rows.length };
+}
+
+/** The mapping the client sends, validated: external input like the file itself. */
+function parseMappingField(raw: FormDataEntryValue | null): CsvMapping | null {
+  if (typeof raw !== "string" || raw.length > MAX_MAPPING_JSON_LENGTH) return null;
+  try {
+    const parsed = csvMappingSchema.safeParse(JSON.parse(raw));
+    return parsed.success ? parsed.data : null;
+  } catch {
+    return null;
+  }
 }
 
 /** A known merchant shows by name, so the preview looks like the list will. */
@@ -190,7 +238,22 @@ export async function previewImport(_prev: PreviewState, formData: FormData): Pr
 async function previewImportImpl(formData: FormData): Promise<PreviewState> {
   const upload = await loadUpload(formData);
   if (!upload.ok) return { status: "error", error: upload.error };
-  const { userId, accountId, accountName, filename, prepared } = upload;
+  const { userId, accountId, accountName, filename, table } = upload;
+
+  // No mapping yet: every import starts with the Columns step, prefilled from the last one.
+  const rawMapping = formData.get("mapping");
+  if (rawMapping === null) {
+    const { saved, latest } = await loadMappingPrefill(db, userId, accountId);
+    const { draft, remembered } = prefillMapping(table, saved, latest);
+    return { status: "mapping", filename, accountId, accountName, columns: columnsInfo(table), draft, remembered };
+  }
+  const mapping = parseMappingField(rawMapping);
+  if (!mapping) return { status: "error", error: "invalidMapping" };
+  const prepared = prepareImport(table, accountId, mapping);
+  if (!prepared.ok) return { status: "error", error: prepared.fileError };
+
+  // Remembered once it reads at least one row, even if the user then cancels.
+  if (prepared.transactions.length > 0) await saveMapping(db, userId, accountId, mapping);
 
   // Same verdicts as the commit, so rows a bank sync already brought in count as duplicates here too.
   const { decisions } = await planMatches(db, userId, accountId, "csv", prepared.transactions);
@@ -216,6 +279,8 @@ async function previewImportImpl(formData: FormData): Promise<PreviewState> {
     errorsOmitted: Math.max(0, plan.errors.length - MAX_ERRORS_RETURNED),
     bankPlan,
     categoryOptions: options.map((o) => ({ id: o.id, label: o.label })),
+    mapping,
+    columns: columnsInfo(table),
   };
 }
 
@@ -230,7 +295,13 @@ export async function confirmImport(_prev: ConfirmState, formData: FormData): Pr
 async function confirmImportImpl(formData: FormData): Promise<ConfirmState> {
   const upload = await loadUpload(formData);
   if (!upload.ok) return { status: "error", error: upload.error };
-  const { userId, accountId, filename, prepared } = upload;
+  const { userId, accountId, filename, table } = upload;
+
+  // Confirm re-reads the file with the mapping the preview showed; without a valid one nothing is imported.
+  const mapping = parseMappingField(formData.get("mapping"));
+  if (!mapping) return { status: "error", error: "invalidMapping" };
+  const prepared = prepareImport(table, accountId, mapping);
+  if (!prepared.ok) return { status: "error", error: prepared.fileError };
 
   // A malformed decisions field is rejected rather than ignored: silently
   // dropping the user's choices would import rows uncategorized.

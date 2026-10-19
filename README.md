@@ -61,7 +61,7 @@ Open http://localhost:3000, create your account, and import [`docs/samples/sampl
 
 More help: [run it on your computer or server](docs/self-hosting.md) · [put it online for free with Vercel and Neon](docs/deployment.md) · [every setting (environment variables)](docs/deployment.md#3-environment-variables).
 
-franC reads one bank's CSV format today (the sample file shows it). Other banks can be added, or connected through bank sync.
+franC reads the CSV export of any bank: the first time, you tell it which column is the date, the label and the amount, and it remembers for next time. Or connect your bank through bank sync.
 
 ## License
 

@@ -3,6 +3,7 @@ import type postgres from "postgres";
 
 import { expect, test } from "./fixtures";
 import { manageSheet, openRowMenu, rowMenuAction, setBudget } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 // Each test imports a file, sets budgets and undoes the import: well over the default 30 s on a cold dev server.
 test.describe.configure({ timeout: 90_000 });
@@ -30,7 +31,7 @@ async function seedCategory(sql: postgres.Sql, userId: string, name: string, mer
 async function importSpend(page: Page, file: string, merchant: string, date: string, amount: string) {
   const line = `${date};${merchant};PRLV ${merchant};REF1;REF1-;Prelevement;;;${amount};;${date};${date};0`;
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, line].join("\n") + "\n", "utf-8"),

@@ -5,6 +5,7 @@ import { isoDaysAgo } from "./helpers/dates";
 import { addAccount } from "./helpers/manage";
 import { sheetOf } from "./helpers/sheet";
 import type postgres from "postgres";
+import { chooseCsv } from "./helpers/imports";
 
 const PREFIX = "E2E Manual";
 const HEADER =
@@ -96,10 +97,7 @@ test("a hand row waits on a fed account, and the CSV of the same purchase takes 
   const csv = `${HEADER}\n${date};CAFE DU COIN;CB CAFE DU COIN;E2E1;;Carte;;;-4,20;;${date};${date};0\n`;
   await page.goto("/import");
   await page.getByRole("radiogroup", { name: "Which account" }).getByRole("radio", { name: name }).click();
-  await page
-    .getByLabel("Choose your bank export")
-    .filter({ visible: true })
-    .setInputFiles({
+  await chooseCsv(page, {
       name: "e2e-manual.csv",
       mimeType: "text/csv",
       buffer: Buffer.from(csv),

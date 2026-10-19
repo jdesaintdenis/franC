@@ -38,7 +38,10 @@
     "sampleTitle": "Transactions",
     "showAll": "See all {count}",
     "chooseAnother": "Choose another file",
-    "recordAnyway": "Record this import anyway"
+    "recordAnyway": "Record this import anyway",
+    "changeColumns": "Change",
+    "changeColumnsLabel": "Change columns",
+    "columnsLine": "Columns: {columns}"
   },
   "result": {
     "region": "Import result",
@@ -82,12 +85,10 @@
     "pending": "Undoing…"
   },
   "rowIssues": {
-    "invalidDate": "invalid date (expected DD/MM/YYYY)",
-    "emptyLabel": "empty operation label",
+    "invalidDate": "date doesn't match the chosen format",
+    "emptyLabel": "empty label",
     "debitCreditExclusive": "exactly one of Debit/Credit must be set",
     "malformedAmount": "malformed amount",
-    "debitPositive": "Debit must not be positive",
-    "creditNegative": "Credit must not be negative",
     "columnCount": "expected {expected} columns, found {found}",
     "invalidRow": "invalid row"
   },
@@ -98,13 +99,15 @@
     "fileTooLarge": "The file is larger than 2 MB.",
     "invalidUpload": "Invalid upload.",
     "accountNotFound": "Account not found.",
-    "unrecognizedHeader": "Unrecognized file: header does not match the expected bank export format",
     "previewFailed": "Could not read the file. Try again.",
     "importFailed": "Could not import the file. Nothing was saved; try again.",
     "importNotFound": "Import not found.",
     "undoFailed": "Could not undo the import. Try again.",
     "offline": "You're offline. Reconnect and try again.",
-    "bankCategoryNotFound": "A category you chose no longer exists. Reload the page and try again."
+    "bankCategoryNotFound": "A category you chose no longer exists. Reload the page and try again.",
+    "noTable": "No table found in this file. Export it again as CSV.",
+    "columnMissing": "A chosen column is not in this file.",
+    "invalidMapping": "Choose the columns again."
   },
   "bank": {
     "heading": "New bank categories",
@@ -130,5 +133,47 @@
   "sync": {
     "title": "Connected to {bank}",
     "body": "This account syncs automatically. Import a CSV for older history or a gap."
+  },
+  "mapping": {
+    "title": "Match the columns",
+    "remembered": "Last import's settings",
+    "newFormat": "New file format: show where the date, label and amount are.",
+    "columns": "Columns",
+    "rowsColumns": "{rows, plural, one {# row} other {# rows}} · {columns, plural, one {# column} other {# columns}}",
+    "chooseColumn": "Choose a column",
+    "none": "—",
+    "date": "Date",
+    "label": "Label",
+    "labelHint": "Used to spot duplicates: keep the same column for every import.",
+    "amount": "Amount",
+    "amountSingle": "One column",
+    "amountSplit": "Debit and credit",
+    "debit": "Debit",
+    "credit": "Credit",
+    "format": "Format",
+    "dates": "Dates",
+    "amounts": "Amounts",
+    "dateFormats": {
+      "dmySlash": "DD/MM/YYYY",
+      "dmySlash2": "DD/MM/YY",
+      "dmyDash": "DD-MM-YYYY",
+      "dmyDot": "DD.MM.YYYY",
+      "ymdDash": "YYYY-MM-DD",
+      "mdySlash": "MM/DD/YYYY"
+    },
+    "decimalComma": "1 234,56",
+    "decimalDot": "1,234.56",
+    "more": "Other columns",
+    "moreChosen": "Other columns{count, plural, =0 {} other { · # chosen}}",
+    "shortLabel": "Short label",
+    "bookedOn": "Booking date",
+    "category": "Bank category",
+    "subcategory": "Bank subcategory",
+    "firstRow": "First row",
+    "firstRowPending": "It will show here once date, label and amount are chosen.",
+    "badDate": "Unreadable date: “{value}”",
+    "rowsRefused": "{count, plural, one {With this format, {refused} of the first # row would be refused.} other {With this format, {refused} of the first # rows would be refused.}}",
+    "useFormat": "Use {format}",
+    "continue": "Continue"
   }
 }

@@ -2,6 +2,7 @@ import { devices } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
 import { addCategory, addRule, addSubcategory, deleteCategory, manageSheet, rowMenuAction } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 test.use({ ...devices["Pixel 7"] });
 
@@ -37,7 +38,7 @@ test("categories and rules: create, rename, rule, import categorizes, delete unc
   // Import two rows of that merchant; the rule categorizes them on insert.
   const lines = [HEADER, csvRow(merchant, 0), csvRow(merchant, 1)];
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `cat-${ts}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from(lines.join("\n") + "\n", "utf-8"),

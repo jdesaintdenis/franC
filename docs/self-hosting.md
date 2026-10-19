@@ -56,7 +56,7 @@ pnpm setup
    Accounts > Import CSV > choose `docs/samples/sample-export.csv` (140 rows, July to September 2025,
    invented merchants) > **Create all** bank categories > confirm. Importing it again adds nothing.
 
-franC reads one bank's CSV format only, the one in `docs/samples/`.
+Any bank's CSV works: on the first import you match the columns, and franC remembers. The sample file is one example.
 
 ## Optional features
 

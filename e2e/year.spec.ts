@@ -8,6 +8,7 @@ import {
 } from "../src/lib/money";
 
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 test.setTimeout(120_000);
 
@@ -48,10 +49,7 @@ test("year review: headline, best and toughest months, months, categories, perio
   const year = 2011 + Math.floor(Math.random() * 10);
   const fileName = `year-${stamp}.csv`;
   await page.goto("/import");
-  await page
-    .getByLabel("Choose your bank export")
-    .filter({ visible: true })
-    .setInputFiles({
+  await chooseCsv(page, {
       name: fileName,
       mimeType: "text/csv",
       buffer: Buffer.from(

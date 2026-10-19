@@ -1,4 +1,5 @@
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 test("home page loads", async ({ page }) => {
   await page.goto("/");
@@ -36,7 +37,7 @@ test.describe("month picker", () => {
     // March 2009: a year no other spec uses, so February 2009 stays empty.
     const line = `15/03/2009;ZQPICK${stamp};PRLV ZQPICK${stamp};REF1;REF1-;Prelevement;;;-12,00;;15/03/2009;15/03/2009;0`;
     await page.goto("/import");
-    await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+    await chooseCsv(page, {
       name: file,
       mimeType: "text/csv",
       buffer: Buffer.from([HEADER, line].join("\n") + "\n", "utf-8"),
