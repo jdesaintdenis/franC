@@ -73,13 +73,13 @@ export function BudgetGaugeRowContent({
         paceAt={paceAt}
         segments={totals.paidCents + totals.dueCents > 0 ? gaugeSegments(entry, totals) : undefined}
       />
-      {left !== null && totals.paidCents + totals.dueCents > 0 && <LeftToSpend cents={left} />}
+      {left !== null && <LeftToSpend cents={left} />}
       {showCharges && <BudgetChargeLines charges={entry.charges ?? []} />}
     </>
   );
 }
 
-/** What the month still allows once the payments due are set aside (only drawn for budgets with payments). */
+/** What the month still allows once the payments due are set aside. */
 function LeftToSpend({ cents }: { cents: number }) {
   const locale = useLocale();
   const t = useTranslations("dashboard.budgets");
