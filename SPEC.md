@@ -1040,3 +1040,15 @@ Every CSV import goes through a Columns step; the Caisse d'Épargne parser is go
 - **D8**: Encoding: UTF-8 if valid, else Windows-1252. No other detection.
 - **D9**: Dedupe hash and label normalization stay frozen; a golden test (`golden.test.ts`) proves the sample export yields identical rows and hashes, so production data keeps deduplicating. No data migration beyond two new columns.
 - **D10**: Still out of scope: OFX/QIF and other file types, a per-bank dropdown, multi-currency.
+
+## 87. Resolved decisions (Slice 75, live on last month's income)
+
+Reste à vivre was too high for someone paid at the end of the month for the next one: the salary due on the 28th counted as "income still due" before payday, and as balance with only a few days left after it. It now follows YNAB's "live on last month's income" rule, after a comparison with other budget apps (none moves a salary to the next month on its own).
+
+- **D1**: With the setting on "next month" (default), income received this month on a counted account is kept for next month: `safe = balance − held + income due on the 1st–7th − bills due − budgets left`. Reason: the money you receive now pays next month.
+- **D2**: Leeway of 7 days (`LEEWAY_LAST_DAY`). A received row linked to a regular payment (`transactions.recurring_id`) dated on the 1st–7th is not held, and confirmed income due on the 1st–7th still counts as expected. A salary paid late (1st–7th) therefore funds its own month; one-off incomes on those days are still held. Reason: "about a week of leeway" (Jérémy).
+- **D3**: Internal transfers (either status) and ignored rows are never income, as in every total. Known limits: money from an account outside franC is income; a transfer pair not matched yet counts as income until paired; a mid-month refund waits for next month.
+- **D4**: Setting `users.income_month` (`"next"` default, `"this"` = today's behaviour exactly), in More > Preferences > Income. Per login, so both users of the shared login and a friend's account use their own row. Migration `0040_income_month`: one added column with a default, no row rewritten.
+- **D5**: The Budget page's balance projection keeps counting every income still due (it is not Reste à vivre).
+- **D6**: The "How is this worked out?" sheet is redesigned (mockup D of the thread, an A + C mix): a summary card with the amount and a bar showing how the balance splits (kept for next month, bills due, budgets left, what is left), then a receipt whose lists open and close, with swatches matching the bar. The sheet now wears the 50 F theme. French keeps "Factures à venir" (glossary) rather than the mockups' "Prélèvements".
+

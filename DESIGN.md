@@ -286,6 +286,9 @@ Each bank account is a button row (name and last four digits, the linked franC a
 ### Reste à vivre value panel (signature)
 The hero card (`.hero-50f`): banknote frame, its own rosettes, 45° hatching and two stars over Note Blue, faint "50" in the corner. Content top to bottom: "Jusqu'au 31 oct." caption with the day chip; the engraved Sand amount; the francs line; "Environ 58 € par jour pendant 26 jours"; the pace chart; a "how it's worked out" sheet link.
 
+### Reste à vivre breakdown sheet (signature)
+"Comment c'est calculé", a `theme-50f` sheet. A summary card leads: "Reste à vivre", the amount (Manrope 700, 36px, Sand; Amber when negative) and a 14px split bar of the balance in four segments, gaps 2px: kept for next month (hatched Periwinkle, 135° stripes), bills still due (hatched Sand), budgets left (solid Periwinkle), what is left (solid Sand). Under it, a receipt card: 48px rows divided by hairlines, a sign column (`−`, `+`, `=`), a 12px swatch matching the bar segment, the label (600), the amount and a chevron; a row with a list is a native `<details>` that opens in place, its list in 13px Faded Ink. "Gardé pour novembre" opens by default when it has rows. A last card in 12px Faded Ink says the rule and links to More. The bar is `aria-hidden`; the receipt carries the same figures.
+
 ### Pace chart (signature)
 Cumulative spending as a 2.5px Periwinkle line over a fading Periwinkle area (35 % to 0), against a dashed even-pace line (35 % alpha) to the month's end, with a vertical hairline and a 10px Periwinkle dot for today. Labels are 10px Faded Ink HTML so they never stretch. Decorative (`aria-hidden`); the sentence above says the same.
 
