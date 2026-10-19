@@ -69,6 +69,10 @@ test("safe to spend: card with breakdown, prompt when the account is not counted
     await expect(sheet).toBeVisible();
     await expect(sheet.getByText("Balance", { exact: true })).toBeVisible();
     await expect(sheet.getByText(/1,234\.56/).first()).toBeVisible();
+    // Income received this month is kept for next month, and the folded lists open on a tap.
+    await expect(sheet.getByText(/^Kept for /)).toBeVisible();
+    await sheet.getByText(/^Bills still due/).click();
+    await expect(sheet.getByText("No bills still due")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(sheet).toBeHidden();
 

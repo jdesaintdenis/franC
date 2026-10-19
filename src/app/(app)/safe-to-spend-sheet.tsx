@@ -26,7 +26,7 @@ export function SafeToSpendSheet({
         {triggerLabel}
         <ChevronRight className="size-4" aria-hidden="true" />
       </SheetTrigger>
-      <SheetContent title={title} description={description} data-testid="safe-to-spend-breakdown">
+      <SheetContent title={title} description={description} className="theme-50f" data-testid="safe-to-spend-breakdown">
         {children}
       </SheetContent>
     </Sheet>

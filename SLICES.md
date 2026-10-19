@@ -834,5 +834,17 @@ Any bank's CSV imports through a Columns step; the fixed Caisse d'Épargne parse
 
 **Done when:** a CSV from a bank franC has never seen imports after matching columns once, the next file from that bank needs one tap, and the sample export still imports to the same rows.
 
+## Slice 75 — Live on last month's income
+
+Reste à vivre keeps income received this month for next month; a regular income on the 1st–7th counts at once; a Plus setting turns it off (SPEC §87).
+
+- [x] `getReceivedIncome` query + tests
+- [x] Held income, leeway and the new formula in `buildSafeToSpend` + tests
+- [x] `users.income_month` (migration 0040), More > Preferences > Income row and sheet
+- [x] Breakdown sheet redesign (summary card + split bar, foldable receipt, 50 F theme; en + fr)
+- [x] Feature docs, SPEC §87, E2E
+
+**Done when:** with the salary paid on the 28th, Reste à vivre on any day of the month no longer includes it, and a salary paid on the 2nd counts for its month.
+
 ## Later / ideas (not v1)
 - [ ] Daily "N new transactions to review" notification

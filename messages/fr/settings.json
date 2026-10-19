@@ -1037,5 +1037,16 @@
       "amortizationOutOfRange": "Cette date doit tomber entre la souscription et la dernière échéance.",
       "lastPaymentStillOwed": "Il reste du capital à cette date : la dernière échéance du contrat doit venir après « Au »."
     }
+  },
+  "incomeMonth": {
+    "title": "Revenus",
+    "intro": "Pour quel mois Reste à vivre compte l'argent qui arrive.",
+    "next": "Pour le mois suivant",
+    "nextHint": "Vous vivez sur l'argent du mois dernier : ce qui arrive ce mois-ci compte à partir du 1er. Un revenu régulier arrivé avant le 8 compte encore pour son mois.",
+    "nextFor": "Pour qui est payé en fin de mois.",
+    "recommended": "Conseillé",
+    "this": "Pour le mois où il arrive",
+    "thisHint": "Le salaire attendu ce mois-ci compte tout de suite, même s'il arrive le 28.",
+    "error": "Échec de l'enregistrement. Réessayez."
   }
 }

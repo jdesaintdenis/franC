@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "income_month" text DEFAULT 'next' NOT NULL;
