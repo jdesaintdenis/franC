@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { fillTrend, monthRange, monthsEnding } from "../../lib/dashboard/month";
 import { normalizeLabel } from "../../lib/import/normalize-label";
 import { db } from "../client";
-import { categories, imports, transactions, transfers } from "../schema";
+import { categories, imports, recurring, transactions, transfers } from "../schema";
 import { createTestUser, resetDb, seedCategories } from "../test-utils";
 import { listAccounts } from "./accounts";
 import {
@@ -582,7 +582,25 @@ describe("dashboard queries", () => {
   });
 
   describe("getReceivedIncome", () => {
-    it("lists inflows of the range on the given accounts, oldest first, without transfers, ignored rows or other users", async () => {
+    /** A confirmed regular income on the context's account; the rows given are linked to it. */
+    async function linkedIncome(ctx: Awaited<ReturnType<typeof setup>>, key: string, rowIds: string[]) {
+      const [item] = await db
+        .insert(recurring)
+        .values({
+          userId: ctx.user.id,
+          accountId: ctx.account.id,
+          merchantKey: key,
+          typicalAmountCents: 241200,
+          interval: "monthly",
+          lastSeenDate: "2025-09-28",
+          status: "confirmed",
+        })
+        .returning();
+      for (const id of rowIds) await db.update(transactions).set({ recurringId: item.id }).where(eq(transactions.id, id));
+      return item.id;
+    }
+
+    it("lists only the charges of the given payments, oldest first, without transfers, ignored rows or other users", async () => {
       const ctx = await setup();
       const other = await setup();
       await seed(ctx, [
@@ -593,37 +611,49 @@ describe("dashboard queries", () => {
         { date: "2025-09-08", amountCents: 700 },
         { date: "2025-09-09", amountCents: 3300 },
         { date: "2025-10-01", amountCents: 12345 },
+        { date: "2025-09-10", amountCents: 4500 },
       ]);
       await seed(other, [{ date: "2025-09-05", amountCents: 8888 }]);
-      // A transfer pair (+700 in, -700 out) and an ignored inflow are not income.
       await seed(ctx, [{ date: "2025-09-07", amountCents: -700 }]);
       const rows = await db.select().from(transactions).where(eq(transactions.userId, ctx.user.id));
       const at = (date: string, cents: number) => rows.find((r) => r.date === date && r.amountCents === cents)!;
       const out = at("2025-09-07", -700);
       await db.insert(transfers).values({ userId: ctx.user.id, outTransactionId: out.id, inTransactionId: at("2025-09-07", 700).id, status: "confirmed" });
       await db.update(transactions).set({ ignoredAt: new Date() }).where(eq(transactions.id, at("2025-09-09", 3300).id));
+      const salary = await linkedIncome(ctx, "SALARY", [
+        at("2025-09-20", 5000).id,
+        at("2025-09-05", 241200).id,
+        at("2025-09-07", 700).id,
+        at("2025-09-09", 3300).id,
+        at("2025-10-01", 12345).id,
+      ]);
+      // A second, unswitched payment (4500 on the 10th) is not asked for.
+      await linkedIncome(ctx, "OTHER", [at("2025-09-10", 4500).id]);
 
-      const got = await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id]);
-      expect(got.map((r) => [r.date, r.amountCents])).toEqual([
-        ["2025-09-05", 241200],
-        ["2025-09-08", 700],
-        ["2025-09-20", 5000],
+      const got = await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id], [salary]);
+      expect(got.map((r) => [r.date, r.amountCents, r.recurringId])).toEqual([
+        ["2025-09-05", 241200, salary],
+        ["2025-09-20", 5000, salary],
       ]);
     });
 
-    it("returns the label and the recurring link", async () => {
+    it("returns the label", async () => {
       const ctx = await setup();
       await seed(ctx, [{ date: "2025-09-05", amountCents: 1000 }]);
-      const [row] = await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id]);
+      const [tx] = await db.select().from(transactions).where(eq(transactions.userId, ctx.user.id));
+      const id = await linkedIncome(ctx, "SALARY", [tx.id]);
+      const [row] = await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id], [id]);
       expect(row.label).toMatch(/^ROW \d+$/);
-      expect(row.recurringId).toBeNull();
     });
 
-    it("is empty for no accounts or accounts that are not the user's", async () => {
+    it("is empty for no accounts, no payments or accounts that are not the user's", async () => {
       const ctx = await setup();
       await seed(ctx, [{ date: "2025-09-05", amountCents: 1000 }]);
-      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [])).toEqual([]);
-      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), ["00000000-0000-4000-8000-000000000000"])).toEqual([]);
+      const [tx] = await db.select().from(transactions).where(eq(transactions.userId, ctx.user.id));
+      const id = await linkedIncome(ctx, "SALARY", [tx.id]);
+      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [], [id])).toEqual([]);
+      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id], [])).toEqual([]);
+      expect(await getReceivedIncome(db, ctx.user.id, monthRange("2025-09"), ["00000000-0000-4000-8000-000000000000"], [id])).toEqual([]);
     });
   });
 });

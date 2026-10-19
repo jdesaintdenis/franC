@@ -35,22 +35,19 @@ export interface SafeToSpendIncome {
   /** Positive. */
   amountCents: number;
   accountId: string;
-  /** False when the income belongs to next month (see `IncomeMonth`): listed, but not in the number. */
+  /** False when the income is kept for next month (see `keptIds`): listed, but not in the number. */
   countsNow: boolean;
 }
 
-/** Which month Reste à vivre counts incoming money for: "next" lives on last month's income (Slice 75). */
-export type IncomeMonth = "this" | "next";
-
-/** An incoming row already booked this month, as read from the transactions. */
+/** An incoming row of a regular income kept for next month, already booked this month (Slice 76). */
 export interface SafeToSpendReceived {
   id: string;
   date: string;
   /** Positive. */
   amountCents: number;
   label: string;
-  /** Set when the row is one of a regular payment's charges. */
-  recurringId: string | null;
+  /** The regular payment the row is a charge of. */
+  recurringId: string;
 }
 
 // A regular income paid up to a week late (or early in the month) still funds its own month.
@@ -86,7 +83,7 @@ export interface SafeToSpendResult {
   /** Names of accounts meant to count but lacking a starting balance. */
   missingBalanceAccounts: string[];
   balanceCents: number;
-  /** Confirmed income still due this month that counts now (on the 1st-7th with `incomeMonth` "next"). */
+  /** Confirmed income still due this month that counts now (a kept payment counts only on the 1st-7th). */
   incomeCents: number;
   /** Positive: bills still due this month. */
   billsCents: number;
@@ -94,10 +91,11 @@ export interface SafeToSpendResult {
   budgetsLeftCents: number;
   /** balance - held + income - bills - budgets left; negative means overspent. */
   safeCents: number;
-  incomeMonth: IncomeMonth;
+  /** True when at least one regular income is switched to "Keep for next month". */
+  keepsIncome: boolean;
   /** "YYYY-MM" of the month after today's: the one the held income is kept for. */
   nextMonth: string;
-  /** Income received this month and kept for next month (empty with `incomeMonth` "this"). */
+  /** Income received this month from kept payments, outside the 1st-7th leeway. */
   heldForNextMonth: SafeToSpendReceived[];
   /** Positive: sum of `heldForNextMonth`. */
   heldCents: number;
@@ -166,10 +164,10 @@ function budgetsFor(
 }
 
 /**
- * What can be spent until the end of the month: balance, minus income received this month (it is
- * next month's money), plus confirmed income still due on the 1st-7th, minus bills still due, minus
- * what each budget still holds back. A regular income received on the 1st-7th is not held back, and
- * with `incomeMonth` "this" nothing is held and every confirmed income still due counts. A bill inside
+ * What can be spent until the end of the month: balance, minus what the regular incomes switched to
+ * "Keep for next month" paid this month (it is next month's money), plus confirmed income still due
+ * (a kept payment only on the 1st-7th), minus bills still due, minus what each budget still holds
+ * back. A kept charge received on the 1st-7th is not held back; every other income counts at once. A bill inside
  * a budget's categories is taken out of that budget's reserve so it is counted once.
  */
 export function buildSafeToSpend(args: {
@@ -179,14 +177,14 @@ export function buildSafeToSpend(args: {
   budgetRows: readonly BudgetRow[];
   /** category id -> parent id (null for top-level). */
   parentOf: ReadonlyMap<string, string | null>;
-  /** Incoming rows booked this month on the counted accounts; ignored with `incomeMonth` "this". */
+  /** Charges booked this month on the counted accounts by the payments in `keptIds`. */
   received: SafeToSpendReceived[];
-  incomeMonth: IncomeMonth;
+  /** Ids of the regular incomes switched to "Keep for next month". */
+  keptIds: ReadonlySet<string>;
   /** "YYYY-MM-DD" */
   today: string;
 }): SafeToSpendResult {
-  const { accounts, items, budgetRows, parentOf, received, incomeMonth, today } = args;
-  const holdsIncome = incomeMonth === "next";
+  const { accounts, items, budgetRows, parentOf, received, keptIds, today } = args;
   const { from: monthStart, to: monthEnd } = monthRange(today.slice(0, 7));
   const counted = countedAccounts(accounts);
   const bills: SafeToSpendBill[] = [];
@@ -213,9 +211,9 @@ export function buildSafeToSpend(args: {
           tracked: e.tracked === true,
         });
       } else if (e.status === "confirmed") {
-        const countsNow = !holdsIncome || inLeeway(e.date);
+        const countsNow = !keptIds.has(e.id) || inLeeway(e.date);
         income.push({ id: e.id, name: e.name, date: e.date, amountCents: e.amountCents, accountId: e.accountId, countsNow });
-      } else if (!holdsIncome || inLeeway(e.date)) {
+      } else if (!keptIds.has(e.id) || inLeeway(e.date)) {
         ignoredDetectedIncomeCount += 1;
       }
     }
@@ -226,7 +224,7 @@ export function buildSafeToSpend(args: {
   const budgets = budgetsFor(budgetRows, bills, parentOf);
   const balanceCents = counted.reduce((sum, a) => sum + a.balanceCents, 0);
   const incomeCents = income.reduce((sum, i) => (i.countsNow ? sum + i.amountCents : sum), 0);
-  const heldForNextMonth = holdsIncome ? received.filter((r) => !(r.recurringId !== null && inLeeway(r.date))) : [];
+  const heldForNextMonth = received.filter((r) => !inLeeway(r.date));
   const heldCents = heldForNextMonth.reduce((sum, r) => sum + r.amountCents, 0);
   const billsCents = bills.reduce((sum, b) => sum - b.amountCents, 0);
   const budgetsLeftCents = budgets.reduce((sum, b) => sum + b.reservedCents, 0);
@@ -243,7 +241,7 @@ export function buildSafeToSpend(args: {
     billsCents,
     budgetsLeftCents,
     safeCents: balanceCents - heldCents + incomeCents - billsCents - budgetsLeftCents,
-    incomeMonth,
+    keepsIncome: keptIds.size > 0,
     nextMonth: addMonths(today.slice(0, 7), 1),
     heldForNextMonth,
     heldCents,

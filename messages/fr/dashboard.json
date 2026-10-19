@@ -137,10 +137,10 @@
     "chartPlanned": "rythme prévu",
     "sheetAsOf": "Au {today}, jusqu'au {date}",
     "held": "Gardé pour {month}",
-    "heldNone": "Rien reçu pour l'instant ce mois-ci",
+    "heldNone": "Rien reçu ce mois-ci de ces paiements pour l'instant",
     "expectedNextMonth": "{name} attendu le {date} · comptera pour {month}",
-    "heldHint": "Les revenus reçus ce mois-ci comptent à partir de {month}. Un revenu régulier arrivé avant le 8 compte pour ce mois-ci.",
-    "heldSettings": "Régler dans Plus ›"
+    "heldHint": "Ce que vos revenus réguliers marqués « Garder pour le mois suivant » ont versé ce mois-ci compte à partir de {month}, sauf s'il est arrivé avant le 8.",
+    "heldSettings": "Choisir les paiements ›"
   },
   "review": {
     "text": "{count, plural, one {# opération à valider} other {# opérations à valider}}"

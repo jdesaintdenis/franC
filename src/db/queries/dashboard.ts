@@ -126,16 +126,17 @@ export async function getDailySpending(
 }
 
 /**
- * Incoming rows of a range on the given accounts (transfers and ignored rows excluded, like every total),
- * oldest first. Feeds Reste à vivre's "kept for next month".
+ * Incoming charges of the given regular payments in a range, on the given accounts (transfers and ignored
+ * rows excluded, like every total), oldest first. Feeds Reste à vivre's "kept for next month".
  */
 export async function getReceivedIncome(
   database: typeof dbClient,
   userId: string,
   range: { from: string; to: string },
   accountIds: string[],
+  recurringIds: string[],
 ): Promise<SafeToSpendReceived[]> {
-  if (accountIds.length === 0) return [];
+  if (accountIds.length === 0 || recurringIds.length === 0) return [];
   const rows = await database
     .select({
       id: transactions.id,
@@ -145,9 +146,17 @@ export async function getReceivedIncome(
       recurringId: transactions.recurringId,
     })
     .from(transactions)
-    .where(and(inRange(userId, range), inArray(transactions.accountId, accountIds), gt(transactions.amountCents, 0)))
+    .where(
+      and(
+        inRange(userId, range),
+        inArray(transactions.accountId, accountIds),
+        inArray(transactions.recurringId, recurringIds),
+        gt(transactions.amountCents, 0),
+      ),
+    )
     .orderBy(transactions.date, transactions.id);
-  return rows;
+  // The filter above guarantees a link; the select type just doesn't know it.
+  return rows.flatMap((r) => (r.recurringId === null ? [] : [{ ...r, recurringId: r.recurringId }]));
 }
 
 /**

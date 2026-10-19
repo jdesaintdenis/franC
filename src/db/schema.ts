@@ -56,7 +56,8 @@ export const users = pgTable(
     // When the Home welcome checklist was finished or hidden; set once, so it never comes back.
     welcomeCompletedAt: timestamp("welcome_completed_at"),
     // Account Home opens on when the URL names none (Slice 50); null = all accounts. Cleared if the account is deleted.
-    // Reste à vivre: "next" keeps income received this month for next month, "this" counts it now (Slice 75).
+    // DEPRECATED (Slice 76): replaced by `recurring.keeps_for_next_month`; nothing reads or writes it any more.
+    // Left in place so the previous deployment keeps working while migrations run; dropped by a later cleanup migration.
     incomeMonth: text("income_month").notNull().default("next"),
     homeAccountId: uuid("home_account_id").references((): AnyPgColumn => accounts.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -481,6 +482,8 @@ export const recurring = pgTable(
      * "Cancelled?" flag; the flag stays hidden until another cycle is missed after it.
      */
     stillActiveAt: date("still_active_at", { mode: "string" }),
+    /** A regular income whose charges are kept for next month in Reste à vivre (Slice 76); off by default. */
+    keepsForNextMonth: boolean("keeps_for_next_month").notNull().default(false),
     createdAt: timestamp("created_at", { withTimezone: true })
       .defaultNow()
       .notNull(),

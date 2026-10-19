@@ -114,7 +114,7 @@ function SubLine({ children, amount, muted }: { children: ReactNode; amount: str
 export function SafeToSpendBreakdown({ result, today }: { result: SafeToSpendResult; today: string }) {
   const locale = useLocale();
   const t = useTranslations("dashboard.safeToSpend");
-  const holds = result.incomeMonth === "next";
+  const holds = result.keepsIncome;
   const month = inSentence(formatMonthName(result.nextMonth, locale), locale);
   const negative = result.safeCents < 0;
   const countedIncome = result.income.filter((i) => i.countsNow);
@@ -250,7 +250,7 @@ export function SafeToSpendBreakdown({ result, today }: { result: SafeToSpendRes
       {holds && (
         <p className="bg-card text-muted-foreground rounded-[10px] border p-3.5 text-xs leading-relaxed">
           {t("heldHint", { month })}{" "}
-          <Link href="/settings" className="text-primary inline-flex items-center font-bold whitespace-nowrap">
+          <Link href="/recurring" className="text-primary inline-flex items-center font-bold whitespace-nowrap">
             {t("heldSettings")}
           </Link>
         </p>

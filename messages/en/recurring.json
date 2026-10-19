@@ -99,7 +99,10 @@
     "createBudget": "Create a {category} budget",
     "openBudget": "Open the {category} budget",
     "actions": "Actions",
-    "range": "Last {count, plural, one {# payment} other {# payments}}: {min} to {max}"
+    "range": "Last {count, plural, one {# payment} other {# payments}}: {min} to {max}",
+    "keepsTitle": "Keep for next month",
+    "keepsOff": "What this payment pays counts right away in what you can spend.",
+    "keepsOn": "What this payment pays this month is kept for next month, except from the 1st to the 7th."
   },
   "toast": {
     "confirmed": "{name} confirmed",
@@ -111,7 +114,9 @@
     "confirmedMany": "{count} confirmed",
     "priceAccepted": "New price accepted for {name}",
     "priceKept": "Kept the usual price for {name}",
-    "stopped": "{name} no longer tracked"
+    "stopped": "{name} no longer tracked",
+    "keepsOn": "{name} is kept for next month",
+    "keepsOff": "{name} now counts right away"
   },
   "errors": {
     "notFound": "This recurring payment no longer exists. Reload the page.",
@@ -121,6 +126,7 @@
     "endFailed": "Could not mark {name} as ended. Try again.",
     "resumeFailed": "Could not resume {name}. Try again.",
     "restoreFailed": "Could not restore {name}. Try again.",
+    "keepsFailed": "Could not change this for {name}. Try again.",
     "stillActiveFailed": "Could not save your answer for {name}. Try again.",
     "acceptFailed": "Could not accept the new price for {name}. Try again.",
     "dismissAlertFailed": "Could not dismiss the alert for {name}. Try again.",

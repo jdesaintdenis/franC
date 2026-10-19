@@ -137,10 +137,10 @@
     "chartPlanned": "planned pace",
     "sheetAsOf": "As of {today}, until {date}",
     "held": "Kept for {month}",
-    "heldNone": "Nothing received yet this month",
+    "heldNone": "Nothing received yet this month from these payments",
     "expectedNextMonth": "{name} expected on {date} · counts for {month}",
-    "heldHint": "Income received this month counts from {month}. Regular income arriving by the 7th counts for this month.",
-    "heldSettings": "Change in More ›"
+    "heldHint": "What your regular incomes marked \"Keep for next month\" paid this month counts from {month}, unless it arrived by the 7th.",
+    "heldSettings": "Choose which payments ›"
   },
   "review": {
     "text": "{count, plural, one {# transaction to review} other {# transactions to review}}"

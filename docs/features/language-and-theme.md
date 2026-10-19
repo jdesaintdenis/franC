@@ -9,8 +9,6 @@ The app is available in English and French, and always in the dark 50 F look. Th
 - **Language**: Automatic (browser language), Français, English. Language names are shown in their own language.
 - Picking one saves at once with no "Saved" message (the page changing is the feedback); a failure shows an error toast with **Try again**. Animations follow the device's **reduce motion** setting ([feedback and motion](feedback-and-motion.md)).
 
-Next to it, **Income** chooses which month Reste à vivre counts incoming money for ([Safe to spend](safe-to-spend.md)).
-
 ## Language
 
 ### How it works

@@ -6,7 +6,7 @@ One page per feature: what it does for the user, how it works under the hood, an
 
 ## Where things are in the app
 
-The bottom bar (a left sidebar on a computer) has **Home**, **Transactions** (and Review), **Plan** (Budgets, Goals, Recurring payments, Next month, Year), **Accounts** (balances, bank sync, imports) and **More** (Categories, Rules, Merchant names, Tags, Bank categories, Export, language, the income-month setting, sign out). See [Navigation](navigation.md).
+The bottom bar (a left sidebar on a computer) has **Home**, **Transactions** (and Review), **Plan** (Budgets, Goals, Recurring payments, Next month, Year), **Accounts** (balances, bank sync, imports) and **More** (Categories, Rules, Merchant names, Tags, Bank categories, Export, language, sign out). See [Navigation](navigation.md).
 
 ## Getting data in
 

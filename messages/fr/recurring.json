@@ -99,7 +99,10 @@
     "createBudget": "Créer un budget {category}",
     "openBudget": "Voir le budget {category}",
     "actions": "Actions",
-    "range": "{count, plural, one {# dernier paiement} other {# derniers paiements}} : de {min} à {max}"
+    "range": "{count, plural, one {# dernier paiement} other {# derniers paiements}} : de {min} à {max}",
+    "keepsTitle": "Garder pour le mois suivant",
+    "keepsOff": "Ce que ce paiement verse compte tout de suite dans votre reste à vivre.",
+    "keepsOn": "Ce que ce paiement verse ce mois-ci est gardé pour le mois suivant, sauf du 1er au 7."
   },
   "toast": {
     "confirmed": "{name} confirmé",
@@ -111,7 +114,9 @@
     "confirmedMany": "{count, plural, one {# confirmé} other {# confirmés}}",
     "priceAccepted": "Nouveau prix accepté pour {name}",
     "priceKept": "Prix habituel conservé pour {name}",
-    "stopped": "{name} n'est plus suivi"
+    "stopped": "{name} n'est plus suivi",
+    "keepsOn": "{name} est gardé pour le mois suivant",
+    "keepsOff": "{name} compte maintenant tout de suite"
   },
   "errors": {
     "notFound": "Ce paiement récurrent n'existe plus. Rechargez la page.",
@@ -121,6 +126,7 @@
     "endFailed": "Impossible de marquer {name} comme terminé. Réessayez.",
     "resumeFailed": "Impossible de reprendre {name}. Réessayez.",
     "restoreFailed": "Impossible de restaurer {name}. Réessayez.",
+    "keepsFailed": "Impossible de modifier {name}. Réessayez.",
     "stillActiveFailed": "Impossible d'enregistrer votre réponse pour {name}. Réessayez.",
     "acceptFailed": "Impossible d'accepter le nouveau prix pour {name}. Réessayez.",
     "dismissAlertFailed": "Impossible d'ignorer l'alerte pour {name}. Réessayez.",

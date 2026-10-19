@@ -48,3 +48,12 @@ export function resolvePriceAlert<
       : i,
   );
 }
+
+/** "Keep for next month" switched on or off for one item, shown at once. */
+export function setKeepsForNextMonth<T extends { id: string; keepsForNextMonth: boolean }>(
+  items: T[],
+  id: string,
+  value: boolean,
+): T[] {
+  return items.map((i) => (i.id === id ? { ...i, keepsForNextMonth: value } : i));
+}
