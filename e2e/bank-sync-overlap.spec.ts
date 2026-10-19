@@ -6,6 +6,7 @@ import { chooseLink, holdFirstSync, disconnectAllBanks } from "./helpers/bank";
 import { deleteAccount, deleteAccountsWithPrefix } from "./helpers/manage";
 import { settled } from "./helpers/recurring";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 // Slice 47: a CSV import and the bank sync feed the same account without counting a purchase twice.
 // The fake bank (e2e/helpers/fake-transactions.ts) serves fixed rows dated relative to today:
@@ -98,7 +99,7 @@ test("manual and automatic together: matches, possible duplicates, ignore, origi
   await page.goto("/import");
   await page.getByRole("radiogroup", { name: "Which account" }).getByRole("radio", { name: NEW_ACCOUNT }).click();
   await expect(page.getByTestId("import-sync")).toContainText("This account syncs automatically. Import a CSV for older history or a gap.");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(csvFile());
+  await chooseCsv(page, csvFile());
   await page.getByRole("button", { name: "Import 5 transactions" }).click();
   await expect(page.getByRole("region", { name: "Import result" }).getByText("5 imported")).toBeVisible();
 
@@ -152,7 +153,7 @@ test("manual and automatic together: matches, possible duplicates, ignore, origi
   await page.goto("/import");
   await page.getByRole("radiogroup", { name: "Which account" }).getByRole("radio", { name: NEW_ACCOUNT }).click();
   await expect(page.getByTestId("import-sync")).toContainText("This account syncs automatically");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(csvFile());
+  await chooseCsv(page, csvFile());
   await expect(page.getByRole("region", { name: "Import preview" }).getByText("All 5 transactions in this file are already in franC.")).toBeVisible();
 
   // 7. Ignore a row from its sheet: it leaves the list, and comes back under the Show filter.

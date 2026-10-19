@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { columnIndex, completeMapping, guessMapping, prefillMapping, type CsvMapping } from "./mapping";
+import { columnIndex, completeMapping, guessDateFormat, guessDecimal, guessMapping, prefillMapping, type CsvMapping } from "./mapping";
 import { readCsvTable } from "./table";
 
 const sample = readFileSync(join(process.cwd(), "docs/samples/sample-export.csv"), "latin1");
@@ -91,5 +91,18 @@ describe("prefillMapping", () => {
 
   it("spells the columns as this file does", () => {
     expect(prefillMapping(t, mapping({ date: "QUAND" }), null).draft.date).toBe("Quand");
+  });
+});
+
+describe("guessDateFormat and guessDecimal", () => {
+  it("pick the first format that reads every value, and the mark that leads to cents", () => {
+    expect(guessDateFormat(["30/09/2025", "01/10/2025"])).toBe("DD/MM/YYYY");
+    expect(guessDateFormat(["2025-09-30"])).toBe("YYYY-MM-DD");
+    expect(guessDateFormat(["09/30/2025", "10/01/2025"])).toBe("MM/DD/YYYY");
+    expect(guessDateFormat([])).toBe("DD/MM/YYYY");
+    expect(guessDecimal(["-12.50", "3.20"])).toBe(".");
+    expect(guessDecimal(["-12,50"])).toBe(",");
+    expect(guessDecimal(["-1 234,50 €"])).toBe(",");
+    expect(guessDecimal([])).toBe(",");
   });
 });

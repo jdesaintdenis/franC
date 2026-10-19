@@ -1,4 +1,5 @@
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -26,7 +27,7 @@ test("import: preview, confirm, then re-import is fully deduplicated", async ({ 
 
   await page.goto("/import");
   await expect(page.getByRole("heading", { name: "Import", exact: true })).toBeVisible();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
 
   await expect(preview.getByTestId("import-new-count")).toHaveText("3");
   await expect(preview.getByText("1 unreadable line won't be imported.")).toBeVisible();
@@ -37,7 +38,7 @@ test("import: preview, confirm, then re-import is fully deduplicated", async ({ 
   await expect(result.getByText("3 imported")).toBeVisible();
 
   await page.getByRole("button", { name: "Import another file" }).click();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
 
   await expect(preview.getByText("Nothing new")).toBeVisible();
   await expect(preview.getByText("All 3 transactions in this file are already in franC.")).toBeVisible();
@@ -47,14 +48,14 @@ test("import: preview, confirm, then re-import is fully deduplicated", async ({ 
   await expect(page.getByText("Choose the CSV file")).toBeVisible();
 });
 
-test("import: a file with the wrong header shows a file error", async ({ page }) => {
+test("import: a file with no table shows a file error", async ({ page }) => {
   await page.goto("/import");
   await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
     name: "wrong.csv",
     mimeType: "text/csv",
-    buffer: Buffer.from("a;b;c\n1;2;3\n", "utf-8"),
+    buffer: Buffer.from("just a sentence, not a table\n", "utf-8"),
   });
-  await expect(page.getByRole("alert").filter({ hasText: /\S/ })).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: "No table found in this file" })).toBeVisible();
 });
 
 test("import history: undo then re-import cleanly", async ({ page }) => {
@@ -68,7 +69,7 @@ test("import history: undo then re-import cleanly", async ({ page }) => {
   const result = page.getByRole("region", { name: "Import result" });
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await page.getByRole("button", { name: "Import 3 transactions" }).click();
   await expect(result.getByText("3 imported")).toBeVisible();
 
@@ -85,6 +86,6 @@ test("import history: undo then re-import cleanly", async ({ page }) => {
   await expect(historyRow).toHaveCount(0);
 
   await page.getByRole("button", { name: "Import another file" }).click();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await chooseCsv(page, file);
   await expect(preview.getByTestId("import-new-count")).toHaveText("3");
 });

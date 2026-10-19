@@ -3,6 +3,7 @@ import { type Locator, type Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { addCategory, deleteCategoriesWithPrefix } from "./helpers/manage";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 const PREFIX = "E2E Create";
 
@@ -20,7 +21,7 @@ async function importRows(page: Page, file: string, label: string, count: number
   });
   await page.goto("/import");
   // The preview starts by itself, even for a file chosen before the page hydrated.
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),

@@ -3,6 +3,7 @@ import { devices } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { toastWith } from "./helpers/sheet";
 import { addCategory, addSubcategory, deleteCategory, manageSheet, rowMenuAction } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 // Same setup as categorize.spec.ts: phone viewport.
 test.use({ ...devices["Pixel 7"] });
@@ -36,7 +37,7 @@ test("subcategories: file under a subcategory with bulk edit, roll up on the das
   // Import three rows.
   const lines = [HEADER, ...[0, 1, 2].map((i) => csvRow(merchant, i))];
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `subcat-${ts}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from(lines.join("\n") + "\n", "utf-8"),

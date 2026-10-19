@@ -3,6 +3,7 @@ import { type Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { manageSheet, rowMenuAction } from "./helpers/manage";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 test.use({ actionTimeout: 10_000 });
 
@@ -46,7 +47,7 @@ test("tags: note found by search, bulk tag, filter with total, rename and delete
   ];
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...lines].join("\n") + "\n", "utf-8"),

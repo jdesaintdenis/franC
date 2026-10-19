@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { type Page } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -36,7 +37,7 @@ test("export: transactions honour the page filters, categories download from set
     `10/${month}/${year};${label};PRLV ${label};REF1;REF1-;Prelevement;;;${amount};;10/${month}/${year};10/${month}/${year};0`;
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: file,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, row(inside, mm, "-44,50"), row(outside, otherMm, "-12,00")].join("\n") + "\n", "utf-8"),

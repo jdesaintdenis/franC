@@ -38,7 +38,10 @@
     "sampleTitle": "Opérations",
     "showAll": "Voir les {count}",
     "chooseAnother": "Choisir un autre fichier",
-    "recordAnyway": "Enregistrer quand même"
+    "recordAnyway": "Enregistrer quand même",
+    "changeColumns": "Modifier",
+    "changeColumnsLabel": "Modifier les colonnes",
+    "columnsLine": "Colonnes : {columns}"
   },
   "result": {
     "region": "Résultat de l'import",
@@ -82,12 +85,10 @@
     "pending": "Annulation…"
   },
   "rowIssues": {
-    "invalidDate": "date invalide (format attendu : JJ/MM/AAAA)",
-    "emptyLabel": "libellé de l'opération vide",
+    "invalidDate": "date illisible avec le format choisi",
+    "emptyLabel": "libellé vide",
     "debitCreditExclusive": "un seul des champs Debit/Credit doit être renseigné",
     "malformedAmount": "montant mal formé",
-    "debitPositive": "le débit ne doit pas être positif",
-    "creditNegative": "le crédit ne doit pas être négatif",
     "columnCount": "{expected} colonnes attendues, {found} trouvées",
     "invalidRow": "ligne invalide"
   },
@@ -98,13 +99,15 @@
     "fileTooLarge": "Le fichier dépasse 2 Mo.",
     "invalidUpload": "Envoi invalide.",
     "accountNotFound": "Compte introuvable.",
-    "unrecognizedHeader": "Fichier non reconnu : l'en-tête ne correspond pas au format d'export bancaire attendu",
     "previewFailed": "Impossible de lire le fichier. Réessayez.",
     "importFailed": "Impossible d'importer le fichier. Rien n'a été enregistré, réessayez.",
     "importNotFound": "Import introuvable.",
     "undoFailed": "Impossible d'annuler l'import. Réessayez.",
     "offline": "Vous êtes hors ligne. Reconnectez-vous et réessayez.",
-    "bankCategoryNotFound": "Une catégorie choisie n'existe plus. Rechargez la page et réessayez."
+    "bankCategoryNotFound": "Une catégorie choisie n'existe plus. Rechargez la page et réessayez.",
+    "noTable": "Aucun tableau trouvé dans ce fichier. Exportez-le à nouveau en CSV.",
+    "columnMissing": "Une colonne choisie n'est pas dans ce fichier.",
+    "invalidMapping": "Choisissez à nouveau les colonnes."
   },
   "bank": {
     "heading": "Nouvelles catégories de la banque",
@@ -130,5 +133,47 @@
   "sync": {
     "title": "Connecté à {bank}",
     "body": "Ce compte se synchronise automatiquement. Importez un CSV pour un historique plus ancien ou une période manquante."
+  },
+  "mapping": {
+    "title": "Associer les colonnes",
+    "remembered": "Réglages du dernier import",
+    "newFormat": "Nouveau format de fichier : indiquez où sont la date, le libellé et le montant.",
+    "columns": "Colonnes",
+    "rowsColumns": "{rows, plural, one {# ligne} other {# lignes}} · {columns, plural, one {# colonne} other {# colonnes}}",
+    "chooseColumn": "Choisir une colonne",
+    "none": "—",
+    "date": "Date",
+    "label": "Libellé",
+    "labelHint": "Sert à repérer les doublons : gardez la même colonne à chaque import.",
+    "amount": "Montant",
+    "amountSingle": "Une colonne",
+    "amountSplit": "Débit et crédit",
+    "debit": "Débit",
+    "credit": "Crédit",
+    "format": "Format",
+    "dates": "Dates",
+    "amounts": "Montants",
+    "dateFormats": {
+      "dmySlash": "JJ/MM/AAAA",
+      "dmySlash2": "JJ/MM/AA",
+      "dmyDash": "JJ-MM-AAAA",
+      "dmyDot": "JJ.MM.AAAA",
+      "ymdDash": "AAAA-MM-JJ",
+      "mdySlash": "MM/JJ/AAAA"
+    },
+    "decimalComma": "1 234,56",
+    "decimalDot": "1,234.56",
+    "more": "Autres colonnes",
+    "moreChosen": "Autres colonnes{count, plural, =0 {} other { · # choisies}}",
+    "shortLabel": "Libellé court",
+    "bookedOn": "Date de comptabilisation",
+    "category": "Catégorie de la banque",
+    "subcategory": "Sous-catégorie de la banque",
+    "firstRow": "Première ligne",
+    "firstRowPending": "Elle s'affichera ici dès que la date, le libellé et le montant sont choisis.",
+    "badDate": "Date illisible : « {value} »",
+    "rowsRefused": "{count, plural, one {Avec ce format, {refused} sur # ligne serait refusée.} other {Avec ce format, {refused} sur les # premières lignes seraient refusées.}}",
+    "useFormat": "Utiliser {format}",
+    "continue": "Continuer"
   }
 }

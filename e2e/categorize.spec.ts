@@ -3,6 +3,7 @@ import { devices } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { addCategory, addRule, deleteCategory, deleteRule, manageSheet, openRowMenu, rowMenuAction } from "./helpers/manage";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 // Same setup as transactions.spec.ts: phone viewport.
 test.use({ ...devices["Pixel 7"] });
@@ -29,7 +30,7 @@ test("categorize a transaction, create a rule, then override one manually", asyn
   const lines = [HEADER, ...[0, 1, 2].map((i) => csvRow(merchant, i))];
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `cat-${Date.now()}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from(lines.join("\n") + "\n", "utf-8"),

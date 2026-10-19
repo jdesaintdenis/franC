@@ -6,6 +6,7 @@ import postgres from "postgres";
 
 import { expect, test } from "./fixtures";
 import { openStartingBalance } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 // A brand-new user, so the app starts empty. The address must be in ALLOWED_EMAILS.
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), quiet: true });
@@ -51,7 +52,7 @@ test("first run: from an empty app to a useful Home through the checklist", asyn
   // 1. Import: choosing the file previews at once, summary first, categories set to create.
   await page.getByTestId("welcome-step-import").click();
   await page.waitForURL("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({ name: "export.csv", mimeType: "text/csv", buffer: SAMPLE });
+  await chooseCsv(page, { name: "export.csv", mimeType: "text/csv", buffer: SAMPLE });
   const preview = page.getByRole("region", { name: "Import preview" });
   await expect(preview.getByTestId("import-new-count")).toBeVisible();
   await expect(preview.getByTestId("import-flows")).toBeVisible();

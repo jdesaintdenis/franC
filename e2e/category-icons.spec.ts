@@ -3,6 +3,7 @@ import { devices } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { toastWith } from "./helpers/sheet";
 import { deleteCategory, manageSheet, pickCategoryIcon, rowMenuAction } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 // Phone viewport.
 test.use({ ...devices["Pixel 7"] });
@@ -55,7 +56,7 @@ test("category icons: top-level and subcategory emojis, hex colour, ＋ adds a s
   const label = `${merchant} R0`;
   const row = `${date};${label};CB ${label};REF0;REF0-;Carte;;;-10,00;;${date};${date};0`;
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `icons-${ts}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, row].join("\n") + "\n", "utf-8"),

@@ -75,12 +75,27 @@ const CONTAINS = {
 
 const SAMPLE_VALUES = 20;
 
-function sampleValues(table: CsvTable, index: number): string[] {
+/** The first non-empty values of the named column, for guessing and for the examples under a select. */
+export function columnSample(table: Pick<CsvTable, "headers" | "rows">, name: string | null): string[] {
+  if (name === null) return [];
+  const index = columnIndex(table.headers, name);
   if (index < 0) return [];
   return table.rows
     .slice(0, SAMPLE_VALUES)
     .map(({ cells }) => (cells[index] ?? "").trim())
     .filter((v) => v !== "");
+}
+
+/** The first date format that reads every value; the usual French one when there is nothing to read. */
+export function guessDateFormat(values: string[]): DateFormat {
+  if (values.length === 0) return DATE_FORMATS[0];
+  return DATE_FORMATS.find((f) => values.every((v) => parseDateAs(v, f) !== null)) ?? DATE_FORMATS[0];
+}
+
+/** The decimal mark an amount column uses: a comma unless only a point leads to 1 or 2 decimals. */
+export function guessDecimal(values: string[]): "," | "." {
+  if (values.some((v) => /,\d{1,2}\s*(€|EUR)?$/i.test(v))) return ",";
+  return values.some((v) => /\.\d{1,2}\s*(€|EUR)?$/i.test(v)) ? "." : ",";
 }
 
 /** Best guess from the header names alone; every field stays empty when nothing fits. */
@@ -114,17 +129,8 @@ export function guessMapping(table: CsvTable): MappingDraft {
   const labelColumn = label ?? shortLabel;
   const split = debit !== null && credit !== null;
 
-  const dateValues = date === null ? [] : sampleValues(table, columnIndex(table.headers, date));
-  const dateFormat =
-    dateValues.length === 0 ? DATE_FORMATS[0] : (DATE_FORMATS.find((f) => dateValues.every((v) => parseDateAs(v, f) !== null)) ?? DATE_FORMATS[0]);
-
-  const amountColumns = split ? [debit, credit] : [amount];
-  const amountValues = amountColumns.flatMap((c) => (c === null ? [] : sampleValues(table, columnIndex(table.headers, c))));
-  const decimal = amountValues.some((v) => /,\d{1,2}\s*(€|EUR)?$/i.test(v))
-    ? ","
-    : amountValues.some((v) => /\.\d{1,2}\s*(€|EUR)?$/i.test(v))
-      ? "."
-      : ",";
+  const dateFormat = guessDateFormat(columnSample(table, date));
+  const decimal = guessDecimal((split ? [debit, credit] : [amount]).flatMap((c) => columnSample(table, c)));
 
   return {
     date,

@@ -3,6 +3,7 @@ import { type Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { addAccount, deleteAccountsWithPrefix } from "./helpers/manage";
 import { closeSheet, sheetOf, toastWith } from "./helpers/sheet";
+import { chooseCsv } from "./helpers/imports";
 
 const HEADER =
   "Date de comptabilisation;Libelle simplifie;Libelle operation;Reference;Informations complementaires;Type operation;Categorie;Sous categorie;Debit;Credit;Date operation;Date de valeur;Pointage operation";
@@ -29,7 +30,7 @@ test.afterEach(async ({ page }) => {
 async function importInto(page: Page, account: string, fileName: string, rows: string[]) {
   await page.goto("/import");
   await page.getByRole("radiogroup", { name: "Which account" }).getByRole("radio", { name: account }).click();
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: fileName,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, ...rows].join("\n") + "\n", "utf-8"),

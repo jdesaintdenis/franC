@@ -2,6 +2,7 @@ import { devices, type Locator } from "@playwright/test";
 
 import { expect, test } from "./fixtures";
 import { addCategory } from "./helpers/manage";
+import { chooseCsv } from "./helpers/imports";
 
 // Phone-sized viewport: the list is mobile-first and virtualized against the window.
 test.use({ ...devices["Pixel 7"] });
@@ -26,7 +27,7 @@ test("transactions: search, infinite scroll, amount + direction filter, clear", 
   const lines = [HEADER, ...Array.from({ length: ROWS }, (_, i) => csvRow(label, i))];
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `tx-${Date.now()}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from(lines.join("\n") + "\n", "utf-8"),
@@ -121,7 +122,7 @@ test("transactions: swipe right to recategorize, and the keyboard equivalent", a
   await addCategory(page, category);
 
   await page.goto("/import");
-  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles({
+  await chooseCsv(page, {
     name: `swipe-${ts}.csv`,
     mimeType: "text/csv",
     buffer: Buffer.from([HEADER, csvRow(label, 0), csvRow(label, 2)].join("\n") + "\n", "utf-8"),

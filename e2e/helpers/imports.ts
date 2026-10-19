@@ -8,3 +8,13 @@ export async function undoImport(page: Page, filename: string) {
   await page.getByRole("alertdialog").getByRole("button", { name: "Undo import" }).click();
   await expect(page.getByRole("alertdialog")).toBeHidden();
 }
+
+/**
+ * Chooses a CSV on the import page and gets past the Columns step with the mapping franC filled in,
+ * leaving the preview open. Works in English and French.
+ */
+export async function chooseCsv(page: Page, file: Parameters<ReturnType<Page["locator"]>["setInputFiles"]>[0]) {
+  await page.getByLabel("Choose your bank export").filter({ visible: true }).setInputFiles(file);
+  await page.getByRole("region", { name: /^(Match the columns|Associer les colonnes)$/ }).waitFor();
+  await page.getByRole("button", { name: /^(Continue|Continuer)$/ }).click();
+}
