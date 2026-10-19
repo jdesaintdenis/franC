@@ -1037,5 +1037,16 @@
       "amortizationOutOfRange": "This date must fall between the subscription and the last payment.",
       "lastPaymentStillOwed": "Capital is still owed on that date, so the contract's last payment must come after “As of”."
     }
+  },
+  "incomeMonth": {
+    "title": "Income",
+    "intro": "Which month Reste à vivre counts incoming money for.",
+    "next": "For the next month",
+    "nextHint": "You live on last month's money: what arrives this month counts from the 1st. Regular income arriving by the 7th still counts for its month.",
+    "nextFor": "For people paid at the end of the month.",
+    "recommended": "Recommended",
+    "this": "For the month it arrives",
+    "thisHint": "Income expected this month counts at once, even if it arrives on the 28th.",
+    "error": "Couldn't save. Try again."
   }
 }

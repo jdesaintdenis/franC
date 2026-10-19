@@ -118,10 +118,9 @@
     "prompt": "Set a starting balance on an account counted in safe to spend to see what's left to spend this month. <link>Open Settings</link>",
     "balance": "Balance",
     "income": "Income expected",
-    "noIncome": "No income expected",
     "bills": "Bills still due ({count})",
     "noBills": "No bills still due",
-    "budgets": "Budgets left",
+    "budgets": "Budgets left ({count})",
     "noBudgets": "No budgets set. <link>Set budgets</link>",
     "includesBills": "incl. bills {amount}",
     "ignoredIncome": "{count, plural, one {# detected income not counted} other {# detected incomes not counted}}. <link>Review in Recurring</link>",
@@ -130,13 +129,18 @@
     "perDayLast": "About <strong>{amount}</strong> for today",
     "howWorked": "How is this worked out?",
     "breakdownTitle": "How it's worked out",
-    "breakdownDescription": "Until {date}, to the cent.",
     "nextMonth": "{month}: <amount>{value}</amount> expected",
     "until": "Until {date}",
     "dayChip": "Day {day} / {total}",
     "francs": "{amount} francs",
     "chartToday": "today",
-    "chartPlanned": "planned pace"
+    "chartPlanned": "planned pace",
+    "sheetAsOf": "As of {today}, until {date}",
+    "held": "Kept for {month}",
+    "heldNone": "Nothing received yet this month",
+    "expectedNextMonth": "{name} expected on {date} · counts for {month}",
+    "heldHint": "Income received this month counts from {month}. Regular income arriving by the 7th counts for this month.",
+    "heldSettings": "Change in More ›"
   },
   "review": {
     "text": "{count, plural, one {# transaction to review} other {# transactions to review}}"

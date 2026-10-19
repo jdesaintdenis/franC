@@ -105,7 +105,7 @@ export function SafeToSpendHero({
         plannedLabel={t("chartPlanned")}
       />
       <div className="flex items-center justify-end">
-        <SafeToSpendSheet triggerLabel={t("howWorked")} title={t("breakdownTitle")} description={t("breakdownDescription", { date })}>
+        <SafeToSpendSheet triggerLabel={t("howWorked")} title={t("breakdownTitle")} description={t("sheetAsOf", { today: formatShortDay(today, today, locale), date })}>
           <SafeToSpendBreakdown result={result} today={today} />
         </SafeToSpendSheet>
       </div>

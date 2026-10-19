@@ -7,10 +7,11 @@ import { HomeSection } from "@/app/(app)/home/home-section";
 import { PageHeader } from "@/components/page-header";
 import { db } from "@/db/client";
 import { getManageCounts } from "@/db/queries/manage-counts";
-import { getUserLocale } from "@/db/queries/users";
+import { getIncomeMonth, getUserLocale } from "@/db/queries/users";
 import { isLocale } from "@/i18n/config";
 import { requireUser } from "@/lib/auth/session";
 
+import { IncomeMonthRow } from "./income-month-row";
 import { LanguageRow } from "./language-row";
 import { SignOutButton } from "./sign-out-button";
 
@@ -37,7 +38,7 @@ function PlusRow({ href, title, value, icon: Icon }: { href: string; title: stri
 export default async function SettingsPage() {
   const user = await requireUser();
   const t = await getTranslations("settings");
-  const [counts, saved] = await Promise.all([getManageCounts(db, user.id), getUserLocale(user.id)]);
+  const [counts, saved, incomeMonth] = await Promise.all([getManageCounts(db, user.id), getUserLocale(user.id), getIncomeMonth(user.id)]);
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
@@ -73,6 +74,7 @@ export default async function SettingsPage() {
         </HomeSection>
         <HomeSection headingId="preferences-heading" title={t("sections.preferences")} flush>
           <LanguageRow current={isLocale(saved) ? saved : "auto"} />
+          <IncomeMonthRow current={incomeMonth} />
         </HomeSection>
         <HomeSection headingId="account-heading" title={t("sections.account")} flush>
           <div className="flex min-h-[52px] items-center justify-between gap-3 px-3.5">

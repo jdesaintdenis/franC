@@ -118,10 +118,9 @@
     "prompt": "Renseignez un solde de départ sur un compte compté dans le reste à vivre pour voir ce qu'il reste à dépenser ce mois-ci. <link>Ouvrir les paramètres</link>",
     "balance": "Solde",
     "income": "Revenus attendus",
-    "noIncome": "Aucun revenu attendu",
     "bills": "Factures à venir ({count})",
     "noBills": "Aucune facture à venir",
-    "budgets": "Reste des budgets",
+    "budgets": "Reste des budgets ({count})",
     "noBudgets": "Aucun budget défini. <link>Définir des budgets</link>",
     "includesBills": "dont factures {amount}",
     "ignoredIncome": "{count, plural, one {# revenu détecté non compté} other {# revenus détectés non comptés}}. <link>À valider dans Récurrents</link>",
@@ -130,13 +129,18 @@
     "perDayLast": "Environ <strong>{amount}</strong> pour aujourd'hui",
     "howWorked": "Comment est-ce calculé ?",
     "breakdownTitle": "Comment c'est calculé",
-    "breakdownDescription": "Jusqu'au {date}, au centime près.",
     "nextMonth": "{month} : <amount>{value}</amount> attendus",
     "until": "Jusqu'au {date}",
     "dayChip": "Jour {day} / {total}",
     "francs": "{amount} francs",
     "chartToday": "auj.",
-    "chartPlanned": "rythme prévu"
+    "chartPlanned": "rythme prévu",
+    "sheetAsOf": "Au {today}, jusqu'au {date}",
+    "held": "Gardé pour {month}",
+    "heldNone": "Rien reçu pour l'instant ce mois-ci",
+    "expectedNextMonth": "{name} attendu le {date} · comptera pour {month}",
+    "heldHint": "Les revenus reçus ce mois-ci comptent à partir de {month}. Un revenu régulier arrivé avant le 8 compte pour ce mois-ci.",
+    "heldSettings": "Régler dans Plus ›"
   },
   "review": {
     "text": "{count, plural, one {# opération à valider} other {# opérations à valider}}"
