@@ -38,6 +38,7 @@ The bottom bar (a left sidebar on a computer) has **Home**, **Transactions** (an
 | --- | --- |
 | [Dashboard](dashboard.md) | Home: Reste à vivre (francs, pace chart), Needs attention, accounts, budgets, goals, the 50 F look |
 | [Budget page](budget-page.md) | `/budget`: any month in one page: month card and bars, budgets, spending ring and drill-down, coming up, goals, balance curve |
+| [Compare two months](compare-months.md) | `/budget/compare`: two months side by side: totals, each category's change, budget shares, picking and swapping the months |
 | [Budgets](budgets.md) | Monthly budgets, roll-up, rollover, presets, pace warning |
 | [Recurring payments and forecast](recurring.md) | Regular payments screen (headline, rows, item sheet, swipe, Undo), detection, confirm/dismiss/restore, next-month outlook (what is left after budgets), Coming up, price alerts, yearly cost, Cancelled? and ended items |
 | [Safe to spend](safe-to-spend.md) | What you can still spend until the end of the month |

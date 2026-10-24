@@ -23,6 +23,8 @@ Tapping the month name opens **"Choose a month"** in a bottom sheet (a centred d
 - months without any transaction are greyed out and can't be chosen, and so are future months; the current month can always be chosen;
 - **Back to this month** (hidden when you're on it), and the footnote "Amounts are what you spent. Months without data are greyed out."
 
+The same sheet, in compare mode, picks the months of [Compare two months](compare-months.md).
+
 One grouped query (`getMonthlyHistory`: spent, income and row count per month over all history, transfers excluded) feeds the picker, the bars and "latest month with data". Cells are built by `buildPickerYear` and the arrows' bounds by `pickerYearBounds` (`src/lib/dashboard/month-picker.ts`).
 
 ### The month card ("Le mois")
@@ -33,6 +35,7 @@ One grouped query (`getMonthlyHistory`: spent, income and row count per month ov
 - **Past month**: the change against the previous month ("−6 % vs juin", green when lower, amber when higher, hidden when the previous month has no spending), and "Revenus … · bilan …" (net signed; "Bilan" is the month net).
 - **Bars** (`MonthBars`, `monthBarWindow` in `src/lib/dashboard/month-bars.ts`): nine months ending four after the selected one, never past the current month; when the window reaches the current month the **next month** is added as an outlined bar (its planned amount, recurring). The selected bar is periwinkle, the month in progress is hatched, and every bar is a link to its month. A dashed line marks the selected month's planned amount ("prévu 4 300 €"). Plain HTML, no chart library.
 - **Verdict** (`budgetVerdict`, `src/lib/budgets/verdict.ts`): current month "Il reste X sur Y de budgets, pour N jours"; past month "N budgets tenus sur M · X de dépassement au total" or "Tous les budgets tenus". Hidden without budgets, and on a finished month with no spending. In French, months inside sentences are lower case (`inSentence`).
+- **Compare with another month** (Slice 78): when the month has spending, the card ends with a link row to `/budget/compare?a=<month>&b=<month before>` ([Compare two months](compare-months.md)).
 
 ### Budgets
 
