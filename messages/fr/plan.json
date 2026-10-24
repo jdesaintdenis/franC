@@ -73,6 +73,29 @@
     "budgets": "Budgets",
     "edit": "Modifier",
     "manage": "Gérer",
-    "recurringLink": "Récurrents"
+    "recurringLink": "Récurrents",
+    "compareLink": "Comparer avec un autre mois"
+  },
+  "compare": {
+    "title": "Comparer",
+    "swap": "Inverser les mois",
+    "summary": "En bref",
+    "less": "<b>{amount}</b> de dépenses en moins qu'en {month}",
+    "more": "<b>{amount}</b> de dépenses en plus qu'en {month}",
+    "same": "Autant dépensé qu'en {month}",
+    "diff": "écart",
+    "spent": "Dépenses",
+    "income": "Revenus",
+    "net": "Bilan",
+    "inProgress": "{month} est en cours : chiffres jusqu'à aujourd'hui.",
+    "categories": "Par catégorie",
+    "new": "nouveau",
+    "categoriesNote": "Triées par écart · touchez une catégorie pour voir ses opérations de {month}",
+    "rowLabel": "{name} : {amountA} en {monthA}, {amountB} en {monthB}, écart {diff}",
+    "budgets": "Budgets",
+    "budgetShare": "<b>{shareA}</b> vs {shareB}",
+    "budgetsNote": "Part du budget dépensée chaque mois, avec le montant actuel du budget",
+    "empty": "Aucune dépense en {monthA} ni en {monthB}",
+    "emptyBody": "Choisissez d'autres mois ci-dessus."
   }
 }

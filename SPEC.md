@@ -1053,3 +1053,18 @@ Reste à vivre was too high for someone paid at the end of the month for the nex
 - **D7 (Slice 76, supersedes D1 and D4)**: Jérémy found the all-income rule did not suit him, so the rule applies only to the regular incomes switched to "Keep for next month" (`recurring.keeps_for_next_month`, off by default, switch in the payment's sheet). Every other income counts at once, as before Slice 75. The Plus "Income" setting is removed; `users.income_month` stays unused until a cleanup migration. Leeway stays the fixed 1st–7th (D2). Migration `0041_keeps_for_next_month`: one added column with a default, nothing rewritten; nothing is held until the user switches a payment on.
 - **D6**: The "How is this worked out?" sheet is redesigned (mockup D of the thread, an A + C mix): a summary card with the amount and a bar showing how the balance splits (kept for next month, bills due, budgets left, what is left), then a receipt whose lists open and close, with swatches matching the bar. The sheet now wears the 50 F theme. French keeps "Factures à venir" (glossary) rather than the mockups' "Prélèvements".
 
+## 89. Resolved decisions (Slice 78, compare two months)
+
+Jérémy asked whether two months could be compared. Only "−X % vs <previous month>" on a past month's card existed. Mockups on the real Budget page showed A (an own page) and B (the comparison overlaid on /budget); Jérémy picked **A** on 2026-10-23: the answer fits one line and the Budget page, already long, stays as it is.
+
+- **D1**: Same figures as the Budget page for each month: `getMonthTotals`, `getSpendingByCategory`, `getBudgetProgress`, all accounts, transfers and ignored rows excluded. No new query, no migration.
+- **D2**: `/budget/compare?a=&b=`. Missing or invalid `a` = current month; `b` defaults to the month before `a`; future months become the current month; the same month twice makes `b` the month before. No redirect.
+- **D3**: Difference = A − B; % change = (A − B) ÷ B, hidden when unchanged, "new" when B is zero.
+- **D4**: The summary opens with the answer ("€438 less spent than in July"), then Spending, Income and Net with the difference. Both months empty: an empty state.
+- **D5**: The year is written only when the two months are in different years.
+- **D6**: A month in progress is compared as it stands (not prorated), with a note.
+- **D7**: Budgets compare the share spent each month against today's base amount (no carry); budgets keep no history.
+- **D8**: A category row opens month A's transactions for that category (the transactions filter takes one date range).
+- **D9**: The second month is picked in the existing month picker, in a compare mode: the other side's month is marked "already picked"; pill B offers the month before A as a shortcut.
+- **D10**: Colours: spending less green, more amber; income and net the other way round; never red.
+

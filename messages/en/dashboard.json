@@ -14,7 +14,12 @@
     "goToYear": "Go to {year}",
     "cellLabel": "{month}, {amount} spent",
     "footnote": "Amounts are what you spent. Months without data are greyed out.",
-    "backToThisMonth": "Back to this month"
+    "backToThisMonth": "Back to this month",
+    "compareTitle": "Compare {month} with…",
+    "compareDescription": "Pick the month to set against {month}.",
+    "taken": "already picked",
+    "previousMonth": "Compare with the month before ({month})",
+    "compareTrigger": "Change month {month}"
   },
   "totals": {
     "label": "Month totals",
