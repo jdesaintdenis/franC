@@ -8,8 +8,10 @@ import { RowLink } from "@/components/row-link";
 import { buttonVariants } from "@/components/ui/button";
 import type { SubcategorySpending } from "@/db/queries/dashboard";
 import { requireUser } from "@/lib/auth/session";
+import { compareHref } from "@/lib/compare/months";
 import { labelUncategorized } from "@/lib/categorize/uncategorized";
 import {
+  addMonths,
   categoryDrillDownHref,
   currentMonth,
   dashboardHref,
@@ -96,6 +98,7 @@ export default async function BudgetPage({ searchParams }: PageProps<"/budget">)
                 bars={data.bars}
                 barScale={data.barScale}
                 verdict={data.verdict}
+                compareHref={compareHref({ a: month, b: addMonths(month, -1) })}
               />
             </HomeSection>
             <TransfersNote count={data.transferCount} href={monthTransfersHref(month, null)} />

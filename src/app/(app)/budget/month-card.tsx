@@ -1,4 +1,6 @@
+import { ArrowLeftRight, ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import type { BudgetVerdict } from "@/lib/budgets/verdict";
@@ -31,6 +33,7 @@ export function MonthCard({
   bars,
   barScale,
   verdict,
+  compareHref,
 }: {
   month: string;
   current: string;
@@ -49,6 +52,8 @@ export function MonthCard({
   bars: MonthBar[];
   barScale: number;
   verdict: BudgetVerdict;
+  /** The Compare page for this month; the link shows only when the month has spending. */
+  compareHref?: string;
 }) {
   const locale = useLocale();
   const t = useTranslations("plan.month");
@@ -133,6 +138,16 @@ export function MonthCard({
               ? t.rich("verdictAllKept", { b: bold })
               : t.rich("verdictPast", { kept: verdict.kept, total: verdict.total, over: formatWholeCents(verdict.overCents, locale), b: bold })}
         </p>
+      )}
+      {compareHref && hasSpending && (
+        <Link
+          href={compareHref}
+          className="border-border text-primary focus-visible:ring-ring/50 -mb-1 flex min-h-12 items-center gap-2.5 border-t pt-3 text-[15px] font-semibold outline-none focus-visible:ring-[3px]"
+        >
+          <ArrowLeftRight className="size-[18px]" aria-hidden="true" />
+          <span className="flex-1">{t("compareLink")}</span>
+          <ChevronRight className="size-[18px]" aria-hidden="true" />
+        </Link>
       )}
     </div>
   );
