@@ -976,31 +976,34 @@ function SheetBody({
                 {sourceText}
               </p>
             )}
-            <div data-testid="sheet-suggestions" role="group" aria-label={t("suggestions")} className="mt-1 flex flex-wrap gap-2">
-              {pillCategories.map((c) => (
-                  <button
-                    key={c.id}
-                    type="button"
-                    data-testid="sheet-suggestion"
-                    disabled={isPending}
-                    onClick={() => pickCategory(c.id)}
-                    className="bg-secondary hover:bg-muted focus-visible:ring-ring/50 min-h-11 max-w-full truncate rounded-full px-4 text-sm outline-none focus-visible:ring-[3px]"
-                  >
-                    {c.label}
-                  </button>
-                ))}
-              <button
-                type="button"
-                data-testid="sheet-new-category"
-                onClick={(e) => {
-                  openStep("category", e);
-                  setPickerCreating(true);
-                }}
-                className="text-primary hover:bg-muted focus-visible:ring-ring/50 min-h-11 rounded-full border border-dashed px-4 text-sm outline-none focus-visible:ring-[3px]"
-              >
-                {t("newCategory")}
-              </button>
-            </div>
+            {/* With a category, the row above changes it: the pills only help a row that has none. */}
+            {!item.category && (
+              <div data-testid="sheet-suggestions" role="group" aria-label={t("suggestions")} className="mt-1 flex flex-wrap gap-2">
+                {pillCategories.map((c) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      data-testid="sheet-suggestion"
+                      disabled={isPending}
+                      onClick={() => pickCategory(c.id)}
+                      className="bg-secondary hover:bg-muted focus-visible:ring-ring/50 min-h-11 max-w-full truncate rounded-full px-4 text-sm outline-none focus-visible:ring-[3px]"
+                    >
+                      {c.label}
+                    </button>
+                  ))}
+                <button
+                  type="button"
+                  data-testid="sheet-new-category"
+                  onClick={(e) => {
+                    openStep("category", e);
+                    setPickerCreating(true);
+                  }}
+                  className="text-primary hover:bg-muted focus-visible:ring-ring/50 min-h-11 rounded-full border border-dashed px-4 text-sm outline-none focus-visible:ring-[3px]"
+                >
+                  {t("newCategory")}
+                </button>
+              </div>
+            )}
             {validatable && item.category && (
               <Button type="button" data-testid="sheet-validate" className="mt-2 h-12" disabled={isPending} onClick={guessed ? keepGuess : validateHere}>
                 {t("validateIn", { category: item.category.name })}

@@ -30,7 +30,7 @@ async function importRows(page: Page, file: string, label: string, count: number
   await expect(page.getByText(/^\d+ imported/)).toBeVisible();
 }
 
-test("validate in the list: ✓ needs a category, Undo, sheet validation, no sideways scroll", async ({ page, sql, workerUser }) => {
+test("validate in the list: ✓ needs a category, Undo, sheet validation, pills only without a category, no sideways scroll", async ({ page, sql, workerUser }) => {
   const ts = Date.now();
   const label = `VLIST${ts}X`;
   const file = `validate-${ts}.csv`;
@@ -77,6 +77,9 @@ test("validate in the list: ✓ needs a category, Undo, sheet validation, no sid
     await expect(sheet.getByTestId("sheet-new-category")).toBeVisible();
     await sheet.getByTestId("sheet-category").click();
     await sheet.getByTestId("category-picker").getByRole("button", { name: category, exact: true }).click();
+    // With a category, the suggestion pills go: the category row changes it.
+    await expect(sheet.getByTestId("sheet-category")).toContainText(category);
+    await expect(sheet.getByTestId("sheet-suggestions")).toHaveCount(0);
     await closeSheet(page);
     await expect(page.getByTestId("row-to-review")).toHaveCount(1);
   } finally {
