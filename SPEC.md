@@ -860,7 +860,7 @@ Jérémy's brief (2026-10-07): Direction A "La liste qui valide" for Transaction
 - **F.** Quick preset chips are removed; every active filter is a wrapping removable chip. The sideways-scrolling chip row is gone.
 - **G.** New `review=todo` filter; the "N to review" row filters the list instead of opening `/review`.
 - **H.** The sheet amount is large sans serif. Francs and Cormorant Garamond stay on Home's hero only (Jérémy, 2026-10-07, after review).
-- **I.** Up to 4 suggestion pills (same merchant, same label key, most used in 90 days, most used overall, then the first categories) plus "+ New", which opens the existing category-creation form; the category picker also has a visible "New category" button.
+- **I.** Up to 4 suggestion pills (same merchant, same label key, most used in 90 days, most used overall, then the first categories) plus "+ New", which opens the existing category-creation form; the category picker also has a visible "New category" button. Since 2026-10-26 the pills and "+ New" show only on a row without a category; with one, the category row changes it.
 - **J–K.** Note and tags sit below the category; Ignore and Delete live in their own amber card.
 - **L.** The bulk bar covers the tab bar while selecting.
 - **M.** The 50 F look now covers `/transactions` and `/review` (page, sheets, bottom bar, sidebar, error toasts); other pages keep Tricolore.
