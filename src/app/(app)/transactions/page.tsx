@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 import { PageHeader } from "@/components/page-header";
 import { db } from "@/db/client";
+import { hasKeptIncome } from "@/db/queries/recurring";
 import { getHomeAccountId, listAccounts } from "@/db/queries/accounts";
 import { listGoals } from "@/db/queries/goals";
 import { savingsAccountChoices } from "@/lib/goals/savings-options";
@@ -38,7 +39,7 @@ export default async function TransactionsPage({ searchParams }: PageProps<"/tra
 
   const hasFilters = params.length > 0;
 
-  const [page, total, categories, accounts, merchants, toReview, tags, totals, movedRows, goals, manual, homeAccountId] = await Promise.all([
+  const [page, total, categories, accounts, merchants, toReview, tags, totals, movedRows, goals, manual, homeAccountId, keepsIncome] = await Promise.all([
     listTransactions(db, user.id, filters, null),
     countTransactions(db, user.id, filters),
     listCategoryOptions(user.id, locale),
@@ -52,6 +53,7 @@ export default async function TransactionsPage({ searchParams }: PageProps<"/tra
     listGoals(db, user.id),
     manualVersion(db, user.id),
     getHomeAccountId(user.id),
+    hasKeptIncome(db, user.id),
   ]);
   // Net per day for the rows of this page, from the server so a day cut across two pages is whole.
   const dayTotals = await sumTransactionsByDay(db, user.id, filters, [...new Set(page.items.map((i) => i.date))]);
@@ -148,6 +150,7 @@ export default async function TransactionsPage({ searchParams }: PageProps<"/tra
           showAccount={accounts.length > 1}
           savingsAccounts={savingsAccountChoices(accounts, goals)}
           categoryFilter={splitCategoryFilter(filters.category, categories)}
+          keepsIncome={keepsIncome}
         />
       </main>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeftRight, ChevronRight, Eye, EyeOff, Pencil, PiggyBank, Repeat, Sparkles, Split, Tag, Trash2 } from "lucide-react";
+import { ArrowLeftRight, CalendarClock, ChevronRight, Eye, EyeOff, Pencil, PiggyBank, Repeat, Sparkles, Split, Tag, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useLayoutEffect, useRef, useState, useTransition, type ReactNode, type Ref } from "react";
 import { useRouter } from "next/navigation";
@@ -14,6 +14,7 @@ import { TransactionAvatar } from "@/components/transaction-avatar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import type { TransactionListItem } from "@/db/queries/transactions";
+import { addMonths, formatMonthName, inSentence } from "@/lib/dashboard/month";
 import { formatDay, formatShortInstant } from "@/lib/format-date";
 import { amountToInput, parseManualForm } from "@/lib/manual/input";
 import { formatCents, formatSignedCents } from "@/lib/money";
@@ -34,6 +35,7 @@ import {
   removeSavingsMoveAction,
   removeSplitAction,
   saveSplitAction,
+  setPaidFromNextMonthAction,
   unignoreTransactionAction,
   unlinkTransferAction,
   validateTransactionAction,
@@ -99,6 +101,8 @@ export interface TransactionSheetProps {
   initialSection?: SheetSection;
   /** A merchant was renamed (or the rename undone); other loaded rows may show a new name. */
   onMerchantRenamed?: () => void;
+  /** The user keeps a regular income for next month: offers "Paid with next month's money" on this month's expenses (Slice 79). */
+  keepsIncome?: boolean;
 }
 
 function initialStep(item: TransactionListItem, section: SheetSection | undefined, showAccount: boolean): Step | null {
@@ -170,6 +174,7 @@ function SheetBody({
   initialSection,
   onMerchantRenamed,
   onIgnoredChanged,
+  keepsIncome = false,
   close,
   queue: screenQueue,
 }: Omit<TransactionSheetProps, "item" | "onClose"> & { item: TransactionListItem; close: () => void }) {
@@ -568,6 +573,25 @@ function SheetBody({
     });
   }
 
+  /** "Paid with next month's money" (Slice 79): optimistic; a refusal puts the switch back and says so. */
+  function changePaidNext(next: boolean) {
+    const id = itemRef.current.id;
+    patch({ paidFromNextMonth: next });
+    onNoteTagsChanged({ id, paidFromNextMonth: next });
+    void queue(async () => {
+      let ok = false;
+      try {
+        ok = (await setPaidFromNextMonthAction({ id, on: next })).ok;
+      } catch {
+        ok = false;
+      }
+      if (ok) return;
+      patch({ paidFromNextMonth: !next });
+      onNoteTagsChanged({ id, paidFromNextMonth: !next });
+      toast.show({ message: failed(), variant: "error" });
+    });
+  }
+
   /** Track as regular payment: the toast's Undo restores the item's earlier state (or removes the new one). */
   function track() {
     const before = itemRef.current;
@@ -772,6 +796,12 @@ function SheetBody({
 
   const bankLabel = item.bankLabel && item.bankLabel !== name ? item.bankLabel : null;
   const dateLine = [formatDay(item.date, today, locale), showAccount ? item.accountName : null].filter(Boolean).join(" · ");
+  // Slice 79: only this month's plain expenses, and only while an income is kept; a switched row can always be switched off.
+  const showPaidNext =
+    keepsIncome &&
+    (item.paidFromNextMonth ||
+      (item.amountCents < 0 && item.date.slice(0, 7) === today.slice(0, 7) && !item.ignored && item.transfer === null && !item.split));
+  const nextMonthName = inSentence(formatMonthName(addMonths(today.slice(0, 7), 1), locale), locale);
   const canSplit = item.transfer === null && item.amountCents !== 0;
   // A free outflow or inflow on a current account, when there is a Savings account to put it on.
   const canMoveToSavings =
@@ -1092,6 +1122,30 @@ function SheetBody({
             <ActionRow testId="sheet-edit" icon={<Pencil className="size-5" />} label={t("edit")} onClick={(e) => openStep("edit", e)} />
           )}
         </div>
+        {showPaidNext && (
+          <label
+            data-testid="sheet-paid-next"
+            className="-mx-3 flex min-h-12 cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-left text-base"
+          >
+            <span aria-hidden="true" className="text-muted-foreground flex size-5 shrink-0 items-center justify-center">
+              <CalendarClock className="size-5" />
+            </span>
+            <span className="flex min-w-0 flex-1 flex-col">
+              <span className="font-medium">{t("paidNext", { month: nextMonthName })}</span>
+              <span className="text-muted-foreground text-sm break-words">
+                {t(item.paidFromNextMonth ? "paidNextOn" : "paidNextOff", { month: nextMonthName })}
+              </span>
+            </span>
+            {/* A native checkbox drawn as a switch, like the regular payment sheet's: keeps keyboard and test semantics. */}
+            <input
+              type="checkbox"
+              role="switch"
+              className="bg-gauge-off checked:bg-primary after:bg-foreground relative h-6 w-10 shrink-0 cursor-pointer appearance-none rounded-full transition-colors after:absolute after:top-0.5 after:left-0.5 after:size-5 after:rounded-full after:transition-transform checked:after:translate-x-4"
+              checked={item.paidFromNextMonth}
+              onChange={(e) => changePaidNext(e.target.checked)}
+            />
+          </label>
+        )}
         {/* Delete and Ignore leave the row out of the books: their own amber card, a gap away from the thumb's usual targets. */}
         <div data-testid="sheet-danger-zone" className="border-warning/40 -mx-3 flex flex-col rounded-xl border">
           {isManual && (
