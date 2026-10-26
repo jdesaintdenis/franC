@@ -1,0 +1,1 @@
+ALTER TABLE "transactions" ADD COLUMN "paid_from_next_month" boolean DEFAULT false NOT NULL;

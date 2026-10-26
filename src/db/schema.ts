@@ -561,6 +561,8 @@ export const transactions = pgTable(
     ignoredAt: timestamp("ignored_at", { withTimezone: true }),
     // Added by hand on an account a bank link or imports feed: waits for the bank row that will take it over (Slice 56).
     awaitingBank: boolean("awaiting_bank").notNull().default(false),
+    // Slice 79: an expense paid with the income kept for next month; Reste à vivre counts it next month.
+    paidFromNextMonth: boolean("paid_from_next_month").notNull().default(false),
     createdAt: timestamp("created_at", { withTimezone: true })
       .defaultNow()
       .notNull(),
