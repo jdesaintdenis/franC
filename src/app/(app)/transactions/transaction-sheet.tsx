@@ -650,8 +650,10 @@ function SheetBody({
     closeStep();
     const linked = moved.transfer;
     if (linked) {
-      patch({ transfer: toListRow(linked, linked.counterpart), reviewed: true });
-      onTransferChanged(pairPatches(toListRow(linked, linked.counterpart), linked.counterpart.id, toListRow(linked, { accountName: before.accountName, date: before.date, amountCents: before.amountCents })));
+      // The other leg is on a Savings account, which Reste à vivre never counts (Slice 79's "For next month").
+      const own = { ...toListRow(linked, linked.counterpart), counterpartUncounted: true };
+      patch({ transfer: own, reviewed: true });
+      onTransferChanged(pairPatches(own, linked.counterpart.id, toListRow(linked, { accountName: before.accountName, date: before.date, amountCents: before.amountCents })));
     }
     const message = moved.goalName
       ? t("movedToGoal", { goal: moved.goalName, account: moved.accountName })
@@ -797,10 +799,14 @@ function SheetBody({
   const bankLabel = item.bankLabel && item.bankLabel !== name ? item.bankLabel : null;
   const dateLine = [formatDay(item.date, today, locale), showAccount ? item.accountName : null].filter(Boolean).join(" · ");
   // Slice 79: only this month's plain expenses, and only while an income is kept; a switched row can always be switched off.
+  // Slice 79: an incoming transfer from an account left out of Reste à vivre (money taken from savings) can be kept for next month too.
+  const paidNextIn = item.amountCents > 0 && item.transfer?.counterpartUncounted === true;
   const showPaidNext =
     keepsIncome &&
     (item.paidFromNextMonth ||
-      (item.amountCents < 0 && item.date.slice(0, 7) === today.slice(0, 7) && !item.ignored && item.transfer === null && !item.split));
+      (item.date.slice(0, 7) === today.slice(0, 7) &&
+        !item.ignored &&
+        (paidNextIn || (item.amountCents < 0 && item.transfer === null && !item.split))));
   const nextMonthName = inSentence(formatMonthName(addMonths(today.slice(0, 7), 1), locale), locale);
   const canSplit = item.transfer === null && item.amountCents !== 0;
   // A free outflow or inflow on a current account, when there is a Savings account to put it on.
@@ -1131,9 +1137,14 @@ function SheetBody({
               <CalendarClock className="size-5" />
             </span>
             <span className="flex min-w-0 flex-1 flex-col">
-              <span className="font-medium">{t("paidNext", { month: nextMonthName })}</span>
+              <span className="font-medium">{t(paidNextIn ? "paidNextIn" : "paidNext", { month: nextMonthName })}</span>
               <span className="text-muted-foreground text-sm break-words">
-                {t(item.paidFromNextMonth ? "paidNextOn" : "paidNextOff", { month: nextMonthName })}
+                {t(
+                  paidNextIn
+                    ? item.paidFromNextMonth ? "paidNextInOn" : "paidNextInOff"
+                    : item.paidFromNextMonth ? "paidNextOn" : "paidNextOff",
+                  { month: nextMonthName },
+                )}
               </span>
             </span>
             {/* A native checkbox drawn as a switch, like the regular payment sheet's: keeps keyboard and test semantics. */}

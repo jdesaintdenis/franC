@@ -120,7 +120,7 @@ export function SafeToSpendBreakdown({ result, today }: { result: SafeToSpendRes
   const countedIncome = result.income.filter((i) => i.countsNow);
   const expectedLater = result.income.filter((i) => !i.countsNow);
   const showIncome = countedIncome.length > 0 || result.ignoredDetectedIncomeCount > 0;
-  // Expenses paid with next month's money come out of what is kept (Slice 79); can go positive if they exceed it.
+  // Expenses paid with next month's money come out of what is kept, transfers kept for it go in (Slice 79); can go positive.
   const keptLeftCents = result.heldCents - result.paidNextCents;
 
   const parts: { part: Part; cents: number }[] = [
@@ -175,7 +175,7 @@ export function SafeToSpendBreakdown({ result, today }: { result: SafeToSpendRes
                 ))}
                 {result.paidNext.map((p) => (
                   <SubLine key={p.id} amount={formatSignedCents(p.amountCents, locale)}>
-                    {t("paidNextLine", { label: p.label, date: formatShortDay(p.date, today, locale) })}
+                    {t(p.amountCents > 0 ? "paidNextInLine" : "paidNextLine", { label: p.label, date: formatShortDay(p.date, today, locale), month })}
                   </SubLine>
                 ))}
                 {expectedLater.map((i) => (

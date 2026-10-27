@@ -865,6 +865,7 @@ An expense paid with the salary kept for next month comes out of what is kept, n
 - [x] `buildSafeToSpend` adds switched expenses back (budget reserve counted once); the pace chart leaves them out
 - [x] "Paid with {month}'s money" switch in the transaction sheet; "Already spent" line in the breakdown (en + fr)
 - [x] Feature docs, SPEC §87 D8, E2E
+- [x] "For {month}" on money taken back from savings (an incoming transfer from an account left out): added to what is kept, never to a budget (SPEC §87 D9)
 
 **Done when:** with the salary kept and 1 800 € of fees switched on, Reste à vivre is 1 800 € higher than without the switch, and the fees still show in October's budgets.
 

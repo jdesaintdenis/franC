@@ -1,6 +1,7 @@
 import { expect, test } from "./fixtures";
-import { clearStartingBalances, setStartingBalance } from "./helpers/manage";
+import { addAccount, clearStartingBalances, deleteAccountsWithPrefix, setStartingBalance } from "./helpers/manage";
 import { creditRow, csvFile, importFile, debitRow, recentDate, undoImport } from "./helpers/recurring";
+import { sheetOf } from "./helpers/sheet";
 
 test("paid with next month's money: the switch shows on this month's expense and Home takes it out of what is kept", async ({
   page,
@@ -80,5 +81,66 @@ test("paid with next month's money: the switch shows on this month's expense and
     await page.goto("/accounts");
     await clearStartingBalances(page);
     await undoImport(page, fileName);
+  }
+});
+
+test("for next month: money taken back from savings can be kept for next month", async ({ page, sql, workerUser }) => {
+  test.setTimeout(120_000);
+  const stamp = Date.now();
+  const salary = `E2E-PAYIN-${stamp}`;
+  const topUp = `E2E-TOPUP-${stamp}`;
+  const savings = `E2E Livret ${stamp}`;
+  const fileName = `for-next-${stamp}.csv`;
+  const day = Math.min(new Date().getUTCDate(), 24);
+  await addAccount(page, savings);
+  await sql`update accounts set savings = true, in_safe_to_spend = false where user_id = ${workerUser.id} and name = ${savings}`;
+  await importFile(
+    page,
+    csvFile(fileName, [
+      creditRow(recentDate(3, 24), salary, "2412,00"),
+      creditRow(recentDate(2, 24), salary, "2412,00"),
+      creditRow(recentDate(1, 24), salary, "2412,00"),
+      creditRow(recentDate(0, day), salary, "2412,00"),
+      creditRow(recentDate(0, day), topUp, "1200,00"),
+    ]),
+    5,
+  );
+
+  try {
+    await sql`update recurring set status = 'confirmed', keeps_for_next_month = true where user_id = ${workerUser.id} and typical_amount_cents > 0`;
+    const [main] = await sql`select name from accounts where user_id = ${workerUser.id} and not savings order by created_at limit 1`;
+    await setStartingBalance(page, main.name as string, "1 150,00");
+
+    // Before it is a transfer, a plain inflow has no switch.
+    await page.goto(`/transactions?q=${encodeURIComponent(topUp)}`);
+    await page.getByRole("button", { name: new RegExp(topUp, "i") }).first().click();
+    await expect(sheetOf(page).getByTestId("sheet-danger-zone")).toBeVisible();
+    await expect(page.getByTestId("sheet-paid-next")).toHaveCount(0);
+
+    // Take it back from savings: it becomes an incoming transfer from an account left out of Reste à vivre.
+    await sheetOf(page).getByTestId("sheet-savings").click();
+    await sheetOf(page).getByTestId("savings-step").getByRole("button", { name: new RegExp(`^${savings}`) }).first().click();
+    await expect(page.getByTestId("sheet-paid-next").getByRole("switch", { name: /^For / })).toBeVisible();
+
+    // Reopen it as the user would later: the move's toast no longer covers the switch.
+    await page.reload();
+    await page.getByRole("button", { name: new RegExp(`${topUp}.*Internal transfer · ${savings}`, "i") }).click();
+    const toggle = page.getByTestId("sheet-paid-next").getByRole("switch", { name: /^For / });
+    await expect(toggle).not.toBeChecked();
+    const saved = page.waitForRequest((r) => r.method() === "POST" && (r.postData() ?? "").includes('"on":true'));
+    await toggle.check();
+    await saved;
+    await expect(toggle).toBeChecked();
+    await page.keyboard.press("Escape");
+
+    await page.goto("/");
+    await page.getByRole("button", { name: "How is this worked out?" }).click();
+    const breakdown = page.getByRole("dialog", { name: "How it's worked out" });
+    await expect(breakdown.getByText(new RegExp(`^Received for .+: ${topUp}`, "i"))).toBeVisible();
+  } finally {
+    await page.goto("/accounts");
+    await clearStartingBalances(page);
+    await undoImport(page, fileName);
+    await deleteAccountsWithPrefix(page, "E2E Livret");
   }
 });

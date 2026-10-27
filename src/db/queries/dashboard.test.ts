@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { fillTrend, monthRange, monthsEnding } from "../../lib/dashboard/month";
 import { normalizeLabel } from "../../lib/import/normalize-label";
 import { db } from "../client";
-import { categories, imports, recurring, transactions, transfers } from "../schema";
+import { accounts, categories, imports, recurring, transactions, transfers } from "../schema";
 import { createTestUser, resetDb, seedCategories } from "../test-utils";
 import { listAccounts } from "./accounts";
 import { setPaidFromNextMonth } from "./transactions";
@@ -698,6 +698,47 @@ describe("dashboard queries", () => {
       expect(await getDailySpending(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id])).toEqual([
         { date: "2025-09-20", spentCents: 4000 },
       ]);
+    });
+
+    it("lists an incoming transfer kept for next month only when it comes from an account left out", async () => {
+      const ctx = await setup();
+      const [savings] = await db
+        .insert(accounts)
+        .values({ userId: ctx.user.id, name: "Livret A", savings: true, inSafeToSpend: false })
+        .returning();
+      const [counted] = await db.insert(accounts).values({ userId: ctx.user.id, name: "Joint" }).returning();
+      await seed(ctx, [
+        { date: "2025-09-26", amountCents: 120000 },
+        { date: "2025-09-27", amountCents: 3000 },
+        { date: "2025-09-28", amountCents: 900 },
+      ]);
+      const rows = await db.select().from(transactions).where(eq(transactions.userId, ctx.user.id));
+      const at = (cents: number) => rows.find((r) => r.amountCents === cents)!;
+      // Legs on the other accounts: 1 200 € from savings, 30 € from a counted account; 9 € is a plain inflow.
+      const leg = async (accountId: string, cents: number, inId: string) => {
+        const [out] = await db
+          .insert(transactions)
+          .values({
+            userId: ctx.user.id,
+            accountId,
+            importId: ctx.importId,
+            date: "2025-09-26",
+            amountCents: -cents,
+            labelRaw: "LEG",
+            labelNormalized: "LEG",
+            labelDisplay: "LEG",
+            dedupeHash: `leg-${inId}`,
+            occurrenceIndex: 0,
+          })
+          .returning();
+        await db.insert(transfers).values({ userId: ctx.user.id, outTransactionId: out.id, inTransactionId: inId, status: "confirmed" });
+      };
+      await leg(savings.id, 120000, at(120000).id);
+      await leg(counted.id, 3000, at(3000).id);
+      for (const cents of [120000, 3000, 900]) expect(await setPaidFromNextMonth(db, ctx.user.id, at(cents).id, true)).toBe(cents !== 900);
+
+      const got = await getPaidFromNextMonth(db, ctx.user.id, monthRange("2025-09"), [ctx.account.id]);
+      expect(got.map((r) => r.amountCents)).toEqual([120000]);
     });
 
     it("switches only the user's own outflows", async () => {
