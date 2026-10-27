@@ -1,10 +1,10 @@
-import { and, eq, gt, gte, inArray, isNull, lte, or, sql } from "drizzle-orm";
+import { and, eq, gt, gte, inArray, isNull, lt, lte, or, sql } from "drizzle-orm";
 import { alias, type AnyPgColumn } from "drizzle-orm/pg-core";
 
 import { UNCATEGORIZED_COLOR } from "../../lib/category-color";
 import { monthRange } from "../../lib/dashboard/month";
 import type { MonthHistoryRow } from "../../lib/dashboard/month-picker";
-import type { SafeToSpendReceived } from "../../lib/safe-to-spend/compute";
+import type { SafeToSpendPaidNext, SafeToSpendReceived } from "../../lib/safe-to-spend/compute";
 import type { db as dbClient } from "../client";
 import { categories, transactions, transfers } from "../schema";
 import { categoryLines } from "./split-sql";
@@ -119,7 +119,8 @@ export async function getDailySpending(
   const rows = await database
     .select({ date: transactions.date, spent: spentSql })
     .from(transactions)
-    .where(and(inRange(userId, range), inArray(transactions.accountId, accountIds)))
+    // An expense paid with next month's money is not this month's pace (Slice 79).
+    .where(and(inRange(userId, range), inArray(transactions.accountId, accountIds), eq(transactions.paidFromNextMonth, false)))
     .groupBy(transactions.date)
     .orderBy(transactions.date);
   return rows.map((r) => ({ date: r.date, spentCents: toCents(r.spent) })).filter((r) => r.spentCents > 0);
@@ -157,6 +158,37 @@ export async function getReceivedIncome(
     .orderBy(transactions.date, transactions.id);
   // The filter above guarantees a link; the select type just doesn't know it.
   return rows.flatMap((r) => (r.recurringId === null ? [] : [{ ...r, recurringId: r.recurringId }]));
+}
+
+/**
+ * Outflows of a range switched to "Paid with next month's money" on the given accounts (transfers and ignored
+ * rows excluded, like every total), oldest first (Slice 79). Feeds Reste à vivre.
+ */
+export async function getPaidFromNextMonth(
+  database: typeof dbClient,
+  userId: string,
+  range: { from: string; to: string },
+  accountIds: string[],
+): Promise<SafeToSpendPaidNext[]> {
+  if (accountIds.length === 0) return [];
+  return database
+    .select({
+      id: transactions.id,
+      date: transactions.date,
+      amountCents: transactions.amountCents,
+      label: sql<string>`coalesce(${transactions.labelDisplay}, ${transactions.labelRaw}, '')`,
+      categoryId: transactions.categoryId,
+    })
+    .from(transactions)
+    .where(
+      and(
+        inRange(userId, range),
+        inArray(transactions.accountId, accountIds),
+        eq(transactions.paidFromNextMonth, true),
+        lt(transactions.amountCents, 0),
+      ),
+    )
+    .orderBy(transactions.date, transactions.id);
 }
 
 /**

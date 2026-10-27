@@ -50,6 +50,16 @@ export interface SafeToSpendReceived {
   recurringId: string;
 }
 
+/** An outflow of this month switched to "Paid with next month's money" (Slice 79): it counts next month. */
+export interface SafeToSpendPaidNext {
+  id: string;
+  date: string;
+  /** Negative (outflow), as stored. */
+  amountCents: number;
+  label: string;
+  categoryId: string | null;
+}
+
 // A regular income paid up to a week late (or early in the month) still funds its own month.
 export const LEEWAY_LAST_DAY = 7;
 
@@ -89,7 +99,7 @@ export interface SafeToSpendResult {
   billsCents: number;
   /** Positive: sum of the budgets' reserved amounts. */
   budgetsLeftCents: number;
-  /** balance - held + income - bills - budgets left; negative means overspent. */
+  /** balance - held + paid next + income - bills - budgets left; negative means overspent. */
   safeCents: number;
   /** True when at least one regular income is switched to "Keep for next month". */
   keepsIncome: boolean;
@@ -99,6 +109,10 @@ export interface SafeToSpendResult {
   heldForNextMonth: SafeToSpendReceived[];
   /** Positive: sum of `heldForNextMonth`. */
   heldCents: number;
+  /** Expenses paid with the kept income (Slice 79); empty when no income is kept. */
+  paidNext: SafeToSpendPaidNext[];
+  /** Positive: sum of `paidNext`, added back to this month (they come out of what is kept). */
+  paidNextCents: number;
   bills: SafeToSpendBill[];
   income: SafeToSpendIncome[];
   budgets: SafeToSpendBudget[];
@@ -134,7 +148,7 @@ export function coveringBudgetId(
   return parent && itemIds.has(parent) ? parent : null;
 }
 
-function toBudget(item: BudgetItem, billsCents: number): SafeToSpendBudget {
+function toBudget(item: BudgetItem, billsCents: number, paidNextCents: number): SafeToSpendBudget {
   return {
     categoryId: item.categoryId,
     name: item.name,
@@ -144,7 +158,8 @@ function toBudget(item: BudgetItem, billsCents: number): SafeToSpendBudget {
     availableCents: item.availableCents,
     spentCents: item.spentCents,
     billsCents,
-    reservedCents: Math.max(0, item.availableCents - item.spentCents - billsCents),
+    // An expense paid with next month's money must not free the budget's reserve too (it would count twice).
+    reservedCents: Math.max(0, item.availableCents - (item.spentCents - paidNextCents) - billsCents),
   };
 }
 
@@ -152,15 +167,21 @@ function budgetsFor(
   rows: readonly BudgetRow[],
   bills: SafeToSpendBill[],
   parentOf: ReadonlyMap<string, string | null>,
+  paidNext: SafeToSpendPaidNext[],
 ): SafeToSpendBudget[] {
   const { items } = buildBudgetOverview(rows);
   const itemIds = new Set(items.map((i) => i.categoryId));
-  const billsByItem = new Map<string, number>();
-  for (const bill of bills) {
-    const id = coveringBudgetId(bill.categoryId, parentOf, itemIds);
-    if (id !== null) billsByItem.set(id, (billsByItem.get(id) ?? 0) + -bill.amountCents);
-  }
-  return items.map((item) => toBudget(item, billsByItem.get(item.categoryId) ?? 0));
+  const byItem = (lines: { categoryId: string | null; amountCents: number }[]) => {
+    const totals = new Map<string, number>();
+    for (const line of lines) {
+      const id = coveringBudgetId(line.categoryId, parentOf, itemIds);
+      if (id !== null) totals.set(id, (totals.get(id) ?? 0) + -line.amountCents);
+    }
+    return totals;
+  };
+  const billsByItem = byItem(bills);
+  const paidByItem = byItem(paidNext);
+  return items.map((item) => toBudget(item, billsByItem.get(item.categoryId) ?? 0, paidByItem.get(item.categoryId) ?? 0));
 }
 
 /**
@@ -168,7 +189,8 @@ function budgetsFor(
  * "Keep for next month" paid this month (it is next month's money), plus confirmed income still due
  * (a kept payment only on the 1st-7th), minus bills still due, minus what each budget still holds
  * back. A kept charge received on the 1st-7th is not held back; every other income counts at once. A bill inside
- * a budget's categories is taken out of that budget's reserve so it is counted once.
+ * a budget's categories is taken out of that budget's reserve so it is counted once. An expense switched to
+ * "Paid with next month's money" is added back: it comes out of what is kept, not out of this month (Slice 79).
  */
 export function buildSafeToSpend(args: {
   accounts: SafeToSpendAccount[];
@@ -181,10 +203,14 @@ export function buildSafeToSpend(args: {
   received: SafeToSpendReceived[];
   /** Ids of the regular incomes switched to "Keep for next month". */
   keptIds: ReadonlySet<string>;
+  /** This month's outflows switched to "Paid with next month's money" on the counted accounts. */
+  paidNext?: SafeToSpendPaidNext[];
   /** "YYYY-MM-DD" */
   today: string;
 }): SafeToSpendResult {
   const { accounts, items, budgetRows, parentOf, received, keptIds, today } = args;
+  // Without a kept income there is no next month's money to pay with: the switch has no effect.
+  const paidNext = keptIds.size > 0 ? (args.paidNext ?? []) : [];
   const { from: monthStart, to: monthEnd } = monthRange(today.slice(0, 7));
   const counted = countedAccounts(accounts);
   const bills: SafeToSpendBill[] = [];
@@ -221,11 +247,12 @@ export function buildSafeToSpend(args: {
   bills.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   income.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
 
-  const budgets = budgetsFor(budgetRows, bills, parentOf);
+  const budgets = budgetsFor(budgetRows, bills, parentOf, paidNext);
   const balanceCents = counted.reduce((sum, a) => sum + a.balanceCents, 0);
   const incomeCents = income.reduce((sum, i) => (i.countsNow ? sum + i.amountCents : sum), 0);
   const heldForNextMonth = received.filter((r) => !inLeeway(r.date));
   const heldCents = heldForNextMonth.reduce((sum, r) => sum + r.amountCents, 0);
+  const paidNextCents = paidNext.reduce((sum, p) => sum - p.amountCents, 0);
   const billsCents = bills.reduce((sum, b) => sum - b.amountCents, 0);
   const budgetsLeftCents = budgets.reduce((sum, b) => sum + b.reservedCents, 0);
 
@@ -240,11 +267,13 @@ export function buildSafeToSpend(args: {
     incomeCents,
     billsCents,
     budgetsLeftCents,
-    safeCents: balanceCents - heldCents + incomeCents - billsCents - budgetsLeftCents,
+    safeCents: balanceCents - heldCents + paidNextCents + incomeCents - billsCents - budgetsLeftCents,
     keepsIncome: keptIds.size > 0,
     nextMonth: addMonths(today.slice(0, 7), 1),
     heldForNextMonth,
     heldCents,
+    paidNext,
+    paidNextCents,
     bills,
     income,
     budgets,

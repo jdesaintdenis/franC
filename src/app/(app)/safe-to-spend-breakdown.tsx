@@ -120,9 +120,11 @@ export function SafeToSpendBreakdown({ result, today }: { result: SafeToSpendRes
   const countedIncome = result.income.filter((i) => i.countsNow);
   const expectedLater = result.income.filter((i) => !i.countsNow);
   const showIncome = countedIncome.length > 0 || result.ignoredDetectedIncomeCount > 0;
+  // Expenses paid with next month's money come out of what is kept (Slice 79); can go positive if they exceed it.
+  const keptLeftCents = result.heldCents - result.paidNextCents;
 
   const parts: { part: Part; cents: number }[] = [
-    { part: "held", cents: result.heldCents },
+    { part: "held", cents: Math.max(0, keptLeftCents) },
     { part: "bills", cents: result.billsCents },
     { part: "budgets", cents: result.budgetsLeftCents },
     { part: "left", cents: Math.max(0, result.safeCents) },
@@ -159,16 +161,21 @@ export function SafeToSpendBreakdown({ result, today }: { result: SafeToSpendRes
             sign="−"
             part="held"
             label={t("held", { month })}
-            amount={formatSignedCents(-result.heldCents, locale)}
-            open={result.heldForNextMonth.length > 0}
+            amount={formatSignedCents(-keptLeftCents, locale)}
+            open={result.heldForNextMonth.length > 0 || result.paidNext.length > 0}
           >
-            {result.heldForNextMonth.length === 0 && expectedLater.length === 0 ? (
+            {result.heldForNextMonth.length === 0 && expectedLater.length === 0 && result.paidNext.length === 0 ? (
               <p>{t("heldNone")}</p>
             ) : (
               <>
                 {result.heldForNextMonth.map((r) => (
                   <SubLine key={r.id} amount={formatSignedCents(r.amountCents, locale)}>
                     {`${r.label} · ${formatShortDay(r.date, today, locale)}`}
+                  </SubLine>
+                ))}
+                {result.paidNext.map((p) => (
+                  <SubLine key={p.id} amount={formatSignedCents(p.amountCents, locale)}>
+                    {t("paidNextLine", { label: p.label, date: formatShortDay(p.date, today, locale) })}
                   </SubLine>
                 ))}
                 {expectedLater.map((i) => (

@@ -67,6 +67,8 @@ interface Props {
   dataVersion: string;
   /** Shown under the header whatever the queue holds ("Not found in your bank", Slice 56). */
   notFound?: ReactNode;
+  /** The user keeps a regular income for next month (Slice 79's switch in the sheet). */
+  keepsIncome: boolean;
 }
 
 /** What a save reports back: the ids the server changed (for Undo), or the message to show. */
@@ -87,7 +89,7 @@ interface LeaveContext {
   subtracted: number;
 }
 
-export function ReviewQueue({ initialItems, initialTotal, categories, merchantNames, tagNames, showAccount, savingsAccounts, dataVersion, notFound }: Props) {
+export function ReviewQueue({ initialItems, initialTotal, categories, merchantNames, tagNames, showAccount, savingsAccounts, dataVersion, notFound, keepsIncome }: Props) {
   const router = useRouter();
   const t = useTranslations("transactions.review");
   const nav = useTranslations("common.nav");
@@ -491,7 +493,12 @@ export function ReviewQueue({ initialItems, initialTotal, categories, merchantNa
     setItems((prev) =>
       prev.map((i) =>
         i.id === patch.id
-          ? { ...i, ...(patch.note !== undefined && { note: patch.note }), ...(patch.tags !== undefined && { tags: patch.tags }) }
+          ? {
+              ...i,
+              ...(patch.note !== undefined && { note: patch.note }),
+              ...(patch.tags !== undefined && { tags: patch.tags }),
+              ...(patch.paidFromNextMonth !== undefined && { paidFromNextMonth: patch.paidFromNextMonth }),
+            }
           : i,
       ),
     );
@@ -621,6 +628,7 @@ export function ReviewQueue({ initialItems, initialTotal, categories, merchantNa
         onTransferChanged={onTransferChanged}
         onSplitChanged={onSplitChanged}
         onNoteTagsChanged={onNoteTagsChanged}
+        keepsIncome={keepsIncome}
         onIgnoredChanged={onIgnoredChanged}
         onMerchantRenamed={refreshMerchants}
       />

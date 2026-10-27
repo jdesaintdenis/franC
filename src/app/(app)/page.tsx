@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 
 import { db } from "@/db/client";
-import { getDailySpending, getMonthlyHistory, getReceivedIncome } from "@/db/queries/dashboard";
+import { getDailySpending, getMonthlyHistory, getPaidFromNextMonth, getReceivedIncome } from "@/db/queries/dashboard";
 import { listAccounts } from "@/db/queries/accounts";
 import { getAccountBalances } from "@/db/queries/balance";
 import { getBalanceGaps } from "@/db/queries/balance-gaps";
@@ -96,9 +96,11 @@ export default async function Home() {
   );
   // The hero's chart and the income held for next month use the accounts the number itself counts.
   const countedIds = balances.filter((b) => b.inSafeToSpend).map((b) => b.id);
-  const [daily, received] = await Promise.all([
+  const [daily, received, paidNext] = await Promise.all([
     getDailySpending(db, user.id, monthRange(now), countedIds),
     keptIds.size > 0 ? getReceivedIncome(db, user.id, monthRange(now), countedIds, [...keptIds]) : [],
+    // Expenses paid with the kept income come out of it, not out of this month (Slice 79).
+    keptIds.size > 0 ? getPaidFromNextMonth(db, user.id, monthRange(now), countedIds) : [],
   ]);
   const latest = latestMonthWithData(history);
   const forecastItems = allRecurring.map(toForecastItem);
@@ -128,6 +130,7 @@ export default async function Home() {
     parentOf: new Map(categories.map((c) => [c.id, c.parentId])),
     received,
     keptIds,
+    paidNext,
     today: todayDate,
   });
   // A due bill counts in the budget that covers it, as in safe to spend.

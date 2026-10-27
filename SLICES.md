@@ -857,5 +857,16 @@ The "kept for next month" rule of Slice 75 applies to the regular incomes the us
 
 **Done when:** with only the salary switched on, a salary paid on the 28th is left out of Reste à vivre, and every other income counts at once.
 
+## Slice 79 — Expense paid with next month's money
+
+An expense paid with the salary kept for next month comes out of what is kept, not out of this month's Reste à vivre (SPEC §87 D8).
+
+- [x] `transactions.paid_from_next_month` (migration 0042), `setPaidFromNextMonth`, `getPaidFromNextMonth`, `hasKeptIncome` + tests
+- [x] `buildSafeToSpend` adds switched expenses back (budget reserve counted once); the pace chart leaves them out
+- [x] "Paid with {month}'s money" switch in the transaction sheet; "Already spent" line in the breakdown (en + fr)
+- [x] Feature docs, SPEC §87 D8, E2E
+
+**Done when:** with the salary kept and 1 800 € of fees switched on, Reste à vivre is 1 800 € higher than without the switch, and the fees still show in October's budgets.
+
 ## Later / ideas (not v1)
 - [ ] Daily "N new transactions to review" notification
