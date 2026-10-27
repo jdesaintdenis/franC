@@ -8,7 +8,7 @@ import type { SafeToSpendPaidNext, SafeToSpendReceived } from "../../lib/safe-to
 import type { db as dbClient } from "../client";
 import { categories, transactions, transfers } from "../schema";
 import { categoryLines } from "./split-sql";
-import { countable, notIgnored } from "./transfer-sql";
+import { countable, inFromUncountedAccount, notIgnored, notInTransfer } from "./transfer-sql";
 
 export { UNCATEGORIZED_COLOR };
 
@@ -161,8 +161,9 @@ export async function getReceivedIncome(
 }
 
 /**
- * Outflows of a range switched to "Paid with next month's money" on the given accounts (transfers and ignored
- * rows excluded, like every total), oldest first (Slice 79). Feeds Reste à vivre.
+ * Rows of a range switched to next month on the given accounts, oldest first (Slice 79). Feeds Reste à vivre:
+ * outflows "paid with next month's money" (transfers and ignored rows excluded, like every total) and incoming
+ * transfers from an account left out of Reste à vivre kept "for next month" (positive amounts).
  */
 export async function getPaidFromNextMonth(
   database: typeof dbClient,
@@ -182,10 +183,16 @@ export async function getPaidFromNextMonth(
     .from(transactions)
     .where(
       and(
-        inRange(userId, range),
+        eq(transactions.userId, userId),
+        gte(transactions.date, range.from),
+        lte(transactions.date, range.to),
         inArray(transactions.accountId, accountIds),
         eq(transactions.paidFromNextMonth, true),
-        lt(transactions.amountCents, 0),
+        notIgnored(),
+        or(
+          and(lt(transactions.amountCents, 0), notInTransfer(userId)),
+          and(gt(transactions.amountCents, 0), inFromUncountedAccount(userId)),
+        ),
       ),
     )
     .orderBy(transactions.date, transactions.id);

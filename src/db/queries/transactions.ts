@@ -37,6 +37,8 @@ export interface TransactionListItem {
     counterpartAccountName: string;
     counterpartDate: string;
     counterpartAmountCents: number;
+    /** The other leg's account is left out of Reste à vivre (Savings, or switched off); feeds Slice 79's switch. */
+    counterpartUncounted?: boolean;
   } | null;
   /**
    * Set when the row is split: its parts by position. While split, `category` is the row's
@@ -301,10 +303,12 @@ export async function loadTransferInfo(
       outDate: outTx.date,
       outAmount: outTx.amountCents,
       outAccountName: outAccount.name,
+      outUncounted: sql<boolean>`(${outAccount.savings} OR NOT ${outAccount.inSafeToSpend})`,
       inId: inTx.id,
       inDate: inTx.date,
       inAmount: inTx.amountCents,
       inAccountName: inAccount.name,
+      inUncounted: sql<boolean>`(${inAccount.savings} OR NOT ${inAccount.inSafeToSpend})`,
     })
     .from(transfers)
     .innerJoin(outTx, and(eq(outTx.id, transfers.outTransactionId), eq(outTx.userId, userId)))
@@ -324,6 +328,7 @@ export async function loadTransferInfo(
       counterpartAccountName: r.inAccountName,
       counterpartDate: r.inDate,
       counterpartAmountCents: r.inAmount,
+      counterpartUncounted: r.inUncounted,
     });
     result.set(r.inId, {
       id: r.id,
@@ -331,6 +336,7 @@ export async function loadTransferInfo(
       counterpartAccountName: r.outAccountName,
       counterpartDate: r.outDate,
       counterpartAmountCents: r.outAmount,
+      counterpartUncounted: r.outUncounted,
     });
   }
   return result;
@@ -620,8 +626,8 @@ export async function setIgnored(
 }
 
 /**
- * Switches "Paid with next month's money" on one outflow (Slice 79). Returns whether a row of the user's changed;
- * an inflow is never switched. Scoped by user_id.
+ * Switches "Paid with next month's money" on one outflow, or "For next month" on an incoming internal transfer
+ * (Slice 79). Returns whether a row of the user's changed; any other inflow is never switched. Scoped by user_id.
  */
 export async function setPaidFromNextMonth(
   database: typeof dbClient,
@@ -632,7 +638,13 @@ export async function setPaidFromNextMonth(
   const rows = await database
     .update(transactions)
     .set({ paidFromNextMonth: on })
-    .where(and(eq(transactions.userId, userId), eq(transactions.id, id), sql`${transactions.amountCents} < 0`))
+    .where(
+      and(
+        eq(transactions.userId, userId),
+        eq(transactions.id, id),
+        or(sql`${transactions.amountCents} < 0`, and(sql`${transactions.amountCents} > 0`, inTransfer(userId))),
+      ),
+    )
     .returning({ id: transactions.id });
   return rows.length > 0;
 }

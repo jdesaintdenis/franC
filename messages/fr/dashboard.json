@@ -140,6 +140,7 @@
     "heldNone": "Rien reçu ce mois-ci de ces paiements pour l'instant",
     "expectedNextMonth": "{name} attendu le {date} · comptera pour {month}",
     "paidNextLine": "Déjà dépensé : {label} · {date}",
+    "paidNextInLine": "Reçu pour {month} : {label} · {date}",
     "heldHint": "Ce que vos revenus réguliers marqués « Garder pour le mois suivant » ont versé ce mois-ci compte à partir de {month}, sauf s'il est arrivé avant le 8. Une dépense marquée « Payée avec l'argent de {month} » en est retirée.",
     "heldSettings": "Choisir les paiements ›"
   },

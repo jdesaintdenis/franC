@@ -33,6 +33,20 @@ export function savingsSideLeg(userId: string) {
       AND other_account."savings" AND NOT own_account."savings")`;
 }
 
+/**
+ * The incoming leg of a transfer from an account left out of Reste à vivre (Savings, or switched off): money brought
+ * into the counted accounts, which Slice 79 lets the user keep for next month.
+ */
+export function inFromUncountedAccount(userId: string) {
+  return sql`EXISTS (
+    SELECT 1 FROM "transfers" tr
+      JOIN "transactions" other ON other."user_id" = ${userId} AND other."id" = tr."out_transaction_id"
+      JOIN "accounts" other_account ON other_account."id" = other."account_id" AND other_account."user_id" = ${userId}
+    WHERE tr."user_id" = ${userId}
+      AND tr."in_transaction_id" = "transactions"."id"
+      AND (other_account."savings" OR NOT other_account."in_safe_to_spend"))`;
+}
+
 /** Rows the user has not set aside (see `transactions.ignored_at`). Explicit prefix for the same reason as above. */
 export function notIgnored() {
   return sql`"transactions"."ignored_at" IS NULL`;

@@ -376,6 +376,20 @@ describe("buildSafeToSpend", () => {
       expect(r.safeCents).toBe(200000);
     });
 
+    it("adds an incoming transfer kept for next month to what is kept", () => {
+      // Savings topped up 1 200 € of the 1 800 € fees: October is back to what it was before the fees.
+      const fromSavings = fees({ id: "vir", amountCents: 120000, label: "VIR LIVRET A" });
+      const r = run({ kept: ["salary"], today: "2026-09-26", received: [pay], paidNext: [fees(), fromSavings] });
+      expect(r.paidNextCents).toBe(180000 - 120000);
+      expect(r.safeCents).toBe(200000 - 241200 + 180000 - 120000);
+    });
+
+    it("never lets an incoming transfer touch a budget", () => {
+      const budgetRows = [budget({ categoryId: FOOD, budgetCents: 40000, spentCents: 38000 })];
+      const r = run({ kept: ["salary"], today: "2026-09-26", budgetRows, paidNext: [fees({ amountCents: 5000, categoryId: FOOD })] });
+      expect(r.budgets[0].reservedCents).toBe(2000);
+    });
+
     it("is not capped by what is kept", () => {
       const r = run({ kept: ["salary"], today: "2026-09-26", paidNext: [fees()] });
       expect(r.heldCents).toBe(0);

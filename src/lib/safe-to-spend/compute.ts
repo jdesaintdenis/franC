@@ -50,11 +50,14 @@ export interface SafeToSpendReceived {
   recurringId: string;
 }
 
-/** An outflow of this month switched to "Paid with next month's money" (Slice 79): it counts next month. */
+/**
+ * A row of this month switched to next month (Slice 79): an outflow "paid with next month's money" (negative), or an
+ * incoming transfer from an account left out of Reste à vivre kept "for next month" (positive).
+ */
 export interface SafeToSpendPaidNext {
   id: string;
   date: string;
-  /** Negative (outflow), as stored. */
+  /** As stored: negative for an expense, positive for an incoming transfer. */
   amountCents: number;
   label: string;
   categoryId: string | null;
@@ -111,7 +114,7 @@ export interface SafeToSpendResult {
   heldCents: number;
   /** Expenses paid with the kept income (Slice 79); empty when no income is kept. */
   paidNext: SafeToSpendPaidNext[];
-  /** Positive: sum of `paidNext`, added back to this month (they come out of what is kept). */
+  /** Sum of `-amountCents` of `paidNext`, added to this month: expenses come out of what is kept, incoming transfers go into it. */
   paidNextCents: number;
   bills: SafeToSpendBill[];
   income: SafeToSpendIncome[];
@@ -180,7 +183,8 @@ function budgetsFor(
     return totals;
   };
   const billsByItem = byItem(bills);
-  const paidByItem = byItem(paidNext);
+  // Only expenses touch a budget; an incoming transfer has nothing to give back.
+  const paidByItem = byItem(paidNext.filter((p) => p.amountCents < 0));
   return items.map((item) => toBudget(item, billsByItem.get(item.categoryId) ?? 0, paidByItem.get(item.categoryId) ?? 0));
 }
 
