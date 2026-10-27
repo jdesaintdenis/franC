@@ -6,6 +6,7 @@ import {
   buildSafeToSpend,
   inLeeway,
   type SafeToSpendAccount,
+  type SafeToSpendPaidNext,
   type SafeToSpendReceived,
 } from "./compute";
 
@@ -59,6 +60,7 @@ function run(over: {
   received?: SafeToSpendReceived[];
   /** Ids of the regular incomes switched to "Keep for next month"; none keeps the plain behaviour. */
   kept?: string[];
+  paidNext?: SafeToSpendPaidNext[];
   today?: string;
 }) {
   return buildSafeToSpend({
@@ -68,6 +70,7 @@ function run(over: {
     parentOf: PARENTS,
     received: over.received ?? [],
     keptIds: new Set(over.kept ?? []),
+    paidNext: over.paidNext,
     today: over.today ?? "2026-09-14",
   });
 }
@@ -335,6 +338,62 @@ describe("buildSafeToSpend", () => {
 
     it("keeps the next month for the held income", () => {
       expect(run({ today: "2026-12-15" }).nextMonth).toBe("2027-01");
+    });
+  });
+
+  describe("expense paid with next month's money (Slice 79)", () => {
+    const pay = { id: "pay", date: "2026-09-24", amountCents: 241200, label: "SALAIRE", recurringId: "salary" };
+    const fees = (over: Partial<SafeToSpendPaidNext> = {}): SafeToSpendPaidNext => ({
+      id: "fees",
+      date: "2026-09-25",
+      amountCents: -180000,
+      label: "FRAIS",
+      categoryId: null,
+      ...over,
+    });
+
+    it("takes the expense out of what is kept, not out of this month", () => {
+      // The balance already lacks the fees: 200 000 is what is left after salary and fees.
+      const r = run({ kept: ["salary"], today: "2026-09-26", received: [pay], paidNext: [fees()] });
+      expect(r.heldCents).toBe(241200);
+      expect(r.paidNextCents).toBe(180000);
+      expect(r.paidNext.map((p) => p.id)).toEqual(["fees"]);
+      expect(r.safeCents).toBe(200000 - 241200 + 180000);
+    });
+
+    it("does not also free the reserve of the budget covering it", () => {
+      // Food: 400 € budget, 380 € spent of which the 180 € fees; without them 200 € is still reserved.
+      const budgetRows = [budget({ categoryId: FOOD, budgetCents: 40000, spentCents: 38000 })];
+      const r = run({ kept: ["salary"], today: "2026-09-26", received: [pay], budgetRows, paidNext: [fees({ amountCents: -18000, categoryId: FOOD })] });
+      expect(r.budgets[0].reservedCents).toBe(20000);
+      expect(r.safeCents).toBe(200000 - 241200 + 18000 - 20000);
+    });
+
+    it("has no effect when no income is kept", () => {
+      const r = run({ paidNext: [fees()] });
+      expect(r.paidNext).toEqual([]);
+      expect(r.paidNextCents).toBe(0);
+      expect(r.safeCents).toBe(200000);
+    });
+
+    it("adds an incoming transfer kept for next month to what is kept", () => {
+      // Savings topped up 1 200 € of the 1 800 € fees: October is back to what it was before the fees.
+      const fromSavings = fees({ id: "vir", amountCents: 120000, label: "VIR LIVRET A" });
+      const r = run({ kept: ["salary"], today: "2026-09-26", received: [pay], paidNext: [fees(), fromSavings] });
+      expect(r.paidNextCents).toBe(180000 - 120000);
+      expect(r.safeCents).toBe(200000 - 241200 + 180000 - 120000);
+    });
+
+    it("never lets an incoming transfer touch a budget", () => {
+      const budgetRows = [budget({ categoryId: FOOD, budgetCents: 40000, spentCents: 38000 })];
+      const r = run({ kept: ["salary"], today: "2026-09-26", budgetRows, paidNext: [fees({ amountCents: 5000, categoryId: FOOD })] });
+      expect(r.budgets[0].reservedCents).toBe(2000);
+    });
+
+    it("is not capped by what is kept", () => {
+      const r = run({ kept: ["salary"], today: "2026-09-26", paidNext: [fees()] });
+      expect(r.heldCents).toBe(0);
+      expect(r.safeCents).toBe(200000 + 180000);
     });
   });
 });

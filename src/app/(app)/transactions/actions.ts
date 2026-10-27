@@ -35,6 +35,7 @@ import {
   bulkSetTransactionCategory,
   listTransactions,
   setIgnored,
+  setPaidFromNextMonth,
   setTransactionCategory,
   sumTransactionsByDay,
   type TransactionListItem,
@@ -528,6 +529,17 @@ export async function ignoreTransactionAction(input: unknown): Promise<IgnoreRes
 /** Brings an ignored transaction back into totals. */
 export async function unignoreTransactionAction(input: unknown): Promise<IgnoreResult> {
   return changeIgnored(input, false);
+}
+
+/** Switches "Paid with next month's money" on an outflow (Slice 79): Reste à vivre counts it next month. */
+export async function setPaidFromNextMonthAction(input: unknown): Promise<{ ok: boolean }> {
+  const user = await requireUser();
+  const parsed = z.object({ id: z.uuid(), on: z.boolean() }).safeParse(input);
+  if (!parsed.success) return { ok: false };
+  const ok = await setPaidFromNextMonth(db, user.id, parsed.data.id, parsed.data.on);
+  // Only Reste à vivre (Home) reads the flag; the list keeps its own optimistic copy.
+  if (ok) revalidatePath("/");
+  return { ok };
 }
 
 /** The ids of the categories to offer as pills for one row; never throws on bad input, just offers none. */

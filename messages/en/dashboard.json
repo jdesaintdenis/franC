@@ -144,7 +144,9 @@
     "held": "Kept for {month}",
     "heldNone": "Nothing received yet this month from these payments",
     "expectedNextMonth": "{name} expected on {date} · counts for {month}",
-    "heldHint": "What your regular incomes marked \"Keep for next month\" paid this month counts from {month}, unless it arrived by the 7th.",
+    "paidNextLine": "Already spent: {label} · {date}",
+    "paidNextInLine": "Received for {month}: {label} · {date}",
+    "heldHint": "What your regular incomes marked \"Keep for next month\" paid this month counts from {month}, unless it arrived by the 7th. An expense marked \"Paid with {month}'s money\" comes out of it.",
     "heldSettings": "Choose which payments ›"
   },
   "review": {

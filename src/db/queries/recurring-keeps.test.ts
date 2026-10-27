@@ -7,7 +7,7 @@ import { recurring } from "../schema";
 import { createTestUser, resetDb } from "../test-utils";
 import { listAccounts } from "./accounts";
 import { provisionUserDefaults } from "./provision";
-import { listRecurring, setKeepsForNextMonth } from "./recurring";
+import { hasKeptIncome, listRecurring, setKeepsForNextMonth } from "./recurring";
 
 async function setup() {
   const user = await createTestUser();
@@ -69,5 +69,22 @@ describe("setKeepsForNextMonth", () => {
     const item = await insertItem(ctx, {});
     expect(await setKeepsForNextMonth(db, other.user.id, item.id, true)).toBe(false);
     expect(await kept(item.id)).toBe(false);
+  });
+});
+
+describe("hasKeptIncome", () => {
+  beforeEach(async () => {
+    await resetDb();
+  });
+
+  it("is true only once one of the user's confirmed incomes is kept", async () => {
+    const ctx = await setup();
+    const other = await setup();
+    const item = await insertItem(ctx, {});
+    await insertItem(other, { keepsForNextMonth: true });
+    await insertItem(ctx, { status: "detected", keepsForNextMonth: true });
+    expect(await hasKeptIncome(db, ctx.user.id)).toBe(false);
+    await setKeepsForNextMonth(db, ctx.user.id, item.id, true);
+    expect(await hasKeptIncome(db, ctx.user.id)).toBe(true);
   });
 });

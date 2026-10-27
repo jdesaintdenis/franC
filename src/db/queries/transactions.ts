@@ -37,6 +37,8 @@ export interface TransactionListItem {
     counterpartAccountName: string;
     counterpartDate: string;
     counterpartAmountCents: number;
+    /** The other leg's account is left out of Reste à vivre (Savings, or switched off); feeds Slice 79's switch. */
+    counterpartUncounted?: boolean;
   } | null;
   /**
    * Set when the row is split: its parts by position. While split, `category` is the row's
@@ -51,6 +53,8 @@ export interface TransactionListItem {
   reviewed: boolean;
   /** Set aside by the user: left out of totals and hidden from the list by default. */
   ignored: boolean;
+  /** Paid with the income kept for next month: Reste à vivre counts it next month (Slice 79). */
+  paidFromNextMonth: boolean;
   /** The regular payment the row belongs to; `tracked` when the user tracks it (Slice 53). */
   recurring: { id: string; tracked: boolean } | null;
   /**
@@ -191,6 +195,7 @@ export function selectListItemRows(database: typeof dbClient, userId: string) {
       note: transactions.note,
       reviewed: sql<boolean>`${transactions.reviewedAt} is not null`,
       ignored: sql<boolean>`${transactions.ignoredAt} is not null`,
+      paidFromNextMonth: transactions.paidFromNextMonth,
       source: transactions.source,
       importKind: imports.kind,
       awaitingBank: transactions.awaitingBank,
@@ -253,6 +258,7 @@ export async function toListItems(
     tags: tagsByTx.get(r.id) ?? [],
     reviewed: r.reviewed,
     ignored: r.ignored,
+    paidFromNextMonth: r.paidFromNextMonth,
     recurring: r.recurringId !== null && r.recurringSource !== null ? { id: r.recurringId, tracked: r.recurringSource === "manual" } : null,
     origin: { source: r.source, importKind: r.importKind, awaitingBank: r.awaitingBank, importedAt: r.importedAt },
   }));
@@ -297,10 +303,12 @@ export async function loadTransferInfo(
       outDate: outTx.date,
       outAmount: outTx.amountCents,
       outAccountName: outAccount.name,
+      outUncounted: sql<boolean>`(${outAccount.savings} OR NOT ${outAccount.inSafeToSpend})`,
       inId: inTx.id,
       inDate: inTx.date,
       inAmount: inTx.amountCents,
       inAccountName: inAccount.name,
+      inUncounted: sql<boolean>`(${inAccount.savings} OR NOT ${inAccount.inSafeToSpend})`,
     })
     .from(transfers)
     .innerJoin(outTx, and(eq(outTx.id, transfers.outTransactionId), eq(outTx.userId, userId)))
@@ -320,6 +328,7 @@ export async function loadTransferInfo(
       counterpartAccountName: r.inAccountName,
       counterpartDate: r.inDate,
       counterpartAmountCents: r.inAmount,
+      counterpartUncounted: r.inUncounted,
     });
     result.set(r.inId, {
       id: r.id,
@@ -327,6 +336,7 @@ export async function loadTransferInfo(
       counterpartAccountName: r.outAccountName,
       counterpartDate: r.outDate,
       counterpartAmountCents: r.outAmount,
+      counterpartUncounted: r.outUncounted,
     });
   }
   return result;
@@ -613,4 +623,28 @@ export async function setIgnored(
     .where(where)
     .returning({ id: transactions.id });
   return rows.map((r) => r.id);
+}
+
+/**
+ * Switches "Paid with next month's money" on one outflow, or "For next month" on an incoming internal transfer
+ * (Slice 79). Returns whether a row of the user's changed; any other inflow is never switched. Scoped by user_id.
+ */
+export async function setPaidFromNextMonth(
+  database: typeof dbClient,
+  userId: string,
+  id: string,
+  on: boolean,
+): Promise<boolean> {
+  const rows = await database
+    .update(transactions)
+    .set({ paidFromNextMonth: on })
+    .where(
+      and(
+        eq(transactions.userId, userId),
+        eq(transactions.id, id),
+        or(sql`${transactions.amountCents} < 0`, and(sql`${transactions.amountCents} > 0`, inTransfer(userId))),
+      ),
+    )
+    .returning({ id: transactions.id });
+  return rows.length > 0;
 }

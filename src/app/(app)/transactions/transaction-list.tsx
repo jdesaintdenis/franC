@@ -73,9 +73,11 @@ interface Props {
   savingsAccounts: SavingsAccountOption[];
   /** The active category filter, so split rows can show the parts that match it. */
   categoryFilter: SplitCategoryFilter | null;
+  /** The user keeps a regular income for next month (Slice 79's switch in the sheet). */
+  keepsIncome: boolean;
 }
 
-export function TransactionList({ initialItems, initialCursor, initialDayTotals, params, hasFilters, categories, merchantNames, tagNames, dataVersion, showAccount, savingsAccounts, categoryFilter }: Props) {
+export function TransactionList({ initialItems, initialCursor, initialDayTotals, params, hasFilters, categories, merchantNames, tagNames, dataVersion, showAccount, savingsAccounts, categoryFilter, keepsIncome }: Props) {
   const t = useTranslations("transactions.list");
   const locale = useLocale();
   const today = useToday();
@@ -342,7 +344,12 @@ export function TransactionList({ initialItems, initialCursor, initialDayTotals,
     setItems((prev) =>
       prev.map((i) =>
         i.id === patch.id
-          ? { ...i, ...(patch.note !== undefined && { note: patch.note }), ...(patch.tags !== undefined && { tags: patch.tags }) }
+          ? {
+              ...i,
+              ...(patch.note !== undefined && { note: patch.note }),
+              ...(patch.tags !== undefined && { tags: patch.tags }),
+              ...(patch.paidFromNextMonth !== undefined && { paidFromNextMonth: patch.paidFromNextMonth }),
+            }
           : i,
       ),
     );
@@ -617,6 +624,7 @@ export function TransactionList({ initialItems, initialCursor, initialDayTotals,
         onTransferChanged={onTransferChanged}
         onSplitChanged={onSplitChanged}
         onNoteTagsChanged={onNoteTagsChanged}
+        keepsIncome={keepsIncome}
         onIgnoredChanged={onIgnoredChanged}
       />
       <CategoryPickerSheet

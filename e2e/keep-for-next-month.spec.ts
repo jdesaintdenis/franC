@@ -8,7 +8,6 @@ import {
   importFile,
   itemSheet,
   recentDate,
-  settled,
   sheetAction,
   showToConfirmList,
   toConfirmRow,
@@ -58,7 +57,9 @@ test("keep for next month: the switch sticks, only shows on a confirmed income, 
     const sheet = itemSheet(page, salary);
     const toggle = sheet.getByRole("switch", { name: /Keep for next month/ });
     await expect(toggle).not.toBeChecked();
-    await settled(page, () => toggle.check());
+    await toggle.check();
+    // Wait for this save's toast, not just any server action: opening the sheet posts others too.
+    await expect(page.getByText(`${salary} is kept for next month`)).toBeVisible();
     await expect(toggle).toBeChecked();
     await expect(sheet.getByText(/kept for next month, except/)).toBeVisible();
     await page.keyboard.press("Escape");
@@ -82,7 +83,8 @@ test("keep for next month: the switch sticks, only shows on a confirmed income, 
     // Switch it off: the line goes away.
     await page.goto("/recurring");
     await billRow(page, salary, "Income").getByRole("button").click();
-    await settled(page, () => itemSheet(page, salary).getByRole("switch", { name: /Keep for next month/ }).uncheck());
+    await itemSheet(page, salary).getByRole("switch", { name: /Keep for next month/ }).uncheck();
+    await expect(page.getByText(`${salary} now counts right away`)).toBeVisible();
     await page.keyboard.press("Escape");
     await page.goto("/");
     await page.getByRole("button", { name: "How is this worked out?" }).click();

@@ -671,6 +671,23 @@ export async function setKeepsForNextMonth(
   return rows.length > 0;
 }
 
+/** Whether the user keeps a regular income for next month (same filter as Home's kept ids); gates Slice 79's switch. */
+export async function hasKeptIncome(database: typeof dbClient, userId: string): Promise<boolean> {
+  const rows = await database
+    .select({ id: recurring.id })
+    .from(recurring)
+    .where(
+      and(
+        eq(recurring.userId, userId),
+        eq(recurring.keepsForNextMonth, true),
+        eq(recurring.status, "confirmed"),
+        sql`${recurring.typicalAmountCents} > 0`,
+      ),
+    )
+    .limit(1);
+  return rows.length > 0;
+}
+
 export interface TrackResult {
   id: string;
   /** The item's state before tracking, for Undo; null when tracking created it. */

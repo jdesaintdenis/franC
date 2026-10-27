@@ -295,6 +295,13 @@
       "when": 1792444988052,
       "tag": "0041_keeps_for_next_month",
       "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1793021376572,
+      "tag": "0042_paid_from_next_month",
+      "breakpoints": true
     }
   ]
 }

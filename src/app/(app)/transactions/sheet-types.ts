@@ -11,11 +11,13 @@ export type CategoryOption = CategoryOptionData;
 /** Which part of the sheet to open on; undefined opens the main view. */
 export type SheetSection = "split" | "transfer" | "rename" | "note";
 
-/** The note and/or tags of a loaded row changed; only the given fields are patched. */
+/** The note, tags or "paid with next month's money" of a loaded row changed; only the given fields are patched. */
 export interface NoteTagsPatch {
   id: string;
   note?: string | null;
   tags?: TagRef[];
+  /** "Paid with next month's money" was switched (Slice 79). */
+  paidFromNextMonth?: boolean;
 }
 
 export type CategorizedResult = Extract<CategorizeResult, { status: "done" }>;
