@@ -14,7 +14,12 @@
     "goToYear": "Aller à {year}",
     "cellLabel": "{month}, {amount} dépensés",
     "footnote": "Les montants sont les dépenses du mois. Les mois sans données sont grisés.",
-    "backToThisMonth": "Revenir à ce mois-ci"
+    "backToThisMonth": "Revenir à ce mois-ci",
+    "compareTitle": "Comparer {month} avec…",
+    "compareDescription": "Choisissez le mois à mettre en face de {month}.",
+    "taken": "déjà choisi",
+    "previousMonth": "Comparer avec le mois d'avant ({month})",
+    "compareTrigger": "Changer le mois {month}"
   },
   "totals": {
     "label": "Totaux du mois",

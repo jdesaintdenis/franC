@@ -857,6 +857,16 @@ The "kept for next month" rule of Slice 75 applies to the regular incomes the us
 
 **Done when:** with only the salary switched on, a salary paid on the 28th is left out of Reste à vivre, and every other income counts at once.
 
+## Slice 78 — Compare two months
+
+Any two months side by side: totals, each category and budgets (SPEC §89).
+
+- [x] `src/lib/compare/months.ts` + tests
+- [x] `/budget/compare` page, compare mode in the month picker, link from the month card (en + fr)
+- [x] Feature docs, SPEC §89, E2E
+
+**Done when:** from September's month card, two taps show September against July with the difference in total and per category.
+
 ## Slice 79 — Expense paid with next month's money
 
 An expense paid with the salary kept for next month comes out of what is kept, not out of this month's Reste à vivre (SPEC §87 D8).
