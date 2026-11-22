@@ -15,6 +15,7 @@ import { currentDate } from "@/lib/dashboard/month";
 
 import { NotFoundList } from "./not-found-list";
 import { ReviewQueue } from "./review-queue";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function ReviewPage() {
   const user = await requireUser();
@@ -37,6 +38,7 @@ export default async function ReviewPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <ReviewQueue
         initialItems={queue.items}
         initialTotal={queue.total}

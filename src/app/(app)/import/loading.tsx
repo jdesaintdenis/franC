@@ -1,10 +1,12 @@
 import { LoadingStatus } from "@/components/loading-status";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageRosettes } from "@/components/page-rosettes";
 
 // The import page: title, "importing into" line, the drop zone, the help line, then the history.
 export default function ImportLoading() {
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
     <main aria-busy="true" className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4 md:p-8">
       <LoadingStatus />
       <Skeleton className="h-8 w-28" />

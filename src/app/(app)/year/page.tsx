@@ -34,6 +34,7 @@ import { YearHeadline } from "./year-headline";
 import { YearMonths } from "./year-months";
 import { YearNetBars } from "./year-net-bars";
 import { YearTitle } from "./year-title";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function YearPage({ searchParams }: PageProps<"/year">) {
   const t = await getTranslations("year");
@@ -78,6 +79,7 @@ export default async function YearPage({ searchParams }: PageProps<"/year">) {
   );
   const shell = (children: React.ReactNode) => (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8 lg:max-w-5xl">{children}</main>
     </div>
   );

@@ -1,11 +1,13 @@
 import { LoadingStatus } from "@/components/loading-status";
 import { PageHeaderSkeleton } from "@/components/page-header-skeleton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageRosettes } from "@/components/page-rosettes";
 
 // Header with a back arrow, the "Mark all" row, then one review card.
 export default function ReviewLoading() {
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main
         aria-busy="true"
         className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 px-4 pb-4 md:px-8"

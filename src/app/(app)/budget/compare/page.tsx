@@ -11,6 +11,7 @@ import { HomeSection } from "../../home/home-section";
 import { loadCompare } from "./compare-data";
 import { ComparePills } from "./compare-pills";
 import { CompareBudgets, CompareCategories, CompareLegend, CompareSummary } from "./compare-sections";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /**
  * Two months side by side (`?a=` and `?b=`): what changed in total, per category and per budget,
@@ -33,6 +34,7 @@ export default async function ComparePage({ searchParams }: PageProps<"/budget/c
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8">
         <PageHeader
           title={<span className="font-title text-[22px] font-bold tracking-[0.1em] uppercase">{t("title")}</span>}

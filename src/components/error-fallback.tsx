@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /**
  * Shared body of the route error boundaries. It never renders `error.message`:
@@ -24,6 +25,7 @@ export function ErrorFallback({
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <p role="alert" className="text-muted-foreground max-w-sm">

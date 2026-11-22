@@ -14,6 +14,7 @@ import type { LedgerEntry } from "@/lib/loans/ledger";
 
 import type { LoanCurvePoint } from "../loan-curve";
 import { LoanScreen, type LoanPageData } from "../loan-screen";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /** The curve before the first figure: the computed deferral, the one estimated segment, then the real payments. */
 function historyCurve(history: LedgerEntry[], startedOn: string | null, borrowedCents: number, label: (iso: string) => string): LoanCurvePoint[] {
@@ -93,6 +94,7 @@ export default async function LoanPage({ params }: { params: Promise<{ id: strin
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-3 px-4 pb-4 md:px-8">
         <PageHeader back={{ href: "/accounts", label: t("page.back") }} title={<PageTitle>{data.loan.name}</PageTitle>} />
         <LoanScreen data={page} today={today} />

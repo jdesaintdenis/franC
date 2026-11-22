@@ -18,7 +18,7 @@ The home screen (`/`) is a short summary of where the accounts stand **today**, 
 
 **Desktop (from 1024 px)**: two columns. Left: Reste à vivre, À traiter. Right: Comptes, Budgets, À venir ce mois-ci, Objectifs. The sidebar and the bottom bar wear the 50 F look while on Home.
 
-**The look** (`.theme-50f`, `.bg-50f`, `.hero-50f` in `globals.css`): dark whatever the theme setting; background `#04051a` with faint rosettes and stars, solid cards `#121638`, periwinkle `#8ea2ff` for links and gauges, sand `#f3e3a6` for the hero amount only, amber `#ffb05a` for warnings. **Red is never used**: `--destructive` maps to amber inside the class. Manrope for text and numbers, Cormorant Garamond (700) for the hero amount only, Cinzel for titles; self-hosted through `@fontsource` packages. Other pages keep the Tricolore look until a later slice ([Language and theme](language-and-theme.md)).
+**The look** (`.theme-50f`, `.bg-50f`, `.hero-50f` in `globals.css`, page ground in `src/components/page-rosettes.tsx`): dark whatever the theme setting; background `#04051a` with faint rosettes and stars (an inline SVG under the content, because CSS repeating gradients that big turned into bright magenta bands in Firefox for Android), solid cards `#121638`, periwinkle `#8ea2ff` for links and gauges, sand `#f3e3a6` for the hero amount only, amber `#ffb05a` for warnings. **Red is never used**: `--destructive` maps to amber inside the class. Manrope for text and numbers, Cormorant Garamond (700) for the hero amount only, Cinzel for titles; self-hosted through `@fontsource` packages. Other pages keep the Tricolore look until a later slice ([Language and theme](language-and-theme.md)).
 
 ## How it works
 

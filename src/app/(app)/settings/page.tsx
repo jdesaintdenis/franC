@@ -13,6 +13,7 @@ import { requireUser } from "@/lib/auth/session";
 
 import { LanguageRow } from "./language-row";
 import { SignOutButton } from "./sign-out-button";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /** One 52 px row: icon tile, name, a short value on the right, chevron. */
 function PlusRow({ href, title, value, icon: Icon }: { href: string; title: string; value?: ReactNode; icon: LucideIcon }) {
@@ -41,6 +42,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8">
         <PageHeader title={<span className="font-title text-[22px] font-bold tracking-[0.1em] uppercase">{t("title")}</span>} />
         <HomeSection headingId="sorting-heading" title={t("sections.classement")} flush>

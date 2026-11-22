@@ -28,6 +28,7 @@ import { EmptyDetectButton } from "./empty-detect-button";
 import { DetectNowButton } from "./detect-now-button";
 import { RecurringScreen } from "./recurring-screen";
 import type { RecurringViewItem } from "./view-item";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /** How many charges each item's sheet lists. */
 const HISTORY_LIMIT = 12;
@@ -106,6 +107,7 @@ export default async function RecurringPage({
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-3 px-4 pb-4 md:px-8">
         <PageHeader
           title={

@@ -27,6 +27,7 @@ import { ReviewAttentionRow } from "./review-attention-row";
 import { SelectionProvider } from "./selection-context";
 import { TransactionSearch } from "./transaction-filters";
 import { TransactionList } from "./transaction-list";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function TransactionsPage({ searchParams }: PageProps<"/transactions">) {
   const user = await requireUser();
@@ -90,6 +91,7 @@ export default async function TransactionsPage({ searchParams }: PageProps<"/tra
   return (
     <SelectionProvider>
       <div className="theme-50f bg-50f flex flex-1 flex-col">
+        <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-3 px-4 pb-4 md:px-8">
         <PageHeader
           engraved

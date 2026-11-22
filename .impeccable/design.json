@@ -426,7 +426,7 @@
       },
       {
         "name": "The Pattern Below, Solid Above Rule",
-        "body": "Guilloché rosettes and stars live on the page background (`.bg-50f`) and inside the hero value panel only. Ordinary cards are solid Note Blue so their content reads cleanly.",
+        "body": "Guilloché rosettes and stars live on the page background (`<PageRosettes />` in the `.bg-50f` wrapper) and inside the hero value panel only. Ordinary cards are solid Note Blue so their content reads cleanly.",
         "section": "elevation"
       },
       {
@@ -436,7 +436,7 @@
       }
     ],
     "dos": [
-      "**Do** keep the 50 F system dark only; new screens add the `theme-50f` class (and `bg-50f` on the page wrapper) until the roll-out makes it the `:root` default.",
+      "**Do** keep the 50 F system dark only; new screens add the `theme-50f` class (and `bg-50f` on the page wrapper, with `<PageRosettes />` as its first child) until the roll-out makes it the `:root` default.",
       "**Do** lead every screen with one answer, and give each section its own Cinzel-titled card.",
       "**Do** use Amber `#ffb05a` for every warning, over-budget and negative amount.",
       "**Do** set every number in Manrope with tabular figures, except the one hero amount.",

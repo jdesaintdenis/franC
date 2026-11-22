@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { PageTitle } from "@/components/page-title";
 import { requireUser } from "@/lib/auth/session";
+import { PageRosettes } from "@/components/page-rosettes";
 
 const FILES = ["transactions", "categories", "rules", "budgets"] as const;
 
@@ -14,6 +15,7 @@ export default async function ExportPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 px-4 pb-4 md:px-8">
       <PageHeader title={<PageTitle>{t("export.title")}</PageTitle>} back={{ href: "/settings", label: nav("backToMore") }} />
       <p className="text-muted-foreground text-sm">{t("export.intro")}</p>

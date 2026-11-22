@@ -37,6 +37,7 @@ import { MonthCard } from "./month-card";
 import { MonthTitle } from "./month-title";
 import { loadBudgetMonth } from "./plan-data";
 import { TransfersNote } from "./transfers-note";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /**
  * The Budget tab: one page for any month (`?month=`), over all accounts. The month card, then
@@ -73,6 +74,7 @@ export default async function BudgetPage({ searchParams }: PageProps<"/budget">)
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8 lg:max-w-5xl">
         <PageHeader
           eyebrow={<DataUpTo accounts={data.freshness} today={today} listLagging />}
