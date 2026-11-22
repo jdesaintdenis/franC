@@ -45,6 +45,7 @@ import { UpcomingPayments } from "./home/upcoming-payments";
 import { SafeToSpendHero, SafeToSpendPrompt } from "./safe-to-spend-hero";
 import { SyncStatusLine } from "./sync-status-line";
 import { WelcomeChecklist } from "./welcome-checklist";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /**
  * Home: a short summary of where the accounts stand now, in the 50 F look (SPEC §72). Nothing to do
@@ -214,6 +215,7 @@ export default async function Home() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8 lg:max-w-5xl">
         <PageHeader
           eyebrow={<DataUpTo accounts={freshness} today={todayDate} listLagging />}

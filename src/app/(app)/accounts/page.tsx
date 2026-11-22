@@ -31,6 +31,7 @@ import { BankSyncSection } from "./bank-sync-section";
 import { ImportsSection } from "./imports-section";
 import { loanRow } from "./loans/loan-row";
 import { LoansSection } from "./loans/loans-section";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function AccountsPage() {
   const user = await requireUser();
@@ -152,6 +153,7 @@ export default async function AccountsPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-3 px-4 pb-4 md:px-8">
         <PageHeader
           eyebrow={<DataUpTo accounts={freshness} today={today} listLagging />}

@@ -13,6 +13,7 @@ import { formatWholeCents } from "@/lib/money";
 import { HomeSection } from "../../home/home-section";
 import { loadPlan } from "../../budget/plan-data";
 import { BudgetsScreen } from "./budgets-screen";
+import { PageRosettes } from "@/components/page-rosettes";
 
 const TOP_SUGGESTIONS = 3;
 
@@ -56,6 +57,7 @@ export default async function BudgetsPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-4 md:px-8">
         <PageHeader
           title={<span className="font-title text-[22px] font-bold tracking-[0.1em] uppercase">{t("title")}</span>}

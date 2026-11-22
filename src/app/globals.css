@@ -127,15 +127,12 @@
   font-family: "Manrope Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
   color: var(--foreground);
 }
-/* Rosettes and a few stars on the page background only (cards are solid). The night ground is set
-   here, not on .theme-50f: an unlayered background there would beat the bg-card of sheets and toasts. */
+/* The page wrapper. Its night ground, rosettes and stars are the <PageRosettes /> SVG inside it
+   (cards are solid): CSS repeating gradients this size turn magenta in Firefox for Android. The
+   wrapper is the SVG's containing block but no stacking context (that would trap the bulk bar's
+   z-index under the bottom nav), and paints no background so the SVG at z-index -10 shows. */
 .theme-50f.bg-50f {
-  background-color: var(--background);
-  background-image:
-    radial-gradient(1.2px 1.2px at 30px 40px, rgb(243 227 166 / 0.67) 50%, transparent),
-    radial-gradient(1px 1px at 140px 160px, rgb(255 255 255 / 0.53) 50%, transparent),
-    repeating-radial-gradient(circle at 85% 12%, rgb(142 162 255 / 0.07) 0 1px, transparent 1px 7px),
-    repeating-radial-gradient(circle at 10% 70%, rgb(142 162 255 / 0.05) 0 1px, transparent 1px 9px);
+  position: relative;
 }
 /* The value panel: thin border, inner rule, its own rosettes, hatching and stars, a faint "50". */
 .hero-50f {

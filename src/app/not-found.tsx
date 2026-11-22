@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function NotFound() {
   const t = await getTranslations("auth.shell.notFound");
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="flex flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <p className="text-muted-foreground max-w-sm">{t("description")}</p>

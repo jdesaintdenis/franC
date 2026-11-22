@@ -14,6 +14,7 @@ import { nextCategoryColor } from "@/lib/category-color";
 import { currentMonth } from "@/lib/dashboard/month";
 
 import { CategoryList } from "./category-list";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function CategoriesPage() {
   const user = await requireUser();
@@ -34,6 +35,7 @@ export default async function CategoriesPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-4 md:px-8">
         <PageHeader
           title={

@@ -218,7 +218,7 @@ Flat, tonal layering. Depth comes from the page being darker (and patterned) tha
 - **Value-panel rule** (`box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px rgb(142 162 255 / 0.27)`): the hero's inner engraved rule, drawn 4px inside its 1px periwinkle border. Structural, not a lift.
 
 ### Named Rules
-**The Pattern Below, Solid Above Rule.** Guilloché rosettes and stars live on the page background (`.bg-50f`) and inside the hero value panel only. Ordinary cards are solid Note Blue so their content reads cleanly.
+**The Pattern Below, Solid Above Rule.** Guilloché rosettes and stars live on the page background (`<PageRosettes />` in the `.bg-50f` wrapper) and inside the hero value panel only. Ordinary cards are solid Note Blue so their content reads cleanly.
 
 **The No Glow Rule.** No glow, no gradient on numbers, no neon. The only gradient fills are the background pattern and the pace chart's area under the line.
 
@@ -315,7 +315,7 @@ One row per thing to handle, linking to its page: a 40px tinted icon tile (Amber
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the 50 F system dark only; new screens add the `theme-50f` class (and `bg-50f` on the page wrapper) until the roll-out makes it the `:root` default.
+- **Do** keep the 50 F system dark only; new screens add the `theme-50f` class (and `bg-50f` on the page wrapper, with `<PageRosettes />` as its first child) until the roll-out makes it the `:root` default.
 - **Do** lead every screen with one answer, and give each section its own Cinzel-titled card.
 - **Do** use Amber `#ffb05a` for every warning, over-budget and negative amount.
 - **Do** set every number in Manrope with tabular figures, except the one hero amount.

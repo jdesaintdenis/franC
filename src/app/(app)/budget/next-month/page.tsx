@@ -16,6 +16,7 @@ import { ForecastList } from "./forecast-list";
 import { loadNextMonth } from "./next-month-data";
 import { OutlookCard } from "./outlook-card";
 import { ToConfirmRow } from "./to-confirm-row";
+import { PageRosettes } from "@/components/page-rosettes";
 
 /** What is expected next month: what it should leave, then the payments, income and budgets behind it. */
 export default async function NextMonthPage() {
@@ -33,6 +34,7 @@ export default async function NextMonthPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8 lg:max-w-5xl">
         <PageHeader
           eyebrow={t("eyebrow")}

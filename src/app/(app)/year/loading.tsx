@@ -1,6 +1,7 @@
 import { LoadingStatus } from "@/components/loading-status";
 import { PageHeaderSkeleton } from "@/components/page-header-skeleton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageRosettes } from "@/components/page-rosettes";
 
 function Card({ className }: { className: string }) {
   return (
@@ -15,6 +16,7 @@ function Card({ className }: { className: string }) {
 export default function YearLoading() {
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
       <main aria-busy="true" className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-2 px-4 pb-6 md:px-8 lg:max-w-5xl">
         <LoadingStatus />
         <PageHeaderSkeleton back titleWidth="w-24" />

@@ -15,6 +15,7 @@ import { SHARED_PARAM } from "@/lib/import/shared-file";
 import { ImportFlow } from "./import-flow";
 import { ImportHistory } from "./import-history";
 import { SharedImportFlow } from "./shared-import-flow";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function ImportPage({ searchParams }: PageProps<"/import">) {
   const user = await requireUser();
@@ -37,6 +38,7 @@ export default async function ImportPage({ searchParams }: PageProps<"/import">)
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4 md:p-8">
       <PageHeader
         title={<PageTitle>{t("title")}</PageTitle>}

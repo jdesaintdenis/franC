@@ -13,6 +13,7 @@ import { CATEGORY_PATH_SEPARATOR } from "@/lib/categorize/hierarchy";
 import { ApplyRulesButton } from "./apply-rules-button";
 import { RuleList } from "./rule-list";
 import { SuggestedRules } from "./suggested-rules";
+import { PageRosettes } from "@/components/page-rosettes";
 
 export default async function RulesPage() {
   const user = await requireUser();
@@ -33,6 +34,7 @@ export default async function RulesPage() {
 
   return (
     <div className="theme-50f bg-50f flex flex-1 flex-col">
+      <PageRosettes />
     <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 px-4 pb-4 md:px-8">
       <PageHeader
         title={<PageTitle>{t("rules.title")}</PageTitle>}
